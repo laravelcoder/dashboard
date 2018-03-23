@@ -50,6 +50,9 @@ class UsersController extends Controller
         $user = User::create($request->all());
         $user->role()->sync(array_filter((array)$request->input('role')));
 
+        foreach ($request->input('contacts', []) as $data) {
+            $user->contacts()->create($data);
+        }
 
 
         return redirect()->route('admin.users.index');
@@ -86,6 +89,23 @@ class UsersController extends Controller
         $user->update($request->all());
         $user->role()->sync(array_filter((array)$request->input('role')));
 
+        $contacts           = $user->contacts;
+        $currentContactData = [];
+        foreach ($request->input('contacts', []) as $index => $data) {
+            if (is_integer($index)) {
+                $user->contacts()->create($data);
+            } else {
+                $id                          = explode('-', $index)[1];
+                $currentContactData[$id] = $data;
+            }
+        }
+        foreach ($contacts as $item) {
+            if (isset($currentContactData[$item->id])) {
+                $item->update($currentContactData[$item->id]);
+            } else {
+                $item->delete();
+            }
+        }
 
 
         return redirect()->route('admin.users.index');
@@ -100,9 +120,13 @@ class UsersController extends Controller
      */
     public function show($id)
     {
+        
+        $roles = \App\Role::get()->pluck('title', 'id');
+$contacts = \App\Contact::where('user_id', $id)->get();
+
         $user = User::findOrFail($id);
 
-        return view('admin.users.show', compact('user'));
+        return view('admin.users.show', compact('user', 'contacts'));
     }
 
 

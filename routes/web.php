@@ -19,12 +19,36 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('auth.
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/home', 'HomeController@index');
     
-    Route::resource('permissions', 'Admin\PermissionsController');
-    Route::post('permissions_mass_destroy', ['uses' => 'Admin\PermissionsController@massDestroy', 'as' => 'permissions.mass_destroy']);
-    Route::resource('roles', 'Admin\RolesController');
-    Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
     Route::resource('users', 'Admin\UsersController');
     Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
+    Route::resource('contact_companies', 'Admin\ContactCompaniesController');
+    Route::post('contact_companies_mass_destroy', ['uses' => 'Admin\ContactCompaniesController@massDestroy', 'as' => 'contact_companies.mass_destroy']);
+    Route::resource('roles', 'Admin\RolesController');
+    Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
+    Route::resource('clinics', 'Admin\ClinicsController');
+    Route::post('clinics_mass_destroy', ['uses' => 'Admin\ClinicsController@massDestroy', 'as' => 'clinics.mass_destroy']);
+    Route::post('clinics_restore/{id}', ['uses' => 'Admin\ClinicsController@restore', 'as' => 'clinics.restore']);
+    Route::delete('clinics_perma_del/{id}', ['uses' => 'Admin\ClinicsController@perma_del', 'as' => 'clinics.perma_del']);
+    Route::resource('permissions', 'Admin\PermissionsController');
+    Route::post('permissions_mass_destroy', ['uses' => 'Admin\PermissionsController@massDestroy', 'as' => 'permissions.mass_destroy']);
+    Route::resource('contacts', 'Admin\ContactsController');
+    Route::post('contacts_mass_destroy', ['uses' => 'Admin\ContactsController@massDestroy', 'as' => 'contacts.mass_destroy']);
+    Route::resource('locations', 'Admin\LocationsController');
+    Route::post('locations_mass_destroy', ['uses' => 'Admin\LocationsController@massDestroy', 'as' => 'locations.mass_destroy']);
+    Route::post('locations_restore/{id}', ['uses' => 'Admin\LocationsController@restore', 'as' => 'locations.restore']);
+    Route::delete('locations_perma_del/{id}', ['uses' => 'Admin\LocationsController@perma_del', 'as' => 'locations.perma_del']);
+    Route::resource('websites', 'Admin\WebsitesController');
+    Route::post('websites_mass_destroy', ['uses' => 'Admin\WebsitesController@massDestroy', 'as' => 'websites.mass_destroy']);
+    Route::post('websites_restore/{id}', ['uses' => 'Admin\WebsitesController@restore', 'as' => 'websites.restore']);
+    Route::delete('websites_perma_del/{id}', ['uses' => 'Admin\WebsitesController@perma_del', 'as' => 'websites.perma_del']);
+    Route::resource('analytics', 'Admin\AnalyticsController');
+    Route::post('analytics_mass_destroy', ['uses' => 'Admin\AnalyticsController@massDestroy', 'as' => 'analytics.mass_destroy']);
+    Route::post('analytics_restore/{id}', ['uses' => 'Admin\AnalyticsController@restore', 'as' => 'analytics.restore']);
+    Route::delete('analytics_perma_del/{id}', ['uses' => 'Admin\AnalyticsController@perma_del', 'as' => 'analytics.perma_del']);
+    Route::resource('adwords', 'Admin\AdwordsController');
+    Route::post('adwords_mass_destroy', ['uses' => 'Admin\AdwordsController@massDestroy', 'as' => 'adwords.mass_destroy']);
+    Route::post('adwords_restore/{id}', ['uses' => 'Admin\AdwordsController@restore', 'as' => 'adwords.restore']);
+    Route::delete('adwords_perma_del/{id}', ['uses' => 'Admin\AdwordsController@perma_del', 'as' => 'adwords.perma_del']);
 
 
 

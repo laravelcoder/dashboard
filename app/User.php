@@ -38,6 +38,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'role_user');
     }
     
+    public function contacts() {
+        return $this->hasMany(Contact::class, 'user_id');
+    }
     
     
 

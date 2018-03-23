@@ -1,10 +1,18 @@
 <?php
 
 return [
-		'user-management' => [		'title' => 'User management',		'fields' => [		],	],
+		'user-management' => [		'title' => 'User Management',		'fields' => [		],	],
 		'permissions' => [		'title' => 'Permissions',		'fields' => [			'title' => 'Title',		],	],
 		'roles' => [		'title' => 'Roles',		'fields' => [			'title' => 'Title',			'permission' => 'Permissions',		],	],
 		'users' => [		'title' => 'Users',		'fields' => [			'name' => 'Name',			'email' => 'Email',			'password' => 'Password',			'role' => 'Role',			'remember-token' => 'Remember token',		],	],
+		'clinic-management' => [		'title' => 'Clinic Management',		'fields' => [		],	],
+		'contact-companies' => [		'title' => 'Companies',		'fields' => [			'name' => 'Company name',			'logo' => 'Logo',		],	],
+		'contacts' => [		'title' => 'Contacts',		'fields' => [			'company' => 'Company',			'first-name' => 'First name',			'last-name' => 'Last name',			'phone1' => 'Phone 1',			'phone2' => 'Phone 2',			'email' => 'Email',			'skype' => 'Skype',			'address' => 'Address',			'user' => 'User',		],	],
+		'clinics' => [		'title' => 'Clinics',		'fields' => [			'nickname' => 'Nickname',			'clinic-email' => 'Clinic Email',			'clinic-phone' => 'Clinic Phone',			'clinic-phone-2' => 'Clinic phone 2',			'logo' => 'Logo',		],	],
+		'locations' => [		'title' => 'Locations',		'fields' => [			'nickname' => 'Nickname',			'address' => 'Address',			'address-2' => 'Address 2',			'city' => 'City',			'state' => 'State',			'phone' => 'Phone',			'phone2' => 'Phone2',			'storefront' => 'Storefront',			'google-map-link' => 'Google map link',		],	],
+		'website' => [		'title' => 'Website',		'fields' => [			'website' => 'Website',		],	],
+		'analytics' => [		'title' => 'Analytics',		'fields' => [			'view-name' => 'View name',			'view-id' => 'View ID',		],	],
+		'adwords' => [		'title' => 'Adwords',		'fields' => [			'client-customer-id' => 'Client customer id',			'user-agent' => 'User agent',			'client-id' => 'Client id',			'client-secret' => 'Client secret',			'refresh-token' => 'Refresh token',			'authorization-uri' => 'Authorization URI',			'redirect-uri' => 'Redirect URI',			'token-credential-uri' => 'Token Credential URI',			'scope' => 'Scope',		],	],
 	'app_create' => 'Create',
 	'app_save' => 'Save',
 	'app_edit' => 'Edit',
