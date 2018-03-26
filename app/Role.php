@@ -14,6 +14,12 @@ class Role extends Model
     protected $fillable = ['title'];
     
     
+    public static function boot()
+    {
+        parent::boot();
+
+        Role::observe(new \App\Observers\UserActionsObserver);
+    }
     
     public function permission()
     {

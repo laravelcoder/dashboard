@@ -22,6 +22,12 @@ class Clinic extends Model
     protected $fillable = ['nickname', 'clinic_email', 'clinic_phone', 'clinic_phone_2', 'logo', 'company_id'];
     
     
+    public static function boot()
+    {
+        parent::boot();
+
+        Clinic::observe(new \App\Observers\UserActionsObserver);
+    }
 
     /**
      * Set to null if empty
