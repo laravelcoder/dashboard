@@ -21,6 +21,7 @@ return [
 		'call-metrics' => [		'title' => 'Call Metrics',		'fields' => [		],	],
 		'bookings-dashboard' => [		'title' => 'Bookings Dashboard',		'fields' => [		],	],
 		'bookings' => [		'title' => 'Bookings',		'fields' => [			'submitted' => 'Submitted',			'customername' => 'Customer Name',			'email' => 'Email',			'phone' => 'Phone',			'family-number' => 'Family number',			'how-long' => 'How long',			'requested-date' => 'Requested date',			'requested-time' => 'Requested time',			'requested-clinic' => 'Requested clinic',			'clinic-id' => 'Clinic id',			'clinic-email' => 'Clinic email',			'clinic-address' => 'Clinic address',			'clinic-phone' => 'Clinic phone',			'clinic-text-numbers' => 'Clinic text numbers',			'client-firstname' => 'Client firstname',		],	],
+		'zipcodes' => [		'title' => 'Zipcodes',		'fields' => [			'zipcode' => 'Zipcode',			'clinic' => 'Clinic',			'location' => 'Location',		],	],
 	'app_create' => 'Create',
 	'app_save' => 'Save',
 	'app_edit' => 'Edit',

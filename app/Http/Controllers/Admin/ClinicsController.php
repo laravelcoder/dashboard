@@ -68,6 +68,9 @@ class ClinicsController extends Controller
         foreach ($request->input('websites', []) as $data) {
             $clinic->websites()->create($data);
         }
+        foreach ($request->input('zipcodes', []) as $data) {
+            $clinic->zipcodes()->create($data);
+        }
         foreach ($request->input('locations', []) as $data) {
             $clinic->locations()->create($data);
         }
@@ -143,6 +146,23 @@ class ClinicsController extends Controller
                 $item->delete();
             }
         }
+        $zipcodes           = $clinic->zipcodes;
+        $currentZipcodeData = [];
+        foreach ($request->input('zipcodes', []) as $index => $data) {
+            if (is_integer($index)) {
+                $clinic->zipcodes()->create($data);
+            } else {
+                $id                          = explode('-', $index)[1];
+                $currentZipcodeData[$id] = $data;
+            }
+        }
+        foreach ($zipcodes as $item) {
+            if (isset($currentZipcodeData[$item->id])) {
+                $item->update($currentZipcodeData[$item->id]);
+            } else {
+                $item->delete();
+            }
+        }
         $locations           = $clinic->locations;
         $currentLocationData = [];
         foreach ($request->input('locations', []) as $index => $data) {
@@ -177,11 +197,11 @@ class ClinicsController extends Controller
         
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $users = \App\User::get()->pluck('name', 'id');
-$contacts = \App\Contact::where('clinic_id', $id)->get();$websites = \App\Website::where('clinic_id', $id)->get();$locations = \App\Location::where('clinic_id', $id)->get();$adwords = \App\Adword::where('clinic_id', $id)->get();
+$contacts = \App\Contact::where('clinic_id', $id)->get();$websites = \App\Website::where('clinic_id', $id)->get();$zipcodes = \App\Zipcode::where('clinic_id', $id)->get();$locations = \App\Location::where('clinic_id', $id)->get();$adwords = \App\Adword::where('clinic_id', $id)->get();
 
         $clinic = Clinic::findOrFail($id);
 
-        return view('admin.clinics.show', compact('clinic', 'contacts', 'websites', 'locations', 'adwords'));
+        return view('admin.clinics.show', compact('clinic', 'contacts', 'websites', 'zipcodes', 'locations', 'adwords'));
     }
 
 

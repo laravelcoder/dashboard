@@ -160,6 +160,16 @@
                         </a>
                     </li>
                 @endcan
+                @can('zipcode_access')
+                <li class="{{ $request->segment(2) == 'zipcodes' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.zipcodes.index') }}">
+                            <i class="fa fa-code-fork"></i>
+                            <span class="title">
+                                @lang('global.zipcodes.title')
+                            </span>
+                        </a>
+                    </li>
+                @endcan
                 </ul>
             </li>
             @endcan
