@@ -60,6 +60,9 @@ class LocationsController extends Controller
         $request = $this->saveFiles($request);
         $location = Location::create($request->all());
 
+        foreach ($request->input('zipcodes', []) as $data) {
+            $location->zipcodes()->create($data);
+        }
 
 
         return redirect()->route('admin.locations.index');
@@ -96,6 +99,23 @@ class LocationsController extends Controller
         $location = Location::findOrFail($id);
         $location->update($request->all());
 
+        $zipcodes           = $location->zipcodes;
+        $currentZipcodeData = [];
+        foreach ($request->input('zipcodes', []) as $index => $data) {
+            if (is_integer($index)) {
+                $location->zipcodes()->create($data);
+            } else {
+                $id                          = explode('-', $index)[1];
+                $currentZipcodeData[$id] = $data;
+            }
+        }
+        foreach ($zipcodes as $item) {
+            if (isset($currentZipcodeData[$item->id])) {
+                $item->update($currentZipcodeData[$item->id]);
+            } else {
+                $item->delete();
+            }
+        }
 
 
         return redirect()->route('admin.locations.index');
@@ -110,9 +130,13 @@ class LocationsController extends Controller
      */
     public function show($id)
     {
+        
+        $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
+        $contact_people = \App\Contact::get()->pluck('first_name', 'id')->prepend(trans('global.app_please_select'), '');$zipcodes = \App\Zipcode::where('location_id', $id)->get();
+
         $location = Location::findOrFail($id);
 
-        return view('admin.locations.show', compact('location'));
+        return view('admin.locations.show', compact('location', 'zipcodes'));
     }
 
 

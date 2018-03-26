@@ -10,4 +10,6 @@ Route::group(['prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], funct
 
         Route::resource('bookings', 'BookingsController', ['except' => ['create', 'edit']]);
 
+        Route::resource('zipcodes', 'ZipcodesController', ['except' => ['create', 'edit']]);
+
 });

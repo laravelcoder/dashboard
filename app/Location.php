@@ -56,4 +56,7 @@ class Location extends Model
         return $this->belongsTo(Contact::class, 'contact_person_id');
     }
     
+    public function zipcodes() {
+        return $this->hasMany(Zipcode::class, 'location_id');
+    }
 }

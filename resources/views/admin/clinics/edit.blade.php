@@ -173,6 +173,37 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
+            Zipcodes
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>@lang('global.zipcodes.fields.zipcode')</th>
+                        
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody id="zipcodes">
+                    @forelse(old('zipcodes', []) as $index => $data)
+                        @include('admin.clinics.zipcodes_row', [
+                            'index' => $index
+                        ])
+                    @empty
+                        @foreach($clinic->zipcodes as $item)
+                            @include('admin.clinics.zipcodes_row', [
+                                'index' => 'id-' . $item->id,
+                                'field' => $item
+                            ])
+                        @endforeach
+                    @endforelse
+                </tbody>
+            </table>
+            <a href="#" class="btn btn-success pull-right add-new">@lang('global.app_add_new')</a>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
             Locations
         </div>
         <div class="panel-body">
@@ -226,6 +257,13 @@
 
     <script type="text/html" id="website-template">
         @include('admin.clinics.websites_row',
+                [
+                    'index' => '_INDEX_',
+                ])
+               </script > 
+
+    <script type="text/html" id="zipcodes-template">
+        @include('admin.clinics.zipcodes_row',
                 [
                     'index' => '_INDEX_',
                 ])

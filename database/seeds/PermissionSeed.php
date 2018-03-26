@@ -85,6 +85,11 @@ class PermissionSeed extends Seeder
             ['id' => 71, 'title' => 'booking_edit',],
             ['id' => 72, 'title' => 'booking_view',],
             ['id' => 73, 'title' => 'booking_delete',],
+            ['id' => 74, 'title' => 'zipcode_access',],
+            ['id' => 75, 'title' => 'zipcode_create',],
+            ['id' => 76, 'title' => 'zipcode_edit',],
+            ['id' => 77, 'title' => 'zipcode_view',],
+            ['id' => 78, 'title' => 'zipcode_delete',],
 
         ];
 

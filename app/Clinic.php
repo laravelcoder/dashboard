@@ -48,6 +48,9 @@ class Clinic extends Model
     public function websites() {
         return $this->hasMany(Website::class, 'clinic_id');
     }
+    public function zipcodes() {
+        return $this->hasMany(Zipcode::class, 'clinic_id');
+    }
     public function locations() {
         return $this->hasMany(Location::class, 'clinic_id');
     }
