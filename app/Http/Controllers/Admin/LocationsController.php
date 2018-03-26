@@ -42,7 +42,11 @@ class LocationsController extends Controller
      */
     public function create()
     {
-        return view('admin.locations.create');
+        
+        $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
+        $contact_people = \App\Contact::get()->pluck('first_name', 'id')->prepend(trans('global.app_please_select'), '');
+
+        return view('admin.locations.create', compact('clinics', 'contact_people'));
     }
 
     /**
@@ -70,9 +74,13 @@ class LocationsController extends Controller
      */
     public function edit($id)
     {
+        
+        $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
+        $contact_people = \App\Contact::get()->pluck('first_name', 'id')->prepend(trans('global.app_please_select'), '');
+
         $location = Location::findOrFail($id);
 
-        return view('admin.locations.edit', compact('location'));
+        return view('admin.locations.edit', compact('location', 'clinics', 'contact_people'));
     }
 
     /**

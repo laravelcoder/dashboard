@@ -39,7 +39,10 @@ class AnalyticsController extends Controller
      */
     public function create()
     {
-        return view('admin.analytics.create');
+        
+        $websites = \App\Website::get()->pluck('website', 'id')->prepend(trans('global.app_please_select'), '');
+
+        return view('admin.analytics.create', compact('websites'));
     }
 
     /**
@@ -66,9 +69,12 @@ class AnalyticsController extends Controller
      */
     public function edit($id)
     {
+        
+        $websites = \App\Website::get()->pluck('website', 'id')->prepend(trans('global.app_please_select'), '');
+
         $analytic = Analytic::findOrFail($id);
 
-        return view('admin.analytics.edit', compact('analytic'));
+        return view('admin.analytics.edit', compact('analytic', 'websites'));
     }
 
     /**

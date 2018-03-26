@@ -31,7 +31,10 @@
                             @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                         @endcan
 
+                        <th>@lang('global.adwords.fields.company')</th>
+                        <th>@lang('global.adwords.fields.website')</th>
                         <th>@lang('global.adwords.fields.client-customer-id')</th>
+                        <th>@lang('global.adwords.fields.clinic')</th>
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else
@@ -48,7 +51,10 @@
                                     @if ( request('show_deleted') != 1 )<td></td>@endif
                                 @endcan
 
+                                <td field-key='company'>{{ $adword->company->name or '' }}</td>
+                                <td field-key='website'>{{ $adword->website->website or '' }}</td>
                                 <td field-key='client_customer_id'>{{ $adword->client_customer_id }}</td>
+                                <td field-key='clinic'>{{ $adword->clinic->nickname or '' }}</td>
                                 @if( request('show_deleted') == 1 )
                                 <td>
                                     {!! Form::open(array(
@@ -89,7 +95,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="14">@lang('global.app_no_entries_in_table')</td>
+                            <td colspan="17">@lang('global.app_no_entries_in_table')</td>
                         </tr>
                     @endif
                 </tbody>

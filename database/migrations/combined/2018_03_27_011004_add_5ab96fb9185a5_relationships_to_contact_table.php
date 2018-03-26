@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Add5ab56c7c7c38cRelationshipsToContactTable extends Migration
+class Add5ab96fb9185a5RelationshipsToContactTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,6 +16,10 @@ class Add5ab56c7c7c38cRelationshipsToContactTable extends Migration
             if (!Schema::hasColumn('contacts', 'company_id')) {
                 $table->integer('company_id')->unsigned()->nullable();
                 $table->foreign('company_id', '135003_5ab54697c4a53')->references('id')->on('contact_companies')->onDelete('cascade');
+                }
+                if (!Schema::hasColumn('contacts', 'clinic_id')) {
+                $table->integer('clinic_id')->unsigned()->nullable();
+                $table->foreign('clinic_id', '135003_5ab967aebc739')->references('id')->on('clinics')->onDelete('cascade');
                 }
                 if (!Schema::hasColumn('contacts', 'user_id')) {
                 $table->integer('user_id')->unsigned()->nullable();
@@ -37,6 +41,11 @@ class Add5ab56c7c7c38cRelationshipsToContactTable extends Migration
                 $table->dropForeign('135003_5ab54697c4a53');
                 $table->dropIndex('135003_5ab54697c4a53');
                 $table->dropColumn('company_id');
+            }
+            if(Schema::hasColumn('contacts', 'clinic_id')) {
+                $table->dropForeign('135003_5ab967aebc739');
+                $table->dropIndex('135003_5ab967aebc739');
+                $table->dropColumn('clinic_id');
             }
             if(Schema::hasColumn('contacts', 'user_id')) {
                 $table->dropForeign('135003_5ab54a3b2237b');

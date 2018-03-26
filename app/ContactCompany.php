@@ -16,4 +16,10 @@ class ContactCompany extends Model
     
     
     
+    public function websites() {
+        return $this->hasMany(Website::class, 'company_id');
+    }
+    public function clinics() {
+        return $this->hasMany(Clinic::class, 'company_id');
+    }
 }

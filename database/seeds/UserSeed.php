@@ -13,7 +13,8 @@ class UserSeed extends Seeder
     {
         $items = [
             
-            ['id' => 1, 'name' => 'Admin', 'email' => 'admin@admin.com', 'password' => '$2y$10$dBYkiiTUBivvyEEarNrqJ.SZHH8rUcMr5ZjM7goE9Jnfu9TZUtoNa', 'remember_token' => '',],
+            ['id' => 2, 'name' => 'Phillip Madsen', 'email' => 'wecodelaravel@gmail.com', 'password' => '$2y$10$ZzQreWXO4BGhzLYrJ3aT0utSoCxOTn1sCuenLU.cnGrd/FVOGKpeC', 'remember_token' => null,],
+            ['id' => 3, 'name' => 'Jessica Eddowes', 'email' => 'jessica@laradasciences.com', 'password' => '$2y$10$SSkrm3Jujla3BT01dz2E5.JK5286eX3iHpeYdNaxE40i2NmyxqEzm', 'remember_token' => null,],
 
         ];
 

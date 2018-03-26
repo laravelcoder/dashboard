@@ -19,12 +19,12 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('auth.
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/home', 'HomeController@index');
     
+    Route::resource('roles', 'Admin\RolesController');
+    Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
     Route::resource('users', 'Admin\UsersController');
     Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
     Route::resource('contact_companies', 'Admin\ContactCompaniesController');
     Route::post('contact_companies_mass_destroy', ['uses' => 'Admin\ContactCompaniesController@massDestroy', 'as' => 'contact_companies.mass_destroy']);
-    Route::resource('roles', 'Admin\RolesController');
-    Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
     Route::resource('clinics', 'Admin\ClinicsController');
     Route::post('clinics_mass_destroy', ['uses' => 'Admin\ClinicsController@massDestroy', 'as' => 'clinics.mass_destroy']);
     Route::post('clinics_restore/{id}', ['uses' => 'Admin\ClinicsController@restore', 'as' => 'clinics.restore']);
@@ -49,6 +49,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('adwords_mass_destroy', ['uses' => 'Admin\AdwordsController@massDestroy', 'as' => 'adwords.mass_destroy']);
     Route::post('adwords_restore/{id}', ['uses' => 'Admin\AdwordsController@restore', 'as' => 'adwords.restore']);
     Route::delete('adwords_perma_del/{id}', ['uses' => 'Admin\AdwordsController@perma_del', 'as' => 'adwords.perma_del']);
+    Route::resource('lca_dashboards', 'Admin\LcaDashboardsController');
+    Route::resource('analytical_dashboards', 'Admin\AnalyticalDashboardsController');
+    Route::resource('adwords_dashboards', 'Admin\AdwordsDashboardsController');
+    Route::resource('call_metrics', 'Admin\CallMetricsController');
+    Route::resource('bookings_dashboards', 'Admin\BookingsDashboardsController');
+    Route::resource('bookings', 'Admin\BookingsController');
+    Route::post('bookings_mass_destroy', ['uses' => 'Admin\BookingsController@massDestroy', 'as' => 'bookings.mass_destroy']);
+    Route::post('bookings_restore/{id}', ['uses' => 'Admin\BookingsController@restore', 'as' => 'bookings.restore']);
+    Route::delete('bookings_perma_del/{id}', ['uses' => 'Admin\BookingsController@perma_del', 'as' => 'bookings.perma_del']);
 
 
 

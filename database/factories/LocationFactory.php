@@ -10,5 +10,7 @@ $factory->define(App\Location::class, function (Faker\Generator $faker) {
         "phone" => $faker->name,
         "phone2" => $faker->name,
         "google_map_link" => $faker->name,
+        "clinic_id" => factory('App\Clinic')->create(),
+        "contact_person_id" => factory('App\Contact')->create(),
     ];
 });

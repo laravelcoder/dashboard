@@ -35,6 +35,8 @@
                         <th>@lang('global.clinics.fields.clinic-email')</th>
                         <th>@lang('global.clinics.fields.clinic-phone')</th>
                         <th>@lang('global.clinics.fields.clinic-phone-2')</th>
+                        <th>@lang('global.clinics.fields.company')</th>
+                        <th>@lang('global.clinics.fields.users')</th>
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else
@@ -55,6 +57,12 @@
                                 <td field-key='clinic_email'>{{ $clinic->clinic_email }}</td>
                                 <td field-key='clinic_phone'>{{ $clinic->clinic_phone }}</td>
                                 <td field-key='clinic_phone_2'>{{ $clinic->clinic_phone_2 }}</td>
+                                <td field-key='company'>{{ $clinic->company->name or '' }}</td>
+                                <td field-key='users'>
+                                    @foreach ($clinic->users as $singleUsers)
+                                        <span class="label label-info label-many">{{ $singleUsers->name }}</span>
+                                    @endforeach
+                                </td>
                                 @if( request('show_deleted') == 1 )
                                 <td>
                                     {!! Form::open(array(
@@ -95,7 +103,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="10">@lang('global.app_no_entries_in_table')</td>
+                            <td colspan="12">@lang('global.app_no_entries_in_table')</td>
                         </tr>
                     @endif
                 </tbody>

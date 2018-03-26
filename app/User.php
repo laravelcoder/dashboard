@@ -41,6 +41,9 @@ class User extends Authenticatable
     public function contacts() {
         return $this->hasMany(Contact::class, 'user_id');
     }
+    public function locations() {
+        return $this->hasMany(Location::class, 'user_id');
+    }
     
     
 

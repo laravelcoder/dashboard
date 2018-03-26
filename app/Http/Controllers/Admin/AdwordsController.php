@@ -39,7 +39,12 @@ class AdwordsController extends Controller
      */
     public function create()
     {
-        return view('admin.adwords.create');
+        
+        $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
+        $websites = \App\Website::get()->pluck('website', 'id')->prepend(trans('global.app_please_select'), '');
+        $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
+
+        return view('admin.adwords.create', compact('companies', 'websites', 'clinics'));
     }
 
     /**
@@ -66,9 +71,14 @@ class AdwordsController extends Controller
      */
     public function edit($id)
     {
+        
+        $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
+        $websites = \App\Website::get()->pluck('website', 'id')->prepend(trans('global.app_please_select'), '');
+        $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
+
         $adword = Adword::findOrFail($id);
 
-        return view('admin.adwords.edit', compact('adword'));
+        return view('admin.adwords.edit', compact('adword', 'companies', 'websites', 'clinics'));
     }
 
     /**

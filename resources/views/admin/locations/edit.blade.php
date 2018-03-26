@@ -125,6 +125,30 @@
                     @endif
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('clinic_id', trans('global.locations.fields.clinic').'', ['class' => 'control-label']) !!}
+                    {!! Form::select('clinic_id', $clinics, old('clinic_id'), ['class' => 'form-control select2']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('clinic_id'))
+                        <p class="help-block">
+                            {{ $errors->first('clinic_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('contact_person_id', trans('global.locations.fields.contact-person').'', ['class' => 'control-label']) !!}
+                    {!! Form::select('contact_person_id', $contact_people, old('contact_person_id'), ['class' => 'form-control select2']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('contact_person_id'))
+                        <p class="help-block">
+                            {{ $errors->first('contact_person_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
             
         </div>
     </div>

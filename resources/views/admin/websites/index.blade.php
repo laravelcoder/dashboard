@@ -31,6 +31,8 @@
                             @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                         @endcan
 
+                        <th>@lang('global.website.fields.company')</th>
+                        <th>@lang('global.website.fields.clinic')</th>
                         <th>@lang('global.website.fields.website')</th>
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
@@ -48,6 +50,8 @@
                                     @if ( request('show_deleted') != 1 )<td></td>@endif
                                 @endcan
 
+                                <td field-key='company'>{{ $website->company->name or '' }}</td>
+                                <td field-key='clinic'>{{ $website->clinic->nickname or '' }}</td>
                                 <td field-key='website'>{{ $website->website }}</td>
                                 @if( request('show_deleted') == 1 )
                                 <td>
@@ -89,7 +93,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="6">@lang('global.app_no_entries_in_table')</td>
+                            <td colspan="8">@lang('global.app_no_entries_in_table')</td>
                         </tr>
                     @endif
                 </tbody>

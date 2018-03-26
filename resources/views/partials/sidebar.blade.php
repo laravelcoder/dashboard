@@ -15,6 +15,70 @@
             </li>
 
             
+            @can('dashboard_access')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i>
+                    <span class="title">@lang('global.dashboards.title')</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                
+                @can('lca_dashboard_access')
+                <li class="{{ $request->segment(2) == 'lca_dashboards' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.lca_dashboards.index') }}">
+                            <i class="fa fa-dashboard"></i>
+                            <span class="title">
+                                @lang('global.lca-dashboard.title')
+                            </span>
+                        </a>
+                    </li>
+                @endcan
+                @can('analytical_dashboard_access')
+                <li class="{{ $request->segment(2) == 'analytical_dashboards' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.analytical_dashboards.index') }}">
+                            <i class="fa fa-bar-chart-o"></i>
+                            <span class="title">
+                                @lang('global.analytical-dashboard.title')
+                            </span>
+                        </a>
+                    </li>
+                @endcan
+                @can('adwords_dashboard_access')
+                <li class="{{ $request->segment(2) == 'adwords_dashboards' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.adwords_dashboards.index') }}">
+                            <i class="fa fa-google"></i>
+                            <span class="title">
+                                @lang('global.adwords-dashboard.title')
+                            </span>
+                        </a>
+                    </li>
+                @endcan
+                @can('call_metric_access')
+                <li class="{{ $request->segment(2) == 'call_metrics' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.call_metrics.index') }}">
+                            <i class="fa fa-phone-square"></i>
+                            <span class="title">
+                                @lang('global.call-metrics.title')
+                            </span>
+                        </a>
+                    </li>
+                @endcan
+                @can('bookings_dashboard_access')
+                <li class="{{ $request->segment(2) == 'bookings_dashboards' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.bookings_dashboards.index') }}">
+                            <i class="fa fa-calendar-check-o"></i>
+                            <span class="title">
+                                @lang('global.bookings-dashboard.title')
+                            </span>
+                        </a>
+                    </li>
+                @endcan
+                </ul>
+            </li>
+            @endcan
             @can('clinic_management_access')
             <li class="treeview">
                 <a href="#">
@@ -110,22 +174,22 @@
                 </a>
                 <ul class="treeview-menu">
                 
-                @can('user_access')
-                <li class="{{ $request->segment(2) == 'users' ? 'active active-sub' : '' }}">
-                        <a href="{{ route('admin.users.index') }}">
-                            <i class="fa fa-user"></i>
-                            <span class="title">
-                                @lang('global.users.title')
-                            </span>
-                        </a>
-                    </li>
-                @endcan
                 @can('role_access')
                 <li class="{{ $request->segment(2) == 'roles' ? 'active active-sub' : '' }}">
                         <a href="{{ route('admin.roles.index') }}">
                             <i class="fa fa-briefcase"></i>
                             <span class="title">
                                 @lang('global.roles.title')
+                            </span>
+                        </a>
+                    </li>
+                @endcan
+                @can('user_access')
+                <li class="{{ $request->segment(2) == 'users' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.users.index') }}">
+                            <i class="fa fa-user"></i>
+                            <span class="title">
+                                @lang('global.users.title')
                             </span>
                         </a>
                     </li>
@@ -143,6 +207,15 @@
                 </ul>
             </li>
             @endcan
+            @can('booking_access')
+            <li class="{{ $request->segment(2) == 'bookings' ? 'active' : '' }}">
+                <a href="{{ route('admin.bookings.index') }}">
+                    <i class="fa fa-calendar-plus-o"></i>
+                    <span class="title">@lang('global.bookings.title')</span>
+                </a>
+            </li>
+            @endcan
+            
 
             
 
