@@ -19,3 +19,7 @@ Homestead.json
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
 composer.lock
+/.overwrite
+
+.phpintel/8ba4bee70b091016a75036bd8b34aca4
+.phpintel/index
