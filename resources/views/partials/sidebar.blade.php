@@ -214,6 +214,70 @@
                         </a>
                     </li>
                 @endcan
+                @can('user_action_access')
+                <li class="{{ $request->segment(2) == 'user_actions' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.user_actions.index') }}">
+                            <i class="fa fa-th-list"></i>
+                            <span class="title">
+                                @lang('global.user-actions.title')
+                            </span>
+                        </a>
+                    </li>
+                @endcan
+                </ul>
+            </li>
+            @endcan
+            @can('task_management_access')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-list"></i>
+                    <span class="title">@lang('global.task-management.title')</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                
+                @can('task_access')
+                <li class="{{ $request->segment(2) == 'tasks' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.tasks.index') }}">
+                            <i class="fa fa-briefcase"></i>
+                            <span class="title">
+                                @lang('global.tasks.title')
+                            </span>
+                        </a>
+                    </li>
+                @endcan
+                @can('task_status_access')
+                <li class="{{ $request->segment(2) == 'task_statuses' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.task_statuses.index') }}">
+                            <i class="fa fa-server"></i>
+                            <span class="title">
+                                @lang('global.task-statuses.title')
+                            </span>
+                        </a>
+                    </li>
+                @endcan
+                @can('task_tag_access')
+                <li class="{{ $request->segment(2) == 'task_tags' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.task_tags.index') }}">
+                            <i class="fa fa-server"></i>
+                            <span class="title">
+                                @lang('global.task-tags.title')
+                            </span>
+                        </a>
+                    </li>
+                @endcan
+                @can('task_calendar_access')
+                <li class="{{ $request->segment(2) == 'task_calendars' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.task_calendars.index') }}">
+                            <i class="fa fa-calendar"></i>
+                            <span class="title">
+                                @lang('global.task-calendar.title')
+                            </span>
+                        </a>
+                    </li>
+                @endcan
                 </ul>
             </li>
             @endcan
@@ -230,6 +294,22 @@
             
 
             
+            @php ($unread = App\MessengerTopic::countUnread())
+            <li class="{{ $request->segment(2) == 'messenger' ? 'active' : '' }} {{ ($unread > 0 ? 'unread' : '') }}">
+                <a href="{{ route('admin.messenger.index') }}">
+                    <i class="fa fa-envelope"></i>
+
+                    <span>Messages</span>
+                    @if($unread > 0)
+                        {{ ($unread > 0 ? '('.$unread.')' : '') }}
+                    @endif
+                </a>
+            </li>
+            <style>
+                .page-sidebar-menu .unread * {
+                    font-weight:bold !important;
+                }
+            </style>
 
 
 

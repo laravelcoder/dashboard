@@ -53,9 +53,6 @@ class UsersController extends Controller
         foreach ($request->input('contacts', []) as $data) {
             $user->contacts()->create($data);
         }
-        foreach ($request->input('locations', []) as $data) {
-            $user->locations()->create($data);
-        }
 
 
         return redirect()->route('admin.users.index');
@@ -109,23 +106,6 @@ class UsersController extends Controller
                 $item->delete();
             }
         }
-        $locations           = $user->locations;
-        $currentLocationData = [];
-        foreach ($request->input('locations', []) as $index => $data) {
-            if (is_integer($index)) {
-                $user->locations()->create($data);
-            } else {
-                $id                          = explode('-', $index)[1];
-                $currentLocationData[$id] = $data;
-            }
-        }
-        foreach ($locations as $item) {
-            if (isset($currentLocationData[$item->id])) {
-                $item->update($currentLocationData[$item->id]);
-            } else {
-                $item->delete();
-            }
-        }
 
 
         return redirect()->route('admin.users.index');
@@ -142,14 +122,14 @@ class UsersController extends Controller
     {
         
         $roles = \App\Role::get()->pluck('title', 'id');
-$contacts = \App\Contact::where('user_id', $id)->get();$clinics = \App\Clinic::whereHas('users',
+$user_actions = \App\UserAction::where('user_id', $id)->get();$contacts = \App\Contact::where('user_id', $id)->get();$clinics = \App\Clinic::whereHas('users',
                     function ($query) use ($id) {
                         $query->where('id', $id);
-                    })->get();$locations = \App\Location::where('user_id', $id)->get();
+                    })->get();$tasks = \App\Task::where('user_id', $id)->get();
 
         $user = User::findOrFail($id);
 
-        return view('admin.users.show', compact('user', 'contacts', 'clinics', 'locations'));
+        return view('admin.users.show', compact('user', 'user_actions', 'contacts', 'clinics', 'tasks'));
     }
 
 

@@ -22,6 +22,12 @@ class Contact extends Model
     protected $fillable = ['first_name', 'last_name', 'phone1', 'phone2', 'email', 'skype', 'company_id', 'clinic_id', 'user_id'];
     
     
+    public static function boot()
+    {
+        parent::boot();
+
+        Contact::observe(new \App\Observers\UserActionsObserver);
+    }
 
     /**
      * Set to null if empty

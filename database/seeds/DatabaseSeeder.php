@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(WebsiteSeed::class);
         $this->call(AdwordSeed::class);
         $this->call(ContactSeed::class);
+        $this->call(TaskStatusSeed::class);
         $this->call(RoleSeedPivot::class);
         $this->call(UserSeedPivot::class);
 

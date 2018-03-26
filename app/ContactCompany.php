@@ -15,6 +15,12 @@ class ContactCompany extends Model
     protected $fillable = ['name', 'logo'];
     
     
+    public static function boot()
+    {
+        parent::boot();
+
+        ContactCompany::observe(new \App\Observers\UserActionsObserver);
+    }
     
     public function websites() {
         return $this->hasMany(Website::class, 'company_id');

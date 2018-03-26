@@ -32,6 +32,12 @@ class Booking extends Model
     protected $fillable = ['submitted', 'customername', 'email', 'phone', 'family_number', 'how_long', 'requested_date', 'requested_time', 'requested_clinic', 'clinic_id', 'clinic_email', 'clinic_address', 'clinic_phone', 'clinic_text_numbers', 'client_firstname'];
     
     
+    public static function boot()
+    {
+        parent::boot();
+
+        Booking::observe(new \App\Observers\UserActionsObserver);
+    }
 
     /**
      * Set attribute to date format

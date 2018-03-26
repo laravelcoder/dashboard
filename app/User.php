@@ -21,6 +21,12 @@ class User extends Authenticatable
     protected $fillable = ['name', 'email', 'password', 'remember_token'];
     
     
+    public static function boot()
+    {
+        parent::boot();
+
+        User::observe(new \App\Observers\UserActionsObserver);
+    }
     
     /**
      * Hash password
@@ -41,10 +47,19 @@ class User extends Authenticatable
     public function contacts() {
         return $this->hasMany(Contact::class, 'user_id');
     }
-    public function locations() {
-        return $this->hasMany(Location::class, 'user_id');
+    public function topics() {
+        return $this->hasMany(MessengerTopic::class, 'receiver_id')->orWhere('sender_id', $this->id);
     }
-    
+
+    public function inbox()
+    {
+        return $this->hasMany(MessengerTopic::class, 'receiver_id');
+    }
+
+    public function outbox()
+    {
+        return $this->hasMany(MessengerTopic::class, 'sender_id');
+    }
     
 
     public function sendPasswordResetNotification($token)
