@@ -24,6 +24,30 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
+                    {!! Form::label('clinic_id', trans('global.contacts.fields.clinic').'', ['class' => 'control-label']) !!}
+                    {!! Form::select('clinic_id', $clinics, old('clinic_id'), ['class' => 'form-control select2']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('clinic_id'))
+                        <p class="help-block">
+                            {{ $errors->first('clinic_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('user_id', trans('global.contacts.fields.user').'', ['class' => 'control-label']) !!}
+                    {!! Form::select('user_id', $users, old('user_id'), ['class' => 'form-control select2']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('user_id'))
+                        <p class="help-block">
+                            {{ $errors->first('user_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
                     {!! Form::label('first_name', trans('global.contacts.fields.first-name').'', ['class' => 'control-label']) !!}
                     {!! Form::text('first_name', old('first_name'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
@@ -90,30 +114,6 @@
                     @if($errors->has('skype'))
                         <p class="help-block">
                             {{ $errors->first('skype') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('address', trans('global.contacts.fields.address').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('address', old('address'), ['class' => 'form-control', 'placeholder' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('address'))
-                        <p class="help-block">
-                            {{ $errors->first('address') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('user_id', trans('global.contacts.fields.user').'', ['class' => 'control-label']) !!}
-                    {!! Form::select('user_id', $users, old('user_id'), ['class' => 'form-control select2']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('user_id'))
-                        <p class="help-block">
-                            {{ $errors->first('user_id') }}
                         </p>
                     @endif
                 </div>

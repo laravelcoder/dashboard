@@ -26,6 +26,7 @@ class StoreClinicsRequest extends FormRequest
             'nickname' => 'required',
             'clinic_email' => 'required|email',
             'logo' => 'nullable|mimes:png,jpg,jpeg,gif',
+            'users.*' => 'exists:users,id',
         ];
     }
 }

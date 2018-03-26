@@ -8,18 +8,18 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App
  * @property string $company
+ * @property string $clinic
+ * @property string $user
  * @property string $first_name
  * @property string $last_name
  * @property string $phone1
  * @property string $phone2
  * @property string $email
  * @property string $skype
- * @property string $address
- * @property string $user
 */
 class Contact extends Model
 {
-    protected $fillable = ['first_name', 'last_name', 'phone1', 'phone2', 'email', 'skype', 'address', 'company_id', 'user_id'];
+    protected $fillable = ['first_name', 'last_name', 'phone1', 'phone2', 'email', 'skype', 'company_id', 'clinic_id', 'user_id'];
     
     
 
@@ -36,6 +36,15 @@ class Contact extends Model
      * Set to null if empty
      * @param $input
      */
+    public function setClinicIdAttribute($input)
+    {
+        $this->attributes['clinic_id'] = $input ? $input : null;
+    }
+
+    /**
+     * Set to null if empty
+     * @param $input
+     */
     public function setUserIdAttribute($input)
     {
         $this->attributes['user_id'] = $input ? $input : null;
@@ -44,6 +53,11 @@ class Contact extends Model
     public function company()
     {
         return $this->belongsTo(ContactCompany::class, 'company_id');
+    }
+    
+    public function clinic()
+    {
+        return $this->belongsTo(Clinic::class, 'clinic_id')->withTrashed();
     }
     
     public function user()

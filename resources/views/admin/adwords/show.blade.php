@@ -13,6 +13,10 @@
                 <div class="col-md-6">
                     <table class="table table-bordered table-striped">
                         <tr>
+                            <th>@lang('global.adwords.fields.company')</th>
+                            <td field-key='company'>{{ $adword->company->name or '' }}</td>
+                        </tr>
+                        <tr>
                             <th>@lang('global.adwords.fields.client-customer-id')</th>
                             <td field-key='client_customer_id'>{{ $adword->client_customer_id }}</td>
                         </tr>
@@ -47,6 +51,10 @@
                         <tr>
                             <th>@lang('global.adwords.fields.scope')</th>
                             <td field-key='scope'>{{ $adword->scope }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.adwords.fields.clinic')</th>
+                            <td field-key='clinic'>{{ $adword->clinic->nickname or '' }}</td>
                         </tr>
                     </table>
                 </div>

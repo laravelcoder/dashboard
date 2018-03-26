@@ -34,9 +34,10 @@ class ContactsController extends Controller
     {
         
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
+        $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
         $users = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
 
-        return view('admin.contacts.create', compact('companies', 'users'));
+        return view('admin.contacts.create', compact('companies', 'clinics', 'users'));
     }
 
     /**
@@ -65,11 +66,12 @@ class ContactsController extends Controller
     {
         
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
+        $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
         $users = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
 
         $contact = Contact::findOrFail($id);
 
-        return view('admin.contacts.edit', compact('contact', 'companies', 'users'));
+        return view('admin.contacts.edit', compact('contact', 'companies', 'clinics', 'users'));
     }
 
     /**
@@ -98,9 +100,14 @@ class ContactsController extends Controller
      */
     public function show($id)
     {
+        
+        $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
+        $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
+        $users = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');$locations = \App\Location::where('contact_person_id', $id)->get();
+
         $contact = Contact::findOrFail($id);
 
-        return view('admin.contacts.show', compact('contact'));
+        return view('admin.contacts.show', compact('contact', 'locations'));
     }
 
 

@@ -48,6 +48,18 @@
                             <th>@lang('global.locations.fields.google-map-link')</th>
                             <td field-key='google_map_link'>{{ $location->google_map_link }}</td>
                         </tr>
+                        <tr>
+                            <th>@lang('global.locations.fields.contact-person')</th>
+                            <td field-key='contact_person'>{{ $location->contact_person->first_name or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.contacts.fields.last-name')</th>
+                            <td field-key='last_name'>{{ isset($location->contact_person) ? $location->contact_person->last_name : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.contacts.fields.email')</th>
+                            <td field-key='email'>{{ isset($location->contact_person) ? $location->contact_person->email : '' }}</td>
+                        </tr>
                     </table>
                 </div>
             </div>

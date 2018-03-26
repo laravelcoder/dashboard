@@ -18,7 +18,151 @@
                         </tr>
                     </table>
                 </div>
-            </div>
+            </div><!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+    
+<li role="presentation" class="active"><a href="#adwords" aria-controls="adwords" role="tab" data-toggle="tab">Adwords</a></li>
+<li role="presentation" class=""><a href="#analytics" aria-controls="analytics" role="tab" data-toggle="tab">Analytics</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    
+<div role="tabpanel" class="tab-pane active" id="adwords">
+<table class="table table-bordered table-striped {{ count($adwords) > 0 ? 'datatable' : '' }}">
+    <thead>
+        <tr>
+            <th>@lang('global.adwords.fields.company')</th>
+                        <th>@lang('global.adwords.fields.client-customer-id')</th>
+                        <th>@lang('global.adwords.fields.clinic')</th>
+                        @if( request('show_deleted') == 1 )
+                        <th>&nbsp;</th>
+                        @else
+                        <th>&nbsp;</th>
+                        @endif
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (count($adwords) > 0)
+            @foreach ($adwords as $adword)
+                <tr data-entry-id="{{ $adword->id }}">
+                    <td field-key='company'>{{ $adword->company->name or '' }}</td>
+                                <td field-key='client_customer_id'>{{ $adword->client_customer_id }}</td>
+                                <td field-key='clinic'>{{ $adword->clinic->nickname or '' }}</td>
+                                @if( request('show_deleted') == 1 )
+                                <td>
+                                    {!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'POST',
+                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                        'route' => ['adwords.restore', $adword->id])) !!}
+                                    {!! Form::submit(trans('global.app_restore'), array('class' => 'btn btn-xs btn-success')) !!}
+                                    {!! Form::close() !!}
+                                                                    {!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'DELETE',
+                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                        'route' => ['adwords.perma_del', $adword->id])) !!}
+                                    {!! Form::submit(trans('global.app_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
+                                                                </td>
+                                @else
+                                <td>
+                                    @can('view')
+                                    <a href="{{ route('adwords.show',[$adword->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
+                                    @endcan
+                                    @can('edit')
+                                    <a href="{{ route('adwords.edit',[$adword->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    @endcan
+                                    @can('delete')
+{!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'DELETE',
+                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                        'route' => ['adwords.destroy', $adword->id])) !!}
+                                    {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
+                                    @endcan
+                                </td>
+                                @endif
+                </tr>
+            @endforeach
+        @else
+            <tr>
+                <td colspan="17">@lang('global.app_no_entries_in_table')</td>
+            </tr>
+        @endif
+    </tbody>
+</table>
+</div>
+<div role="tabpanel" class="tab-pane " id="analytics">
+<table class="table table-bordered table-striped {{ count($analytics) > 0 ? 'datatable' : '' }}">
+    <thead>
+        <tr>
+            <th>@lang('global.analytics.fields.view-name')</th>
+                        <th>@lang('global.analytics.fields.view-id')</th>
+                        @if( request('show_deleted') == 1 )
+                        <th>&nbsp;</th>
+                        @else
+                        <th>&nbsp;</th>
+                        @endif
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (count($analytics) > 0)
+            @foreach ($analytics as $analytic)
+                <tr data-entry-id="{{ $analytic->id }}">
+                    <td field-key='view_name'>{{ $analytic->view_name }}</td>
+                                <td field-key='view_id'>{{ $analytic->view_id }}</td>
+                                @if( request('show_deleted') == 1 )
+                                <td>
+                                    {!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'POST',
+                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                        'route' => ['analytics.restore', $analytic->id])) !!}
+                                    {!! Form::submit(trans('global.app_restore'), array('class' => 'btn btn-xs btn-success')) !!}
+                                    {!! Form::close() !!}
+                                                                    {!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'DELETE',
+                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                        'route' => ['analytics.perma_del', $analytic->id])) !!}
+                                    {!! Form::submit(trans('global.app_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
+                                                                </td>
+                                @else
+                                <td>
+                                    @can('view')
+                                    <a href="{{ route('analytics.show',[$analytic->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
+                                    @endcan
+                                    @can('edit')
+                                    <a href="{{ route('analytics.edit',[$analytic->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    @endcan
+                                    @can('delete')
+{!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'DELETE',
+                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                        'route' => ['analytics.destroy', $analytic->id])) !!}
+                                    {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
+                                    @endcan
+                                </td>
+                                @endif
+                </tr>
+            @endforeach
+        @else
+            <tr>
+                <td colspan="8">@lang('global.app_no_entries_in_table')</td>
+            </tr>
+        @endif
+    </tbody>
+</table>
+</div>
+</div>
 
             <p>&nbsp;</p>
 

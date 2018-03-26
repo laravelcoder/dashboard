@@ -35,6 +35,10 @@
                         <th>@lang('global.locations.fields.city')</th>
                         <th>@lang('global.locations.fields.state')</th>
                         <th>@lang('global.locations.fields.phone2')</th>
+                        <th>@lang('global.locations.fields.clinic')</th>
+                        <th>@lang('global.locations.fields.contact-person')</th>
+                        <th>@lang('global.contacts.fields.last-name')</th>
+                        <th>@lang('global.contacts.fields.email')</th>
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else
@@ -55,6 +59,10 @@
                                 <td field-key='city'>{{ $location->city }}</td>
                                 <td field-key='state'>{{ $location->state }}</td>
                                 <td field-key='phone2'>{{ $location->phone2 }}</td>
+                                <td field-key='clinic'>{{ $location->clinic->nickname or '' }}</td>
+                                <td field-key='contact_person'>{{ $location->contact_person->first_name or '' }}</td>
+<td field-key='last_name'>{{ isset($location->contact_person) ? $location->contact_person->last_name : '' }}</td>
+<td field-key='email'>{{ isset($location->contact_person) ? $location->contact_person->email : '' }}</td>
                                 @if( request('show_deleted') == 1 )
                                 <td>
                                     {!! Form::open(array(
@@ -95,7 +103,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="14">@lang('global.app_no_entries_in_table')</td>
+                            <td colspan="16">@lang('global.app_no_entries_in_table')</td>
                         </tr>
                     @endif
                 </tbody>

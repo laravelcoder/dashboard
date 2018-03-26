@@ -13,6 +13,30 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
+                    {!! Form::label('company_id', trans('global.adwords.fields.company').'', ['class' => 'control-label']) !!}
+                    {!! Form::select('company_id', $companies, old('company_id'), ['class' => 'form-control select2']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('company_id'))
+                        <p class="help-block">
+                            {{ $errors->first('company_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('website_id', trans('global.adwords.fields.website').'', ['class' => 'control-label']) !!}
+                    {!! Form::select('website_id', $websites, old('website_id'), ['class' => 'form-control select2']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('website_id'))
+                        <p class="help-block">
+                            {{ $errors->first('website_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
                     {!! Form::label('client_customer_id', trans('global.adwords.fields.client-customer-id').'*', ['class' => 'control-label']) !!}
                     {!! Form::text('client_customer_id', old('client_customer_id'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
@@ -115,6 +139,18 @@
                     @if($errors->has('scope'))
                         <p class="help-block">
                             {{ $errors->first('scope') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('clinic_id', trans('global.adwords.fields.clinic').'', ['class' => 'control-label']) !!}
+                    {!! Form::select('clinic_id', $clinics, old('clinic_id'), ['class' => 'form-control select2']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('clinic_id'))
+                        <p class="help-block">
+                            {{ $errors->first('clinic_id') }}
                         </p>
                     @endif
                 </div>

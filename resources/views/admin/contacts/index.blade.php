@@ -26,14 +26,14 @@
                         @endcan
 
                         <th>@lang('global.contacts.fields.company')</th>
+                        <th>@lang('global.contacts.fields.clinic')</th>
+                        <th>@lang('global.contacts.fields.user')</th>
                         <th>@lang('global.contacts.fields.first-name')</th>
                         <th>@lang('global.contacts.fields.last-name')</th>
                         <th>@lang('global.contacts.fields.phone1')</th>
                         <th>@lang('global.contacts.fields.phone2')</th>
                         <th>@lang('global.contacts.fields.email')</th>
                         <th>@lang('global.contacts.fields.skype')</th>
-                        <th>@lang('global.contacts.fields.address')</th>
-                        <th>@lang('global.contacts.fields.user')</th>
                                                 <th>&nbsp;</th>
 
                     </tr>
@@ -48,14 +48,14 @@
                                 @endcan
 
                                 <td field-key='company'>{{ $contact->company->name or '' }}</td>
+                                <td field-key='clinic'>{{ $contact->clinic->nickname or '' }}</td>
+                                <td field-key='user'>{{ $contact->user->name or '' }}</td>
                                 <td field-key='first_name'>{{ $contact->first_name }}</td>
                                 <td field-key='last_name'>{{ $contact->last_name }}</td>
                                 <td field-key='phone1'>{{ $contact->phone1 }}</td>
                                 <td field-key='phone2'>{{ $contact->phone2 }}</td>
                                 <td field-key='email'>{{ $contact->email }}</td>
                                 <td field-key='skype'>{{ $contact->skype }}</td>
-                                <td field-key='address'>{{ $contact->address }}</td>
-                                <td field-key='user'>{{ $contact->user->name or '' }}</td>
                                                                 <td>
                                     @can('contact_view')
                                     <a href="{{ route('admin.contacts.show',[$contact->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>

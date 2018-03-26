@@ -74,6 +74,17 @@ class PermissionSeed extends Seeder
             ['id' => 59, 'title' => 'adword_edit',],
             ['id' => 60, 'title' => 'adword_view',],
             ['id' => 61, 'title' => 'adword_delete',],
+            ['id' => 63, 'title' => 'dashboard_access',],
+            ['id' => 64, 'title' => 'lca_dashboard_access',],
+            ['id' => 65, 'title' => 'analytical_dashboard_access',],
+            ['id' => 66, 'title' => 'adwords_dashboard_access',],
+            ['id' => 67, 'title' => 'call_metric_access',],
+            ['id' => 68, 'title' => 'bookings_dashboard_access',],
+            ['id' => 69, 'title' => 'booking_access',],
+            ['id' => 70, 'title' => 'booking_create',],
+            ['id' => 71, 'title' => 'booking_edit',],
+            ['id' => 72, 'title' => 'booking_view',],
+            ['id' => 73, 'title' => 'booking_delete',],
 
         ];
 

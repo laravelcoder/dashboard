@@ -33,6 +33,7 @@
 
                         <th>@lang('global.analytics.fields.view-name')</th>
                         <th>@lang('global.analytics.fields.view-id')</th>
+                        <th>@lang('global.analytics.fields.website')</th>
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else
@@ -51,6 +52,7 @@
 
                                 <td field-key='view_name'>{{ $analytic->view_name }}</td>
                                 <td field-key='view_id'>{{ $analytic->view_id }}</td>
+                                <td field-key='website'>{{ $analytic->website->website or '' }}</td>
                                 @if( request('show_deleted') == 1 )
                                 <td>
                                     {!! Form::open(array(
@@ -91,7 +93,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="7">@lang('global.app_no_entries_in_table')</td>
+                            <td colspan="8">@lang('global.app_no_entries_in_table')</td>
                         </tr>
                     @endif
                 </tbody>

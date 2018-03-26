@@ -7,12 +7,20 @@ return [
 		'users' => [		'title' => 'Users',		'fields' => [			'name' => 'Name',			'email' => 'Email',			'password' => 'Password',			'role' => 'Role',			'remember-token' => 'Remember token',		],	],
 		'clinic-management' => [		'title' => 'Clinic Management',		'fields' => [		],	],
 		'contact-companies' => [		'title' => 'Companies',		'fields' => [			'name' => 'Company name',			'logo' => 'Logo',		],	],
-		'contacts' => [		'title' => 'Contacts',		'fields' => [			'company' => 'Company',			'first-name' => 'First name',			'last-name' => 'Last name',			'phone1' => 'Phone 1',			'phone2' => 'Phone 2',			'email' => 'Email',			'skype' => 'Skype',			'address' => 'Address',			'user' => 'User',		],	],
-		'clinics' => [		'title' => 'Clinics',		'fields' => [			'nickname' => 'Nickname',			'clinic-email' => 'Clinic Email',			'clinic-phone' => 'Clinic Phone',			'clinic-phone-2' => 'Clinic phone 2',			'logo' => 'Logo',		],	],
-		'locations' => [		'title' => 'Locations',		'fields' => [			'nickname' => 'Nickname',			'address' => 'Address',			'address-2' => 'Address 2',			'city' => 'City',			'state' => 'State',			'phone' => 'Phone',			'phone2' => 'Phone2',			'storefront' => 'Storefront',			'google-map-link' => 'Google map link',		],	],
-		'website' => [		'title' => 'Website',		'fields' => [			'website' => 'Website',		],	],
-		'analytics' => [		'title' => 'Analytics',		'fields' => [			'view-name' => 'View name',			'view-id' => 'View ID',		],	],
-		'adwords' => [		'title' => 'Adwords',		'fields' => [			'client-customer-id' => 'Client customer id',			'user-agent' => 'User agent',			'client-id' => 'Client id',			'client-secret' => 'Client secret',			'refresh-token' => 'Refresh token',			'authorization-uri' => 'Authorization URI',			'redirect-uri' => 'Redirect URI',			'token-credential-uri' => 'Token Credential URI',			'scope' => 'Scope',		],	],
+		'contacts' => [		'title' => 'Contacts',		'fields' => [			'company' => 'Company',			'clinic' => 'Clinic',			'user' => 'User',			'first-name' => 'First name',			'last-name' => 'Last name',			'phone1' => 'Phone 1',			'phone2' => 'Phone 2',			'email' => 'Email',			'skype' => 'Skype',		],	],
+		'clinics' => [		'title' => 'Clinics',		'fields' => [			'nickname' => 'Nickname',			'clinic-email' => 'Clinic Email',			'clinic-phone' => 'Clinic Phone',			'clinic-phone-2' => 'Clinic phone 2',			'logo' => 'Logo',			'company' => 'Company',			'users' => 'Users',		],	],
+		'locations' => [		'title' => 'Locations',		'fields' => [			'nickname' => 'Nickname',			'address' => 'Address',			'address-2' => 'Address 2',			'city' => 'City',			'state' => 'State',			'phone' => 'Phone',			'phone2' => 'Phone2',			'storefront' => 'Storefront',			'google-map-link' => 'Google map link',			'clinic' => 'Clinic',			'contact-person' => 'Contact person',		],	],
+		'website' => [		'title' => 'Website',		'fields' => [			'company' => 'Company',			'clinic' => 'Clinic',			'website' => 'Website',		],	],
+		'analytics' => [		'title' => 'Analytics',		'fields' => [			'view-name' => 'View name',			'view-id' => 'View ID',			'website' => 'Website',		],	],
+		'adwords' => [		'title' => 'Adwords',		'fields' => [			'company' => 'Company',			'website' => 'Website',			'client-customer-id' => 'Client customer id',			'user-agent' => 'User agent',			'client-id' => 'Client id',			'client-secret' => 'Client secret',			'refresh-token' => 'Refresh token',			'authorization-uri' => 'Authorization URI',			'redirect-uri' => 'Redirect URI',			'token-credential-uri' => 'Token Credential URI',			'scope' => 'Scope',			'clinic' => 'Clinic',		],	],
+		'dashboards' => [		'title' => 'Dashboards',		'fields' => [		],	],
+		'dashboards' => [		'title' => 'Dashboards',		'fields' => [		],	],
+		'lca-dashboard' => [		'title' => 'LCA Dashboard',		'fields' => [		],	],
+		'analytical-dashboard' => [		'title' => 'Analytical Dashboard',		'fields' => [		],	],
+		'adwords-dashboard' => [		'title' => 'Adwords Dashboard',		'fields' => [		],	],
+		'call-metrics' => [		'title' => 'Call Metrics',		'fields' => [		],	],
+		'bookings-dashboard' => [		'title' => 'Bookings Dashboard',		'fields' => [		],	],
+		'bookings' => [		'title' => 'Bookings',		'fields' => [			'submitted' => 'Submitted',			'customername' => 'Customer Name',			'email' => 'Email',			'phone' => 'Phone',			'family-number' => 'Family number',			'how-long' => 'How long',			'requested-date' => 'Requested date',			'requested-time' => 'Requested time',			'requested-clinic' => 'Requested clinic',			'clinic-id' => 'Clinic id',			'clinic-email' => 'Clinic email',			'clinic-address' => 'Clinic address',			'clinic-phone' => 'Clinic phone',			'clinic-text-numbers' => 'Clinic text numbers',			'client-firstname' => 'Client firstname',		],	],
 	'app_create' => 'Create',
 	'app_save' => 'Save',
 	'app_edit' => 'Edit',

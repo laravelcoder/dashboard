@@ -30,12 +30,16 @@ class LocationTest extends DuskTestCase
                 ->type("phone2", $location->phone2)
                 ->attach("storefront", base_path("tests/_resources/test.jpg"))
                 ->type("google_map_link", $location->google_map_link)
+                ->select("clinic_id", $location->clinic_id)
+                ->select("contact_person_id", $location->contact_person_id)
                 ->press('Save')
                 ->assertRouteIs('admin.locations.index')
                 ->assertSeeIn("tr:last-child td[field-key='nickname']", $location->nickname)
                 ->assertSeeIn("tr:last-child td[field-key='city']", $location->city)
                 ->assertSeeIn("tr:last-child td[field-key='state']", $location->state)
-                ->assertSeeIn("tr:last-child td[field-key='phone2']", $location->phone2);
+                ->assertSeeIn("tr:last-child td[field-key='phone2']", $location->phone2)
+                ->assertSeeIn("tr:last-child td[field-key='clinic']", $location->clinic->nickname)
+                ->assertSeeIn("tr:last-child td[field-key='contact_person']", $location->contact_person->first_name);
         });
     }
 
@@ -60,12 +64,16 @@ class LocationTest extends DuskTestCase
                 ->type("phone2", $location2->phone2)
                 ->attach("storefront", base_path("tests/_resources/test.jpg"))
                 ->type("google_map_link", $location2->google_map_link)
+                ->select("clinic_id", $location2->clinic_id)
+                ->select("contact_person_id", $location2->contact_person_id)
                 ->press('Update')
                 ->assertRouteIs('admin.locations.index')
                 ->assertSeeIn("tr:last-child td[field-key='nickname']", $location2->nickname)
                 ->assertSeeIn("tr:last-child td[field-key='city']", $location2->city)
                 ->assertSeeIn("tr:last-child td[field-key='state']", $location2->state)
-                ->assertSeeIn("tr:last-child td[field-key='phone2']", $location2->phone2);
+                ->assertSeeIn("tr:last-child td[field-key='phone2']", $location2->phone2)
+                ->assertSeeIn("tr:last-child td[field-key='clinic']", $location2->clinic->nickname)
+                ->assertSeeIn("tr:last-child td[field-key='contact_person']", $location2->contact_person->first_name);
         });
     }
 
@@ -88,7 +96,9 @@ class LocationTest extends DuskTestCase
                 ->assertSeeIn("td[field-key='state']", $location->state)
                 ->assertSeeIn("td[field-key='phone']", $location->phone)
                 ->assertSeeIn("td[field-key='phone2']", $location->phone2)
-                ->assertSeeIn("td[field-key='google_map_link']", $location->google_map_link);
+                ->assertSeeIn("td[field-key='google_map_link']", $location->google_map_link)
+                ->assertSeeIn("td[field-key='clinic']", $location->clinic->nickname)
+                ->assertSeeIn("td[field-key='contact_person']", $location->contact_person->first_name);
         });
     }
 

@@ -21,7 +21,6 @@ class CreateCombined1521829525ContactsTable extends Migration
                 $table->string('phone2')->nullable();
                 $table->string('email')->nullable();
                 $table->string('skype')->nullable();
-                $table->string('address')->nullable();
                 
                 $table->timestamps();
                 

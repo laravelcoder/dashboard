@@ -42,7 +42,12 @@ class ClinicsController extends Controller
      */
     public function create()
     {
-        return view('admin.clinics.create');
+        
+        $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
+        $users = \App\User::get()->pluck('name', 'id');
+
+
+        return view('admin.clinics.create', compact('companies', 'users'));
     }
 
     /**
@@ -55,7 +60,17 @@ class ClinicsController extends Controller
     {
         $request = $this->saveFiles($request);
         $clinic = Clinic::create($request->all());
+        $clinic->users()->sync(array_filter((array)$request->input('users')));
 
+        foreach ($request->input('contacts', []) as $data) {
+            $clinic->contacts()->create($data);
+        }
+        foreach ($request->input('websites', []) as $data) {
+            $clinic->websites()->create($data);
+        }
+        foreach ($request->input('locations', []) as $data) {
+            $clinic->locations()->create($data);
+        }
 
 
         return redirect()->route('admin.clinics.index');
@@ -70,9 +85,14 @@ class ClinicsController extends Controller
      */
     public function edit($id)
     {
+        
+        $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
+        $users = \App\User::get()->pluck('name', 'id');
+
+
         $clinic = Clinic::findOrFail($id);
 
-        return view('admin.clinics.edit', compact('clinic'));
+        return view('admin.clinics.edit', compact('clinic', 'companies', 'users'));
     }
 
     /**
@@ -87,7 +107,59 @@ class ClinicsController extends Controller
         $request = $this->saveFiles($request);
         $clinic = Clinic::findOrFail($id);
         $clinic->update($request->all());
+        $clinic->users()->sync(array_filter((array)$request->input('users')));
 
+        $contacts           = $clinic->contacts;
+        $currentContactData = [];
+        foreach ($request->input('contacts', []) as $index => $data) {
+            if (is_integer($index)) {
+                $clinic->contacts()->create($data);
+            } else {
+                $id                          = explode('-', $index)[1];
+                $currentContactData[$id] = $data;
+            }
+        }
+        foreach ($contacts as $item) {
+            if (isset($currentContactData[$item->id])) {
+                $item->update($currentContactData[$item->id]);
+            } else {
+                $item->delete();
+            }
+        }
+        $websites           = $clinic->websites;
+        $currentWebsiteData = [];
+        foreach ($request->input('websites', []) as $index => $data) {
+            if (is_integer($index)) {
+                $clinic->websites()->create($data);
+            } else {
+                $id                          = explode('-', $index)[1];
+                $currentWebsiteData[$id] = $data;
+            }
+        }
+        foreach ($websites as $item) {
+            if (isset($currentWebsiteData[$item->id])) {
+                $item->update($currentWebsiteData[$item->id]);
+            } else {
+                $item->delete();
+            }
+        }
+        $locations           = $clinic->locations;
+        $currentLocationData = [];
+        foreach ($request->input('locations', []) as $index => $data) {
+            if (is_integer($index)) {
+                $clinic->locations()->create($data);
+            } else {
+                $id                          = explode('-', $index)[1];
+                $currentLocationData[$id] = $data;
+            }
+        }
+        foreach ($locations as $item) {
+            if (isset($currentLocationData[$item->id])) {
+                $item->update($currentLocationData[$item->id]);
+            } else {
+                $item->delete();
+            }
+        }
 
 
         return redirect()->route('admin.clinics.index');
@@ -102,9 +174,14 @@ class ClinicsController extends Controller
      */
     public function show($id)
     {
+        
+        $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
+        $users = \App\User::get()->pluck('name', 'id');
+$contacts = \App\Contact::where('clinic_id', $id)->get();$websites = \App\Website::where('clinic_id', $id)->get();$locations = \App\Location::where('clinic_id', $id)->get();$adwords = \App\Adword::where('clinic_id', $id)->get();
+
         $clinic = Clinic::findOrFail($id);
 
-        return view('admin.clinics.show', compact('clinic'));
+        return view('admin.clinics.show', compact('clinic', 'contacts', 'websites', 'locations', 'adwords'));
     }
 
 

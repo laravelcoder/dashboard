@@ -35,6 +35,18 @@
                     @endif
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('website_id', trans('global.analytics.fields.website').'', ['class' => 'control-label']) !!}
+                    {!! Form::select('website_id', $websites, old('website_id'), ['class' => 'form-control select2']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('website_id'))
+                        <p class="help-block">
+                            {{ $errors->first('website_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
             
         </div>
     </div>

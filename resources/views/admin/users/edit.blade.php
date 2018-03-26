@@ -76,7 +76,6 @@
                         <th>@lang('global.contacts.fields.phone2')</th>
                         <th>@lang('global.contacts.fields.email')</th>
                         <th>@lang('global.contacts.fields.skype')</th>
-                        <th>@lang('global.contacts.fields.address')</th>
                         
                     <th>Actions</th>
                 </tr>
@@ -99,6 +98,44 @@
             <a href="#" class="btn btn-success pull-right add-new">@lang('global.app_add_new')</a>
         </div>
     </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Locations
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>@lang('global.locations.fields.nickname')</th>
+                        <th>@lang('global.locations.fields.address')</th>
+                        <th>@lang('global.locations.fields.address-2')</th>
+                        <th>@lang('global.locations.fields.city')</th>
+                        <th>@lang('global.locations.fields.state')</th>
+                        <th>@lang('global.locations.fields.phone')</th>
+                        <th>@lang('global.locations.fields.phone2')</th>
+                        <th>@lang('global.locations.fields.google-map-link')</th>
+                        
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody id="locations">
+                    @forelse(old('locations', []) as $index => $data)
+                        @include('admin.users.locations_row', [
+                            'index' => $index
+                        ])
+                    @empty
+                        @foreach($user->locations as $item)
+                            @include('admin.users.locations_row', [
+                                'index' => 'id-' . $item->id,
+                                'field' => $item
+                            ])
+                        @endforeach
+                    @endforelse
+                </tbody>
+            </table>
+            <a href="#" class="btn btn-success pull-right add-new">@lang('global.app_add_new')</a>
+        </div>
+    </div>
 
     {!! Form::submit(trans('global.app_update'), ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
@@ -109,6 +146,13 @@
 
     <script type="text/html" id="contacts-template">
         @include('admin.users.contacts_row',
+                [
+                    'index' => '_INDEX_',
+                ])
+               </script > 
+
+    <script type="text/html" id="locations-template">
+        @include('admin.users.locations_row',
                 [
                     'index' => '_INDEX_',
                 ])
