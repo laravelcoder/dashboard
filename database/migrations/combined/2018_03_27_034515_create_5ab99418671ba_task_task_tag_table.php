@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Create5ab97ed2c630fTaskTaskTagTable extends Migration
+class Create5ab99418671baTaskTaskTagTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,9 @@ class Create5ab97ed2c630fTaskTaskTagTable extends Migration
         if(! Schema::hasTable('task_task_tag')) {
             Schema::create('task_task_tag', function (Blueprint $table) {
                 $table->integer('task_id')->unsigned()->nullable();
-                $table->foreign('task_id', 'fk_p_136426_136425_taskta_5ab97ed2c6462')->references('id')->on('tasks')->onDelete('cascade');
+                $table->foreign('task_id', 'fk_p_136426_136425_taskta_5ab99418672ef')->references('id')->on('tasks')->onDelete('cascade');
                 $table->integer('task_tag_id')->unsigned()->nullable();
-                $table->foreign('task_tag_id', 'fk_p_136425_136426_task_t_5ab97ed2c6539')->references('id')->on('task_tags')->onDelete('cascade');
+                $table->foreign('task_tag_id', 'fk_p_136425_136426_task_t_5ab99418673ac')->references('id')->on('task_tags')->onDelete('cascade');
                 
             });
         }
