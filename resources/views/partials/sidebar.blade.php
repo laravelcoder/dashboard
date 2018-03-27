@@ -173,6 +173,15 @@
                 </ul>
             </li>
             @endcan
+            @can('booking_access')
+            <li class="{{ $request->segment(2) == 'bookings' ? 'active' : '' }}">
+                <a href="{{ route('admin.bookings.index') }}">
+                    <i class="fa fa-calendar-plus-o"></i>
+                    <span class="title">@lang('global.bookings.title')</span>
+                </a>
+            </li>
+            @endcan
+            
             @can('user_management_access')
             <li class="treeview">
                 <a href="#">
@@ -281,15 +290,6 @@
                 </ul>
             </li>
             @endcan
-            @can('booking_access')
-            <li class="{{ $request->segment(2) == 'bookings' ? 'active' : '' }}">
-                <a href="{{ route('admin.bookings.index') }}">
-                    <i class="fa fa-calendar-plus-o"></i>
-                    <span class="title">@lang('global.bookings.title')</span>
-                </a>
-            </li>
-            @endcan
-            
 
             
 
