@@ -24,7 +24,7 @@
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($clinics) > 0 ? 'datatable' : '' }} @can('clinic_delete') @if ( request('show_deleted') != 1 ) dt-select @endif @endcan">
+            <table class="table table-bordered table-striped ajaxTable @can('clinic_delete') @if ( request('show_deleted') != 1 ) dt-select @endif @endcan">
                 <thead>
                     <tr>
                         @can('clinic_delete')
@@ -44,69 +44,6 @@
                         @endif
                     </tr>
                 </thead>
-                
-                <tbody>
-                    @if (count($clinics) > 0)
-                        @foreach ($clinics as $clinic)
-                            <tr data-entry-id="{{ $clinic->id }}">
-                                @can('clinic_delete')
-                                    @if ( request('show_deleted') != 1 )<td></td>@endif
-                                @endcan
-
-                                <td field-key='nickname'>{{ $clinic->nickname }}</td>
-                                <td field-key='clinic_email'>{{ $clinic->clinic_email }}</td>
-                                <td field-key='clinic_phone'>{{ $clinic->clinic_phone }}</td>
-                                <td field-key='clinic_phone_2'>{{ $clinic->clinic_phone_2 }}</td>
-                                <td field-key='company'>{{ $clinic->company->name or '' }}</td>
-                                <td field-key='users'>
-                                    @foreach ($clinic->users as $singleUsers)
-                                        <span class="label label-info label-many">{{ $singleUsers->name }}</span>
-                                    @endforeach
-                                </td>
-                                @if( request('show_deleted') == 1 )
-                                <td>
-                                    {!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'POST',
-                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['admin.clinics.restore', $clinic->id])) !!}
-                                    {!! Form::submit(trans('global.app_restore'), array('class' => 'btn btn-xs btn-success')) !!}
-                                    {!! Form::close() !!}
-                                                                    {!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'DELETE',
-                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['admin.clinics.perma_del', $clinic->id])) !!}
-                                    {!! Form::submit(trans('global.app_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                    {!! Form::close() !!}
-                                                                </td>
-                                @else
-                                <td>
-                                    @can('clinic_view')
-                                    <a href="{{ route('admin.clinics.show',[$clinic->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
-                                    @endcan
-                                    @can('clinic_edit')
-                                    <a href="{{ route('admin.clinics.edit',[$clinic->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
-                                    @endcan
-                                    @can('clinic_delete')
-{!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'DELETE',
-                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['admin.clinics.destroy', $clinic->id])) !!}
-                                    {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                    {!! Form::close() !!}
-                                    @endcan
-                                </td>
-                                @endif
-                            </tr>
-                        @endforeach
-                    @else
-                        <tr>
-                            <td colspan="12">@lang('global.app_no_entries_in_table')</td>
-                        </tr>
-                    @endif
-                </tbody>
             </table>
         </div>
     </div>
@@ -117,6 +54,22 @@
         @can('clinic_delete')
             @if ( request('show_deleted') != 1 ) window.route_mass_crud_entries_destroy = '{{ route('admin.clinics.mass_destroy') }}'; @endif
         @endcan
-
+        $(document).ready(function () {
+            window.dtDefaultOptions.ajax = '{!! route('admin.clinics.index') !!}?show_deleted={{ request('show_deleted') }}';
+            window.dtDefaultOptions.columns = [@can('clinic_delete')
+                @if ( request('show_deleted') != 1 )
+                    {data: 'massDelete', name: 'id', searchable: false, sortable: false},
+                @endif
+                @endcan{data: 'nickname', name: 'nickname'},
+                {data: 'clinic_email', name: 'clinic_email'},
+                {data: 'clinic_phone', name: 'clinic_phone'},
+                {data: 'clinic_phone_2', name: 'clinic_phone_2'},
+                {data: 'company.name', name: 'company.name'},
+                {data: 'users.name', name: 'users.name'},
+                
+                {data: 'actions', name: 'actions', searchable: false, sortable: false}
+            ];
+            processAjaxTables();
+        });
     </script>
 @endsection

@@ -2,6 +2,10 @@
 
 Route::group(['prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], function () {
 
+        Route::resource('contact_companies', 'ContactCompaniesController', ['except' => ['create', 'edit']]);
+
+        Route::resource('clinics', 'ClinicsController', ['except' => ['create', 'edit']]);
+
         Route::resource('locations', 'LocationsController', ['except' => ['create', 'edit']]);
 
         Route::resource('websites', 'WebsitesController', ['except' => ['create', 'edit']]);

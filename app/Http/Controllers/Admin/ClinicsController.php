@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreClinicsRequest;
 use App\Http\Requests\Admin\UpdateClinicsRequest;
 use App\Http\Controllers\Traits\FileUploadTrait;
+use Yajra\DataTables\DataTables;
 
 class ClinicsController extends Controller
 {
@@ -23,16 +24,66 @@ class ClinicsController extends Controller
     {
 
 
-        if (request('show_deleted') == 1) {
-            if (! Gate::allows('clinic_delete')) {
-                return abort(401);
+        
+        if (request()->ajax()) {
+            $query = Clinic::query();
+            $query->with("company");
+            $query->with("users");
+            $template = 'actionsTemplate';
+            if(request('show_deleted') == 1) {
+                
+                $query->onlyTrashed();
+                $template = 'restoreTemplate';
             }
-            $clinics = Clinic::onlyTrashed()->get();
-        } else {
-            $clinics = Clinic::all();
+            $query->select([
+                'clinics.id',
+                'clinics.nickname',
+                'clinics.clinic_email',
+                'clinics.clinic_phone',
+                'clinics.clinic_phone_2',
+                'clinics.logo',
+                'clinics.company_id',
+            ]);
+            $table = Datatables::of($query);
+
+            $table->setRowAttr([
+                'data-entry-id' => '{{$id}}',
+            ]);
+            $table->addColumn('massDelete', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+            $table->editColumn('actions', function ($row) use ($template) {
+                $gateKey  = 'clinic_';
+                $routeKey = 'admin.clinics';
+
+                return view($template, compact('row', 'gateKey', 'routeKey'));
+            });
+            $table->editColumn('clinic_phone', function ($row) {
+                return $row->clinic_phone ? $row->clinic_phone : '';
+            });
+            $table->editColumn('clinic_phone_2', function ($row) {
+                return $row->clinic_phone_2 ? $row->clinic_phone_2 : '';
+            });
+            $table->editColumn('logo', function ($row) {
+                if($row->logo) { return '<a href="'. asset(env('UPLOAD_PATH').'/' . $row->logo) .'" target="_blank"><img src="'. asset(env('UPLOAD_PATH').'/thumb/' . $row->logo) .'"/>'; };
+            });
+            $table->editColumn('company.name', function ($row) {
+                return $row->company ? $row->company->name : '';
+            });
+            $table->editColumn('users.name', function ($row) {
+                if(count($row->users) == 0) {
+                    return '';
+                }
+
+                return '<span class="label label-info label-many">' . implode('</span><span class="label label-info label-many"> ',
+                        $row->users->pluck('name')->toArray()) . '</span>';
+            });
+
+            $table->rawColumns(['actions','massDelete','logo','users.name']);
+
+            return $table->make(true);
         }
 
-        return view('admin.clinics.index', compact('clinics'));
+        return view('admin.clinics.index');
     }
 
     /**
