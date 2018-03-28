@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreContactCompaniesRequest;
 use App\Http\Requests\Admin\UpdateContactCompaniesRequest;
 use App\Http\Controllers\Traits\FileUploadTrait;
+use Yajra\DataTables\DataTables;
 
 class ContactCompaniesController extends Controller
 {
@@ -23,9 +24,42 @@ class ContactCompaniesController extends Controller
     {
 
 
-                $contact_companies = ContactCompany::all();
+        
+        if (request()->ajax()) {
+            $query = ContactCompany::query();
+            $template = 'actionsTemplate';
+            
+            $query->select([
+                'contact_companies.id',
+                'contact_companies.name',
+                'contact_companies.logo',
+            ]);
+            $table = Datatables::of($query);
 
-        return view('admin.contact_companies.index', compact('contact_companies'));
+            $table->setRowAttr([
+                'data-entry-id' => '{{$id}}',
+            ]);
+            $table->addColumn('massDelete', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+            $table->editColumn('actions', function ($row) use ($template) {
+                $gateKey  = 'contact_company_';
+                $routeKey = 'admin.contact_companies';
+
+                return view($template, compact('row', 'gateKey', 'routeKey'));
+            });
+            $table->editColumn('name', function ($row) {
+                return $row->name ? $row->name : '';
+            });
+            $table->editColumn('logo', function ($row) {
+                if($row->logo) { return '<a href="'. asset(env('UPLOAD_PATH').'/' . $row->logo) .'" target="_blank"><img src="'. asset(env('UPLOAD_PATH').'/thumb/' . $row->logo) .'"/>'; };
+            });
+
+            $table->rawColumns(['actions','massDelete','logo']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.contact_companies.index');
     }
 
     /**

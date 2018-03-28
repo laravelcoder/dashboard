@@ -25,6 +25,7 @@ class UpdateContactsRequest extends FormRequest
         return [
             
             'company_id' => 'required',
+            'company_contacts.*' => 'exists:contacts,id',
         ];
     }
 }

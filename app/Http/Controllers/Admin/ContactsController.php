@@ -36,8 +36,10 @@ class ContactsController extends Controller
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
         $users = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
+        $company_contacts = \App\Contact::get()->pluck('first_name', 'id');
 
-        return view('admin.contacts.create', compact('companies', 'clinics', 'users'));
+
+        return view('admin.contacts.create', compact('companies', 'clinics', 'users', 'company_contacts'));
     }
 
     /**
@@ -49,6 +51,7 @@ class ContactsController extends Controller
     public function store(StoreContactsRequest $request)
     {
         $contact = Contact::create($request->all());
+        $contact->company_contacts()->sync(array_filter((array)$request->input('company_contacts')));
 
 
 
@@ -68,10 +71,12 @@ class ContactsController extends Controller
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
         $users = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
+        $company_contacts = \App\Contact::get()->pluck('first_name', 'id');
+
 
         $contact = Contact::findOrFail($id);
 
-        return view('admin.contacts.edit', compact('contact', 'companies', 'clinics', 'users'));
+        return view('admin.contacts.edit', compact('contact', 'companies', 'clinics', 'users', 'company_contacts'));
     }
 
     /**
@@ -85,6 +90,7 @@ class ContactsController extends Controller
     {
         $contact = Contact::findOrFail($id);
         $contact->update($request->all());
+        $contact->company_contacts()->sync(array_filter((array)$request->input('company_contacts')));
 
 
 
@@ -103,11 +109,16 @@ class ContactsController extends Controller
         
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
-        $users = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');$locations = \App\Location::where('contact_person_id', $id)->get();
+        $users = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
+        $company_contacts = \App\Contact::get()->pluck('first_name', 'id');
+$contacts = \App\Contact::whereHas('company_contacts',
+                    function ($query) use ($id) {
+                        $query->where('id', $id);
+                    })->get();$locations = \App\Location::where('contact_person_id', $id)->get();
 
         $contact = Contact::findOrFail($id);
 
-        return view('admin.contacts.show', compact('contact', 'locations'));
+        return view('admin.contacts.show', compact('contact', 'contacts', 'locations'));
     }
 
 

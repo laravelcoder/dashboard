@@ -45,6 +45,7 @@
                         <th>@lang('global.contacts.fields.phone2')</th>
                         <th>@lang('global.contacts.fields.email')</th>
                         <th>@lang('global.contacts.fields.skype')</th>
+                        <th>@lang('global.contacts.fields.company-contacts')</th>
                                                 <th>&nbsp;</th>
 
         </tr>
@@ -61,6 +62,11 @@
                                 <td field-key='phone2'>{{ $contact->phone2 }}</td>
                                 <td field-key='email'>{{ $contact->email }}</td>
                                 <td field-key='skype'>{{ $contact->skype }}</td>
+                                <td field-key='company_contacts'>
+                                    @foreach ($contact->company_contacts as $singleCompanyContacts)
+                                        <span class="label label-info label-many">{{ $singleCompanyContacts->first_name }}</span>
+                                    @endforeach
+                                </td>
                                                                 <td>
                                     @can('view')
                                     <a href="{{ route('contacts.show',[$contact->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
@@ -83,7 +89,7 @@
             @endforeach
         @else
             <tr>
-                <td colspan="14">@lang('global.app_no_entries_in_table')</td>
+                <td colspan="15">@lang('global.app_no_entries_in_table')</td>
             </tr>
         @endif
     </tbody>
