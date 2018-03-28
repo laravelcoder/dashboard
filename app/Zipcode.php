@@ -19,12 +19,6 @@ class Zipcode extends Model
     protected $fillable = ['zipcode', 'clinic_id', 'location_id'];
     
     
-    public static function boot()
-    {
-        parent::boot();
-
-        Zipcode::observe(new \App\Observers\UserActionsObserver);
-    }
 
     /**
      * Set to null if empty
