@@ -119,6 +119,18 @@
                     @endif
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('company_contacts', trans('global.contacts.fields.company-contacts').'', ['class' => 'control-label']) !!}
+                    {!! Form::select('company_contacts[]', $company_contacts, old('company_contacts') ? old('company_contacts') : $contact->company_contacts->pluck('id')->toArray(), ['class' => 'form-control select2', 'multiple' => 'multiple']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('company_contacts'))
+                        <p class="help-block">
+                            {{ $errors->first('company_contacts') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
             
         </div>
     </div>

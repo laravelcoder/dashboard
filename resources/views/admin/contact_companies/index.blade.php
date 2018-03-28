@@ -18,7 +18,7 @@
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($contact_companies) > 0 ? 'datatable' : '' }} @can('contact_company_delete') dt-select @endcan">
+            <table class="table table-bordered table-striped ajaxTable @can('contact_company_delete') dt-select @endcan">
                 <thead>
                     <tr>
                         @can('contact_company_delete')
@@ -30,42 +30,6 @@
 
                     </tr>
                 </thead>
-                
-                <tbody>
-                    @if (count($contact_companies) > 0)
-                        @foreach ($contact_companies as $contact_company)
-                            <tr data-entry-id="{{ $contact_company->id }}">
-                                @can('contact_company_delete')
-                                    <td></td>
-                                @endcan
-
-                                <td field-key='name'>{{ $contact_company->name }}</td>
-                                                                <td>
-                                    @can('contact_company_view')
-                                    <a href="{{ route('admin.contact_companies.show',[$contact_company->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
-                                    @endcan
-                                    @can('contact_company_edit')
-                                    <a href="{{ route('admin.contact_companies.edit',[$contact_company->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
-                                    @endcan
-                                    @can('contact_company_delete')
-{!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'DELETE',
-                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['admin.contact_companies.destroy', $contact_company->id])) !!}
-                                    {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                    {!! Form::close() !!}
-                                    @endcan
-                                </td>
-
-                            </tr>
-                        @endforeach
-                    @else
-                        <tr>
-                            <td colspan="7">@lang('global.app_no_entries_in_table')</td>
-                        </tr>
-                    @endif
-                </tbody>
             </table>
         </div>
     </div>
@@ -76,6 +40,15 @@
         @can('contact_company_delete')
             window.route_mass_crud_entries_destroy = '{{ route('admin.contact_companies.mass_destroy') }}';
         @endcan
-
+        $(document).ready(function () {
+            window.dtDefaultOptions.ajax = '{!! route('admin.contact_companies.index') !!}';
+            window.dtDefaultOptions.columns = [@can('contact_company_delete')
+                    {data: 'massDelete', name: 'id', searchable: false, sortable: false},
+                @endcan{data: 'name', name: 'name'},
+                
+                {data: 'actions', name: 'actions', searchable: false, sortable: false}
+            ];
+            processAjaxTables();
+        });
     </script>
 @endsection
