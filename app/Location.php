@@ -27,12 +27,6 @@ class Location extends Model
     protected $fillable = ['nickname', 'address', 'address_2', 'city', 'state', 'phone', 'phone2', 'storefront', 'google_map_link', 'clinic_id', 'contact_person_id'];
     
     
-    public static function boot()
-    {
-        parent::boot();
-
-        Location::observe(new \App\Observers\UserActionsObserver);
-    }
 
     /**
      * Set to null if empty

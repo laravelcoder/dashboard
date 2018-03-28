@@ -14,11 +14,5 @@ class TaskTag extends Model
     protected $fillable = ['name'];
     
     
-    public static function boot()
-    {
-        parent::boot();
-
-        TaskTag::observe(new \App\Observers\UserActionsObserver);
-    }
     
 }

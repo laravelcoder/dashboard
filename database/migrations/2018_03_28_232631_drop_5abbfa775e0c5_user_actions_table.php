@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCombined1522105439UserActionsTable extends Migration
+class Drop5abbfa775e0c5UserActionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -11,6 +11,16 @@ class CreateCombined1522105439UserActionsTable extends Migration
      * @return void
      */
     public function up()
+    {
+        Schema::dropIfExists('user_actions');
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
     {
         if(! Schema::hasTable('user_actions')) {
             Schema::create('user_actions', function (Blueprint $table) {
@@ -23,15 +33,5 @@ class CreateCombined1522105439UserActionsTable extends Migration
                 
             });
         }
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('user_actions');
     }
 }

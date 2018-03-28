@@ -122,14 +122,14 @@ class UsersController extends Controller
     {
         
         $roles = \App\Role::get()->pluck('title', 'id');
-$user_actions = \App\UserAction::where('user_id', $id)->get();$contacts = \App\Contact::where('user_id', $id)->get();$clinics = \App\Clinic::whereHas('users',
+$contacts = \App\Contact::where('user_id', $id)->get();$clinics = \App\Clinic::whereHas('users',
                     function ($query) use ($id) {
                         $query->where('id', $id);
                     })->get();$tasks = \App\Task::where('user_id', $id)->get();
 
         $user = User::findOrFail($id);
 
-        return view('admin.users.show', compact('user', 'user_actions', 'contacts', 'clinics', 'tasks'));
+        return view('admin.users.show', compact('user', 'contacts', 'clinics', 'tasks'));
     }
 
 

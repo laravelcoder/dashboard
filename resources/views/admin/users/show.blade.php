@@ -33,8 +33,7 @@
             </div><!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
     
-<li role="presentation" class="active"><a href="#useractions" aria-controls="useractions" role="tab" data-toggle="tab">User actions</a></li>
-<li role="presentation" class=""><a href="#contacts" aria-controls="contacts" role="tab" data-toggle="tab">Contacts</a></li>
+<li role="presentation" class="active"><a href="#contacts" aria-controls="contacts" role="tab" data-toggle="tab">Contacts</a></li>
 <li role="presentation" class=""><a href="#clinics" aria-controls="clinics" role="tab" data-toggle="tab">Clinics</a></li>
 <li role="presentation" class=""><a href="#tasks" aria-controls="tasks" role="tab" data-toggle="tab">Tasks</a></li>
 </ul>
@@ -42,40 +41,7 @@
 <!-- Tab panes -->
 <div class="tab-content">
     
-<div role="tabpanel" class="tab-pane active" id="useractions">
-<table class="table table-bordered table-striped {{ count($user_actions) > 0 ? 'datatable' : '' }}">
-    <thead>
-        <tr>
-            <th>@lang('global.user-actions.created_at')</th>
-                        <th>@lang('global.user-actions.fields.user')</th>
-                        <th>@lang('global.user-actions.fields.action')</th>
-                        <th>@lang('global.user-actions.fields.action-model')</th>
-                        <th>@lang('global.user-actions.fields.action-id')</th>
-                        
-        </tr>
-    </thead>
-
-    <tbody>
-        @if (count($user_actions) > 0)
-            @foreach ($user_actions as $user_action)
-                <tr data-entry-id="{{ $user_action->id }}">
-                    <td>{{ $user_action->created_at or '' }}</td>
-                                <td field-key='user'>{{ $user_action->user->name or '' }}</td>
-                                <td field-key='action'>{{ $user_action->action }}</td>
-                                <td field-key='action_model'>{{ $user_action->action_model }}</td>
-                                <td field-key='action_id'>{{ $user_action->action_id }}</td>
-                                
-                </tr>
-            @endforeach
-        @else
-            <tr>
-                <td colspan="7">@lang('global.app_no_entries_in_table')</td>
-            </tr>
-        @endif
-    </tbody>
-</table>
-</div>
-<div role="tabpanel" class="tab-pane " id="contacts">
+<div role="tabpanel" class="tab-pane active" id="contacts">
 <table class="table table-bordered table-striped {{ count($contacts) > 0 ? 'datatable' : '' }}">
     <thead>
         <tr>

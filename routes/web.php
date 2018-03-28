@@ -69,7 +69,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('zipcodes_mass_destroy', ['uses' => 'Admin\ZipcodesController@massDestroy', 'as' => 'zipcodes.mass_destroy']);
     Route::post('zipcodes_restore/{id}', ['uses' => 'Admin\ZipcodesController@restore', 'as' => 'zipcodes.restore']);
     Route::delete('zipcodes_perma_del/{id}', ['uses' => 'Admin\ZipcodesController@perma_del', 'as' => 'zipcodes.perma_del']);
-    Route::resource('user_actions', 'Admin\UserActionsController');
 
     Route::model('messenger', 'App\MessengerTopic');
     Route::get('messenger/inbox', 'Admin\MessengerController@inbox')->name('messenger.inbox');

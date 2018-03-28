@@ -223,16 +223,6 @@
                         </a>
                     </li>
                 @endcan
-                @can('user_action_access')
-                <li class="{{ $request->segment(2) == 'user_actions' ? 'active active-sub' : '' }}">
-                        <a href="{{ route('admin.user_actions.index') }}">
-                            <i class="fa fa-th-list"></i>
-                            <span class="title">
-                                @lang('global.user-actions.title')
-                            </span>
-                        </a>
-                    </li>
-                @endcan
                 </ul>
             </li>
             @endcan
