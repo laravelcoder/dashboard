@@ -3,7 +3,10 @@
 
 <head>
     @include('partials.head')
+    @yield('topcss')
+    @yield('topscripts')
 </head>
+
 
 
 <body class="hold-transition skin-blue sidebar-mini">
