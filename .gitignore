@@ -22,3 +22,4 @@ composer.lock
 /.overwrite
 
 .phpintel/*
+config/google-ads.php

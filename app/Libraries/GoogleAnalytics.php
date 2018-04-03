@@ -40,7 +40,7 @@ function getMostVisitedPagesForPeriod(DateTime $startDate, DateTime $endDate, $m
 
     $analyticsData = [];
 
-    $answer = LaravelAnalytics::performQuery($startDate, $endDate, 'ga:pageviews,ga:uniquePageviews,ga:avgTimeOnPage,ga:entrances,ga:bounceRate,ga:exitRate,ga:pageValue', ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
+    $answer = Analytics::performQuery($startDate, $endDate, 'ga:pageviews,ga:uniquePageviews,ga:avgTimeOnPage,ga:entrances,ga:bounceRate,ga:exitRate,ga:pageValue', ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $maxResults]);
 
     if (is_null($answer->rows)) {
         return new Collection([]);
@@ -69,7 +69,7 @@ function getVisitorsAndPageViewsForPeriod(DateTime $startDate, DateTime $endDate
         $po3 = 2;
         $gBy = ($groupBy == 'yearMonth' ? 'Ym' : 'Ymd');
     }
-    $answer = LaravelAnalytics::performQuery($startDate, $endDate, 'ga:visits,ga:pageviews', ['dimensions' => $dimension]);
+    $answer = Analytics::performQuery($startDate, $endDate, 'ga:visits,ga:pageviews', ['dimensions' => $dimension]);
 
     if (is_null($answer->rows)) {
         return new Collection([]);
