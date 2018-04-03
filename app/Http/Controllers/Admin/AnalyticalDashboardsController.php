@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Input;
 
 class AnalyticalDashboardsController extends Controller
 {
-    public function index()
+    public function index(Stats $stats)
     {
 
         $start = Carbon::now()->subYear();
@@ -30,7 +30,7 @@ class AnalyticalDashboardsController extends Controller
             $end = Carbon::parse($date_range_arr[1]);
         }
 
-        $toppages = Analytics::fetchMostVisitedPages($start,$end,100);
+        $toppages = Analytics::fetchMostVisitedPages($start,$end,100 );
         $topkeywords = Analytics::getTopKeyWordsForPeriod($start,$end);
         $topreferrers = Analytics::getTopReferrersForPeriod($start,$end,100);
 
@@ -63,35 +63,35 @@ class AnalyticalDashboardsController extends Controller
             $total_visitors = number_format($total_visitors);
             $total_pageviews = number_format($total_pageviews);
         }
-        $product_chart[0] = array('Product','Sold');
-        foreach($stats->getHighestSellingProducts(12,$start,$end) as $product){
-            $product_chart[] = array($product->name,$product->sales_count);
-        }
+        // $product_chart[0] = array('Product','Sold');
+        // foreach($stats->getHighestSellingProducts(12,$start,$end) as $product){
+        //     $product_chart[] = array($product->name,$product->sales_count);
+        // }
         $page_chart[0] = array('Page','Pageviews');
         foreach($toppages as $row){
             $page_chart[] = array($row['url'],(int)$row['pageViews']);
         }
-        $revenue = $stats->totalRevenueByDate($start,$end);
-        $revenue_array = array();
-        foreach ($revenue as $row){
-            $revenue_array[$row->order_date] = $row->total_revenue;
-        }
+        // $revenue = $stats->totalRevenueByDate($start,$end);
+        // $revenue_array = array();
+        // foreach ($revenue as $row){
+        //     $revenue_array[$row->order_date] = $row->total_revenue;
+        // }
         $interval = DateInterval::createFromDateString('1 day');
         $period = new DatePeriod($start, $interval, $end);
 
-        $order_chart = array();
-        if(count($order_array) > 0){
-            foreach ( $period as $dt ){
-                $order_chart[] = array('%%new Date('.$dt->format('Y, m-1, d, H').') %%',(int)@$order_array[$dt->format('Y-m-d')]);
-            }
-        }
+        // $order_chart = array();
+        // if(count($order_array) > 0){
+        //     foreach ( $period as $dt ){
+        //         $order_chart[] = array('%%new Date('.$dt->format('Y, m-1, d, H').') %%',(int)@$order_array[$dt->format('Y-m-d')]);
+        //     }
+        // }
 
-        $revenue_chart = array();
-        if(count($revenue_array) > 0){
-            foreach ( $period as $dt ){
-                $revenue_chart[] = array('%%new Date('.$dt->format('Y, m-1, d, H').') %%',(float)@$revenue_array[$dt->format('Y-m-d')]);
-            }
-        }
+        // $revenue_chart = array();
+        // if(count($revenue_array) > 0){
+        //     foreach ( $period as $dt ){
+        //         $revenue_chart[] = array('%%new Date('.$dt->format('Y, m-1, d, H').') %%',(float)@$revenue_array[$dt->format('Y-m-d')]);
+        //     }
+        // }
 
 
 
