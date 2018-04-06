@@ -20,5 +20,11 @@ Homestead.json
 .rocketeer/
 composer.lock
 /.overwrite
-
+/.idea/*
+/.idea
+.idea/*
 .phpintel/*
+config/google-ads.php
+/.phpintel/
+/.overwrite/
+/config/google-ads.php

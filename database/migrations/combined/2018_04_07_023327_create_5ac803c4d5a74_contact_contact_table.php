@@ -15,10 +15,9 @@ class Create5ac803c4d5a74ContactContactTable extends Migration
         if(! Schema::hasTable('contact_contact')) {
             Schema::create('contact_contact', function (Blueprint $table) {
                 $table->integer('contact_id')->unsigned()->nullable();
-                $table->foreign('contact_id', 'fk_p_135003_135003_contac_5ac803c4d5b6a')->references('id')->on('contacts')->onDelete('cascade');
-                $table->integer('contact_id')->unsigned()->nullable();
-                $table->foreign('contact_id', 'fk_p_135003_135003_contac_5ac803c4d5bec')->references('id')->on('contacts')->onDelete('cascade');
-                
+
+                $table->foreign('contact_id', 'fk_p_135003_135003_contac_5abbfcc9825c0')->references('id')->on('contacts')->onDelete('cascade');
+
             });
         }
     }
