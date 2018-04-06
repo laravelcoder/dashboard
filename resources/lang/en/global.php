@@ -28,6 +28,7 @@ return [
 		'task-tags' => [		'title' => 'Tags',		'fields' => [			'name' => 'Name',		],	],
 		'tasks' => [		'title' => 'Tasks',		'fields' => [			'name' => 'Name',			'description' => 'Description',			'status' => 'Status',			'tag' => 'Tags',			'attachment' => 'Attachment',			'due-date' => 'Due date',			'user' => 'Assigned to',		],	],
 		'task-calendar' => [		'title' => 'Calendar',		'fields' => [		],	],
+		'api-test' => [		'title' => 'Api test',		'fields' => [			'submitted-user-city' => 'Submitted user city',			'submitted-user-state' => 'Submitted user state',			'name' => 'Name',			'subject' => 'Subject',			'message' => 'Message',			'created-by' => 'Created by',		],	],
 	'app_create' => 'Create',
 	'app_save' => 'Save',
 	'app_edit' => 'Edit',
@@ -268,5 +269,7 @@ return [
 	'app_basic_crm' => 'Basic CRM',
 	'app_customers' => 'Customers',
 	'app_customer' => 'Customer',
+	'app_select_all' => 'Select all',
+	'app_deselect_all' => 'Deselect all',
 	'global_title' => 'lcadashboard',
 ];

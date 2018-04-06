@@ -24,7 +24,7 @@
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($websites) > 0 ? 'datatable' : '' }} @can('website_delete') @if ( request('show_deleted') != 1 ) dt-select @endif @endcan">
+            <table class="table table-bordered table-striped ajaxTable @can('website_delete') @if ( request('show_deleted') != 1 ) dt-select @endif @endcan">
                 <thead>
                     <tr>
                         @can('website_delete')
@@ -41,62 +41,6 @@
                         @endif
                     </tr>
                 </thead>
-                
-                <tbody>
-                    @if (count($websites) > 0)
-                        @foreach ($websites as $website)
-                            <tr data-entry-id="{{ $website->id }}">
-                                @can('website_delete')
-                                    @if ( request('show_deleted') != 1 )<td></td>@endif
-                                @endcan
-
-                                <td field-key='company'>{{ $website->company->name or '' }}</td>
-                                <td field-key='clinic'>{{ $website->clinic->nickname or '' }}</td>
-                                <td field-key='website'>{{ $website->website }}</td>
-                                @if( request('show_deleted') == 1 )
-                                <td>
-                                    {!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'POST',
-                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['admin.websites.restore', $website->id])) !!}
-                                    {!! Form::submit(trans('global.app_restore'), array('class' => 'btn btn-xs btn-success')) !!}
-                                    {!! Form::close() !!}
-                                                                    {!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'DELETE',
-                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['admin.websites.perma_del', $website->id])) !!}
-                                    {!! Form::submit(trans('global.app_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                    {!! Form::close() !!}
-                                                                </td>
-                                @else
-                                <td>
-                                    @can('website_view')
-                                    <a href="{{ route('admin.websites.show',[$website->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
-                                    @endcan
-                                    @can('website_edit')
-                                    <a href="{{ route('admin.websites.edit',[$website->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
-                                    @endcan
-                                    @can('website_delete')
-{!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'DELETE',
-                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['admin.websites.destroy', $website->id])) !!}
-                                    {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                    {!! Form::close() !!}
-                                    @endcan
-                                </td>
-                                @endif
-                            </tr>
-                        @endforeach
-                    @else
-                        <tr>
-                            <td colspan="8">@lang('global.app_no_entries_in_table')</td>
-                        </tr>
-                    @endif
-                </tbody>
             </table>
         </div>
     </div>
@@ -107,6 +51,19 @@
         @can('website_delete')
             @if ( request('show_deleted') != 1 ) window.route_mass_crud_entries_destroy = '{{ route('admin.websites.mass_destroy') }}'; @endif
         @endcan
-
+        $(document).ready(function () {
+            window.dtDefaultOptions.ajax = '{!! route('admin.websites.index') !!}?show_deleted={{ request('show_deleted') }}';
+            window.dtDefaultOptions.columns = [@can('website_delete')
+                @if ( request('show_deleted') != 1 )
+                    {data: 'massDelete', name: 'id', searchable: false, sortable: false},
+                @endif
+                @endcan{data: 'company.name', name: 'company.name'},
+                {data: 'clinic.nickname', name: 'clinic.nickname'},
+                {data: 'website', name: 'website'},
+                
+                {data: 'actions', name: 'actions', searchable: false, sortable: false}
+            ];
+            processAjaxTables();
+        });
     </script>
 @endsection
