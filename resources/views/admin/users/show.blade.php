@@ -34,6 +34,7 @@
 <ul class="nav nav-tabs" role="tablist">
     
 <li role="presentation" class="active"><a href="#contacts" aria-controls="contacts" role="tab" data-toggle="tab">Contacts</a></li>
+<li role="presentation" class=""><a href="#apitest" aria-controls="apitest" role="tab" data-toggle="tab">Api test</a></li>
 <li role="presentation" class=""><a href="#clinics" aria-controls="clinics" role="tab" data-toggle="tab">Clinics</a></li>
 <li role="presentation" class=""><a href="#tasks" aria-controls="tasks" role="tab" data-toggle="tab">Tasks</a></li>
 </ul>
@@ -97,6 +98,80 @@
         @else
             <tr>
                 <td colspan="15">@lang('global.app_no_entries_in_table')</td>
+            </tr>
+        @endif
+    </tbody>
+</table>
+</div>
+<div role="tabpanel" class="tab-pane " id="apitest">
+<table class="table table-bordered table-striped {{ count($api_tests) > 0 ? 'datatable' : '' }}">
+    <thead>
+        <tr>
+            <th>@lang('global.api-test.fields.submitted-user-city')</th>
+                        <th>@lang('global.api-test.fields.submitted-user-state')</th>
+                        <th>@lang('global.api-test.fields.name')</th>
+                        <th>@lang('global.api-test.fields.subject')</th>
+                        <th>@lang('global.api-test.fields.message')</th>
+                        <th>@lang('global.api-test.fields.created-by')</th>
+                        @if( request('show_deleted') == 1 )
+                        <th>&nbsp;</th>
+                        @else
+                        <th>&nbsp;</th>
+                        @endif
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (count($api_tests) > 0)
+            @foreach ($api_tests as $api_test)
+                <tr data-entry-id="{{ $api_test->id }}">
+                    <td field-key='submitted_user_city'>{{ $api_test->submitted_user_city }}</td>
+                                <td field-key='submitted_user_state'>{{ $api_test->submitted_user_state }}</td>
+                                <td field-key='name'>{{ $api_test->name }}</td>
+                                <td field-key='subject'>{{ $api_test->subject }}</td>
+                                <td field-key='message'>{{ $api_test->message }}</td>
+                                <td field-key='created_by'>{{ $api_test->created_by->name or '' }}</td>
+                                @if( request('show_deleted') == 1 )
+                                <td>
+                                    {!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'POST',
+                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                        'route' => ['api_tests.restore', $api_test->id])) !!}
+                                    {!! Form::submit(trans('global.app_restore'), array('class' => 'btn btn-xs btn-success')) !!}
+                                    {!! Form::close() !!}
+                                                                    {!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'DELETE',
+                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                        'route' => ['api_tests.perma_del', $api_test->id])) !!}
+                                    {!! Form::submit(trans('global.app_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
+                                                                </td>
+                                @else
+                                <td>
+                                    @can('view')
+                                    <a href="{{ route('api_tests.show',[$api_test->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
+                                    @endcan
+                                    @can('edit')
+                                    <a href="{{ route('api_tests.edit',[$api_test->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    @endcan
+                                    @can('delete')
+{!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'DELETE',
+                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                        'route' => ['api_tests.destroy', $api_test->id])) !!}
+                                    {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
+                                    @endcan
+                                </td>
+                                @endif
+                </tr>
+            @endforeach
+        @else
+            <tr>
+                <td colspan="11">@lang('global.app_no_entries_in_table')</td>
             </tr>
         @endif
     </tbody>

@@ -10,6 +10,7 @@ use App\Http\Requests\Admin\UpdateClinicsRequest;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
+
 class ClinicsController extends Controller {
 	use FileUploadTrait;
 
@@ -297,4 +298,5 @@ class ClinicsController extends Controller {
 
 		return redirect()->route('admin.clinics.index');
 	}
+
 }

@@ -22,6 +22,9 @@ class ContactCompaniesController extends Controller
      */
     public function index()
     {
+        if (! Gate::allows('contact_company_access')) {
+            return abort(401);
+        }
 
 
         
@@ -69,6 +72,9 @@ class ContactCompaniesController extends Controller
      */
     public function create()
     {
+        if (! Gate::allows('contact_company_create')) {
+            return abort(401);
+        }
         return view('admin.contact_companies.create');
     }
 
@@ -80,6 +86,9 @@ class ContactCompaniesController extends Controller
      */
     public function store(StoreContactCompaniesRequest $request)
     {
+        if (! Gate::allows('contact_company_create')) {
+            return abort(401);
+        }
         $request = $this->saveFiles($request);
         $contact_company = ContactCompany::create($request->all());
 
@@ -103,6 +112,9 @@ class ContactCompaniesController extends Controller
      */
     public function edit($id)
     {
+        if (! Gate::allows('contact_company_edit')) {
+            return abort(401);
+        }
         $contact_company = ContactCompany::findOrFail($id);
 
         return view('admin.contact_companies.edit', compact('contact_company'));
@@ -117,6 +129,9 @@ class ContactCompaniesController extends Controller
      */
     public function update(UpdateContactCompaniesRequest $request, $id)
     {
+        if (! Gate::allows('contact_company_edit')) {
+            return abort(401);
+        }
         $request = $this->saveFiles($request);
         $contact_company = ContactCompany::findOrFail($id);
         $contact_company->update($request->all());
@@ -169,6 +184,9 @@ class ContactCompaniesController extends Controller
      */
     public function show($id)
     {
+        if (! Gate::allows('contact_company_view')) {
+            return abort(401);
+        }
         $contacts = \App\Contact::where('company_id', $id)->get();$websites = \App\Website::where('company_id', $id)->get();$adwords = \App\Adword::where('company_id', $id)->get();$clinics = \App\Clinic::where('company_id', $id)->get();
 
         $contact_company = ContactCompany::findOrFail($id);
@@ -185,6 +203,9 @@ class ContactCompaniesController extends Controller
      */
     public function destroy($id)
     {
+        if (! Gate::allows('contact_company_delete')) {
+            return abort(401);
+        }
         $contact_company = ContactCompany::findOrFail($id);
         $contact_company->delete();
 
@@ -198,6 +219,9 @@ class ContactCompaniesController extends Controller
      */
     public function massDestroy(Request $request)
     {
+        if (! Gate::allows('contact_company_delete')) {
+            return abort(401);
+        }
         if ($request->input('ids')) {
             $entries = ContactCompany::whereIn('id', $request->input('ids'))->get();
 
