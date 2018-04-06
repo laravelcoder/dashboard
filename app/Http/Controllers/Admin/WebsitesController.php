@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreWebsitesRequest;
 use App\Http\Requests\Admin\UpdateWebsitesRequest;
+use Yajra\DataTables\DataTables;
 
 class WebsitesController extends Controller
 {
@@ -18,18 +19,57 @@ class WebsitesController extends Controller
      */
     public function index()
     {
-
-
-        if (request('show_deleted') == 1) {
-            if (! Gate::allows('website_delete')) {
-                return abort(401);
-            }
-            $websites = Website::onlyTrashed()->get();
-        } else {
-            $websites = Website::all();
+        if (! Gate::allows('website_access')) {
+            return abort(401);
         }
 
-        return view('admin.websites.index', compact('websites'));
+
+        
+        if (request()->ajax()) {
+            $query = Website::query();
+            $query->with("company");
+            $query->with("clinic");
+            $template = 'actionsTemplate';
+            if(request('show_deleted') == 1) {
+                
+        if (! Gate::allows('website_delete')) {
+            return abort(401);
+        }
+                $query->onlyTrashed();
+                $template = 'restoreTemplate';
+            }
+            $query->select([
+                'websites.id',
+                'websites.company_id',
+                'websites.clinic_id',
+                'websites.website',
+            ]);
+            $table = Datatables::of($query);
+
+            $table->setRowAttr([
+                'data-entry-id' => '{{$id}}',
+            ]);
+            $table->addColumn('massDelete', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+            $table->editColumn('actions', function ($row) use ($template) {
+                $gateKey  = 'website_';
+                $routeKey = 'admin.websites';
+
+                return view($template, compact('row', 'gateKey', 'routeKey'));
+            });
+            $table->editColumn('company.name', function ($row) {
+                return $row->company ? $row->company->name : '';
+            });
+            $table->editColumn('clinic.nickname', function ($row) {
+                return $row->clinic ? $row->clinic->nickname : '';
+            });
+
+            $table->rawColumns(['actions','massDelete']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.websites.index');
     }
 
     /**
@@ -39,6 +79,9 @@ class WebsitesController extends Controller
      */
     public function create()
     {
+        if (! Gate::allows('website_create')) {
+            return abort(401);
+        }
         
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
@@ -54,6 +97,9 @@ class WebsitesController extends Controller
      */
     public function store(StoreWebsitesRequest $request)
     {
+        if (! Gate::allows('website_create')) {
+            return abort(401);
+        }
         $website = Website::create($request->all());
 
         foreach ($request->input('adwords', []) as $data) {
@@ -76,6 +122,9 @@ class WebsitesController extends Controller
      */
     public function edit($id)
     {
+        if (! Gate::allows('website_edit')) {
+            return abort(401);
+        }
         
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
@@ -94,6 +143,9 @@ class WebsitesController extends Controller
      */
     public function update(UpdateWebsitesRequest $request, $id)
     {
+        if (! Gate::allows('website_edit')) {
+            return abort(401);
+        }
         $website = Website::findOrFail($id);
         $website->update($request->all());
 
@@ -145,6 +197,9 @@ class WebsitesController extends Controller
      */
     public function show($id)
     {
+        if (! Gate::allows('website_view')) {
+            return abort(401);
+        }
         
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');$adwords = \App\Adword::where('website_id', $id)->get();$analytics = \App\Analytic::where('website_id', $id)->get();
@@ -163,6 +218,9 @@ class WebsitesController extends Controller
      */
     public function destroy($id)
     {
+        if (! Gate::allows('website_delete')) {
+            return abort(401);
+        }
         $website = Website::findOrFail($id);
         $website->delete();
 
@@ -176,6 +234,9 @@ class WebsitesController extends Controller
      */
     public function massDestroy(Request $request)
     {
+        if (! Gate::allows('website_delete')) {
+            return abort(401);
+        }
         if ($request->input('ids')) {
             $entries = Website::whereIn('id', $request->input('ids'))->get();
 
@@ -194,6 +255,9 @@ class WebsitesController extends Controller
      */
     public function restore($id)
     {
+        if (! Gate::allows('website_delete')) {
+            return abort(401);
+        }
         $website = Website::onlyTrashed()->findOrFail($id);
         $website->restore();
 
@@ -208,6 +272,9 @@ class WebsitesController extends Controller
      */
     public function perma_del($id)
     {
+        if (! Gate::allows('website_delete')) {
+            return abort(401);
+        }
         $website = Website::onlyTrashed()->findOrFail($id);
         $website->forceDelete();
 

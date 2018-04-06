@@ -88,7 +88,13 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('users', trans('global.clinics.fields.users').'', ['class' => 'control-label']) !!}
-                    {!! Form::select('users[]', $users, old('users'), ['class' => 'form-control select2', 'multiple' => 'multiple']) !!}
+                    <button type="button" class="btn btn-primary btn-xs" id="selectbtn-users">
+                        {{ trans('global.app_select_all') }}
+                    </button>
+                    <button type="button" class="btn btn-primary btn-xs" id="deselectbtn-users">
+                        {{ trans('global.app_deselect_all') }}
+                    </button>
+                    {!! Form::select('users[]', $users, old('users'), ['class' => 'form-control select2', 'multiple' => 'multiple', 'id' => 'selectall-users' ]) !!}
                     <p class="help-block"></p>
                     @if($errors->has('users'))
                         <p class="help-block">
@@ -261,4 +267,14 @@
             return false;
         });
         </script>
+    <script>
+        $("#selectbtn-users").click(function(){
+            $("#selectall-users > option").prop("selected","selected");
+            $("#selectall-users").trigger("change");
+        });
+        $("#deselectbtn-users").click(function(){
+            $("#selectall-users > option").prop("selected","");
+            $("#selectall-users").trigger("change");
+        });
+    </script>
 @stop

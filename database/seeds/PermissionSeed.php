@@ -110,6 +110,16 @@ class PermissionSeed extends Seeder
             ['id' => 101, 'title' => 'task_edit',],
             ['id' => 102, 'title' => 'task_view',],
             ['id' => 103, 'title' => 'task_delete',],
+            ['id' => 104, 'title' => 'task_calendar_access',],
+            ['id' => 105, 'title' => 'task_calendar_create',],
+            ['id' => 106, 'title' => 'task_calendar_edit',],
+            ['id' => 107, 'title' => 'task_calendar_view',],
+            ['id' => 108, 'title' => 'task_calendar_delete',],
+            ['id' => 109, 'title' => 'api_test_access',],
+            ['id' => 110, 'title' => 'api_test_create',],
+            ['id' => 111, 'title' => 'api_test_edit',],
+            ['id' => 112, 'title' => 'api_test_view',],
+            ['id' => 113, 'title' => 'api_test_delete',],
 
         ];
 

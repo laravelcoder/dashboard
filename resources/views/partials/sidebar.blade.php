@@ -280,6 +280,15 @@
                 </ul>
             </li>
             @endcan
+            @can('api_test_access')
+            <li class="{{ $request->segment(2) == 'api_tests' ? 'active' : '' }}">
+                <a href="{{ route('admin.api_tests.index') }}">
+                    <i class="fa fa-gears"></i>
+                    <span class="title">@lang('global.api-test.title')</span>
+                </a>
+            </li>
+            @endcan
+            
 
             
 

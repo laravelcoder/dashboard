@@ -22,6 +22,9 @@ class ClinicsController extends Controller
      */
     public function index()
     {
+        if (! Gate::allows('clinic_access')) {
+            return abort(401);
+        }
 
 
         
@@ -32,6 +35,9 @@ class ClinicsController extends Controller
             $template = 'actionsTemplate';
             if(request('show_deleted') == 1) {
                 
+        if (! Gate::allows('clinic_delete')) {
+            return abort(401);
+        }
                 $query->onlyTrashed();
                 $template = 'restoreTemplate';
             }
@@ -93,6 +99,9 @@ class ClinicsController extends Controller
      */
     public function create()
     {
+        if (! Gate::allows('clinic_create')) {
+            return abort(401);
+        }
         
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $users = \App\User::get()->pluck('name', 'id');
@@ -109,6 +118,9 @@ class ClinicsController extends Controller
      */
     public function store(StoreClinicsRequest $request)
     {
+        if (! Gate::allows('clinic_create')) {
+            return abort(401);
+        }
         $request = $this->saveFiles($request);
         $clinic = Clinic::create($request->all());
         $clinic->users()->sync(array_filter((array)$request->input('users')));
@@ -139,6 +151,9 @@ class ClinicsController extends Controller
      */
     public function edit($id)
     {
+        if (! Gate::allows('clinic_edit')) {
+            return abort(401);
+        }
         
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $users = \App\User::get()->pluck('name', 'id');
@@ -158,6 +173,9 @@ class ClinicsController extends Controller
      */
     public function update(UpdateClinicsRequest $request, $id)
     {
+        if (! Gate::allows('clinic_edit')) {
+            return abort(401);
+        }
         $request = $this->saveFiles($request);
         $clinic = Clinic::findOrFail($id);
         $clinic->update($request->all());
@@ -245,6 +263,9 @@ class ClinicsController extends Controller
      */
     public function show($id)
     {
+        if (! Gate::allows('clinic_view')) {
+            return abort(401);
+        }
         
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $users = \App\User::get()->pluck('name', 'id');
@@ -264,6 +285,9 @@ $contacts = \App\Contact::where('clinic_id', $id)->get();$websites = \App\Websit
      */
     public function destroy($id)
     {
+        if (! Gate::allows('clinic_delete')) {
+            return abort(401);
+        }
         $clinic = Clinic::findOrFail($id);
         $clinic->delete();
 
@@ -277,6 +301,9 @@ $contacts = \App\Contact::where('clinic_id', $id)->get();$websites = \App\Websit
      */
     public function massDestroy(Request $request)
     {
+        if (! Gate::allows('clinic_delete')) {
+            return abort(401);
+        }
         if ($request->input('ids')) {
             $entries = Clinic::whereIn('id', $request->input('ids'))->get();
 
@@ -295,6 +322,9 @@ $contacts = \App\Contact::where('clinic_id', $id)->get();$websites = \App\Websit
      */
     public function restore($id)
     {
+        if (! Gate::allows('clinic_delete')) {
+            return abort(401);
+        }
         $clinic = Clinic::onlyTrashed()->findOrFail($id);
         $clinic->restore();
 
@@ -309,6 +339,9 @@ $contacts = \App\Contact::where('clinic_id', $id)->get();$websites = \App\Websit
      */
     public function perma_del($id)
     {
+        if (! Gate::allows('clinic_delete')) {
+            return abort(401);
+        }
         $clinic = Clinic::onlyTrashed()->findOrFail($id);
         $clinic->forceDelete();
 
