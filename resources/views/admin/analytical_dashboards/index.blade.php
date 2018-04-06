@@ -18,7 +18,38 @@
 @section('topscripts')
 <script type="text/javascript" src="{!! asset('/DataTables/datatables.min.js') !!}"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawChartVisitors);
 
+    function drawChartVisitors() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('{{$column_type}}', '{{$column_name}}');
+        data.addColumn('number', 'Visitors');
+        <?php
+$json = json_encode($visitors_chart);
+$json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
+?>
+        data.addRows(<?=$json?>);
+
+        var options = {
+            hAxis: {
+                title: '{{$column_name}}',
+                format: '{{$column_format}}'
+            },
+            vAxis: {
+                title: 'Visitors',
+                format: '#',
+            },
+            chartArea: {right: 0, width: '90%', height: '80%'}
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div_visitors'));
+
+        chart.draw(data, options);
+    }
+</script>
 
 @endsection
 
@@ -47,7 +78,7 @@
             <ul class="mini-stats col-sm-12">
                 <li class="col-sm-4">
                     <div class="values alert alert-info">
-                        <strong>{{$activeusers}}</strong>
+                        <strong> </strong>
                         Active Users right now
                     </div>
                 </li>
@@ -86,4 +117,104 @@
     </div>
 </div>
 
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="clip-stats"></i>
+                Visitors
+                <div class="panel-tools">
+                    <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="chart_div_visitors" style="height: 305px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="clip-stats"></i>
+                Pageviews
+                <div class="panel-tools">
+                    <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="chart_div_pageviews" style="height: 305px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="clip-stats"></i>
+                Revenue
+                <div class="panel-tools">
+                    <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="chart_div_revenue" style="height: 305px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="clip-stats"></i>
+                Orders
+                <div class="panel-tools">
+                    <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="chart_div" style="height: 305px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="clip-stats"></i>
+                Top Selling Products
+                <div class="panel-tools">
+                    <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="piechart_3d_product" style="width: 100%; height: 305px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="clip-stats"></i>
+                Top Pages
+                <div class="panel-tools">
+                    <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="piechart_3d_page" style="width: 100%; height: 305px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 @stop
+
+
+@section('bottomscripts')
+    <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+    <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+@endsection
