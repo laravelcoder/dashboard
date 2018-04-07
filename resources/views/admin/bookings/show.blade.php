@@ -84,6 +84,18 @@
                             <th>@lang('global.bookings.fields.searched-for')</th>
                             <td field-key='searched_for'>{{ $booking->searched_for }}</td>
                         </tr>
+                        <tr>
+                            <th>@lang('global.bookings.fields.latitude')</th>
+                            <td field-key='latitude'>{{ $booking->latitude }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.bookings.fields.longitude')</th>
+                            <td field-key='longitude'>{{ $booking->longitude }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.bookings.fields.country')</th>
+                            <td field-key='country'>{{ $booking->country }}</td>
+                        </tr>
                     </table>
                 </div>
             </div>

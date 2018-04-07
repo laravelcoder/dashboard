@@ -20,5 +20,8 @@ $factory->define(App\Booking::class, function (Faker\Generator $faker) {
         "submitted_user_city" => $faker->name,
         "submitted_user_state" => $faker->name,
         "searched_for" => $faker->name,
+        "latitude" => $faker->name,
+        "longitude" => $faker->name,
+        "country" => $faker->name,
     ];
 });
