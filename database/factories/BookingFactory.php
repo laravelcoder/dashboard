@@ -17,5 +17,8 @@ $factory->define(App\Booking::class, function (Faker\Generator $faker) {
         "clinic_phone" => $faker->name,
         "clinic_text_numbers" => $faker->name,
         "client_firstname" => $faker->name,
+        "submitted_user_city" => $faker->name,
+        "submitted_user_state" => $faker->name,
+        "searched_for" => $faker->name,
     ];
 });

@@ -19,6 +19,9 @@ class BookingsController extends Controller
      */
     public function index()
     {
+        if (! Gate::allows('booking_access')) {
+            return abort(401);
+        }
 
 
         
@@ -27,6 +30,9 @@ class BookingsController extends Controller
             $template = 'actionsTemplate';
             if(request('show_deleted') == 1) {
                 
+        if (! Gate::allows('booking_delete')) {
+            return abort(401);
+        }
                 $query->onlyTrashed();
                 $template = 'restoreTemplate';
             }
@@ -47,6 +53,9 @@ class BookingsController extends Controller
                 'bookings.clinic_phone',
                 'bookings.clinic_text_numbers',
                 'bookings.client_firstname',
+                'bookings.submitted_user_city',
+                'bookings.submitted_user_state',
+                'bookings.searched_for',
             ]);
             $table = Datatables::of($query);
 
@@ -100,6 +109,15 @@ class BookingsController extends Controller
             $table->editColumn('client_firstname', function ($row) {
                 return $row->client_firstname ? $row->client_firstname : '';
             });
+            $table->editColumn('submitted_user_city', function ($row) {
+                return $row->submitted_user_city ? $row->submitted_user_city : '';
+            });
+            $table->editColumn('submitted_user_state', function ($row) {
+                return $row->submitted_user_state ? $row->submitted_user_state : '';
+            });
+            $table->editColumn('searched_for', function ($row) {
+                return $row->searched_for ? $row->searched_for : '';
+            });
 
             $table->rawColumns(['actions','massDelete']);
 
@@ -116,6 +134,9 @@ class BookingsController extends Controller
      */
     public function create()
     {
+        if (! Gate::allows('booking_create')) {
+            return abort(401);
+        }
         return view('admin.bookings.create');
     }
 
@@ -127,6 +148,9 @@ class BookingsController extends Controller
      */
     public function store(StoreBookingsRequest $request)
     {
+        if (! Gate::allows('booking_create')) {
+            return abort(401);
+        }
         $booking = Booking::create($request->all());
 
 
@@ -143,6 +167,9 @@ class BookingsController extends Controller
      */
     public function edit($id)
     {
+        if (! Gate::allows('booking_edit')) {
+            return abort(401);
+        }
         $booking = Booking::findOrFail($id);
 
         return view('admin.bookings.edit', compact('booking'));
@@ -157,6 +184,9 @@ class BookingsController extends Controller
      */
     public function update(UpdateBookingsRequest $request, $id)
     {
+        if (! Gate::allows('booking_edit')) {
+            return abort(401);
+        }
         $booking = Booking::findOrFail($id);
         $booking->update($request->all());
 
@@ -174,6 +204,9 @@ class BookingsController extends Controller
      */
     public function show($id)
     {
+        if (! Gate::allows('booking_view')) {
+            return abort(401);
+        }
         $booking = Booking::findOrFail($id);
 
         return view('admin.bookings.show', compact('booking'));
@@ -188,6 +221,9 @@ class BookingsController extends Controller
      */
     public function destroy($id)
     {
+        if (! Gate::allows('booking_delete')) {
+            return abort(401);
+        }
         $booking = Booking::findOrFail($id);
         $booking->delete();
 
@@ -201,6 +237,9 @@ class BookingsController extends Controller
      */
     public function massDestroy(Request $request)
     {
+        if (! Gate::allows('booking_delete')) {
+            return abort(401);
+        }
         if ($request->input('ids')) {
             $entries = Booking::whereIn('id', $request->input('ids'))->get();
 
@@ -219,6 +258,9 @@ class BookingsController extends Controller
      */
     public function restore($id)
     {
+        if (! Gate::allows('booking_delete')) {
+            return abort(401);
+        }
         $booking = Booking::onlyTrashed()->findOrFail($id);
         $booking->restore();
 
@@ -233,6 +275,9 @@ class BookingsController extends Controller
      */
     public function perma_del($id)
     {
+        if (! Gate::allows('booking_delete')) {
+            return abort(401);
+        }
         $booking = Booking::onlyTrashed()->findOrFail($id);
         $booking->forceDelete();
 
