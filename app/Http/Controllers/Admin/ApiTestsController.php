@@ -9,8 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreApiTestsRequest;
 use App\Http\Requests\Admin\UpdateApiTestsRequest;
 use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Input;
 
 class ApiTestsController extends Controller
 {
@@ -24,18 +22,11 @@ class ApiTestsController extends Controller
         if (! Gate::allows('api_test_access')) {
             return abort(401);
         }
-        if ($filterBy = Input::get('filter')) {
-            if ($filterBy == 'all') {
-                Session::put('ApiTest.filter', 'all');
-            } elseif ($filterBy == 'my') {
-                Session::put('ApiTest.filter', 'my');
-            }
-        }
+
 
         
         if (request()->ajax()) {
             $query = ApiTest::query();
-            $query->with("created_by");
             $template = 'actionsTemplate';
             if(request('show_deleted') == 1) {
                 
@@ -47,12 +38,13 @@ class ApiTestsController extends Controller
             }
             $query->select([
                 'api_tests.id',
-                'api_tests.submitted_user_city',
-                'api_tests.submitted_user_state',
                 'api_tests.name',
                 'api_tests.subject',
                 'api_tests.message',
-                'api_tests.created_by_id',
+                'api_tests.submitted_user_city',
+                'api_tests.submitted_user_state',
+                'api_tests.searched_for',
+                'api_tests.email',
             ]);
             $table = Datatables::of($query);
 
@@ -67,12 +59,6 @@ class ApiTestsController extends Controller
 
                 return view($template, compact('row', 'gateKey', 'routeKey'));
             });
-            $table->editColumn('submitted_user_city', function ($row) {
-                return $row->submitted_user_city ? $row->submitted_user_city : '';
-            });
-            $table->editColumn('submitted_user_state', function ($row) {
-                return $row->submitted_user_state ? $row->submitted_user_state : '';
-            });
             $table->editColumn('name', function ($row) {
                 return $row->name ? $row->name : '';
             });
@@ -82,8 +68,17 @@ class ApiTestsController extends Controller
             $table->editColumn('message', function ($row) {
                 return $row->message ? $row->message : '';
             });
-            $table->editColumn('created_by.name', function ($row) {
-                return $row->created_by ? $row->created_by->name : '';
+            $table->editColumn('submitted_user_city', function ($row) {
+                return $row->submitted_user_city ? $row->submitted_user_city : '';
+            });
+            $table->editColumn('submitted_user_state', function ($row) {
+                return $row->submitted_user_state ? $row->submitted_user_state : '';
+            });
+            $table->editColumn('searched_for', function ($row) {
+                return $row->searched_for ? $row->searched_for : '';
+            });
+            $table->editColumn('email', function ($row) {
+                return $row->email ? $row->email : '';
             });
 
             $table->rawColumns(['actions','massDelete']);
@@ -104,10 +99,7 @@ class ApiTestsController extends Controller
         if (! Gate::allows('api_test_create')) {
             return abort(401);
         }
-        
-        $created_bies = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
-
-        return view('admin.api_tests.create', compact('created_bies'));
+        return view('admin.api_tests.create');
     }
 
     /**
@@ -140,12 +132,9 @@ class ApiTestsController extends Controller
         if (! Gate::allows('api_test_edit')) {
             return abort(401);
         }
-        
-        $created_bies = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
-
         $api_test = ApiTest::findOrFail($id);
 
-        return view('admin.api_tests.edit', compact('api_test', 'created_bies'));
+        return view('admin.api_tests.edit', compact('api_test'));
     }
 
     /**

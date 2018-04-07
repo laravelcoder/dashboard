@@ -15,11 +15,13 @@ class CreateCombined1523057169ApiTestsTable extends Migration
         if(! Schema::hasTable('api_tests')) {
             Schema::create('api_tests', function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('submitted_user_city')->nullable();
-                $table->string('submitted_user_state')->nullable();
                 $table->string('name')->nullable();
                 $table->string('subject')->nullable();
                 $table->string('message')->nullable();
+                $table->string('submitted_user_city')->nullable();
+                $table->string('submitted_user_state')->nullable();
+                $table->string('searched_for')->nullable();
+                $table->string('email')->nullable();
                 
                 $table->timestamps();
                 $table->softDeletes();
