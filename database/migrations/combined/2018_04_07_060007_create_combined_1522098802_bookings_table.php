@@ -33,6 +33,9 @@ class CreateCombined1522098802BookingsTable extends Migration
                 $table->string('submitted_user_city')->nullable();
                 $table->string('submitted_user_state')->nullable();
                 $table->string('searched_for')->nullable();
+                $table->string('latitude')->nullable();
+                $table->string('longitude')->nullable();
+                $table->string('country')->nullable();
                 
                 $table->timestamps();
                 $table->softDeletes();

@@ -56,6 +56,9 @@ class BookingsController extends Controller
                 'bookings.submitted_user_city',
                 'bookings.submitted_user_state',
                 'bookings.searched_for',
+                'bookings.latitude',
+                'bookings.longitude',
+                'bookings.country',
             ]);
             $table = Datatables::of($query);
 
@@ -117,6 +120,15 @@ class BookingsController extends Controller
             });
             $table->editColumn('searched_for', function ($row) {
                 return $row->searched_for ? $row->searched_for : '';
+            });
+            $table->editColumn('latitude', function ($row) {
+                return $row->latitude ? $row->latitude : '';
+            });
+            $table->editColumn('longitude', function ($row) {
+                return $row->longitude ? $row->longitude : '';
+            });
+            $table->editColumn('country', function ($row) {
+                return $row->country ? $row->country : '';
             });
 
             $table->rawColumns(['actions','massDelete']);

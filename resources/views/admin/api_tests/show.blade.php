@@ -13,14 +13,6 @@
                 <div class="col-md-6">
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <th>@lang('global.api-test.fields.submitted-user-city')</th>
-                            <td field-key='submitted_user_city'>{{ $api_test->submitted_user_city }}</td>
-                        </tr>
-                        <tr>
-                            <th>@lang('global.api-test.fields.submitted-user-state')</th>
-                            <td field-key='submitted_user_state'>{{ $api_test->submitted_user_state }}</td>
-                        </tr>
-                        <tr>
                             <th>@lang('global.api-test.fields.name')</th>
                             <td field-key='name'>{{ $api_test->name }}</td>
                         </tr>
@@ -33,8 +25,20 @@
                             <td field-key='message'>{{ $api_test->message }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('global.api-test.fields.created-by')</th>
-                            <td field-key='created_by'>{{ $api_test->created_by->name or '' }}</td>
+                            <th>@lang('global.api-test.fields.submitted-user-city')</th>
+                            <td field-key='submitted_user_city'>{{ $api_test->submitted_user_city }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.api-test.fields.submitted-user-state')</th>
+                            <td field-key='submitted_user_state'>{{ $api_test->submitted_user_state }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.api-test.fields.searched-for')</th>
+                            <td field-key='searched_for'>{{ $api_test->searched_for }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.api-test.fields.email')</th>
+                            <td field-key='email'>{{ $api_test->email }}</td>
                         </tr>
                     </table>
                 </div>

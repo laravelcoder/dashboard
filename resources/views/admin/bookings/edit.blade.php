@@ -227,6 +227,42 @@
                     @endif
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('latitude', trans('global.bookings.fields.latitude').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('latitude', old('latitude'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('latitude'))
+                        <p class="help-block">
+                            {{ $errors->first('latitude') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('longitude', trans('global.bookings.fields.longitude').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('longitude', old('longitude'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('longitude'))
+                        <p class="help-block">
+                            {{ $errors->first('longitude') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('country', trans('global.bookings.fields.country').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('country', old('country'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('country'))
+                        <p class="help-block">
+                            {{ $errors->first('country') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
             
         </div>
     </div>

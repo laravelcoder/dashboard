@@ -8,8 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreApiTestsRequest;
 use App\Http\Requests\Admin\UpdateApiTestsRequest;
 use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Input;
 
 class ApiTestsController extends Controller
 {
