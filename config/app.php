@@ -183,8 +183,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-        Spatie\Analytics\AnalyticsServiceProvider::class,
-
+        
         /*
          * Application Service Providers...
          */
@@ -193,7 +192,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
 
     ],
 
@@ -250,10 +248,9 @@ return [
         'Image'        => Intervention\Image\Facades\Image::class,
         'Form'         => Collective\Html\FormFacade::class,
         'Html'         => Collective\Html\HtmlFacade::class,
-        'Analytics'    => Spatie\Analytics\AnalyticsFacade::class,
-
+        
     ],
 
-
+    
 
 ];

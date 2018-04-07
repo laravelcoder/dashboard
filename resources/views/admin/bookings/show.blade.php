@@ -72,6 +72,18 @@
                             <th>@lang('global.bookings.fields.client-firstname')</th>
                             <td field-key='client_firstname'>{{ $booking->client_firstname }}</td>
                         </tr>
+                        <tr>
+                            <th>@lang('global.bookings.fields.submitted-user-city')</th>
+                            <td field-key='submitted_user_city'>{{ $booking->submitted_user_city }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.bookings.fields.submitted-user-state')</th>
+                            <td field-key='submitted_user_state'>{{ $booking->submitted_user_state }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.bookings.fields.searched-for')</th>
+                            <td field-key='searched_for'>{{ $booking->searched_for }}</td>
+                        </tr>
                     </table>
                 </div>
             </div>
