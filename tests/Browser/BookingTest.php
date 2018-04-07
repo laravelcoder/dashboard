@@ -36,6 +36,12 @@ class BookingTest extends DuskTestCase
                 ->type("clinic_phone", $booking->clinic_phone)
                 ->type("clinic_text_numbers", $booking->clinic_text_numbers)
                 ->type("client_firstname", $booking->client_firstname)
+                ->type("submitted_user_city", $booking->submitted_user_city)
+                ->type("submitted_user_state", $booking->submitted_user_state)
+                ->type("searched_for", $booking->searched_for)
+                ->type("latitude", $booking->latitude)
+                ->type("longitude", $booking->longitude)
+                ->type("country", $booking->country)
                 ->press('Save')
                 ->assertRouteIs('admin.bookings.index')
                 ->assertSeeIn("tr:last-child td[field-key='submitted']", $booking->submitted)
@@ -77,6 +83,12 @@ class BookingTest extends DuskTestCase
                 ->type("clinic_phone", $booking2->clinic_phone)
                 ->type("clinic_text_numbers", $booking2->clinic_text_numbers)
                 ->type("client_firstname", $booking2->client_firstname)
+                ->type("submitted_user_city", $booking2->submitted_user_city)
+                ->type("submitted_user_state", $booking2->submitted_user_state)
+                ->type("searched_for", $booking2->searched_for)
+                ->type("latitude", $booking2->latitude)
+                ->type("longitude", $booking2->longitude)
+                ->type("country", $booking2->country)
                 ->press('Update')
                 ->assertRouteIs('admin.bookings.index')
                 ->assertSeeIn("tr:last-child td[field-key='submitted']", $booking2->submitted)
@@ -117,7 +129,13 @@ class BookingTest extends DuskTestCase
                 ->assertSeeIn("td[field-key='clinic_address']", $booking->clinic_address)
                 ->assertSeeIn("td[field-key='clinic_phone']", $booking->clinic_phone)
                 ->assertSeeIn("td[field-key='clinic_text_numbers']", $booking->clinic_text_numbers)
-                ->assertSeeIn("td[field-key='client_firstname']", $booking->client_firstname);
+                ->assertSeeIn("td[field-key='client_firstname']", $booking->client_firstname)
+                ->assertSeeIn("td[field-key='submitted_user_city']", $booking->submitted_user_city)
+                ->assertSeeIn("td[field-key='submitted_user_state']", $booking->submitted_user_state)
+                ->assertSeeIn("td[field-key='searched_for']", $booking->searched_for)
+                ->assertSeeIn("td[field-key='latitude']", $booking->latitude)
+                ->assertSeeIn("td[field-key='longitude']", $booking->longitude)
+                ->assertSeeIn("td[field-key='country']", $booking->country);
         });
     }
 

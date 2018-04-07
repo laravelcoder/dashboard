@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Create5abbd3a07cb2eContactContactTable extends Migration
+class Create5ac8121a8ecb2ContactContactTable extends Migration
 {
     /**
      * Run the migrations.
@@ -22,6 +22,6 @@ class Create5abbd3a07cb2eContactContactTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contact_contact');
+
     }
 }

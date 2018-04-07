@@ -7,13 +7,6 @@
     <p>
         <a href="{{ route('admin.api_tests.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
         
-        @if(!is_null(Auth::getUser()->role_id) && config('global.can_see_all_records_role_id') == Auth::getUser()->role_id)
-            @if(Session::get('ApiTest.filter', 'all') == 'my')
-                <a href="?filter=all" class="btn btn-default">Show all records</a>
-            @else
-                <a href="?filter=my" class="btn btn-default">Filter my records</a>
-            @endif
-        @endif
     </p>
     @endcan
 
@@ -38,12 +31,10 @@
                             @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                         @endcan
 
-                        <th>@lang('global.api-test.fields.submitted-user-city')</th>
-                        <th>@lang('global.api-test.fields.submitted-user-state')</th>
                         <th>@lang('global.api-test.fields.name')</th>
                         <th>@lang('global.api-test.fields.subject')</th>
                         <th>@lang('global.api-test.fields.message')</th>
-                        <th>@lang('global.api-test.fields.created-by')</th>
+                        <th>@lang('global.api-test.fields.email')</th>
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else
@@ -67,12 +58,10 @@
                 @if ( request('show_deleted') != 1 )
                     {data: 'massDelete', name: 'id', searchable: false, sortable: false},
                 @endif
-                @endcan{data: 'submitted_user_city', name: 'submitted_user_city'},
-                {data: 'submitted_user_state', name: 'submitted_user_state'},
-                {data: 'name', name: 'name'},
+                @endcan{data: 'name', name: 'name'},
                 {data: 'subject', name: 'subject'},
                 {data: 'message', name: 'message'},
-                {data: 'created_by.name', name: 'created_by.name'},
+                {data: 'email', name: 'email'},
                 
                 {data: 'actions', name: 'actions', searchable: false, sortable: false}
             ];

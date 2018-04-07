@@ -24,12 +24,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $clinic_phone
  * @property string $clinic_text_numbers
  * @property string $client_firstname
+ * @property string $submitted_user_city
+ * @property string $submitted_user_state
+ * @property string $searched_for
+ * @property string $latitude
+ * @property string $longitude
+ * @property string $country
 */
 class Booking extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['submitted', 'customername', 'email', 'phone', 'family_number', 'how_long', 'requested_date', 'requested_time', 'requested_clinic', 'clinic_id', 'clinic_email', 'clinic_address', 'clinic_phone', 'clinic_text_numbers', 'client_firstname'];
+    protected $fillable = ['submitted', 'customername', 'email', 'phone', 'family_number', 'how_long', 'requested_date', 'requested_time', 'requested_clinic', 'clinic_id', 'clinic_email', 'clinic_address', 'clinic_phone', 'clinic_text_numbers', 'client_firstname', 'submitted_user_city', 'submitted_user_state', 'searched_for', 'latitude', 'longitude', 'country'];
     
     
 

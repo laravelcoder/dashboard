@@ -191,6 +191,78 @@
                     @endif
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('submitted_user_city', trans('global.bookings.fields.submitted-user-city').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('submitted_user_city', old('submitted_user_city'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('submitted_user_city'))
+                        <p class="help-block">
+                            {{ $errors->first('submitted_user_city') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('submitted_user_state', trans('global.bookings.fields.submitted-user-state').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('submitted_user_state', old('submitted_user_state'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('submitted_user_state'))
+                        <p class="help-block">
+                            {{ $errors->first('submitted_user_state') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('searched_for', trans('global.bookings.fields.searched-for').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('searched_for', old('searched_for'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('searched_for'))
+                        <p class="help-block">
+                            {{ $errors->first('searched_for') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('latitude', trans('global.bookings.fields.latitude').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('latitude', old('latitude'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('latitude'))
+                        <p class="help-block">
+                            {{ $errors->first('latitude') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('longitude', trans('global.bookings.fields.longitude').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('longitude', old('longitude'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('longitude'))
+                        <p class="help-block">
+                            {{ $errors->first('longitude') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('country', trans('global.bookings.fields.country').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('country', old('country'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('country'))
+                        <p class="help-block">
+                            {{ $errors->first('country') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
             
         </div>
     </div>

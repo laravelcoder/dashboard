@@ -12,30 +12,6 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('submitted_user_city', trans('global.api-test.fields.submitted-user-city').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('submitted_user_city', old('submitted_user_city'), ['class' => 'form-control', 'placeholder' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('submitted_user_city'))
-                        <p class="help-block">
-                            {{ $errors->first('submitted_user_city') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('submitted_user_state', trans('global.api-test.fields.submitted-user-state').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('submitted_user_state', old('submitted_user_state'), ['class' => 'form-control', 'placeholder' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('submitted_user_state'))
-                        <p class="help-block">
-                            {{ $errors->first('submitted_user_state') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
                     {!! Form::label('name', trans('global.api-test.fields.name').'', ['class' => 'control-label']) !!}
                     {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
@@ -66,6 +42,54 @@
                     @if($errors->has('message'))
                         <p class="help-block">
                             {{ $errors->first('message') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('submitted_user_city', trans('global.api-test.fields.submitted-user-city').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('submitted_user_city', old('submitted_user_city'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('submitted_user_city'))
+                        <p class="help-block">
+                            {{ $errors->first('submitted_user_city') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('submitted_user_state', trans('global.api-test.fields.submitted-user-state').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('submitted_user_state', old('submitted_user_state'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('submitted_user_state'))
+                        <p class="help-block">
+                            {{ $errors->first('submitted_user_state') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('searched_for', trans('global.api-test.fields.searched-for').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('searched_for', old('searched_for'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('searched_for'))
+                        <p class="help-block">
+                            {{ $errors->first('searched_for') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('email', trans('global.api-test.fields.email').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('email', old('email'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('email'))
+                        <p class="help-block">
+                            {{ $errors->first('email') }}
                         </p>
                     @endif
                 </div>

@@ -3,10 +3,7 @@
 
 <head>
     @include('partials.head')
-    @yield('topcss')
-    @yield('topscripts')
 </head>
-
 
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -56,8 +53,6 @@
 <button type="submit">Logout</button>
 {!! Form::close() !!}
 
-
 @include('partials.javascripts')
-@yield('bottomscripts')
 </body>
 </html>

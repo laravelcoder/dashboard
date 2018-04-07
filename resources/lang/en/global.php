@@ -20,7 +20,7 @@ return [
 		'adwords-dashboard' => [		'title' => 'Adwords Dashboard',		'fields' => [		],	],
 		'call-metrics' => [		'title' => 'Call Metrics',		'fields' => [		],	],
 		'bookings-dashboard' => [		'title' => 'Bookings Dashboard',		'fields' => [		],	],
-		'bookings' => [		'title' => 'Bookings',		'fields' => [			'submitted' => 'Submitted',			'customername' => 'Customer Name',			'email' => 'Email',			'phone' => 'Phone',			'family-number' => 'Family number',			'how-long' => 'How long',			'requested-date' => 'Requested date',			'requested-time' => 'Requested time',			'requested-clinic' => 'Requested clinic',			'clinic-id' => 'Clinic id',			'clinic-email' => 'Clinic email',			'clinic-address' => 'Clinic address',			'clinic-phone' => 'Clinic phone',			'clinic-text-numbers' => 'Clinic text numbers',			'client-firstname' => 'Client firstname',		],	],
+		'bookings' => [		'title' => 'Bookings',		'fields' => [			'submitted' => 'Submitted',			'customername' => 'Customer Name',			'email' => 'Email',			'phone' => 'Phone',			'family-number' => 'Family number',			'how-long' => 'How long',			'requested-date' => 'Requested date',			'requested-time' => 'Requested time',			'requested-clinic' => 'Requested clinic',			'clinic-id' => 'Clinic id',			'clinic-email' => 'Clinic email',			'clinic-address' => 'Clinic address',			'clinic-phone' => 'Clinic phone',			'clinic-text-numbers' => 'Clinic text numbers',			'client-firstname' => 'Client firstname',			'submitted-user-city' => 'Submitted user city',			'submitted-user-state' => 'Submitted user state',			'searched-for' => 'Searched for',			'latitude' => 'Latitude',			'longitude' => 'Longitude',			'country' => 'Country',		],	],
 		'zipcodes' => [		'title' => 'Zipcodes',		'fields' => [			'zipcode' => 'Zipcode',			'clinic' => 'Clinic',			'location' => 'Location',		],	],
 		'user-actions' => [		'title' => 'User actions',		'created_at' => 'Time',		'fields' => [		],	],
 		'task-management' => [		'title' => 'Task management',		'fields' => [		],	],
@@ -28,7 +28,7 @@ return [
 		'task-tags' => [		'title' => 'Tags',		'fields' => [			'name' => 'Name',		],	],
 		'tasks' => [		'title' => 'Tasks',		'fields' => [			'name' => 'Name',			'description' => 'Description',			'status' => 'Status',			'tag' => 'Tags',			'attachment' => 'Attachment',			'due-date' => 'Due date',			'user' => 'Assigned to',		],	],
 		'task-calendar' => [		'title' => 'Calendar',		'fields' => [		],	],
-		'api-test' => [		'title' => 'Api test',		'fields' => [			'submitted-user-city' => 'Submitted user city',			'submitted-user-state' => 'Submitted user state',			'name' => 'Name',			'subject' => 'Subject',			'message' => 'Message',			'created-by' => 'Created by',		],	],
+		'api-test' => [		'title' => 'Api test',		'fields' => [			'name' => 'Name',			'subject' => 'Subject',			'message' => 'Message',			'submitted-user-city' => 'Submitted user city',			'submitted-user-state' => 'Submitted user state',			'searched-for' => 'Searched for',			'email' => 'Email',		],	],
 	'app_create' => 'Create',
 	'app_save' => 'Save',
 	'app_edit' => 'Edit',
