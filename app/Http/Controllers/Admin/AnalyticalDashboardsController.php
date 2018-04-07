@@ -58,7 +58,7 @@ class AnalyticalDashboardsController extends Controller
             $column_format = 'hh:mm a';
         }
 
-//	    $visitorspageviews = Analytics::fetchTotalVisitorsAndPageViews(Period::create($start,$end));
+		// $visitorspageviews = Analytics::fetchTotalVisitorsAndPageViews(Period::create($start,$end));
         $visitorspageviews = Analytics::fetchTotalVisitorsAndPageViews(Period::create($start,$end),$groupBy);
         $total_visitors = $total_pageviews = 0;
         $visitors_chart = $pageviews_chart = array();

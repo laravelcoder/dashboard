@@ -188,7 +188,7 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
                     <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
                 </div>
             </div>
-            <div class="panel-body">
+            <div class="panel-body"> 
                 <div id="piechart_3d_product" style="width: 100%; height: 305px;"></div>
             </div>
         </div>
