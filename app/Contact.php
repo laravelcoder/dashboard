@@ -65,9 +65,4 @@ class Contact extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
     
-    public function company_contacts()
-    {
-        return $this->belongsToMany(Contact::class, 'contact_contact');
-    }
-    
 }

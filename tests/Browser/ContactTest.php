@@ -15,12 +15,9 @@ class ContactTest extends DuskTestCase
         $admin = \App\User::find(1);
         $contact = factory('App\Contact')->make();
 
-        $relations = [
-            factory('App\Contact')->create(), 
-            factory('App\Contact')->create(), 
-        ];
+        
 
-        $this->browse(function (Browser $browser) use ($admin, $contact, $relations) {
+        $this->browse(function (Browser $browser) use ($admin, $contact) {
             $browser->loginAs($admin)
                 ->visit(route('admin.contacts.index'))
                 ->clickLink('Add new')
@@ -33,8 +30,6 @@ class ContactTest extends DuskTestCase
                 ->type("phone2", $contact->phone2)
                 ->type("email", $contact->email)
                 ->type("skype", $contact->skype)
-                ->select('select[name="company_contacts[]"]', $relations[0]->id)
-                ->select('select[name="company_contacts[]"]', $relations[1]->id)
                 ->press('Save')
                 ->assertRouteIs('admin.contacts.index')
                 ->assertSeeIn("tr:last-child td[field-key='company']", $contact->company->name)
@@ -45,9 +40,7 @@ class ContactTest extends DuskTestCase
                 ->assertSeeIn("tr:last-child td[field-key='phone1']", $contact->phone1)
                 ->assertSeeIn("tr:last-child td[field-key='phone2']", $contact->phone2)
                 ->assertSeeIn("tr:last-child td[field-key='email']", $contact->email)
-                ->assertSeeIn("tr:last-child td[field-key='skype']", $contact->skype)
-                ->assertSeeIn("tr:last-child td[field-key='company_contacts'] span:first-child", $relations[0]->first_name)
-                ->assertSeeIn("tr:last-child td[field-key='company_contacts'] span:last-child", $relations[1]->first_name);
+                ->assertSeeIn("tr:last-child td[field-key='skype']", $contact->skype);
         });
     }
 
@@ -57,12 +50,9 @@ class ContactTest extends DuskTestCase
         $contact = factory('App\Contact')->create();
         $contact2 = factory('App\Contact')->make();
 
-        $relations = [
-            factory('App\Contact')->create(), 
-            factory('App\Contact')->create(), 
-        ];
+        
 
-        $this->browse(function (Browser $browser) use ($admin, $contact, $contact2, $relations) {
+        $this->browse(function (Browser $browser) use ($admin, $contact, $contact2) {
             $browser->loginAs($admin)
                 ->visit(route('admin.contacts.index'))
                 ->click('tr[data-entry-id="' . $contact->id . '"] .btn-info')
@@ -75,8 +65,6 @@ class ContactTest extends DuskTestCase
                 ->type("phone2", $contact2->phone2)
                 ->type("email", $contact2->email)
                 ->type("skype", $contact2->skype)
-                ->select('select[name="company_contacts[]"]', $relations[0]->id)
-                ->select('select[name="company_contacts[]"]', $relations[1]->id)
                 ->press('Update')
                 ->assertRouteIs('admin.contacts.index')
                 ->assertSeeIn("tr:last-child td[field-key='company']", $contact2->company->name)
@@ -87,9 +75,7 @@ class ContactTest extends DuskTestCase
                 ->assertSeeIn("tr:last-child td[field-key='phone1']", $contact2->phone1)
                 ->assertSeeIn("tr:last-child td[field-key='phone2']", $contact2->phone2)
                 ->assertSeeIn("tr:last-child td[field-key='email']", $contact2->email)
-                ->assertSeeIn("tr:last-child td[field-key='skype']", $contact2->skype)
-                ->assertSeeIn("tr:last-child td[field-key='company_contacts'] span:first-child", $relations[0]->first_name)
-                ->assertSeeIn("tr:last-child td[field-key='company_contacts'] span:last-child", $relations[1]->first_name);
+                ->assertSeeIn("tr:last-child td[field-key='skype']", $contact2->skype);
         });
     }
 
@@ -98,14 +84,10 @@ class ContactTest extends DuskTestCase
         $admin = \App\User::find(1);
         $contact = factory('App\Contact')->create();
 
-        $relations = [
-            factory('App\Contact')->create(), 
-            factory('App\Contact')->create(), 
-        ];
+        
 
-        $contact->company_contacts()->attach([$relations[0]->id, $relations[1]->id]);
 
-        $this->browse(function (Browser $browser) use ($admin, $contact, $relations) {
+        $this->browse(function (Browser $browser) use ($admin, $contact) {
             $browser->loginAs($admin)
                 ->visit(route('admin.contacts.index'))
                 ->click('tr[data-entry-id="' . $contact->id . '"] .btn-primary')
@@ -117,9 +99,7 @@ class ContactTest extends DuskTestCase
                 ->assertSeeIn("td[field-key='phone1']", $contact->phone1)
                 ->assertSeeIn("td[field-key='phone2']", $contact->phone2)
                 ->assertSeeIn("td[field-key='email']", $contact->email)
-                ->assertSeeIn("td[field-key='skype']", $contact->skype)
-                ->assertSeeIn("tr:last-child td[field-key='company_contacts'] span:first-child", $relations[0]->first_name)
-                ->assertSeeIn("tr:last-child td[field-key='company_contacts'] span:last-child", $relations[1]->first_name);
+                ->assertSeeIn("td[field-key='skype']", $contact->skype);
         });
     }
 

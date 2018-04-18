@@ -3,8 +3,6 @@
 
 <head>
     @include('partials.head')
-    @yield('topcss')
-    @yield('topscripts')
 </head>
 
 
@@ -56,6 +54,5 @@
 {!! Form::close() !!}
 
 @include('partials.javascripts')
-@yield('bottomscripts')
 </body>
 </html>
