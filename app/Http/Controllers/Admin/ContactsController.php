@@ -18,6 +18,9 @@ class ContactsController extends Controller
      */
     public function index()
     {
+        if (! Gate::allows('contact_access')) {
+            return abort(401);
+        }
 
 
                 $contacts = Contact::all();
@@ -32,14 +35,15 @@ class ContactsController extends Controller
      */
     public function create()
     {
+        if (! Gate::allows('contact_create')) {
+            return abort(401);
+        }
         
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
         $users = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
-        $company_contacts = \App\Contact::get()->pluck('first_name', 'id');
 
-
-        return view('admin.contacts.create', compact('companies', 'clinics', 'users', 'company_contacts'));
+        return view('admin.contacts.create', compact('companies', 'clinics', 'users'));
     }
 
     /**
@@ -50,8 +54,10 @@ class ContactsController extends Controller
      */
     public function store(StoreContactsRequest $request)
     {
+        if (! Gate::allows('contact_create')) {
+            return abort(401);
+        }
         $contact = Contact::create($request->all());
-        $contact->company_contacts()->sync(array_filter((array)$request->input('company_contacts')));
 
 
 
@@ -67,16 +73,17 @@ class ContactsController extends Controller
      */
     public function edit($id)
     {
+        if (! Gate::allows('contact_edit')) {
+            return abort(401);
+        }
         
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
         $users = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
-        $company_contacts = \App\Contact::get()->pluck('first_name', 'id');
-
 
         $contact = Contact::findOrFail($id);
 
-        return view('admin.contacts.edit', compact('contact', 'companies', 'clinics', 'users', 'company_contacts'));
+        return view('admin.contacts.edit', compact('contact', 'companies', 'clinics', 'users'));
     }
 
     /**
@@ -88,9 +95,11 @@ class ContactsController extends Controller
      */
     public function update(UpdateContactsRequest $request, $id)
     {
+        if (! Gate::allows('contact_edit')) {
+            return abort(401);
+        }
         $contact = Contact::findOrFail($id);
         $contact->update($request->all());
-        $contact->company_contacts()->sync(array_filter((array)$request->input('company_contacts')));
 
 
 
@@ -106,19 +115,17 @@ class ContactsController extends Controller
      */
     public function show($id)
     {
+        if (! Gate::allows('contact_view')) {
+            return abort(401);
+        }
         
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
-        $users = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
-        $company_contacts = \App\Contact::get()->pluck('first_name', 'id');
-$contacts = \App\Contact::whereHas('company_contacts',
-                    function ($query) use ($id) {
-                        $query->where('id', $id);
-                    })->get();$locations = \App\Location::where('contact_person_id', $id)->get();
+        $users = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');$locations = \App\Location::where('contact_person_id', $id)->get();
 
         $contact = Contact::findOrFail($id);
 
-        return view('admin.contacts.show', compact('contact', 'contacts', 'locations'));
+        return view('admin.contacts.show', compact('contact', 'locations'));
     }
 
 
@@ -130,6 +137,9 @@ $contacts = \App\Contact::whereHas('company_contacts',
      */
     public function destroy($id)
     {
+        if (! Gate::allows('contact_delete')) {
+            return abort(401);
+        }
         $contact = Contact::findOrFail($id);
         $contact->delete();
 
@@ -143,6 +153,9 @@ $contacts = \App\Contact::whereHas('company_contacts',
      */
     public function massDestroy(Request $request)
     {
+        if (! Gate::allows('contact_delete')) {
+            return abort(401);
+        }
         if ($request->input('ids')) {
             $entries = Contact::whereIn('id', $request->input('ids'))->get();
 
