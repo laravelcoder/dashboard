@@ -15,7 +15,7 @@ class CreateCombined1523057169ApiTestsTable extends Migration
         if(! Schema::hasTable('api_tests')) {
             Schema::create('api_tests', function (Blueprint $table) {
                 $table->increments('id');
-                $table->date('submitted')->nullable();
+                $table->string('submitted')->nullable();
                 $table->string('name')->nullable();
                 $table->string('email')->nullable();
                 $table->string('subject')->nullable();

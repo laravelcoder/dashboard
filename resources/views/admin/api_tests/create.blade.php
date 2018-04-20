@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('submitted', trans('global.api-test.fields.submitted').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('submitted', old('submitted'), ['class' => 'form-control date', 'placeholder' => '']) !!}
+                    {!! Form::text('submitted', old('submitted'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('submitted'))
                         <p class="help-block">
@@ -150,23 +150,3 @@
     {!! Form::close() !!}
 @stop
 
-@section('javascript')
-    @parent
-
-    <script src="{{ url('adminlte/plugins/datetimepicker/moment-with-locales.min.js') }}"></script>
-    <script src="{{ url('adminlte/plugins/datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
-    <script>
-        $(function(){
-            moment.updateLocale('{{ App::getLocale() }}', {
-                week: { dow: 1 } // Monday is the first day of the week
-            });
-            
-            $('.date').datetimepicker({
-                format: "{{ config('app.date_format_moment') }}",
-                locale: "{{ App::getLocale() }}",
-            });
-            
-        });
-    </script>
-            
-@stop
