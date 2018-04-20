@@ -12,12 +12,36 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
+                    {!! Form::label('submitted', trans('global.api-test.fields.submitted').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('submitted', old('submitted'), ['class' => 'form-control date', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('submitted'))
+                        <p class="help-block">
+                            {{ $errors->first('submitted') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
                     {!! Form::label('name', trans('global.api-test.fields.name').'', ['class' => 'control-label']) !!}
                     {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('name'))
                         <p class="help-block">
                             {{ $errors->first('name') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('email', trans('global.api-test.fields.email').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('email', old('email'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('email'))
+                        <p class="help-block">
+                            {{ $errors->first('email') }}
                         </p>
                     @endif
                 </div>
@@ -84,12 +108,36 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('email', trans('global.api-test.fields.email').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('email', old('email'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    {!! Form::label('latitide', trans('global.api-test.fields.latitide').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('latitide', old('latitide'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
-                    @if($errors->has('email'))
+                    @if($errors->has('latitide'))
                         <p class="help-block">
-                            {{ $errors->first('email') }}
+                            {{ $errors->first('latitide') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('longetude', trans('global.api-test.fields.longetude').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('longetude', old('longetude'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('longetude'))
+                        <p class="help-block">
+                            {{ $errors->first('longetude') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('country', trans('global.api-test.fields.country').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('country', old('country'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('country'))
+                        <p class="help-block">
+                            {{ $errors->first('country') }}
                         </p>
                     @endif
                 </div>
@@ -102,3 +150,23 @@
     {!! Form::close() !!}
 @stop
 
+@section('javascript')
+    @parent
+
+    <script src="{{ url('adminlte/plugins/datetimepicker/moment-with-locales.min.js') }}"></script>
+    <script src="{{ url('adminlte/plugins/datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+    <script>
+        $(function(){
+            moment.updateLocale('{{ App::getLocale() }}', {
+                week: { dow: 1 } // Monday is the first day of the week
+            });
+            
+            $('.date').datetimepicker({
+                format: "{{ config('app.date_format_moment') }}",
+                locale: "{{ App::getLocale() }}",
+            });
+            
+        });
+    </script>
+            
+@stop

@@ -38,13 +38,17 @@ class ApiTestsController extends Controller
             }
             $query->select([
                 'api_tests.id',
+                'api_tests.submitted',
                 'api_tests.name',
+                'api_tests.email',
                 'api_tests.subject',
                 'api_tests.message',
                 'api_tests.submitted_user_city',
                 'api_tests.submitted_user_state',
                 'api_tests.searched_for',
-                'api_tests.email',
+                'api_tests.latitide',
+                'api_tests.longetude',
+                'api_tests.country',
             ]);
             $table = Datatables::of($query);
 
@@ -59,8 +63,14 @@ class ApiTestsController extends Controller
 
                 return view($template, compact('row', 'gateKey', 'routeKey'));
             });
+            $table->editColumn('submitted', function ($row) {
+                return $row->submitted ? $row->submitted : '';
+            });
             $table->editColumn('name', function ($row) {
                 return $row->name ? $row->name : '';
+            });
+            $table->editColumn('email', function ($row) {
+                return $row->email ? $row->email : '';
             });
             $table->editColumn('subject', function ($row) {
                 return $row->subject ? $row->subject : '';
@@ -77,8 +87,14 @@ class ApiTestsController extends Controller
             $table->editColumn('searched_for', function ($row) {
                 return $row->searched_for ? $row->searched_for : '';
             });
-            $table->editColumn('email', function ($row) {
-                return $row->email ? $row->email : '';
+            $table->editColumn('latitide', function ($row) {
+                return $row->latitide ? $row->latitide : '';
+            });
+            $table->editColumn('longetude', function ($row) {
+                return $row->longetude ? $row->longetude : '';
+            });
+            $table->editColumn('country', function ($row) {
+                return $row->country ? $row->country : '';
             });
 
             $table->rawColumns(['actions','massDelete']);
