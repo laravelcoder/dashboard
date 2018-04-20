@@ -23,6 +23,7 @@ class StoreApiTestsRequest extends FormRequest
     public function rules()
     {
         return [
+            'submitted' => 'nullable|date_format:'.config('app.date_format'),
         ];
     }
 }

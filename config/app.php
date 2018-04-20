@@ -76,8 +76,11 @@ return [
      |
      */
 
-     'date_format' => 'm/d/Y',
-     'date_format_js' => 'mm/dd/yy',
+    'date_format' => 'm/d/Y',
+    'date_format_js' => 'mm/dd/yy',
+    'date_format_moment' => 'MM/DD/YYYY',
+    'time_format_moment' => 'HH:mm:ss',
+    'datetime_format_moment' => 'MM/DD/YYYY HH:mm:ss',
 
     /*
     |--------------------------------------------------------------------------

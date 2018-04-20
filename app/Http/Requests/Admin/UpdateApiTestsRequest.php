@@ -24,6 +24,7 @@ class UpdateApiTestsRequest extends FormRequest
     {
         return [
             
+            'submitted' => 'nullable|date_format:'.config('app.date_format'),
         ];
     }
 }

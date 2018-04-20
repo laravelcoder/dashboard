@@ -28,7 +28,7 @@ return [
 		'task-tags' => [		'title' => 'Tags',		'fields' => [			'name' => 'Name',		],	],
 		'tasks' => [		'title' => 'Tasks',		'fields' => [			'name' => 'Name',			'description' => 'Description',			'status' => 'Status',			'tag' => 'Tags',			'attachment' => 'Attachment',			'due-date' => 'Due date',			'user' => 'Assigned to',		],	],
 		'task-calendar' => [		'title' => 'Calendar',		'fields' => [		],	],
-		'api-test' => [		'title' => 'Api test',		'fields' => [			'name' => 'Name',			'subject' => 'Subject',			'message' => 'Message',			'submitted-user-city' => 'Submitted user city',			'submitted-user-state' => 'Submitted user state',			'searched-for' => 'Searched for',			'email' => 'Email',		],	],
+		'api-test' => [		'title' => 'Api test',		'fields' => [			'submitted' => 'Submitted',			'name' => 'Name',			'email' => 'Email',			'subject' => 'Subject',			'message' => 'Message',			'submitted-user-city' => 'Submitted user city',			'submitted-user-state' => 'Submitted user state',			'searched-for' => 'Searched for',			'latitide' => 'Latitide',			'longetude' => 'Longetude',			'country' => 'Country',		],	],
 	'app_create' => 'Create',
 	'app_save' => 'Save',
 	'app_edit' => 'Edit',
