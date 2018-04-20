@@ -1,0 +1,23 @@
+{
+  "client_firstname": "[client_firstname]",
+  "clinic_address": "[clinic_address]",
+  "clinic_email": "[clinic_email]",
+  "clinic_id": "[clinic_id]",
+  "clinic_phone": "[clinic_phone]",
+  "clinic_text_numbers": "[clinic_text_numbers]",
+  "country": "[country]",
+  "customername": "[name]",
+  "email": "[email]",
+  "family_number": "[family_number]",
+  "how_long": "[how_long]",
+  "latitude": "[latitude]",
+  "longitude": "[longitude]",
+  "phone": "[phone]",
+  "requested_clinic": "[requested_clinic]",
+  "requested_date": "[requested_date]",
+  "requested_time": "[requested_time]",
+  "searched_for": "[searched_for]",
+  "submitted": "[submitted]",
+  "submitted_user_city": "[submitted_user_city]",
+  "submitted_user_state": "[submitted_user_state]"
+}
