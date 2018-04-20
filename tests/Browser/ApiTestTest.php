@@ -29,9 +29,9 @@ class ApiTestTest extends DuskTestCase
                 ->type("submitted_user_city", $api_test->submitted_user_city)
                 ->type("submitted_user_state", $api_test->submitted_user_state)
                 ->type("searched_for", $api_test->searched_for)
-                ->type("latitide", $api_test->latitide)
-                ->type("longetude", $api_test->longetude)
                 ->type("country", $api_test->country)
+                ->type("latitude", $api_test->latitude)
+                ->type("longitude", $api_test->longitude)
                 ->press('Save')
                 ->assertRouteIs('admin.api_tests.index')
                 ->assertSeeIn("tr:last-child td[field-key='submitted']", $api_test->submitted)
@@ -62,9 +62,9 @@ class ApiTestTest extends DuskTestCase
                 ->type("submitted_user_city", $api_test2->submitted_user_city)
                 ->type("submitted_user_state", $api_test2->submitted_user_state)
                 ->type("searched_for", $api_test2->searched_for)
-                ->type("latitide", $api_test2->latitide)
-                ->type("longetude", $api_test2->longetude)
                 ->type("country", $api_test2->country)
+                ->type("latitude", $api_test2->latitude)
+                ->type("longitude", $api_test2->longitude)
                 ->press('Update')
                 ->assertRouteIs('admin.api_tests.index')
                 ->assertSeeIn("tr:last-child td[field-key='submitted']", $api_test2->submitted)
@@ -95,9 +95,9 @@ class ApiTestTest extends DuskTestCase
                 ->assertSeeIn("td[field-key='submitted_user_city']", $api_test->submitted_user_city)
                 ->assertSeeIn("td[field-key='submitted_user_state']", $api_test->submitted_user_state)
                 ->assertSeeIn("td[field-key='searched_for']", $api_test->searched_for)
-                ->assertSeeIn("td[field-key='latitide']", $api_test->latitide)
-                ->assertSeeIn("td[field-key='longetude']", $api_test->longetude)
-                ->assertSeeIn("td[field-key='country']", $api_test->country);
+                ->assertSeeIn("td[field-key='country']", $api_test->country)
+                ->assertSeeIn("td[field-key='latitude']", $api_test->latitude)
+                ->assertSeeIn("td[field-key='longitude']", $api_test->longitude);
         });
     }
 

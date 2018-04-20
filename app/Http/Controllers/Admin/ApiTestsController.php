@@ -46,9 +46,9 @@ class ApiTestsController extends Controller
                 'api_tests.submitted_user_city',
                 'api_tests.submitted_user_state',
                 'api_tests.searched_for',
-                'api_tests.latitide',
-                'api_tests.longetude',
                 'api_tests.country',
+                'api_tests.latitude',
+                'api_tests.longitude',
             ]);
             $table = Datatables::of($query);
 
@@ -87,14 +87,14 @@ class ApiTestsController extends Controller
             $table->editColumn('searched_for', function ($row) {
                 return $row->searched_for ? $row->searched_for : '';
             });
-            $table->editColumn('latitide', function ($row) {
-                return $row->latitide ? $row->latitide : '';
-            });
-            $table->editColumn('longetude', function ($row) {
-                return $row->longetude ? $row->longetude : '';
-            });
             $table->editColumn('country', function ($row) {
                 return $row->country ? $row->country : '';
+            });
+            $table->editColumn('latitude', function ($row) {
+                return $row->latitude ? $row->latitude : '';
+            });
+            $table->editColumn('longitude', function ($row) {
+                return $row->longitude ? $row->longitude : '';
             });
 
             $table->rawColumns(['actions','massDelete']);

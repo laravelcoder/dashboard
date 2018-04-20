@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Create5ada4f13f2fd4ClinicUserTable extends Migration
+class Create5ada561e1484dClinicUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,9 @@ class Create5ada4f13f2fd4ClinicUserTable extends Migration
         if(! Schema::hasTable('clinic_user')) {
             Schema::create('clinic_user', function (Blueprint $table) {
                 $table->integer('clinic_id')->unsigned()->nullable();
-                $table->foreign('clinic_id', 'fk_p_135004_134992_user_c_5ada4f13f3107')->references('id')->on('clinics')->onDelete('cascade');
+                $table->foreign('clinic_id', 'fk_p_135004_134992_user_c_5ada561e149a6')->references('id')->on('clinics')->onDelete('cascade');
                 $table->integer('user_id')->unsigned()->nullable();
-                $table->foreign('user_id', 'fk_p_134992_135004_clinic_5ada4f13f31c0')->references('id')->on('users')->onDelete('cascade');
+                $table->foreign('user_id', 'fk_p_134992_135004_clinic_5ada561e14a70')->references('id')->on('users')->onDelete('cascade');
                 
             });
         }

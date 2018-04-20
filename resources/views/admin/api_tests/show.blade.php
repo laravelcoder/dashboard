@@ -45,16 +45,16 @@
                             <td field-key='searched_for'>{{ $api_test->searched_for }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('global.api-test.fields.latitide')</th>
-                            <td field-key='latitide'>{{ $api_test->latitide }}</td>
-                        </tr>
-                        <tr>
-                            <th>@lang('global.api-test.fields.longetude')</th>
-                            <td field-key='longetude'>{{ $api_test->longetude }}</td>
-                        </tr>
-                        <tr>
                             <th>@lang('global.api-test.fields.country')</th>
                             <td field-key='country'>{{ $api_test->country }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.api-test.fields.latitude')</th>
+                            <td field-key='latitude'>{{ $api_test->latitude }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.api-test.fields.longitude')</th>
+                            <td field-key='longitude'>{{ $api_test->longitude }}</td>
                         </tr>
                     </table>
                 </div>
