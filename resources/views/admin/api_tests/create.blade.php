@@ -108,36 +108,36 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('latitide', trans('global.api-test.fields.latitide').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('latitide', old('latitide'), ['class' => 'form-control', 'placeholder' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('latitide'))
-                        <p class="help-block">
-                            {{ $errors->first('latitide') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('longetude', trans('global.api-test.fields.longetude').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('longetude', old('longetude'), ['class' => 'form-control', 'placeholder' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('longetude'))
-                        <p class="help-block">
-                            {{ $errors->first('longetude') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
                     {!! Form::label('country', trans('global.api-test.fields.country').'', ['class' => 'control-label']) !!}
                     {!! Form::text('country', old('country'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('country'))
                         <p class="help-block">
                             {{ $errors->first('country') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('latitude', trans('global.api-test.fields.latitude').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('latitude', old('latitude'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('latitude'))
+                        <p class="help-block">
+                            {{ $errors->first('latitude') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('longitude', trans('global.api-test.fields.longitude').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('longitude', old('longitude'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('longitude'))
+                        <p class="help-block">
+                            {{ $errors->first('longitude') }}
                         </p>
                     @endif
                 </div>

@@ -16,15 +16,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $submitted_user_city
  * @property string $submitted_user_state
  * @property string $searched_for
- * @property string $latitide
- * @property string $longetude
  * @property string $country
+ * @property string $latitude
+ * @property string $longitude
 */
 class ApiTest extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['submitted', 'name', 'email', 'subject', 'message', 'submitted_user_city', 'submitted_user_state', 'searched_for', 'latitide', 'longetude', 'country'];
+    protected $fillable = ['submitted', 'name', 'email', 'subject', 'message', 'submitted_user_city', 'submitted_user_state', 'searched_for', 'country', 'latitude', 'longitude'];
     protected $hidden = [];
     
     

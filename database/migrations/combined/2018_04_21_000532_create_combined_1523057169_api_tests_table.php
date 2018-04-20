@@ -23,9 +23,9 @@ class CreateCombined1523057169ApiTestsTable extends Migration
                 $table->string('submitted_user_city')->nullable();
                 $table->string('submitted_user_state')->nullable();
                 $table->string('searched_for')->nullable();
-                $table->string('latitide')->nullable();
-                $table->string('longetude')->nullable();
                 $table->string('country')->nullable();
+                $table->string('latitude')->nullable();
+                $table->string('longitude')->nullable();
                 
                 $table->timestamps();
                 $table->softDeletes();

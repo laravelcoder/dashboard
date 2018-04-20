@@ -10,8 +10,8 @@ $factory->define(App\ApiTest::class, function (Faker\Generator $faker) {
         "submitted_user_city" => $faker->name,
         "submitted_user_state" => $faker->name,
         "searched_for" => $faker->name,
-        "latitide" => $faker->name,
-        "longetude" => $faker->name,
         "country" => $faker->name,
+        "latitude" => $faker->name,
+        "longitude" => $faker->name,
     ];
 });
