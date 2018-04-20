@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
 class Contact extends Model
 {
     protected $fillable = ['first_name', 'last_name', 'phone1', 'phone2', 'email', 'skype', 'company_id', 'clinic_id', 'user_id'];
+    protected $hidden = [];
     
     
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreContactsRequest;
 use App\Http\Requests\Admin\UpdateContactsRequest;
+use Yajra\DataTables\DataTables;
 
 class ContactsController extends Controller
 {
@@ -23,9 +24,73 @@ class ContactsController extends Controller
         }
 
 
-                $contacts = Contact::all();
+        
+        if (request()->ajax()) {
+            $query = Contact::query();
+            $query->with("company");
+            $query->with("clinic");
+            $query->with("user");
+            $template = 'actionsTemplate';
+            
+            $query->select([
+                'contacts.id',
+                'contacts.company_id',
+                'contacts.clinic_id',
+                'contacts.user_id',
+                'contacts.first_name',
+                'contacts.last_name',
+                'contacts.phone1',
+                'contacts.phone2',
+                'contacts.email',
+                'contacts.skype',
+            ]);
+            $table = Datatables::of($query);
 
-        return view('admin.contacts.index', compact('contacts'));
+            $table->setRowAttr([
+                'data-entry-id' => '{{$id}}',
+            ]);
+            $table->addColumn('massDelete', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+            $table->editColumn('actions', function ($row) use ($template) {
+                $gateKey  = 'contact_';
+                $routeKey = 'admin.contacts';
+
+                return view($template, compact('row', 'gateKey', 'routeKey'));
+            });
+            $table->editColumn('company.name', function ($row) {
+                return $row->company ? $row->company->name : '';
+            });
+            $table->editColumn('clinic.nickname', function ($row) {
+                return $row->clinic ? $row->clinic->nickname : '';
+            });
+            $table->editColumn('user.name', function ($row) {
+                return $row->user ? $row->user->name : '';
+            });
+            $table->editColumn('first_name', function ($row) {
+                return $row->first_name ? $row->first_name : '';
+            });
+            $table->editColumn('last_name', function ($row) {
+                return $row->last_name ? $row->last_name : '';
+            });
+            $table->editColumn('phone1', function ($row) {
+                return $row->phone1 ? $row->phone1 : '';
+            });
+            $table->editColumn('phone2', function ($row) {
+                return $row->phone2 ? $row->phone2 : '';
+            });
+            $table->editColumn('email', function ($row) {
+                return $row->email ? $row->email : '';
+            });
+            $table->editColumn('skype', function ($row) {
+                return $row->skype ? $row->skype : '';
+            });
+
+            $table->rawColumns(['actions','massDelete']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.contacts.index');
     }
 
     /**

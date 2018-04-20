@@ -6,6 +6,8 @@ Route::group(['prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], funct
 
         Route::resource('clinics', 'ClinicsController', ['except' => ['create', 'edit']]);
 
+        Route::resource('contacts', 'ContactsController', ['except' => ['create', 'edit']]);
+
         Route::resource('locations', 'LocationsController', ['except' => ['create', 'edit']]);
 
         Route::resource('bookings', 'BookingsController', ['except' => ['create', 'edit']]);
