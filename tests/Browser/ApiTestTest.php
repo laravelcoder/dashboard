@@ -38,8 +38,7 @@ class ApiTestTest extends DuskTestCase
                 ->assertSeeIn("tr:last-child td[field-key='name']", $api_test->name)
                 ->assertSeeIn("tr:last-child td[field-key='email']", $api_test->email)
                 ->assertSeeIn("tr:last-child td[field-key='subject']", $api_test->subject)
-                ->assertSeeIn("tr:last-child td[field-key='message']", $api_test->message)
-                ->assertSeeIn("tr:last-child td[field-key='country']", $api_test->country);
+                ->assertSeeIn("tr:last-child td[field-key='message']", $api_test->message);
         });
     }
 
@@ -72,8 +71,7 @@ class ApiTestTest extends DuskTestCase
                 ->assertSeeIn("tr:last-child td[field-key='name']", $api_test2->name)
                 ->assertSeeIn("tr:last-child td[field-key='email']", $api_test2->email)
                 ->assertSeeIn("tr:last-child td[field-key='subject']", $api_test2->subject)
-                ->assertSeeIn("tr:last-child td[field-key='message']", $api_test2->message)
-                ->assertSeeIn("tr:last-child td[field-key='country']", $api_test2->country);
+                ->assertSeeIn("tr:last-child td[field-key='message']", $api_test2->message);
         });
     }
 

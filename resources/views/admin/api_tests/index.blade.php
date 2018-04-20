@@ -36,7 +36,6 @@
                         <th>@lang('global.api-test.fields.email')</th>
                         <th>@lang('global.api-test.fields.subject')</th>
                         <th>@lang('global.api-test.fields.message')</th>
-                        <th>@lang('global.api-test.fields.country')</th>
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else
@@ -65,7 +64,6 @@
                 {data: 'email', name: 'email'},
                 {data: 'subject', name: 'subject'},
                 {data: 'message', name: 'message'},
-                {data: 'country', name: 'country'},
                 
                 {data: 'actions', name: 'actions', searchable: false, sortable: false}
             ];

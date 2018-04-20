@@ -2,7 +2,7 @@
 
 $factory->define(App\ApiTest::class, function (Faker\Generator $faker) {
     return [
-        "submitted" => $faker->date("m/d/Y", $max = 'now'),
+        "submitted" => $faker->name,
         "name" => $faker->name,
         "email" => $faker->name,
         "subject" => $faker->name,
