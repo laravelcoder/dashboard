@@ -18,7 +18,7 @@
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($contacts) > 0 ? 'datatable' : '' }} @can('contact_delete') dt-select @endcan">
+            <table class="table table-bordered table-striped ajaxTable @can('contact_delete') dt-select @endcan">
                 <thead>
                     <tr>
                         @can('contact_delete')
@@ -38,50 +38,6 @@
 
                     </tr>
                 </thead>
-                
-                <tbody>
-                    @if (count($contacts) > 0)
-                        @foreach ($contacts as $contact)
-                            <tr data-entry-id="{{ $contact->id }}">
-                                @can('contact_delete')
-                                    <td></td>
-                                @endcan
-
-                                <td field-key='company'>{{ $contact->company->name or '' }}</td>
-                                <td field-key='clinic'>{{ $contact->clinic->nickname or '' }}</td>
-                                <td field-key='user'>{{ $contact->user->name or '' }}</td>
-                                <td field-key='first_name'>{{ $contact->first_name }}</td>
-                                <td field-key='last_name'>{{ $contact->last_name }}</td>
-                                <td field-key='phone1'>{{ $contact->phone1 }}</td>
-                                <td field-key='phone2'>{{ $contact->phone2 }}</td>
-                                <td field-key='email'>{{ $contact->email }}</td>
-                                <td field-key='skype'>{{ $contact->skype }}</td>
-                                                                <td>
-                                    @can('contact_view')
-                                    <a href="{{ route('admin.contacts.show',[$contact->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
-                                    @endcan
-                                    @can('contact_edit')
-                                    <a href="{{ route('admin.contacts.edit',[$contact->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
-                                    @endcan
-                                    @can('contact_delete')
-{!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'DELETE',
-                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['admin.contacts.destroy', $contact->id])) !!}
-                                    {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                    {!! Form::close() !!}
-                                    @endcan
-                                </td>
-
-                            </tr>
-                        @endforeach
-                    @else
-                        <tr>
-                            <td colspan="14">@lang('global.app_no_entries_in_table')</td>
-                        </tr>
-                    @endif
-                </tbody>
             </table>
         </div>
     </div>
@@ -92,6 +48,23 @@
         @can('contact_delete')
             window.route_mass_crud_entries_destroy = '{{ route('admin.contacts.mass_destroy') }}';
         @endcan
-
+        $(document).ready(function () {
+            window.dtDefaultOptions.ajax = '{!! route('admin.contacts.index') !!}';
+            window.dtDefaultOptions.columns = [@can('contact_delete')
+                    {data: 'massDelete', name: 'id', searchable: false, sortable: false},
+                @endcan{data: 'company.name', name: 'company.name'},
+                {data: 'clinic.nickname', name: 'clinic.nickname'},
+                {data: 'user.name', name: 'user.name'},
+                {data: 'first_name', name: 'first_name'},
+                {data: 'last_name', name: 'last_name'},
+                {data: 'phone1', name: 'phone1'},
+                {data: 'phone2', name: 'phone2'},
+                {data: 'email', name: 'email'},
+                {data: 'skype', name: 'skype'},
+                
+                {data: 'actions', name: 'actions', searchable: false, sortable: false}
+            ];
+            processAjaxTables();
+        });
     </script>
 @endsection
