@@ -13,16 +13,8 @@
                 <div class="col-md-6">
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <th>@lang('global.api-test.fields.submitted')</th>
-                            <td field-key='submitted'>{{ $api_test->submitted }}</td>
-                        </tr>
-                        <tr>
                             <th>@lang('global.api-test.fields.name')</th>
                             <td field-key='name'>{{ $api_test->name }}</td>
-                        </tr>
-                        <tr>
-                            <th>@lang('global.api-test.fields.email')</th>
-                            <td field-key='email'>{{ $api_test->email }}</td>
                         </tr>
                         <tr>
                             <th>@lang('global.api-test.fields.subject')</th>
@@ -45,16 +37,8 @@
                             <td field-key='searched_for'>{{ $api_test->searched_for }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('global.api-test.fields.country')</th>
-                            <td field-key='country'>{{ $api_test->country }}</td>
-                        </tr>
-                        <tr>
-                            <th>@lang('global.api-test.fields.latitude')</th>
-                            <td field-key='latitude'>{{ $api_test->latitude }}</td>
-                        </tr>
-                        <tr>
-                            <th>@lang('global.api-test.fields.longitude')</th>
-                            <td field-key='longitude'>{{ $api_test->longitude }}</td>
+                            <th>@lang('global.api-test.fields.email')</th>
+                            <td field-key='email'>{{ $api_test->email }}</td>
                         </tr>
                     </table>
                 </div>

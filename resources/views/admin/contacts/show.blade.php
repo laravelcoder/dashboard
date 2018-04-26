@@ -40,18 +40,88 @@
                             <th>@lang('global.contacts.fields.skype')</th>
                             <td field-key='skype'>{{ $contact->skype }}</td>
                         </tr>
+                        <tr>
+                            <th>@lang('global.contacts.fields.company-contacts')</th>
+                            <td field-key='company_contacts'>
+                                @foreach ($contact->company_contacts as $singleCompanyContacts)
+                                    <span class="label label-info label-many">{{ $singleCompanyContacts->first_name }}</span>
+                                @endforeach
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div><!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
     
-<li role="presentation" class="active"><a href="#locations" aria-controls="locations" role="tab" data-toggle="tab">Locations</a></li>
+<li role="presentation" class="active"><a href="#contacts" aria-controls="contacts" role="tab" data-toggle="tab">Contacts</a></li>
+<li role="presentation" class=""><a href="#locations" aria-controls="locations" role="tab" data-toggle="tab">Locations</a></li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
     
-<div role="tabpanel" class="tab-pane active" id="locations">
+<div role="tabpanel" class="tab-pane active" id="contacts">
+<table class="table table-bordered table-striped {{ count($contacts) > 0 ? 'datatable' : '' }}">
+    <thead>
+        <tr>
+            <th>@lang('global.contacts.fields.company')</th>
+                        <th>@lang('global.contacts.fields.first-name')</th>
+                        <th>@lang('global.contacts.fields.last-name')</th>
+                        <th>@lang('global.contacts.fields.phone1')</th>
+                        <th>@lang('global.contacts.fields.phone2')</th>
+                        <th>@lang('global.contacts.fields.email')</th>
+                        <th>@lang('global.contacts.fields.skype')</th>
+                        <th>@lang('global.contacts.fields.company-contacts')</th>
+                                                <th>&nbsp;</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (count($contacts) > 0)
+            @foreach ($contacts as $contact)
+                <tr data-entry-id="{{ $contact->id }}">
+                    <td field-key='company'>{{ $contact->company->name or '' }}</td>
+                                <td field-key='first_name'>{{ $contact->first_name }}</td>
+                                <td field-key='last_name'>{{ $contact->last_name }}</td>
+                                <td field-key='phone1'>{{ $contact->phone1 }}</td>
+                                <td field-key='phone2'>{{ $contact->phone2 }}</td>
+                                <td field-key='email'>{{ $contact->email }}</td>
+                                <td field-key='skype'>{{ $contact->skype }}</td>
+                                <td field-key='company_contacts'>
+                                    @foreach ($contact->company_contacts as $singleCompanyContacts)
+                                        <span class="label label-info label-many">{{ $singleCompanyContacts->first_name }}</span>
+                                    @endforeach
+                                </td>
+                                                                <td>
+                                    @can('view')
+                                    <a href="{{ route('contacts.show',[$contact->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
+                                    @endcan
+                                    @can('edit')
+                                    <a href="{{ route('contacts.edit',[$contact->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    @endcan
+                                    @can('delete')
+{!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'DELETE',
+                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                        'route' => ['contacts.destroy', $contact->id])) !!}
+                                    {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
+                                    @endcan
+                                </td>
+
+                </tr>
+            @endforeach
+        @else
+            <tr>
+                <td colspan="15">@lang('global.app_no_entries_in_table')</td>
+            </tr>
+        @endif
+    </tbody>
+</table>
+</div>
+<div role="tabpanel" class="tab-pane " id="locations">
 <table class="table table-bordered table-striped {{ count($locations) > 0 ? 'datatable' : '' }}">
     <thead>
         <tr>

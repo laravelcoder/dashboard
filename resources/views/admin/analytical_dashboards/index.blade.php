@@ -28,9 +28,9 @@
         data.addColumn('{{$column_type}}', '{{$column_name}}');
         data.addColumn('number', 'Visitors');
         <?php
-$json = json_encode($visitors_chart);
-$json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
-?>
+        $json = json_encode($visitors_chart);
+        $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
+        ?>
         data.addRows(<?=$json?>);
 
         var options = {
@@ -59,10 +59,10 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
         var data = new google.visualization.DataTable();
         data.addColumn('{{$column_type}}', '{{$column_name}}');
         data.addColumn('number', 'Pageviews');
-        <?php
-$json = json_encode($pageviews_chart);
-$json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
-?>
+        <?php 
+            $json=json_encode($pageviews_chart);
+            $json = preg_replace("/(('|\")%%|%%(\"|'))/",'', $json);
+        ?>
         data.addRows(<?=$json?>);
 
         var options = {
@@ -86,7 +86,7 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
     google.charts.load("current", {packages: ["corechart"]});
     google.charts.setOnLoadCallback(drawChartPage);
     function drawChartPage() {
-        var data = google.visualization.arrayToDataTable(<?=json_encode($page_chart)?>);
+        var data = google.visualization.arrayToDataTable(<?= json_encode($page_chart) ?>);
 
         var options = {
             is3D: true,

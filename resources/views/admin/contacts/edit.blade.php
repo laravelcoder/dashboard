@@ -119,6 +119,24 @@
                     @endif
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('company_contacts', trans('global.contacts.fields.company-contacts').'', ['class' => 'control-label']) !!}
+                    <button type="button" class="btn btn-primary btn-xs" id="selectbtn-company_contacts">
+                        {{ trans('global.app_select_all') }}
+                    </button>
+                    <button type="button" class="btn btn-primary btn-xs" id="deselectbtn-company_contacts">
+                        {{ trans('global.app_deselect_all') }}
+                    </button>
+                    {!! Form::select('company_contacts[]', $company_contacts, old('company_contacts') ? old('company_contacts') : $contact->company_contacts->pluck('id')->toArray(), ['class' => 'form-control select2', 'multiple' => 'multiple', 'id' => 'selectall-company_contacts' ]) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('company_contacts'))
+                        <p class="help-block">
+                            {{ $errors->first('company_contacts') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
             
         </div>
     </div>
@@ -127,3 +145,17 @@
     {!! Form::close() !!}
 @stop
 
+@section('javascript')
+    @parent
+
+    <script>
+        $("#selectbtn-company_contacts").click(function(){
+            $("#selectall-company_contacts > option").prop("selected","selected");
+            $("#selectall-company_contacts").trigger("change");
+        });
+        $("#deselectbtn-company_contacts").click(function(){
+            $("#selectall-company_contacts > option").prop("selected","");
+            $("#selectall-company_contacts").trigger("change");
+        });
+    </script>
+@stop
