@@ -25,9 +25,12 @@ class AnalyticalDashboardsController extends Controller {
 		// $topkeywords = Analytics::getTopKeyWordsForPeriod($start,$end);
 		// $topreferrers = Analytics::getTopReferrersForPeriod($start,$end,100);
 
-		// Analytics::getAnalyticsService()->data_realtime->get(env('ANALYTICS_VIEW_ID'), 'rt:activeVisitors')->totalsForAllResults['rt:activeVisitors']
+		$online = Analytics::getAnalyticsService()->data_realtime->get('ga:' . config('analytics.view_id').'', 'rt:activeVisitors')->totalsForAllResults['rt:activeVisitors'];
+		//$online = Analytics::getAnalyticsService()->data_realtime->get('ga:idhere',  'rt:activeVisitors')->totalsForAllResults['rt:activeVisitors'];
 		// $activeusers = Analytics::getActiveUsers();
 		// $activeusers = number_format($activeusers);
+
+		$all = Analytics::getAnalyticsService();
 
 		$analyticsData_mvp = Analytics::fetchMostVisitedPages(Period::days(14));
 		$this->data['url'] = $analyticsData_mvp->pluck('url');
@@ -98,6 +101,6 @@ class AnalyticalDashboardsController extends Controller {
 		//     }
 		// }
 
-		return view('admin.analytical_dashboards.index', compact('analyticsData_mvp', 'chartData', 'stats', 'product_chart', 'page_chart', 'order_chart', 'revenue_chart', 'visitors_chart', 'pageviews_chart', 'topkeywords', 'topreferrers', 'start', 'end', 'toppages', 'total_visitors', 'total_pageviews', 'column_type', 'column_name', 'column_format'))->with('active', 'home');
+		return view('admin.analytical_dashboards.index', compact('analyticsData_mvp', 'chartData', 'stats', 'product_chart', 'page_chart', 'order_chart', 'revenue_chart', 'visitors_chart', 'pageviews_chart', 'topkeywords', 'topreferrers', 'start', 'end', 'toppages', 'total_visitors', 'total_pageviews', 'column_type', 'column_name', 'column_format', 'online'))->with('active', 'home');
 	}
 }
