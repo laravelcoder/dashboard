@@ -31,10 +31,11 @@
                             @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                         @endcan
 
+                        <th>@lang('global.api-test.fields.submitted')</th>
                         <th>@lang('global.api-test.fields.name')</th>
+                        <th>@lang('global.api-test.fields.email')</th>
                         <th>@lang('global.api-test.fields.subject')</th>
                         <th>@lang('global.api-test.fields.message')</th>
-                        <th>@lang('global.api-test.fields.email')</th>
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else
@@ -58,10 +59,11 @@
                 @if ( request('show_deleted') != 1 )
                     {data: 'massDelete', name: 'id', searchable: false, sortable: false},
                 @endif
-                @endcan{data: 'name', name: 'name'},
+                @endcan{data: 'submitted', name: 'submitted'},
+                {data: 'name', name: 'name'},
+                {data: 'email', name: 'email'},
                 {data: 'subject', name: 'subject'},
                 {data: 'message', name: 'message'},
-                {data: 'email', name: 'email'},
                 
                 {data: 'actions', name: 'actions', searchable: false, sortable: false}
             ];

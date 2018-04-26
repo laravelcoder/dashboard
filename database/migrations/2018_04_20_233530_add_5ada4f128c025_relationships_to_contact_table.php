@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Add5ac8343842499RelationshipsToContactTable extends Migration
+class Add5ada4f128c025RelationshipsToContactTable extends Migration
 {
     /**
      * Run the migrations.
@@ -37,21 +37,6 @@ class Add5ac8343842499RelationshipsToContactTable extends Migration
     public function down()
     {
         Schema::table('contacts', function(Blueprint $table) {
-            if(Schema::hasColumn('contacts', 'company_id')) {
-                $table->dropForeign('135003_5ab54697c4a53');
-                $table->dropIndex('135003_5ab54697c4a53');
-                $table->dropColumn('company_id');
-            }
-            if(Schema::hasColumn('contacts', 'clinic_id')) {
-                $table->dropForeign('135003_5ab967aebc739');
-                $table->dropIndex('135003_5ab967aebc739');
-                $table->dropColumn('clinic_id');
-            }
-            if(Schema::hasColumn('contacts', 'user_id')) {
-                $table->dropForeign('135003_5ab54a3b2237b');
-                $table->dropIndex('135003_5ab54a3b2237b');
-                $table->dropColumn('user_id');
-            }
             
         });
     }

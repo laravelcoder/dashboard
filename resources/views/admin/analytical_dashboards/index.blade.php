@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+ 
 @section('topcss')
 <link rel="stylesheet" type="text/css" href="{!! asset('/DataTables/datatables.min.css') !!}"/>
 
@@ -100,26 +101,13 @@
 
 
 @endsection
-
+ 
 @section('content')
     <h3 class="page-title">@lang('global.analytical-dashboard.title')</h3>
-    {!! Form::open(['method' => 'get']) !!}
-             <div class="col-md-3 text-right">
-                <div class="input-group">
-                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
-                    {!! Form::text('date-range', null, ['class' => 'form-control date-range']) !!}
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
-                      </div>
-                </div>
-            </div>
-
-            <div class="clearfix"></div>
-    {!! Form::close() !!}
+    
     <p>
-        {{ trans('global.app_custom_controller_index') }}
+        {{ trans('global.app_custom_controller_index') }} 
     </p>
-
 <div class="row">
     <div class="col-sm-12">
         <div class="row space12">

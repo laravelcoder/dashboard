@@ -20,6 +20,7 @@ class Clinic extends Model
     use SoftDeletes;
 
     protected $fillable = ['nickname', 'clinic_email', 'clinic_phone', 'clinic_phone_2', 'logo', 'company_id'];
+    protected $hidden = [];
     
     
 

@@ -13,12 +13,36 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
+                    {!! Form::label('submitted', trans('global.api-test.fields.submitted').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('submitted', old('submitted'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('submitted'))
+                        <p class="help-block">
+                            {{ $errors->first('submitted') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
                     {!! Form::label('name', trans('global.api-test.fields.name').'', ['class' => 'control-label']) !!}
                     {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('name'))
                         <p class="help-block">
                             {{ $errors->first('name') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('email', trans('global.api-test.fields.email').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('email', old('email'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('email'))
+                        <p class="help-block">
+                            {{ $errors->first('email') }}
                         </p>
                     @endif
                 </div>
@@ -85,12 +109,36 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('email', trans('global.api-test.fields.email').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('email', old('email'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    {!! Form::label('country', trans('global.api-test.fields.country').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('country', old('country'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
-                    @if($errors->has('email'))
+                    @if($errors->has('country'))
                         <p class="help-block">
-                            {{ $errors->first('email') }}
+                            {{ $errors->first('country') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('latitude', trans('global.api-test.fields.latitude').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('latitude', old('latitude'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('latitude'))
+                        <p class="help-block">
+                            {{ $errors->first('latitude') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('longitude', trans('global.api-test.fields.longitude').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('longitude', old('longitude'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('longitude'))
+                        <p class="help-block">
+                            {{ $errors->first('longitude') }}
                         </p>
                     @endif
                 </div>

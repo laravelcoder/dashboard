@@ -25,6 +25,7 @@ class Location extends Model
     use SoftDeletes;
 
     protected $fillable = ['nickname', 'address', 'address_2', 'city', 'state', 'phone', 'phone2', 'storefront', 'google_map_link', 'clinic_id', 'contact_person_id'];
+    protected $hidden = [];
     
     
 
