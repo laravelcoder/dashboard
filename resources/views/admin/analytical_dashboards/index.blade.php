@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
- 
 @section('topcss')
 <link rel="stylesheet" type="text/css" href="{!! asset('/DataTables/datatables.min.css') !!}"/>
 
@@ -29,9 +28,9 @@
         data.addColumn('{{$column_type}}', '{{$column_name}}');
         data.addColumn('number', 'Visitors');
         <?php
-        $json = json_encode($visitors_chart);
-        $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
-        ?>
+$json = json_encode($visitors_chart);
+$json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
+?>
         data.addRows(<?=$json?>);
 
         var options = {
@@ -60,10 +59,10 @@
         var data = new google.visualization.DataTable();
         data.addColumn('{{$column_type}}', '{{$column_name}}');
         data.addColumn('number', 'Pageviews');
-        <?php 
-            $json=json_encode($pageviews_chart);
-            $json = preg_replace("/(('|\")%%|%%(\"|'))/",'', $json);
-        ?>
+        <?php
+$json = json_encode($pageviews_chart);
+$json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
+?>
         data.addRows(<?=$json?>);
 
         var options = {
@@ -87,7 +86,7 @@
     google.charts.load("current", {packages: ["corechart"]});
     google.charts.setOnLoadCallback(drawChartPage);
     function drawChartPage() {
-        var data = google.visualization.arrayToDataTable(<?= json_encode($page_chart) ?>);
+        var data = google.visualization.arrayToDataTable(<?=json_encode($page_chart)?>);
 
         var options = {
             is3D: true,
@@ -101,13 +100,26 @@
 
 
 @endsection
- 
+
 @section('content')
     <h3 class="page-title">@lang('global.analytical-dashboard.title')</h3>
-    
+    {!! Form::open(['method' => 'get']) !!}
+             <div class="col-md-3 text-right">
+                <div class="input-group">
+                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                    {!! Form::text('date-range', null, ['class' => 'form-control date-range']) !!}
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
+                      </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+    {!! Form::close() !!}
     <p>
-        {{ trans('global.app_custom_controller_index') }} 
+        {{ trans('global.app_custom_controller_index') }}
     </p>
+
 <div class="row">
     <div class="col-sm-12">
         <div class="row space12">
