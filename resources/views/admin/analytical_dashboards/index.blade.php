@@ -2,6 +2,7 @@
 
 @section('topcss')
 <link rel="stylesheet" type="text/css" href="{!! asset('/DataTables/datatables.min.css') !!}"/>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
 <style type="text/css">
 	.mini-stats{border-left: none !important; }
@@ -15,7 +16,16 @@
 </style>
 @endsection
 
+@section('afterJQ')
+	{{-- start: JAVASCRIPTS REQUIRED AFTER JQ  --}}
+	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+ 	{{-- end: JAVASCRIPTS REQUIRED AFTER JQ --}}
+@endsection
+
 @section('topscripts')
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script type="text/javascript" src="{!! asset('/DataTables/datatables.min.js') !!}"></script>
@@ -30,9 +40,9 @@
 		data.addColumn('{{$column_type}}', '{{$column_name}}');
 		data.addColumn('number', 'Visitors');
 		<?php
-$json = json_encode($visitors_chart);
-$json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
-?>
+			$json = json_encode($visitors_chart);
+			$json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
+		?>
 		data.addRows(<?=$json?>);
 
 		var options = {
@@ -99,7 +109,33 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
 		chart.draw(data, options);
 	}
 </script>
+<script type="text/javascript">
+	$(function() {
 
+	    var start = moment().subtract(29, 'days');
+	    var end = moment();
+
+	    function cb(start, end) {
+	        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+	    }
+
+	    $('#reportrange').daterangepicker({
+	        startDate: start,
+	        endDate: end,
+	        ranges: {
+	           'Today': [moment(), moment()],
+	           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+	           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+	           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+	           'This Month': [moment().startOf('month'), moment().endOf('month')],
+	           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+	        }
+	    }, cb);
+
+	    cb(start, end);
+
+	});
+	</script>
 
 @endsection
 
@@ -117,31 +153,22 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
 		{!! Form::open(['method' => 'get']) !!}
 		<div class="col-md-3">
 
-			<div class="form-group col-md-12">
-			<label>From:</label>
-				<div class='input-group date' id='datetimepicker1'>
-				<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
-					{!! Form::text('date-range', null, ['class' => 'form-control date-range-from']) !!}
-
-				</div>
-			</div>
-			<div class="clearfix"></div>
 
 		</div>
 
 		<div class="col-md-3">
 
 			<div class="form-group col-md-12">
-			<label>To:</label>
-				<div class='input-group date' id='datetimepicker2'>
-				<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
-					{!! Form::text('date-range', null, ['class' => 'form-control date-range-to']) !!}
-
-				</div>
+			<label>Date Ranges:</label>
+			 <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+			    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+			    <span></span> <b class="caret"></b>
+			</div>
 			</div>
 			<div class="clearfix"></div>
 
 		</div>
+
 		{!! Form::close() !!}
 
 		<div class="col-md-3">
@@ -176,7 +203,11 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
 
 @include('admin.analytical_dashboards.partials.topwidgets')
 
-<hr class="padded-center" style="clear:both" />
+<hr style="clear:both" />
+
+<div class="row">
+{{-- dd($anadata) --}}
+</div>
 
 <div class="row">
 	<div class="col-sm-6">
@@ -220,59 +251,7 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
 
 @section('bottomscripts')
 	{{-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY  --}}
-	<script>
-		jQuery(function ($) {
-		   var bindDatePicker = function() {
-				$("div#datetimepicker2>span").datetimepicker({
-				format:'YYYY-MM-DD',
-					icons: {
-						time: "fa fa-clock-o",
-						date: "fa fa-calendar",
-						up: "fa fa-arrow-up",
-						down: "fa fa-arrow-down"
-					}
-				}).find('input:first').on("blur",function () {
-					// check if the date is correct. We can accept dd-mm-yyyy and yyyy-mm-dd.
-					// update the format if it's yyyy-mm-dd
-					var date = parseDate($(this).val());
 
-					if (! isValidDate(date)) {
-						//create date based on momentjs (we have that)
-						date = moment().format('YYYY-MM-DD');
-					}
-
-					$(this).val(date);
-				});
-			}
-
-		   var isValidDate = function(value, format) {
-				format = format || false;
-				// lets parse the date to the best of our knowledge
-				if (format) {
-					value = parseDate(value);
-				}
-
-				var timestamp = Date.parse(value);
-
-				return isNaN(timestamp) == false;
-		   }
-
-		   var parseDate = function(value) {
-				var m = value.match(/^(\d{1,2})(\/|-)?(\d{1,2})(\/|-)?(\d{4})$/);
-				if (m)
-					value = m[5] + '-' + ("00" + m[3]).slice(-2) + '-' + ("00" + m[1]).slice(-2);
-
-				return value;
-		   }
-
-		   bindDatePicker();
-		 });
-	</script>
 	{{-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY --}}
 @endsection
 
-@section('afterJQ')
-	{{-- start: JAVASCRIPTS REQUIRED AFTER JQ  --}}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/js/bootstrap-datetimepicker.min.js"></script>
- 	{{-- end: JAVASCRIPTS REQUIRED AFTER JQ --}}
-@endsection

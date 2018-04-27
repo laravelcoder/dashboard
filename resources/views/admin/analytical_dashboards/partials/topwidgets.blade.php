@@ -9,7 +9,7 @@
 				<h4>Active Users Right Now</h4>
 			</div>
 			<div class="icon">
-				<i class="ion ion-person-add"></i>
+				<i class="fa fa-users"></i>
 			</div>
 
 		</div>
@@ -21,7 +21,7 @@
 				<h4>Unique Visitors</h4>
 			</div>
 			<div class="icon">
-				<i class="fa fa-shopping-cart"></i>
+				<i class="fa fa-user-plus"></i>
 			</div>
 
 		</div>
