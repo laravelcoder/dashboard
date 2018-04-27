@@ -172,10 +172,11 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
 			</div>
 		</div>
 	</div>
-
+<hr style="clear:both" />
 
 @include('admin.analytical_dashboards.partials.topwidgets')
 
+<hr class="padded-center" style="clear:both" />
 
 <div class="row">
 	<div class="col-sm-6">
