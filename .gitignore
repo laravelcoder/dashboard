@@ -28,3 +28,4 @@ config/google-ads.php
 /.phpintel/
 /.overwrite/
 /config/google-ads.php
+resources/views/admin/analytical_dashboards/partials/topwidgets-notstyled.blade.php

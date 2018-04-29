@@ -25,9 +25,17 @@ class AnalyticalDashboardsController extends Controller {
 		// $topkeywords = Analytics::getTopKeyWordsForPeriod($start,$end);
 		// $topreferrers = Analytics::getTopReferrersForPeriod($start,$end,100);
 
-		// Analytics::getAnalyticsService()->data_realtime->get(env('ANALYTICS_VIEW_ID'), 'rt:activeVisitors')->totalsForAllResults['rt:activeVisitors']
-		// $activeusers = Analytics::getActiveUsers();
-		// $activeusers = number_format($activeusers);
+		$online = Analytics::getAnalyticsService()->data_realtime->get('ga:' . config('analytics.view_id') . '', 'rt:activeVisitors')->totalsForAllResults['rt:activeVisitors'];
+
+		// https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries
+		$anadata = Analytics::performQuery(
+			Period::years(1),
+			'ga:sessions',
+			[
+				'metrics' => 'ga:sessions, ga:pageviews, ga:bounces,ga:sessionDuration',
+				'dimensions' => 'ga:yearMonth',
+			]
+		);
 
 		$analyticsData_mvp = Analytics::fetchMostVisitedPages(Period::days(14));
 		$this->data['url'] = $analyticsData_mvp->pluck('url');
@@ -50,7 +58,8 @@ class AnalyticalDashboardsController extends Controller {
 			$column_format = 'hh:mm a';
 		}
 
-		// $visitorspageviews = Analytics::fetchTotalVisitorsAndPageViews(Period::create($start,$end));
+
+		// $visitorspageviews = Analytics::fetchTotalVisitorsAndPageViews(Period::days(14), $groupBy);
 		$visitorspageviews = Analytics::fetchTotalVisitorsAndPageViews(Period::create($start, $end), $groupBy);
 		$total_visitors = $total_pageviews = 0;
 		$visitors_chart = $pageviews_chart = array();
@@ -98,6 +107,6 @@ class AnalyticalDashboardsController extends Controller {
 		//     }
 		// }
 
-		return view('admin.analytical_dashboards.index', compact('analyticsData_mvp', 'chartData', 'stats', 'product_chart', 'page_chart', 'order_chart', 'revenue_chart', 'visitors_chart', 'pageviews_chart', 'topkeywords', 'topreferrers', 'start', 'end', 'toppages', 'total_visitors', 'total_pageviews', 'column_type', 'column_name', 'column_format'))->with('active', 'home');
+		return view('admin.analytical_dashboards.index', compact('analyticsData_mvp', 'chartData', 'stats', 'product_chart', 'page_chart', 'order_chart', 'revenue_chart', 'visitors_chart', 'pageviews_chart', 'topkeywords', 'topreferrers', 'start', 'end', 'toppages', 'total_visitors', 'total_pageviews', 'column_type', 'column_name', 'column_format', 'online', 'anadata'))->with('active', 'home');
 	}
 }

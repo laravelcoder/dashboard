@@ -3,6 +3,8 @@
 
 <head>
     @include('partials.head')
+    @yield('topcss')
+    @yield('topscripts')
 </head>
 
 
@@ -53,6 +55,9 @@
 <button type="submit">Logout</button>
 {!! Form::close() !!}
 
+@yield('bottomscripts')
 @include('partials.javascripts')
+
+@yield('afterJQ')
 </body>
 </html>
