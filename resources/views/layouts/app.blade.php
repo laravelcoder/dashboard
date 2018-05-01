@@ -55,8 +55,8 @@
 <button type="submit">Logout</button>
 {!! Form::close() !!}
 
-@yield('bottomscripts')
 @include('partials.javascripts')
+@yield('bottomscripts')
 
 @yield('afterJQ')
 </body>
