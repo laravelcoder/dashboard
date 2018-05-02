@@ -13,7 +13,8 @@ class ClinicSeed extends Seeder
     {
         $items = [
             
-            ['id' => 1, 'nickname' => 'Lice Clinics of America', 'clinic_email' => 'contact@liceclinicsofamerica.com', 'clinic_phone' => null, 'clinic_phone_2' => null, 'logo' => null, 'company_id' => 1,],
+            ['id' => 1, 'nickname' => 'Lice Clinics of America', 'logo' => null, 'company_id' => 1,],
+            ['id' => 2, 'nickname' => 'Lice Clinics Hawaii', 'logo' => null, 'company_id' => 2,],
 
         ];
 

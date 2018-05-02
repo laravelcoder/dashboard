@@ -7,9 +7,9 @@ return [
 		'users' => [		'title' => 'Users',		'fields' => [			'name' => 'Name',			'email' => 'Email',			'password' => 'Password',			'role' => 'Role',			'remember-token' => 'Remember token',		],	],
 		'clinic-management' => [		'title' => 'Clinic Management',		'fields' => [		],	],
 		'contact-companies' => [		'title' => 'Companies',		'fields' => [			'name' => 'Company name',			'logo' => 'Logo',		],	],
-		'contacts' => [		'title' => 'Contacts',		'fields' => [			'company' => 'Company',			'clinic' => 'Clinic',			'user' => 'User',			'first-name' => 'First name',			'last-name' => 'Last name',			'phone1' => 'Phone 1',			'phone2' => 'Phone 2',			'email' => 'Email',			'skype' => 'Skype',		],	],
-		'clinics' => [		'title' => 'Clinics',		'fields' => [			'nickname' => 'Nickname',			'clinic-email' => 'Clinic Email',			'clinic-phone' => 'Clinic Phone',			'clinic-phone-2' => 'Clinic phone 2',			'logo' => 'Logo',			'company' => 'Company',			'users' => 'Users',		],	],
-		'locations' => [		'title' => 'Locations',		'fields' => [			'nickname' => 'Nickname',			'address' => 'Address',			'address-2' => 'Address 2',			'city' => 'City',			'state' => 'State',			'phone' => 'Phone',			'phone2' => 'Phone2',			'storefront' => 'Storefront',			'google-map-link' => 'Google map link',			'clinic' => 'Clinic',			'contact-person' => 'Contact person',		],	],
+		'contacts' => [		'title' => 'Contacts',		'fields' => [			'company' => 'Company',			'clinic' => 'Clinic',			'user' => 'User',			'first-name' => 'First name',			'last-name' => 'Last name',			'phone1' => 'Phone 1',			'phone2' => 'Phone 2',			'email' => 'Email',			'skype' => 'Skype',			'notes' => 'Notes',		],	],
+		'clinics' => [		'title' => 'Clinics',		'fields' => [			'nickname' => 'Nickname',			'logo' => 'Logo',			'company' => 'Company',			'users' => 'Users',			'notes' => 'Notes',		],	],
+		'locations' => [		'title' => 'Locations',		'fields' => [			'parent-website' => 'Parent website',			'clinic-website-link' => 'Clinic website link',			'clinic' => 'Clinic',			'clinic-location-id' => 'Clinic location id',			'nickname' => 'Nickname',			'contact-person' => 'Contact person',			'address' => 'Address',			'address-2' => 'Address 2',			'city' => 'City',			'state' => 'State',			'location-email' => 'Location Email',			'phone' => 'Phone',			'phone2' => 'Phone2',			'storefront' => 'Storefront',			'google-map-link' => 'Google map link',			'created-by' => 'Created by',		],	],
 		'website' => [		'title' => 'Website',		'fields' => [			'company' => 'Company',			'clinic' => 'Clinic',			'website' => 'Website',		],	],
 		'analytics' => [		'title' => 'Analytics',		'fields' => [			'view-name' => 'View name',			'view-id' => 'View ID',			'website' => 'Website',		],	],
 		'adwords' => [		'title' => 'Adwords',		'fields' => [			'company' => 'Company',			'website' => 'Website',			'client-customer-id' => 'Client customer id',			'user-agent' => 'User agent',			'client-id' => 'Client id',			'client-secret' => 'Client secret',			'refresh-token' => 'Refresh token',			'authorization-uri' => 'Authorization URI',			'redirect-uri' => 'Redirect URI',			'token-credential-uri' => 'Token Credential URI',			'scope' => 'Scope',			'clinic' => 'Clinic',		],	],
@@ -20,7 +20,7 @@ return [
 		'adwords-dashboard' => [		'title' => 'Adwords Dashboard',		'fields' => [		],	],
 		'call-metrics' => [		'title' => 'Call Metrics',		'fields' => [		],	],
 		'bookings-dashboard' => [		'title' => 'Bookings Dashboard',		'fields' => [		],	],
-		'bookings' => [		'title' => 'Bookings',		'fields' => [			'submitted' => 'Submitted',			'customername' => 'Customer Name',			'email' => 'Email',			'phone' => 'Phone',			'family-number' => 'Family number',			'how-long' => 'How long',			'requested-date' => 'Requested date',			'requested-time' => 'Requested time',			'requested-clinic' => 'Requested clinic',			'clinic-id' => 'Clinic id',			'clinic-email' => 'Clinic email',			'clinic-address' => 'Clinic address',			'clinic-phone' => 'Clinic phone',			'clinic-text-numbers' => 'Clinic text numbers',			'client-firstname' => 'Client firstname',			'submitted-user-city' => 'Submitted user city',			'submitted-user-state' => 'Submitted user state',			'searched-for' => 'Searched for',			'latitude' => 'Latitude',			'longitude' => 'Longitude',			'country' => 'Country',		],	],
+		'bookings' => [		'title' => 'Bookings',		'fields' => [			'submitted' => 'Submitted',			'customername' => 'Customername',			'phone' => 'Phone',			'family-number' => 'Family number',			'email' => 'Email',			'how-long' => 'How long',			'requested-date' => 'Requested date',			'requested-time' => 'Requested time',			'requested-clinic' => 'Requested clinic',			'clinic-id' => 'Clinic id',			'clinic-email' => 'Clinic email',			'clinic-address' => 'Clinic address',			'clinic-phone' => 'Clinic phone',			'clinic-text-numbers' => 'Clinic text numbers',			'client-firstname' => 'Client firstname',			'submitted-user-city' => 'Submitted user city',			'submitted-user-state' => 'Submitted user state',			'searched-for' => 'Searched for',			'latitude' => 'Latitude',			'longitude' => 'Longitude',			'country' => 'Country',		],	],
 		'zipcodes' => [		'title' => 'Zipcodes',		'fields' => [			'zipcode' => 'Zipcode',			'clinic' => 'Clinic',			'location' => 'Location',		],	],
 		'user-actions' => [		'title' => 'User actions',		'created_at' => 'Time',		'fields' => [		],	],
 		'task-management' => [		'title' => 'Task management',		'fields' => [		],	],
@@ -271,5 +271,7 @@ return [
 	'app_customer' => 'Customer',
 	'app_select_all' => 'Select all',
 	'app_deselect_all' => 'Deselect all',
+	'app_team-management' => 'Teams',
+	'app_team-management-singular' => 'Team',
 	'global_title' => 'lcadashboard',
 ];

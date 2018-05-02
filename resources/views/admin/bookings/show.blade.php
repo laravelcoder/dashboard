@@ -21,16 +21,16 @@
                             <td field-key='customername'>{{ $booking->customername }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('global.bookings.fields.email')</th>
-                            <td field-key='email'>{{ $booking->email }}</td>
-                        </tr>
-                        <tr>
                             <th>@lang('global.bookings.fields.phone')</th>
                             <td field-key='phone'>{{ $booking->phone }}</td>
                         </tr>
                         <tr>
                             <th>@lang('global.bookings.fields.family-number')</th>
                             <td field-key='family_number'>{{ $booking->family_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.bookings.fields.email')</th>
+                            <td field-key='email'>{{ $booking->email }}</td>
                         </tr>
                         <tr>
                             <th>@lang('global.bookings.fields.how-long')</th>

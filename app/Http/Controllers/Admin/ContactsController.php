@@ -43,6 +43,7 @@ class ContactsController extends Controller
                 'contacts.phone2',
                 'contacts.email',
                 'contacts.skype',
+                'contacts.notes',
             ]);
             $table = Datatables::of($query);
 
@@ -83,6 +84,9 @@ class ContactsController extends Controller
             });
             $table->editColumn('skype', function ($row) {
                 return $row->skype ? $row->skype : '';
+            });
+            $table->editColumn('notes', function ($row) {
+                return $row->notes ? $row->notes : '';
             });
 
             $table->rawColumns(['actions','massDelete']);

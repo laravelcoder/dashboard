@@ -30,6 +30,7 @@ class ContactTest extends DuskTestCase
                 ->type("phone2", $contact->phone2)
                 ->type("email", $contact->email)
                 ->type("skype", $contact->skype)
+                ->type("notes", $contact->notes)
                 ->press('Save')
                 ->assertRouteIs('admin.contacts.index')
                 ->assertSeeIn("tr:last-child td[field-key='company']", $contact->company->name)
@@ -65,6 +66,7 @@ class ContactTest extends DuskTestCase
                 ->type("phone2", $contact2->phone2)
                 ->type("email", $contact2->email)
                 ->type("skype", $contact2->skype)
+                ->type("notes", $contact2->notes)
                 ->press('Update')
                 ->assertRouteIs('admin.contacts.index')
                 ->assertSeeIn("tr:last-child td[field-key='company']", $contact2->company->name)
@@ -99,7 +101,8 @@ class ContactTest extends DuskTestCase
                 ->assertSeeIn("td[field-key='phone1']", $contact->phone1)
                 ->assertSeeIn("td[field-key='phone2']", $contact->phone2)
                 ->assertSeeIn("td[field-key='email']", $contact->email)
-                ->assertSeeIn("td[field-key='skype']", $contact->skype);
+                ->assertSeeIn("td[field-key='skype']", $contact->skype)
+                ->assertSeeIn("td[field-key='notes']", $contact->notes);
         });
     }
 

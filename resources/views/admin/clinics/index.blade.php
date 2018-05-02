@@ -32,9 +32,6 @@
                         @endcan
 
                         <th>@lang('global.clinics.fields.nickname')</th>
-                        <th>@lang('global.clinics.fields.clinic-email')</th>
-                        <th>@lang('global.clinics.fields.clinic-phone')</th>
-                        <th>@lang('global.clinics.fields.clinic-phone-2')</th>
                         <th>@lang('global.clinics.fields.company')</th>
                         <th>@lang('global.clinics.fields.users')</th>
                         @if( request('show_deleted') == 1 )
@@ -61,9 +58,6 @@
                     {data: 'massDelete', name: 'id', searchable: false, sortable: false},
                 @endif
                 @endcan{data: 'nickname', name: 'nickname'},
-                {data: 'clinic_email', name: 'clinic_email'},
-                {data: 'clinic_phone', name: 'clinic_phone'},
-                {data: 'clinic_phone_2', name: 'clinic_phone_2'},
                 {data: 'company.name', name: 'company.name'},
                 {data: 'users.name', name: 'users.name'},
                 

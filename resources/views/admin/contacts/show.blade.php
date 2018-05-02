@@ -40,6 +40,10 @@
                             <th>@lang('global.contacts.fields.skype')</th>
                             <td field-key='skype'>{{ $contact->skype }}</td>
                         </tr>
+                        <tr>
+                            <th>@lang('global.contacts.fields.notes')</th>
+                            <td field-key='notes'>{!! $contact->notes !!}</td>
+                        </tr>
                     </table>
                 </div>
             </div><!-- Nav tabs -->
@@ -55,11 +59,13 @@
 <table class="table table-bordered table-striped {{ count($locations) > 0 ? 'datatable' : '' }}">
     <thead>
         <tr>
-            <th>@lang('global.locations.fields.nickname')</th>
+            <th>@lang('global.locations.fields.clinic-location-id')</th>
+                        <th>@lang('global.locations.fields.nickname')</th>
+                        <th>@lang('global.locations.fields.contact-person')</th>
                         <th>@lang('global.locations.fields.city')</th>
                         <th>@lang('global.locations.fields.state')</th>
-                        <th>@lang('global.locations.fields.phone2')</th>
-                        <th>@lang('global.locations.fields.contact-person')</th>
+                        <th>@lang('global.locations.fields.phone')</th>
+                        <th>@lang('global.locations.fields.created-by')</th>
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else
@@ -72,11 +78,13 @@
         @if (count($locations) > 0)
             @foreach ($locations as $location)
                 <tr data-entry-id="{{ $location->id }}">
-                    <td field-key='nickname'>{{ $location->nickname }}</td>
+                    <td field-key='clinic_location_id'>{{ $location->clinic_location_id }}</td>
+                                <td field-key='nickname'>{{ $location->nickname }}</td>
+                                <td field-key='contact_person'>{{ $location->contact_person->first_name or '' }}</td>
                                 <td field-key='city'>{{ $location->city }}</td>
                                 <td field-key='state'>{{ $location->state }}</td>
-                                <td field-key='phone2'>{{ $location->phone2 }}</td>
-                                <td field-key='contact_person'>{{ $location->contact_person->first_name or '' }}</td>
+                                <td field-key='phone'>{{ $location->phone }}</td>
+                                <td field-key='created_by'>{{ $location->created_by->name or '' }}</td>
                                 @if( request('show_deleted') == 1 )
                                 <td>
                                     {!! Form::open(array(
@@ -117,7 +125,7 @@
             @endforeach
         @else
             <tr>
-                <td colspan="16">@lang('global.app_no_entries_in_table')</td>
+                <td colspan="21">@lang('global.app_no_entries_in_table')</td>
             </tr>
         @endif
     </tbody>
