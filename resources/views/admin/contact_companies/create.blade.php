@@ -73,9 +73,6 @@
                 <thead>
                 <tr>
                     <th>@lang('global.clinics.fields.nickname')</th>
-                        <th>@lang('global.clinics.fields.clinic-email')</th>
-                        <th>@lang('global.clinics.fields.clinic-phone')</th>
-                        <th>@lang('global.clinics.fields.clinic-phone-2')</th>
                         
                     <th>Actions</th>
                 </tr>

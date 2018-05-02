@@ -13,8 +13,28 @@
                 <div class="col-md-6">
                     <table class="table table-bordered table-striped">
                         <tr>
+                            <th>@lang('global.locations.fields.clinic-website-link')</th>
+                            <td field-key='clinic_website_link'>{{ $location->clinic_website_link }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.locations.fields.clinic-location-id')</th>
+                            <td field-key='clinic_location_id'>{{ $location->clinic_location_id }}</td>
+                        </tr>
+                        <tr>
                             <th>@lang('global.locations.fields.nickname')</th>
                             <td field-key='nickname'>{{ $location->nickname }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.locations.fields.contact-person')</th>
+                            <td field-key='contact_person'>{{ $location->contact_person->first_name or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.contacts.fields.last-name')</th>
+                            <td field-key='last_name'>{{ isset($location->contact_person) ? $location->contact_person->last_name : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.contacts.fields.email')</th>
+                            <td field-key='email'>{{ isset($location->contact_person) ? $location->contact_person->email : '' }}</td>
                         </tr>
                         <tr>
                             <th>@lang('global.locations.fields.address')</th>
@@ -33,6 +53,10 @@
                             <td field-key='state'>{{ $location->state }}</td>
                         </tr>
                         <tr>
+                            <th>@lang('global.locations.fields.location-email')</th>
+                            <td field-key='location_email'>{{ $location->location_email }}</td>
+                        </tr>
+                        <tr>
                             <th>@lang('global.locations.fields.phone')</th>
                             <td field-key='phone'>{{ $location->phone }}</td>
                         </tr>
@@ -49,16 +73,8 @@
                             <td field-key='google_map_link'>{{ $location->google_map_link }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('global.locations.fields.contact-person')</th>
-                            <td field-key='contact_person'>{{ $location->contact_person->first_name or '' }}</td>
-                        </tr>
-                        <tr>
-                            <th>@lang('global.contacts.fields.last-name')</th>
-                            <td field-key='last_name'>{{ isset($location->contact_person) ? $location->contact_person->last_name : '' }}</td>
-                        </tr>
-                        <tr>
-                            <th>@lang('global.contacts.fields.email')</th>
-                            <td field-key='email'>{{ isset($location->contact_person) ? $location->contact_person->email : '' }}</td>
+                            <th>@lang('global.locations.fields.created-by')</th>
+                            <td field-key='created_by'>{{ $location->created_by->name or '' }}</td>
                         </tr>
                     </table>
                 </div>

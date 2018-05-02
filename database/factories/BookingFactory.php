@@ -4,9 +4,9 @@ $factory->define(App\Booking::class, function (Faker\Generator $faker) {
     return [
         "submitted" => $faker->date("m/d/Y", $max = 'now'),
         "customername" => $faker->name,
-        "email" => $faker->safeEmail,
         "phone" => $faker->name,
         "family_number" => $faker->name,
+        "email" => $faker->name,
         "how_long" => $faker->name,
         "requested_date" => $faker->date("m/d/Y", $max = 'now'),
         "requested_time" => $faker->date("H:i:s", $max = 'now'),

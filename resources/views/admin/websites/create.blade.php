@@ -37,8 +37,8 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('website', trans('global.website.fields.website').'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('website', old('website'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
-                    <p class="help-block"></p>
+                    {!! Form::text('website', old('website'), ['class' => 'form-control', 'placeholder' => 'Do not use http only user root domain', 'required' => '']) !!}
+                    <p class="help-block">Do not use http only user root domain</p>
                     @if($errors->has('website'))
                         <p class="help-block">
                             {{ $errors->first('website') }}
@@ -47,6 +47,40 @@
                 </div>
             </div>
             
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Locations
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>@lang('global.locations.fields.clinic-website-link')</th>
+                        <th>@lang('global.locations.fields.clinic-location-id')</th>
+                        <th>@lang('global.locations.fields.nickname')</th>
+                        <th>@lang('global.locations.fields.address')</th>
+                        <th>@lang('global.locations.fields.address-2')</th>
+                        <th>@lang('global.locations.fields.city')</th>
+                        <th>@lang('global.locations.fields.state')</th>
+                        <th>@lang('global.locations.fields.location-email')</th>
+                        <th>@lang('global.locations.fields.phone')</th>
+                        <th>@lang('global.locations.fields.phone2')</th>
+                        <th>@lang('global.locations.fields.google-map-link')</th>
+                        
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody id="locations">
+                    @foreach(old('locations', []) as $index => $data)
+                        @include('admin.websites.locations_row', [
+                            'index' => $index
+                        ])
+                    @endforeach
+                </tbody>
+            </table>
+            <a href="#" class="btn btn-success pull-right add-new">@lang('global.app_add_new')</a>
         </div>
     </div>
     <div class="panel panel-default">
@@ -113,6 +147,13 @@
 
 @section('javascript')
     @parent
+
+    <script type="text/html" id="locations-template">
+        @include('admin.websites.locations_row',
+                [
+                    'index' => '_INDEX_',
+                ])
+               </script > 
 
     <script type="text/html" id="adwords-template">
         @include('admin.websites.adwords_row',

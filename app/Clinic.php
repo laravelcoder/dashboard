@@ -9,17 +9,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @package App
  * @property string $nickname
- * @property string $clinic_email
- * @property string $clinic_phone
- * @property string $clinic_phone_2
  * @property string $logo
  * @property string $company
+ * @property text $notes
 */
 class Clinic extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['nickname', 'clinic_email', 'clinic_phone', 'clinic_phone_2', 'logo', 'company_id'];
+    protected $fillable = ['nickname', 'logo', 'notes', 'company_id'];
     protected $hidden = [];
     
     

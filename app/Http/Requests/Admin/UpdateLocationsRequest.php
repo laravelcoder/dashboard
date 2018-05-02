@@ -24,10 +24,12 @@ class UpdateLocationsRequest extends FormRequest
     {
         return [
             
+            'clinic_location_id' => 'max:2147483647|nullable|numeric',
             'nickname' => 'required',
             'address' => 'required',
             'city' => 'required',
             'state' => 'required',
+            'location_email' => 'email',
             'storefront' => 'nullable|mimes:png,jpg,jpeg,gif',
         ];
     }

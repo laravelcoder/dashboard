@@ -33,9 +33,9 @@
 
                         <th>@lang('global.bookings.fields.submitted')</th>
                         <th>@lang('global.bookings.fields.customername')</th>
-                        <th>@lang('global.bookings.fields.email')</th>
                         <th>@lang('global.bookings.fields.phone')</th>
                         <th>@lang('global.bookings.fields.family-number')</th>
+                        <th>@lang('global.bookings.fields.email')</th>
                         <th>@lang('global.bookings.fields.requested-date')</th>
                         <th>@lang('global.bookings.fields.requested-clinic')</th>
                         <th>@lang('global.bookings.fields.clinic-id')</th>
@@ -65,9 +65,9 @@
                 @endif
                 @endcan{data: 'submitted', name: 'submitted'},
                 {data: 'customername', name: 'customername'},
-                {data: 'email', name: 'email'},
                 {data: 'phone', name: 'phone'},
                 {data: 'family_number', name: 'family_number'},
+                {data: 'email', name: 'email'},
                 {data: 'requested_date', name: 'requested_date'},
                 {data: 'requested_clinic', name: 'requested_clinic'},
                 {data: 'clinic_id', name: 'clinic_id'},

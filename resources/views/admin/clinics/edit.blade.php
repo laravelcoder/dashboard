@@ -25,42 +25,6 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('clinic_email', trans('global.clinics.fields.clinic-email').'*', ['class' => 'control-label']) !!}
-                    {!! Form::email('clinic_email', old('clinic_email'), ['class' => 'form-control', 'placeholder' => 'Email for this clinic location. if same as another just add it again', 'required' => '']) !!}
-                    <p class="help-block">Email for this clinic location. if same as another just add it again</p>
-                    @if($errors->has('clinic_email'))
-                        <p class="help-block">
-                            {{ $errors->first('clinic_email') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('clinic_phone', trans('global.clinics.fields.clinic-phone').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('clinic_phone', old('clinic_phone'), ['class' => 'form-control', 'placeholder' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('clinic_phone'))
-                        <p class="help-block">
-                            {{ $errors->first('clinic_phone') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('clinic_phone_2', trans('global.clinics.fields.clinic-phone-2').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('clinic_phone_2', old('clinic_phone_2'), ['class' => 'form-control', 'placeholder' => 'this could be local phone or toll free  for examle']) !!}
-                    <p class="help-block">this could be local phone or toll free  for examle</p>
-                    @if($errors->has('clinic_phone_2'))
-                        <p class="help-block">
-                            {{ $errors->first('clinic_phone_2') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
                     @if ($clinic->logo)
                         <a href="{{ asset(env('UPLOAD_PATH').'/'.$clinic->logo) }}" target="_blank"><img src="{{ asset(env('UPLOAD_PATH').'/thumb/'.$clinic->logo) }}"></a>
                     @endif
@@ -103,6 +67,18 @@
                     @if($errors->has('users'))
                         <p class="help-block">
                             {{ $errors->first('users') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('notes', trans('global.clinics.fields.notes').'', ['class' => 'control-label']) !!}
+                    {!! Form::textarea('notes', old('notes'), ['class' => 'form-control ', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('notes'))
+                        <p class="help-block">
+                            {{ $errors->first('notes') }}
                         </p>
                     @endif
                 </div>
@@ -216,11 +192,14 @@
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>@lang('global.locations.fields.nickname')</th>
+                    <th>@lang('global.locations.fields.clinic-website-link')</th>
+                        <th>@lang('global.locations.fields.clinic-location-id')</th>
+                        <th>@lang('global.locations.fields.nickname')</th>
                         <th>@lang('global.locations.fields.address')</th>
                         <th>@lang('global.locations.fields.address-2')</th>
                         <th>@lang('global.locations.fields.city')</th>
                         <th>@lang('global.locations.fields.state')</th>
+                        <th>@lang('global.locations.fields.location-email')</th>
                         <th>@lang('global.locations.fields.phone')</th>
                         <th>@lang('global.locations.fields.phone2')</th>
                         <th>@lang('global.locations.fields.google-map-link')</th>
