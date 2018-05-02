@@ -17,6 +17,7 @@ class Analytic extends Model
     use SoftDeletes;
 
     protected $fillable = ['view_name', 'view_id', 'website_id'];
+    protected $hidden = [];
     
     
 

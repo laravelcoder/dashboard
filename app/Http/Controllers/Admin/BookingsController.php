@@ -40,9 +40,9 @@ class BookingsController extends Controller
                 'bookings.id',
                 'bookings.submitted',
                 'bookings.customername',
-                'bookings.email',
                 'bookings.phone',
                 'bookings.family_number',
+                'bookings.email',
                 'bookings.how_long',
                 'bookings.requested_date',
                 'bookings.requested_time',
@@ -76,11 +76,17 @@ class BookingsController extends Controller
             $table->editColumn('submitted', function ($row) {
                 return $row->submitted ? $row->submitted : '';
             });
+            $table->editColumn('customername', function ($row) {
+                return $row->customername ? $row->customername : '';
+            });
             $table->editColumn('phone', function ($row) {
                 return $row->phone ? $row->phone : '';
             });
             $table->editColumn('family_number', function ($row) {
                 return $row->family_number ? $row->family_number : '';
+            });
+            $table->editColumn('email', function ($row) {
+                return $row->email ? $row->email : '';
             });
             $table->editColumn('how_long', function ($row) {
                 return $row->how_long ? $row->how_long : '';

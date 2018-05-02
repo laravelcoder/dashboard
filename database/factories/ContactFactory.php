@@ -11,5 +11,6 @@ $factory->define(App\Contact::class, function (Faker\Generator $faker) {
         "phone2" => $faker->name,
         "email" => $faker->name,
         "skype" => $faker->name,
+        "notes" => $faker->name,
     ];
 });

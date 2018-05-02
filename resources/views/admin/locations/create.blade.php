@@ -12,12 +12,72 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
+                    {!! Form::label('parent_website_id', trans('global.locations.fields.parent-website').'', ['class' => 'control-label']) !!}
+                    {!! Form::select('parent_website_id', $parent_websites, old('parent_website_id'), ['class' => 'form-control select2']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('parent_website_id'))
+                        <p class="help-block">
+                            {{ $errors->first('parent_website_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('clinic_website_link', trans('global.locations.fields.clinic-website-link').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('clinic_website_link', old('clinic_website_link'), ['class' => 'form-control', 'placeholder' => 'This is the link to the clinic info page. Used if multiple locations on one site.']) !!}
+                    <p class="help-block">This is the link to the clinic info page. Used if multiple locations on one site.</p>
+                    @if($errors->has('clinic_website_link'))
+                        <p class="help-block">
+                            {{ $errors->first('clinic_website_link') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('clinic_id', trans('global.locations.fields.clinic').'', ['class' => 'control-label']) !!}
+                    {!! Form::select('clinic_id', $clinics, old('clinic_id'), ['class' => 'form-control select2']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('clinic_id'))
+                        <p class="help-block">
+                            {{ $errors->first('clinic_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('clinic_location_id', trans('global.locations.fields.clinic-location-id').'', ['class' => 'control-label']) !!}
+                    {!! Form::number('clinic_location_id', old('clinic_location_id'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('clinic_location_id'))
+                        <p class="help-block">
+                            {{ $errors->first('clinic_location_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
                     {!! Form::label('nickname', trans('global.locations.fields.nickname').'*', ['class' => 'control-label']) !!}
                     {!! Form::text('nickname', old('nickname'), ['class' => 'form-control', 'placeholder' => 'Title or Name of location', 'required' => '']) !!}
                     <p class="help-block">Title or Name of location</p>
                     @if($errors->has('nickname'))
                         <p class="help-block">
                             {{ $errors->first('nickname') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('contact_person_id', trans('global.locations.fields.contact-person').'', ['class' => 'control-label']) !!}
+                    {!! Form::select('contact_person_id', $contact_people, old('contact_person_id'), ['class' => 'form-control select2']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('contact_person_id'))
+                        <p class="help-block">
+                            {{ $errors->first('contact_person_id') }}
                         </p>
                     @endif
                 </div>
@@ -72,6 +132,18 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
+                    {!! Form::label('location_email', trans('global.locations.fields.location-email').'', ['class' => 'control-label']) !!}
+                    {!! Form::email('location_email', old('location_email'), ['class' => 'form-control', 'placeholder' => 'Add the email even if used by multiple clinics']) !!}
+                    <p class="help-block">Add the email even if used by multiple clinics</p>
+                    @if($errors->has('location_email'))
+                        <p class="help-block">
+                            {{ $errors->first('location_email') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
                     {!! Form::label('phone', trans('global.locations.fields.phone').'', ['class' => 'control-label']) !!}
                     {!! Form::text('phone', old('phone'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
@@ -117,30 +189,6 @@
                     @if($errors->has('google_map_link'))
                         <p class="help-block">
                             {{ $errors->first('google_map_link') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('clinic_id', trans('global.locations.fields.clinic').'', ['class' => 'control-label']) !!}
-                    {!! Form::select('clinic_id', $clinics, old('clinic_id'), ['class' => 'form-control select2']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('clinic_id'))
-                        <p class="help-block">
-                            {{ $errors->first('clinic_id') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('contact_person_id', trans('global.locations.fields.contact-person').'', ['class' => 'control-label']) !!}
-                    {!! Form::select('contact_person_id', $contact_people, old('contact_person_id'), ['class' => 'form-control select2']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('contact_person_id'))
-                        <p class="help-block">
-                            {{ $errors->first('contact_person_id') }}
                         </p>
                     @endif
                 </div>

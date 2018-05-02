@@ -23,7 +23,7 @@ class StoreWebsitesRequest extends FormRequest
     public function rules()
     {
         return [
-            'website' => 'required|unique:websites,website,'.$this->route('website'),
+            'website' => 'required',
         ];
     }
 }

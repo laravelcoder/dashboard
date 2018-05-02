@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class ContactCompany extends Model
 {
     protected $fillable = ['name', 'logo'];
+    protected $hidden = [];
     
     
     

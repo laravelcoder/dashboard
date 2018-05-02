@@ -17,6 +17,7 @@ class Zipcode extends Model
     use SoftDeletes;
 
     protected $fillable = ['zipcode', 'clinic_id', 'location_id'];
+    protected $hidden = [];
     
     
 

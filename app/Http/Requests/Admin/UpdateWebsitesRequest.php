@@ -24,7 +24,7 @@ class UpdateWebsitesRequest extends FormRequest
     {
         return [
             
-            'website' => 'required|unique:websites,website,'.$this->route('website'),
+            'website' => 'required',
         ];
     }
 }

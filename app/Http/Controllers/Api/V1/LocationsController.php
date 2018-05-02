@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreLocationsRequest;
 use App\Http\Requests\Admin\UpdateLocationsRequest;
 use App\Http\Controllers\Traits\FileUploadTrait;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Input;
 
 class LocationsController extends Controller
 {
@@ -29,6 +32,23 @@ class LocationsController extends Controller
         $location = Location::findOrFail($id);
         $location->update($request->all());
         
+        $zipcodes           = $location->zipcodes;
+        $currentZipcodeData = [];
+        foreach ($request->input('zipcodes', []) as $index => $data) {
+            if (is_integer($index)) {
+                $location->zipcodes()->create($data);
+            } else {
+                $id                          = explode('-', $index)[1];
+                $currentZipcodeData[$id] = $data;
+            }
+        }
+        foreach ($zipcodes as $item) {
+            if (isset($currentZipcodeData[$item->id])) {
+                $item->update($currentZipcodeData[$item->id]);
+            } else {
+                $item->delete();
+            }
+        }
 
         return $location;
     }
@@ -38,6 +58,9 @@ class LocationsController extends Controller
         $request = $this->saveFiles($request);
         $location = Location::create($request->all());
         
+        foreach ($request->input('zipcodes', []) as $data) {
+            $location->zipcodes()->create($data);
+        }
 
         return $location;
     }
