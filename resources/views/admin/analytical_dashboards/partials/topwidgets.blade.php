@@ -29,7 +29,7 @@
 	<div class="col-lg-3 col-xs-6">
 		<div class="small-box bg-green">
 			<div class="inner">
-				<h3>53<sup style="font-size: 20px">%</sup></h3>
+				<h3> ?? ga:bounces ?? <sup style="font-size: 20px">%</sup></h3>
 				<h4>Bounce Rate</h4>
 			</div>
 			<div class="icon">
@@ -59,5 +59,63 @@
 	</div>
 
 
+</div>
+
+<div class="row">
+	<div class="col-lg-3 col-xs-6">
+
+		<div class="small-box bg-green">
+			<div class="inner">
+				<h3>?? ga:goalCompletionsAll ?? </h3>
+				<h4>Total Goal Completions</h4>
+			</div>
+			<div class="icon">
+				<i class="fa fa-users"></i>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="col-lg-3 col-xs-6">
+
+		<div class="small-box bg-green">
+			<div class="inner">
+				<h3>?? ga:goal5Starts ??</h3>
+				<h4>Store Locator Submits</h4>
+			</div>
+			<div class="icon">
+				<i class="fa fa-users"></i>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="col-lg-3 col-xs-6">
+
+		<div class="small-box bg-green">
+			<div class="inner">
+				<h3>?? ga:goal6Starts ??</h3>
+				<h4>Clinics-Near-you Submits</h4>
+			</div>
+			<div class="icon">
+				<i class="fa fa-users"></i>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="col-lg-3 col-xs-6">
+
+		<div class="small-box bg-green">
+			<div class="inner">
+				<h3> TBD </h3>
+				<h4>  </h4>
+			</div>
+			<div class="icon">
+				<i class="fa fa-users"></i>
+			</div>
+
+		</div>
+	</div>
 </div>
 <!-- =========================================================== -->
