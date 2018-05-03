@@ -13,8 +13,9 @@ class ClinicSeed extends Seeder
     {
         $items = [
             
-            ['id' => 1, 'nickname' => 'Lice Clinics of America', 'logo' => null, 'company_id' => 1,],
-            ['id' => 2, 'nickname' => 'Lice Clinics Hawaii', 'logo' => null, 'company_id' => 2,],
+            ['id' => 1, 'nickname' => 'Lice Clinics of America', 'logo' => null, 'company_id' => 1, 'notes' => null,],
+            ['id' => 2, 'nickname' => 'Lice Clinics Hawaii', 'logo' => null, 'company_id' => 2, 'notes' => null,],
+            ['id' => 4, 'nickname' => 'Lice Clinics Pasadena', 'logo' => null, 'company_id' => 3, 'notes' => null,],
 
         ];
 
