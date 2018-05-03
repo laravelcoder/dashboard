@@ -6,7 +6,7 @@
     @can('location_create')
     <p>
         <a href="{{ route('admin.locations.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
-        
+
         @if(!is_null(Auth::getUser()->role_id) && config('global.can_see_all_records_role_id') == Auth::getUser()->role_id)
             @if(Session::get('Location.filter', 'all') == 'my')
                 <a href="?filter=all" class="btn btn-default">Show all records</a>
@@ -23,7 +23,7 @@
             <li><a href="{{ route('admin.locations.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">@lang('global.app_trash')</a></li>
         </ul>
     </p>
-    
+
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -42,12 +42,12 @@
                         <th>@lang('global.locations.fields.clinic-location-id')</th>
                         <th>@lang('global.locations.fields.nickname')</th>
                         <th>@lang('global.locations.fields.contact-person')</th>
-                        <th>@lang('global.contacts.fields.last-name')</th>
-                        <th>@lang('global.contacts.fields.email')</th>
+                        {{-- <th>@lang('global.contacts.fields.last-name')</th> --}}
+                        {{-- <th>@lang('global.contacts.fields.email')</th> --}}
                         <th>@lang('global.locations.fields.city')</th>
                         <th>@lang('global.locations.fields.state')</th>
                         <th>@lang('global.locations.fields.phone')</th>
-                        <th>@lang('global.locations.fields.created-by')</th>
+                        {{-- <th>@lang('global.locations.fields.created-by')</th> --}}
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else
@@ -60,7 +60,7 @@
     </div>
 @stop
 
-@section('javascript') 
+@section('javascript')
     <script>
         @can('location_delete')
             @if ( request('show_deleted') != 1 ) window.route_mass_crud_entries_destroy = '{{ route('admin.locations.mass_destroy') }}'; @endif
@@ -71,17 +71,18 @@
                 @if ( request('show_deleted') != 1 )
                     {data: 'massDelete', name: 'id', searchable: false, sortable: false},
                 @endif
-                @endcan{data: 'clinic.nickname', name: 'clinic.nickname'},
+                @endcan
+                {data: 'clinic.nickname', name: 'clinic.nickname'},
                 {data: 'clinic_location_id', name: 'clinic_location_id'},
                 {data: 'nickname', name: 'nickname'},
                 {data: 'contact_person.first_name', name: 'contact_person.first_name'},
-                {data: 'contact_person.last_name', name: 'contact_person.last_name'},
-                {data: 'contact_person.email', name: 'contact_person.email'},
+                // {data: 'contact_person.last_name', name: 'contact_person.last_name'},
+                // {data: 'contact_person.email', name: 'contact_person.email'},
                 {data: 'city', name: 'city'},
                 {data: 'state', name: 'state'},
                 {data: 'phone', name: 'phone'},
-                {data: 'created_by.name', name: 'created_by.name'},
-                
+                // {data: 'created_by.name', name: 'created_by.name'},
+
                 {data: 'actions', name: 'actions', searchable: false, sortable: false}
             ];
             processAjaxTables();

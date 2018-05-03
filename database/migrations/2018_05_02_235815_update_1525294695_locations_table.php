@@ -14,7 +14,7 @@ class Update1525294695LocationsTable extends Migration
     {
         Schema::table('locations', function (Blueprint $table) {
             if (Schema::hasColumn('locations', 'clinic_id')) {
-                $table->dropColumn('clinic_id');
+               // $table->dropColumn('clinic_id');
             }
 
         });
