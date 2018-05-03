@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Add5aea2a8befa53RelationshipsToLocationTable extends Migration
+class Add5aea7b8a92466RelationshipsToLocationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -41,26 +41,6 @@ class Add5aea2a8befa53RelationshipsToLocationTable extends Migration
     public function down()
     {
         Schema::table('locations', function(Blueprint $table) {
-            if(Schema::hasColumn('locations', 'parent_website_id')) {
-                $table->dropForeign('135068_5aea1e5427ee3');
-                $table->dropIndex('135068_5aea1e5427ee3');
-                $table->dropColumn('parent_website_id');
-            }
-            if(Schema::hasColumn('locations', 'clinic_id')) {
-                $table->dropForeign('135068_5ab9644779eff');
-                $table->dropIndex('135068_5ab9644779eff');
-                $table->dropColumn('clinic_id');
-            }
-            if(Schema::hasColumn('locations', 'contact_person_id')) {
-                $table->dropForeign('135068_5ab96b5952da6');
-                $table->dropIndex('135068_5ab96b5952da6');
-                $table->dropColumn('contact_person_id');
-            }
-            if(Schema::hasColumn('locations', 'created_by_id')) {
-                $table->dropForeign('135068_5aea1ce1f190b');
-                $table->dropIndex('135068_5aea1ce1f190b');
-                $table->dropColumn('created_by_id');
-            }
             
         });
     }

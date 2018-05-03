@@ -33,10 +33,6 @@
                             <td field-key='last_name'>{{ isset($location->contact_person) ? $location->contact_person->last_name : '' }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('global.contacts.fields.email')</th>
-                            <td field-key='email'>{{ isset($location->contact_person) ? $location->contact_person->email : '' }}</td>
-                        </tr>
-                        <tr>
                             <th>@lang('global.locations.fields.address')</th>
                             <td field-key='address'>{{ $location->address }}</td>
                         </tr>

@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class Update1525294695LocationsTable extends Migration
 {
@@ -13,16 +13,16 @@ class Update1525294695LocationsTable extends Migration
     public function up()
     {
         Schema::table('locations', function (Blueprint $table) {
-            if (Schema::hasColumn('locations', 'clinic_id')) {
-               // $table->dropColumn('clinic_id');
+            if(Schema::hasColumn('locations', 'clinic_id')) {
+                $table->dropColumn('clinic_id');
             }
-
+            
         });
-        Schema::table('locations', function (Blueprint $table) {
-
-            if (!Schema::hasColumn('locations', 'clinic_location_id')) {
+Schema::table('locations', function (Blueprint $table) {
+            
+if (!Schema::hasColumn('locations', 'clinic_location_id')) {
                 $table->integer('clinic_location_id')->nullable()->unsigned();
-            }
+                }
         });
 
     }
@@ -36,11 +36,11 @@ class Update1525294695LocationsTable extends Migration
     {
         Schema::table('locations', function (Blueprint $table) {
             $table->dropColumn('clinic_location_id');
-
+            
         });
-        Schema::table('locations', function (Blueprint $table) {
-            $table->string('clinic_id')->nullable();
-
+Schema::table('locations', function (Blueprint $table) {
+                        $table->string('clinic_id')->nullable();
+                
         });
 
     }

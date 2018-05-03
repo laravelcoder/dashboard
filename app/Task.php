@@ -18,6 +18,7 @@ use Carbon\Carbon;
 class Task extends Model
 {
     protected $fillable = ['name', 'description', 'attachment', 'due_date', 'status_id', 'user_id'];
+    protected $hidden = [];
     
     
 

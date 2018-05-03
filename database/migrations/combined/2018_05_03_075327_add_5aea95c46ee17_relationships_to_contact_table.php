@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Add5aea2a8bb8ffbRelationshipsToContactTable extends Migration
+class Add5aea95c46ee17RelationshipsToContactTable extends Migration
 {
     /**
      * Run the migrations.

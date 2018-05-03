@@ -15,6 +15,7 @@ class ContactCompanySeed extends Seeder
             
             ['id' => 1, 'name' => 'Larada Sciences', 'logo' => null,],
             ['id' => 2, 'name' => 'LCA Hawaii', 'logo' => '/tmp/phpjI9YjJ',],
+            ['id' => 3, 'name' => 'LCA Pasadena', 'logo' => null,],
 
         ];
 
