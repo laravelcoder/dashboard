@@ -13,18 +13,6 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('submitted', trans('global.bookings.fields.submitted').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('submitted', old('submitted'), ['class' => 'form-control date', 'placeholder' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('submitted'))
-                        <p class="help-block">
-                            {{ $errors->first('submitted') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
                     {!! Form::label('customername', trans('global.bookings.fields.customername').'', ['class' => 'control-label']) !!}
                     {!! Form::text('customername', old('customername'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
@@ -86,7 +74,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('requested_date', trans('global.bookings.fields.requested-date').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('requested_date', old('requested_date'), ['class' => 'form-control date', 'placeholder' => '']) !!}
+                    {!! Form::text('requested_date', old('requested_date'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('requested_date'))
                         <p class="help-block">
@@ -98,7 +86,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('requested_time', trans('global.bookings.fields.requested-time').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('requested_time', old('requested_time'), ['class' => 'form-control timepicker', 'placeholder' => '']) !!}
+                    {!! Form::text('requested_time', old('requested_time'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('requested_time'))
                         <p class="help-block">
@@ -263,6 +251,18 @@
                     @endif
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('submitted', trans('global.bookings.fields.submitted').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('submitted', old('submitted'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('submitted'))
+                        <p class="help-block">
+                            {{ $errors->first('submitted') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
             
         </div>
     </div>
@@ -271,27 +271,3 @@
     {!! Form::close() !!}
 @stop
 
-@section('javascript')
-    @parent
-
-    <script src="{{ url('adminlte/plugins/datetimepicker/moment-with-locales.min.js') }}"></script>
-    <script src="{{ url('adminlte/plugins/datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
-    <script>
-        $(function(){
-            moment.updateLocale('{{ App::getLocale() }}', {
-                week: { dow: 1 } // Monday is the first day of the week
-            });
-            
-            $('.date').datetimepicker({
-                format: "{{ config('app.date_format_moment') }}",
-                locale: "{{ App::getLocale() }}",
-            });
-            
-            $('.timepicker').datetimepicker({
-                format: "{{ config('app.time_format_moment') }}",
-            });
-            
-        });
-    </script>
-            
-@stop

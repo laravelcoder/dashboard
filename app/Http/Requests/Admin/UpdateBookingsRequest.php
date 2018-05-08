@@ -24,9 +24,6 @@ class UpdateBookingsRequest extends FormRequest
     {
         return [
             
-            'submitted' => 'nullable|date_format:'.config('app.date_format'),
-            'requested_date' => 'nullable|date_format:'.config('app.date_format'),
-            'requested_time' => 'nullable|date_format:H:i:s',
         ];
     }
 }

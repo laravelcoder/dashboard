@@ -30,16 +30,17 @@
                         @can('booking_delete')
                             @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                         @endcan
-
                         <th>@lang('global.bookings.fields.submitted')</th>
                         <th>@lang('global.bookings.fields.customername')</th>
                         <th>@lang('global.bookings.fields.phone')</th>
-                        <th>@lang('global.bookings.fields.family-number')</th>
+                        
                         <th>@lang('global.bookings.fields.email')</th>
-                        <th>@lang('global.bookings.fields.requested-date')</th>
+                            <th>@lang('global.bookings.fields.family-number')</th>
+                        {{-- <th>@lang('global.bookings.fields.requested-date')</th> --}}
+                        {{-- <th>@lang('global.bookings.fields.requested-time')</th> --}}
                         <th>@lang('global.bookings.fields.requested-clinic')</th>
                         <th>@lang('global.bookings.fields.clinic-id')</th>
-                        <th>@lang('global.bookings.fields.clinic-phone')</th>
+                        
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else
@@ -63,15 +64,17 @@
                 @if ( request('show_deleted') != 1 )
                     {data: 'massDelete', name: 'id', searchable: false, sortable: false},
                 @endif
-                @endcan{data: 'submitted', name: 'submitted'},
+                @endcan
+                {data: 'submitted', name: 'submitted'},
                 {data: 'customername', name: 'customername'},
                 {data: 'phone', name: 'phone'},
-                {data: 'family_number', name: 'family_number'},
                 {data: 'email', name: 'email'},
-                {data: 'requested_date', name: 'requested_date'},
+                {data: 'family_number', name: 'family_number'},
+                // {data: 'requested_date', name: 'requested_date'},
+                // {data: 'requested_time', name: 'requested_time'},
                 {data: 'requested_clinic', name: 'requested_clinic'},
                 {data: 'clinic_id', name: 'clinic_id'},
-                {data: 'clinic_phone', name: 'clinic_phone'},
+               
                 
                 {data: 'actions', name: 'actions', searchable: false, sortable: false}
             ];

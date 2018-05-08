@@ -13,10 +13,6 @@
                 <div class="col-md-6">
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <th>@lang('global.bookings.fields.submitted')</th>
-                            <td field-key='submitted'>{{ $booking->submitted }}</td>
-                        </tr>
-                        <tr>
                             <th>@lang('global.bookings.fields.customername')</th>
                             <td field-key='customername'>{{ $booking->customername }}</td>
                         </tr>
@@ -95,6 +91,10 @@
                         <tr>
                             <th>@lang('global.bookings.fields.country')</th>
                             <td field-key='country'>{{ $booking->country }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.bookings.fields.submitted')</th>
+                            <td field-key='submitted'>{{ $booking->submitted }}</td>
                         </tr>
                     </table>
                 </div>

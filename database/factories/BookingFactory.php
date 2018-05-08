@@ -2,14 +2,13 @@
 
 $factory->define(App\Booking::class, function (Faker\Generator $faker) {
     return [
-        "submitted" => $faker->date("m/d/Y", $max = 'now'),
         "customername" => $faker->name,
         "phone" => $faker->name,
         "family_number" => $faker->name,
         "email" => $faker->name,
         "how_long" => $faker->name,
-        "requested_date" => $faker->date("m/d/Y", $max = 'now'),
-        "requested_time" => $faker->date("H:i:s", $max = 'now'),
+        "requested_date" => $faker->name,
+        "requested_time" => $faker->name,
         "requested_clinic" => $faker->name,
         "clinic_id" => $faker->name,
         "clinic_email" => $faker->name,
@@ -23,5 +22,6 @@ $factory->define(App\Booking::class, function (Faker\Generator $faker) {
         "latitude" => $faker->name,
         "longitude" => $faker->name,
         "country" => $faker->name,
+        "submitted" => $faker->name,
     ];
 });
