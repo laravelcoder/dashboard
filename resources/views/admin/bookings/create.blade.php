@@ -24,24 +24,12 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('customername', trans('global.bookings.fields.customername').'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('customername', old('customername'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::label('customername', trans('global.bookings.fields.customername').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('customername', old('customername'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('customername'))
                         <p class="help-block">
                             {{ $errors->first('customername') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('email', trans('global.bookings.fields.email').'*', ['class' => 'control-label']) !!}
-                    {!! Form::email('email', old('email'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('email'))
-                        <p class="help-block">
-                            {{ $errors->first('email') }}
                         </p>
                     @endif
                 </div>
@@ -66,6 +54,18 @@
                     @if($errors->has('family_number'))
                         <p class="help-block">
                             {{ $errors->first('family_number') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('email', trans('global.bookings.fields.email').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('email', old('email'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('email'))
+                        <p class="help-block">
+                            {{ $errors->first('email') }}
                         </p>
                     @endif
                 </div>
@@ -272,20 +272,25 @@
 
 @section('javascript')
     @parent
-    <script>
-        $('.date').datepicker({
-            autoclose: true,
-            dateFormat: "{{ config('app.date_format_js') }}"
-        });
-    </script>
-    <script src="{{ url('adminlte/js') }}/timepicker.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.js"></script>
-    <script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>    <script>
-        $('.timepicker').datetimepicker({
-            autoclose: true,
-            timeFormat: "HH:mm:ss",
-            timeOnly: true
-        });
-    </script>
 
+    <script src="{{ url('adminlte/plugins/datetimepicker/moment-with-locales.min.js') }}"></script>
+    <script src="{{ url('adminlte/plugins/datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+    <script>
+        $(function(){
+            moment.updateLocale('{{ App::getLocale() }}', {
+                week: { dow: 1 } // Monday is the first day of the week
+            });
+            
+            $('.date').datetimepicker({
+                format: "{{ config('app.date_format_moment') }}",
+                locale: "{{ App::getLocale() }}",
+            });
+            
+            $('.timepicker').datetimepicker({
+                format: "{{ config('app.time_format_moment') }}",
+            });
+            
+        });
+    </script>
+            
 @stop

@@ -44,11 +44,9 @@ class ClinicsController extends Controller
             $query->select([
                 'clinics.id',
                 'clinics.nickname',
-                'clinics.clinic_email',
-                'clinics.clinic_phone',
-                'clinics.clinic_phone_2',
                 'clinics.logo',
                 'clinics.company_id',
+                'clinics.notes',
             ]);
             $table = Datatables::of($query);
 
@@ -63,12 +61,6 @@ class ClinicsController extends Controller
 
                 return view($template, compact('row', 'gateKey', 'routeKey'));
             });
-            $table->editColumn('clinic_phone', function ($row) {
-                return $row->clinic_phone ? $row->clinic_phone : '';
-            });
-            $table->editColumn('clinic_phone_2', function ($row) {
-                return $row->clinic_phone_2 ? $row->clinic_phone_2 : '';
-            });
             $table->editColumn('logo', function ($row) {
                 if($row->logo) { return '<a href="'. asset(env('UPLOAD_PATH').'/' . $row->logo) .'" target="_blank"><img src="'. asset(env('UPLOAD_PATH').'/thumb/' . $row->logo) .'"/>'; };
             });
@@ -82,6 +74,9 @@ class ClinicsController extends Controller
 
                 return '<span class="label label-info label-many">' . implode('</span><span class="label label-info label-many"> ',
                         $row->users->pluck('name')->toArray()) . '</span>';
+            });
+            $table->editColumn('notes', function ($row) {
+                return $row->notes ? $row->notes : '';
             });
 
             $table->rawColumns(['actions','massDelete','logo','users.name']);

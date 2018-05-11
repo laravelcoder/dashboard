@@ -26,6 +26,7 @@ class Adword extends Model
     use SoftDeletes;
 
     protected $fillable = ['client_customer_id', 'user_agent', 'client_id', 'client_secret', 'refresh_token', 'authorization_uri', 'redirect_uri', 'token_credential_uri', 'scope', 'company_id', 'website_id', 'clinic_id'];
+    protected $hidden = [];
     
     
 

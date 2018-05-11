@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App
  * @property string $submitted
  * @property string $customername
- * @property string $email
  * @property string $phone
  * @property string $family_number
+ * @property string $email
  * @property string $how_long
  * @property string $requested_date
  * @property time $requested_time
@@ -35,9 +35,10 @@ class Booking extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['submitted', 'customername', 'email', 'phone', 'family_number', 'how_long', 'requested_date', 'requested_time', 'requested_clinic', 'clinic_id', 'clinic_email', 'clinic_address', 'clinic_phone', 'clinic_text_numbers', 'client_firstname', 'submitted_user_city', 'submitted_user_state', 'searched_for', 'latitude', 'longitude', 'country'];
-    
-    
+    protected $fillable = ['submitted', 'customername', 'phone', 'email', 'family_number', 'how_long', 'requested_date', 'requested_time', 'requested_clinic', 'clinic_id', 'clinic_email', 'clinic_address', 'clinic_phone', 'clinic_text_numbers', 'client_firstname', 'submitted_user_city', 'submitted_user_state', 'searched_for', 'latitude', 'longitude', 'country'];
+    protected $hidden = [];
+
+
 
     /**
      * Set attribute to date format
@@ -126,5 +127,5 @@ class Booking extends Model
             return '';
         }
     }
-    
+
 }
