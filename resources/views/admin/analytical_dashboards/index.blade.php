@@ -20,41 +20,39 @@
 <script type="text/javascript" src="{!! asset('/DataTables/datatables.min.js') !!}"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-google.charts.load('current', {packages: ['corechart', 'line']});
-google.charts.setOnLoadCallback(drawChartVisitors);
+    @if($view_id > 0)
+    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.setOnLoadCallback(drawChartVisitors);
+    google.charts.setOnLoadCallback(drawChartPageviews);
+    google.charts.setOnLoadCallback(drawChartPage);
 
-function drawChartVisitors() {
+    function drawChartVisitors() {
 
-    var data = new google.visualization.DataTable();
-    data.addColumn('{{$column_type}}', '{{$column_name}}');
-    data.addColumn('number', 'Visitors');
+        var data = new google.visualization.DataTable();
+        data.addColumn('{{$column_type}}', '{{$column_name}}');
+        data.addColumn('number', 'Visitors');
 <?php
 $json = json_encode($visitors_chart);
 $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
 ?>
-    data.addRows(<?= $json ?>);
+        data.addRows(<?= $json ?>);
 
-    var options = {
-        hAxis: {
-            title: '{{$column_name}}',
-            format: '{{$column_format}}'
-        },
-        vAxis: {
-            title: 'Visitors',
-            format: '#',
-        },
-        chartArea: {right: 0, width: '90%', height: '80%'}
-    };
+        var options = {
+            hAxis: {
+                title: '{{$column_name}}',
+                format: '{{$column_format}}'
+            },
+            vAxis: {
+                title: 'Visitors',
+                format: '#',
+            },
+            chartArea: {right: 0, width: '90%', height: '80%'}
+        };
 
-    var chart = new google.visualization.LineChart(document.getElementById('chart_div_visitors'));
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div_visitors'));
 
-    chart.draw(data, options);
-}
-</script>
-<script type="text/javascript">
-    google.charts.load('current', {packages: ['corechart', 'line']});
-    google.charts.setOnLoadCallback(drawChartPageviews);
-
+        chart.draw(data, options);
+    }
     function drawChartPageviews() {
 
         var data = new google.visualization.DataTable();
@@ -82,10 +80,6 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
 
         chart.draw(data, options);
     }
-</script>
-<script type="text/javascript">
-    google.charts.load("current", {packages: ["corechart"]});
-    google.charts.setOnLoadCallback(drawChartPage);
     function drawChartPage() {
         var data = google.visualization.arrayToDataTable(<?= json_encode($page_chart) ?>);
 
@@ -97,6 +91,7 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d_page'));
         chart.draw(data, options);
     }
+    @endif
 </script>
 
 @endsection
@@ -111,38 +106,30 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
 
 {!! Form::open(['method' => 'get','id' => 'filter_form']) !!}
 <div class="row">
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-3">
-        <div class="form-group col-md-12">
-            <label>Date Range</label>
-            <div class="input-group">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                </div>
-                <input type="text" name="date-range" class="form-control pull-right" value="{!!@$search_params['date-range']!!}">
+    <div class="form-group col-md-4">
+        <label>Date Range</label>
+        <div class="input-group">
+            <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
             </div>
+            <input type="text" name="date-range" class="form-control pull-right" value="{!!@$search_params['date-range']!!}">
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="form-group col-md-12">
-            <label for="inputWebsite">Website</label>
-            {!! Form::select('website', @$websites,@$search_params['website'], array('class'=>'form-control', 'id' => 'website', 'value'=>@$search_params['website'])) !!}
-        </div>
+    <div class="form-group col-md-4">
+        <label for="inputWebsite">Website</label>
+        {!! Form::select('website', @$websites,@$search_params['website'], array('placeholder' => 'Select Website', 'class'=>'form-control', 'id' => 'website', 'value'=>@$search_params['website'])) !!}
     </div>
-    <div class="col-md-3">
-        <div class="form-group col-md-12">
-            <div class="form-group">
-                <label for="view">Select View</label>
-                {!! Form::select('view', @$views,@$search_params['view'], array('class'=>'form-control', 'id' => 'view', 'value'=>@$search_params['view'])) !!}
-            </div>
-        </div>
+    <div class="form-group col-md-4">
+        <label for="view">View</label>
+        {!! Form::select('view', @$views,@$search_params['view'], array('placeholder' => 'Select View', 'class'=>'form-control', 'id' => 'view', 'value'=>@$search_params['view'])) !!}
     </div>
 </div>
 {!! Form::close() !!}
 <hr style="clear:both" />
 
+@if($view_id > 0)
 @include('admin.analytical_dashboards.partials.topwidgets')
+@endif
 
 <hr style="clear:both" />
 
@@ -150,6 +137,7 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
     {{-- dd($anadata) --}}
 </div>
 
+@if($view_id > 0)
 <div class="row">
     <div class="col-sm-6">
         <div class="panel panel-default">
@@ -186,55 +174,64 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
         </div>
     </div>
 </div>
-
+@else
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-success">Select above filters to view analytics dashboard</div>
+    </div>
+</div>
+@endif
 
 @stop
 
 @section('bottomscripts')
 <script>
-$(function() {
-    $('input[name="date-range"]').daterangepicker({
-        opens: 'left',
-        ranges: {
-           'Today': [moment(), moment()],
-           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-           'This Month': [moment().startOf('month'), moment().endOf('month')],
-           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+    $(function () {
+        $('input[name="date-range"]').daterangepicker({
+            opens: 'left',
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, function (start, end, label) {
+            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            $('input[name="date-range"]').val(start.format('MM/DD/YYYY') + ' - ' + end.format('MM/DD/YYYY'))
+            $('#filter_form').submit();
+        });
+
+        var start = moment().subtract(29, 'days');
+        var end = moment();
+
+        function cb(start, end) {
+            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
         }
-    }, function(start, end, label) {
-          console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-          $('input[name="date-range"]').val(start.format('MM/DD/YYYY') + ' - ' + end.format('MM/DD/YYYY'))
-          $('#filter_form').submit();
+
+        $('#reportrange').daterangepicker({
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, cb);
+
+        cb(start, end);
+
+        $('select[name="website"],select[name="view"]').on("change", function () {
+            if($(this).attr('id') == 'website'){
+                $('#view').val('');
+            }
+            $('#filter_form').submit();
+        });
     });
-  
-    var start = moment().subtract(29, 'days');
-    var end = moment();
-
-    function cb(start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-    }
-
-    $('#reportrange').daterangepicker({
-        startDate: start,
-        endDate: end,
-        ranges: {
-           'Today': [moment(), moment()],
-           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-           'This Month': [moment().startOf('month'), moment().endOf('month')],
-           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        }
-    }, cb);
-
-    cb(start, end);
-  
-  $('select[name="website"],select[name="view"]').on( "change", function() {
-        $('#filter_form').submit();
-  });
-});
 </script>    
 @endsection
 

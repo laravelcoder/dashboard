@@ -30,7 +30,8 @@
                         @can('booking_delete')
                             @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                         @endcan
-
+                        
+                        <th>@lang('global.bookings.fields.id')</th>
                         <th>@lang('global.bookings.fields.submitted')</th>
                         <th>@lang('global.bookings.fields.customername')</th>
                         <th>@lang('global.bookings.fields.email')</th>
@@ -41,9 +42,9 @@
                         <th>@lang('global.bookings.fields.clinic-id')</th>
                         <th>@lang('global.bookings.fields.clinic-phone')</th>
                         @if( request('show_deleted') == 1 )
-                        <th>&nbsp;</th>
+                        <th>Action</th>
                         @else
-                        <th>&nbsp;</th>
+                        <th>Action</th>
                         @endif
                     </tr>
                 </thead>
@@ -59,11 +60,13 @@
         @endcan
         $(document).ready(function () {
             window.dtDefaultOptions.ajax = '{!! route('admin.bookings.index') !!}?show_deleted={{ request('show_deleted') }}';
+            window.dtDefaultOptions.order = [[1, "desc"]];
             window.dtDefaultOptions.columns = [@can('booking_delete')
                 @if ( request('show_deleted') != 1 )
                     {data: 'massDelete', name: 'id', searchable: false, sortable: false},
                 @endif
-                @endcan{data: 'submitted', name: 'submitted'},
+                @endcan{data: 'id', name: 'id', visible: false, searchable: false},
+                {data: 'submitted', name: 'submitted'},
                 {data: 'customername', name: 'customername'},
                 {data: 'email', name: 'email'},
                 {data: 'phone', name: 'phone'},
