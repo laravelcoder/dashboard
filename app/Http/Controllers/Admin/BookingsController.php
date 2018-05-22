@@ -73,6 +73,9 @@ class BookingsController extends Controller
 
                 return view($template, compact('row', 'gateKey', 'routeKey'));
             });
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : '';
+            });
             $table->editColumn('submitted', function ($row) {
                 return $row->submitted ? $row->submitted : '';
             });
