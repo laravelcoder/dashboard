@@ -13,16 +13,8 @@
                 <div class="col-md-6">
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <th>@lang('global.bookings.fields.submitted')</th>
-                            <td field-key='submitted'>{{ $booking->submitted }}</td>
-                        </tr>
-                        <tr>
                             <th>@lang('global.bookings.fields.customername')</th>
                             <td field-key='customername'>{{ $booking->customername }}</td>
-                        </tr>
-                        <tr>
-                            <th>@lang('global.bookings.fields.email')</th>
-                            <td field-key='email'>{{ $booking->email }}</td>
                         </tr>
                         <tr>
                             <th>@lang('global.bookings.fields.phone')</th>
@@ -31,6 +23,10 @@
                         <tr>
                             <th>@lang('global.bookings.fields.family-number')</th>
                             <td field-key='family_number'>{{ $booking->family_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.bookings.fields.email')</th>
+                            <td field-key='email'>{{ $booking->email }}</td>
                         </tr>
                         <tr>
                             <th>@lang('global.bookings.fields.how-long')</th>
@@ -95,6 +91,10 @@
                         <tr>
                             <th>@lang('global.bookings.fields.country')</th>
                             <td field-key='country'>{{ $booking->country }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.bookings.fields.submitted')</th>
+                            <td field-key='submitted'>{{ $booking->submitted }}</td>
                         </tr>
                     </table>
                 </div>

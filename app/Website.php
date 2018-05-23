@@ -17,6 +17,7 @@ class Website extends Model
     use SoftDeletes;
 
     protected $fillable = ['website', 'company_id', 'clinic_id'];
+    protected $hidden = [];
     
     
 
@@ -48,6 +49,9 @@ class Website extends Model
         return $this->belongsTo(Clinic::class, 'clinic_id')->withTrashed();
     }
     
+    public function locations() {
+        return $this->hasMany(Location::class, 'parent_website_id');
+    }
     public function adwords() {
         return $this->hasMany(Adword::class, 'website_id');
     }

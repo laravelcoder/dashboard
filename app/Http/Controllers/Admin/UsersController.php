@@ -143,11 +143,11 @@ class UsersController extends Controller
 $contacts = \App\Contact::where('user_id', $id)->get();$clinics = \App\Clinic::whereHas('users',
                     function ($query) use ($id) {
                         $query->where('id', $id);
-                    })->get();$tasks = \App\Task::where('user_id', $id)->get();
+                    })->get();$tasks = \App\Task::where('user_id', $id)->get();$locations = \App\Location::where('created_by_id', $id)->get();
 
         $user = User::findOrFail($id);
 
-        return view('admin.users.show', compact('user', 'contacts', 'clinics', 'tasks'));
+        return view('admin.users.show', compact('user', 'contacts', 'clinics', 'tasks', 'locations'));
     }
 
 

@@ -12,6 +12,7 @@ use Yajra\DataTables\DataTables;
 
 class BookingsController extends Controller
 {
+ 
     /**
      * Display a listing of Booking.
      *
@@ -298,4 +299,5 @@ class BookingsController extends Controller
 
         return redirect()->route('admin.bookings.index');
     }
+ 
 }

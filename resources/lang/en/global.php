@@ -1,7 +1,7 @@
 <?php
 
 return [
-	
+ 
 	'user-management' => [
 		'title' => 'User Management',
 		'fields' => [
@@ -270,6 +270,7 @@ return [
 			'longitude' => 'Longitude',
 		],
 	],
+ 
 	'app_create' => 'Create',
 	'app_save' => 'Save',
 	'app_edit' => 'Edit',
@@ -512,5 +513,7 @@ return [
 	'app_customer' => 'Customer',
 	'app_select_all' => 'Select all',
 	'app_deselect_all' => 'Deselect all',
+	'app_team-management' => 'Teams',
+	'app_team-management-singular' => 'Team',
 	'global_title' => 'lcadashboard',
 ];

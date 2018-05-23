@@ -21,8 +21,6 @@
 <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
 <script src="{{ url('adminlte/js') }}/bootstrap.min.js"></script>
 <script src="{{ url('adminlte/js') }}/select2.full.min.js"></script>
-<script src="{{ url('adminlte/plugins/daterangepicker/moment.min.js') }}"></script>
-<script src="{{ url('adminlte/plugins/daterangepicker/daterangepicker.js') }}"></script>
 <script src="{{ url('adminlte/js') }}/main.js"></script>
 
 <script src="{{ url('adminlte/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>

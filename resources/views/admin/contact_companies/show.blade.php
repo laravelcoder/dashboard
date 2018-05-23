@@ -83,7 +83,7 @@
             @endforeach
         @else
             <tr>
-                <td colspan="14">@lang('global.app_no_entries_in_table')</td>
+                <td colspan="15">@lang('global.app_no_entries_in_table')</td>
             </tr>
         @endif
     </tbody>
@@ -226,9 +226,6 @@
     <thead>
         <tr>
             <th>@lang('global.clinics.fields.nickname')</th>
-                        <th>@lang('global.clinics.fields.clinic-email')</th>
-                        <th>@lang('global.clinics.fields.clinic-phone')</th>
-                        <th>@lang('global.clinics.fields.clinic-phone-2')</th>
                         <th>@lang('global.clinics.fields.users')</th>
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
@@ -243,9 +240,6 @@
             @foreach ($clinics as $clinic)
                 <tr data-entry-id="{{ $clinic->id }}">
                     <td field-key='nickname'>{{ $clinic->nickname }}</td>
-                                <td field-key='clinic_email'>{{ $clinic->clinic_email }}</td>
-                                <td field-key='clinic_phone'>{{ $clinic->clinic_phone }}</td>
-                                <td field-key='clinic_phone_2'>{{ $clinic->clinic_phone_2 }}</td>
                                 <td field-key='users'>
                                     @foreach ($clinic->users as $singleUsers)
                                         <span class="label label-info label-many">{{ $singleUsers->name }}</span>
@@ -291,7 +285,7 @@
             @endforeach
         @else
             <tr>
-                <td colspan="12">@lang('global.app_no_entries_in_table')</td>
+                <td colspan="10">@lang('global.app_no_entries_in_table')</td>
             </tr>
         @endif
     </tbody>

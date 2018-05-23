@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        
+
         $this->call(ContactCompanySeed::class);
         $this->call(PermissionSeed::class);
         $this->call(RoleSeed::class);
@@ -24,8 +24,10 @@ class DatabaseSeeder extends Seeder
         $this->call(LocationSeed::class);
         $this->call(TaskStatusSeed::class);
         $this->call(TaskSeed::class);
+        $this->call(ZipcodeSeed::class);
         $this->call(RoleSeedPivot::class);
         $this->call(UserSeedPivot::class);
 
+      //  $this->call(BookingsTableSeeder::class);
     }
 }

@@ -13,36 +13,12 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('submitted', trans('global.bookings.fields.submitted').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('submitted', old('submitted'), ['class' => 'form-control date', 'placeholder' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('submitted'))
-                        <p class="help-block">
-                            {{ $errors->first('submitted') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('customername', trans('global.bookings.fields.customername').'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('customername', old('customername'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::label('customername', trans('global.bookings.fields.customername').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('customername', old('customername'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('customername'))
                         <p class="help-block">
                             {{ $errors->first('customername') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('email', trans('global.bookings.fields.email').'*', ['class' => 'control-label']) !!}
-                    {!! Form::email('email', old('email'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('email'))
-                        <p class="help-block">
-                            {{ $errors->first('email') }}
                         </p>
                     @endif
                 </div>
@@ -73,6 +49,18 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
+                    {!! Form::label('email', trans('global.bookings.fields.email').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('email', old('email'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('email'))
+                        <p class="help-block">
+                            {{ $errors->first('email') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
                     {!! Form::label('how_long', trans('global.bookings.fields.how-long').'', ['class' => 'control-label']) !!}
                     {!! Form::text('how_long', old('how_long'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
@@ -86,7 +74,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('requested_date', trans('global.bookings.fields.requested-date').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('requested_date', old('requested_date'), ['class' => 'form-control date', 'placeholder' => '']) !!}
+                    {!! Form::text('requested_date', old('requested_date'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('requested_date'))
                         <p class="help-block">
@@ -98,7 +86,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('requested_time', trans('global.bookings.fields.requested-time').'', ['class' => 'control-label']) !!}
-                    {!! Form::text('requested_time', old('requested_time'), ['class' => 'form-control timepicker', 'placeholder' => '']) !!}
+                    {!! Form::text('requested_time', old('requested_time'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('requested_time'))
                         <p class="help-block">
@@ -263,6 +251,18 @@
                     @endif
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('submitted', trans('global.bookings.fields.submitted').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('submitted', old('submitted'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('submitted'))
+                        <p class="help-block">
+                            {{ $errors->first('submitted') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
             
         </div>
     </div>
@@ -271,22 +271,3 @@
     {!! Form::close() !!}
 @stop
 
-@section('javascript')
-    @parent
-    <script>
-        $('.date').datepicker({
-            autoclose: true,
-            dateFormat: "{{ config('app.date_format_js') }}"
-        });
-    </script>
-    <script src="{{ url('adminlte/js') }}/timepicker.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.js"></script>
-    <script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>    <script>
-        $('.timepicker').datetimepicker({
-            autoclose: true,
-            timeFormat: "HH:mm:ss",
-            timeOnly: true
-        });
-    </script>
-
-@stop

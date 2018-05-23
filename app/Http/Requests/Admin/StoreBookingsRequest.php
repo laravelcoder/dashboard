@@ -23,11 +23,6 @@ class StoreBookingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'submitted' => 'nullable|date_format:'.config('app.date_format'),
-            'customername' => 'required',
-            'email' => 'required|email',
-            'requested_date' => 'nullable|date_format:'.config('app.date_format'),
-            'requested_time' => 'nullable|date_format:H:i:s',
         ];
     }
 }

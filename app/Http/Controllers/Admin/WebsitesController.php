@@ -102,6 +102,9 @@ class WebsitesController extends Controller
         }
         $website = Website::create($request->all());
 
+        foreach ($request->input('locations', []) as $data) {
+            $website->locations()->create($data);
+        }
         foreach ($request->input('adwords', []) as $data) {
             $website->adwords()->create($data);
         }
@@ -149,6 +152,23 @@ class WebsitesController extends Controller
         $website = Website::findOrFail($id);
         $website->update($request->all());
 
+        $locations           = $website->locations;
+        $currentLocationData = [];
+        foreach ($request->input('locations', []) as $index => $data) {
+            if (is_integer($index)) {
+                $website->locations()->create($data);
+            } else {
+                $id                          = explode('-', $index)[1];
+                $currentLocationData[$id] = $data;
+            }
+        }
+        foreach ($locations as $item) {
+            if (isset($currentLocationData[$item->id])) {
+                $item->update($currentLocationData[$item->id]);
+            } else {
+                $item->delete();
+            }
+        }
         $adwords           = $website->adwords;
         $currentAdwordData = [];
         foreach ($request->input('adwords', []) as $index => $data) {
@@ -202,11 +222,11 @@ class WebsitesController extends Controller
         }
         
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
-        $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');$adwords = \App\Adword::where('website_id', $id)->get();$analytics = \App\Analytic::where('website_id', $id)->get();
+        $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');$locations = \App\Location::where('parent_website_id', $id)->get();$adwords = \App\Adword::where('website_id', $id)->get();$analytics = \App\Analytic::where('website_id', $id)->get();
 
         $website = Website::findOrFail($id);
 
-        return view('admin.websites.show', compact('website', 'adwords', 'analytics'));
+        return view('admin.websites.show', compact('website', 'locations', 'adwords', 'analytics'));
     }
 
 
