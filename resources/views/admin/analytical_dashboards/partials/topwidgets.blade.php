@@ -29,7 +29,7 @@
 	<div class="col-lg-3 col-xs-6">
 		<div class="small-box bg-green">
 			<div class="inner">
-				<h3> ?? ga:bounces ?? <sup style="font-size: 20px">%</sup></h3>
+				<h3>{{$bounce_rate}}<sup style="font-size: 20px">%</sup></h3>
 				<h4>Bounce Rate</h4>
 			</div>
 			<div class="icon">
