@@ -5,7 +5,7 @@
 
 		<div class="small-box bg-yellow">
 			<div class="inner">
-				<h3> </h3>
+				<h3>TBD </h3>
 				<h4>Today's Appointments</h4>
 			</div>
 			<div class="icon">
@@ -17,8 +17,8 @@
 	<div class="col-lg-3 col-xs-6">
 		<div class="small-box bg-aqua">
 			<div class="inner">
-				<h3> </h3>
-				<h4>Week's Appointments</h4>
+				<h3>TBD </h3>
+				<h4>This Week's Appointments</h4>
 			</div>
 			<div class="icon">
 				<i class="fa fa-user-plus"></i>
@@ -29,8 +29,8 @@
 	<div class="col-lg-3 col-xs-6">
 		<div class="small-box bg-green">
 			<div class="inner">
-				<h3> <sup style="font-size: 20px"></sup></h3>
-				<h4>Months Appointment's</h4>
+				<h3>TBD <sup style="font-size: 20px"></sup></h3>
+				<h4>This Month's Appointment's</h4>
 			</div>
 			<div class="icon">
 				<i class="ion ion-stats-bars"></i>
@@ -60,14 +60,14 @@
 
 
 </div>
-{{--
+
 <div class="row">
 	<div class="col-lg-3 col-xs-6">
 
 		<div class="small-box bg-green">
 			<div class="inner">
-				<h3> ?? ga:goalCompletionsAll ?? </h3>
-				<h4>Total Goal Completions</h4>
+				<h3> TBD</h3>
+				<h4>Today's Bookings</h4>
 			</div>
 			<div class="icon">
 				<i class="fa fa-users"></i>
@@ -80,22 +80,8 @@
 
 		<div class="small-box bg-green">
 			<div class="inner">
-				<h3>?? ga:goal5Starts ??</h3>
-				<h4>Store Locator Submits</h4>
-			</div>
-			<div class="icon">
-				<i class="fa fa-users"></i>
-			</div>
-
-		</div>
-	</div>
-
-	<div class="col-lg-3 col-xs-6">
-
-		<div class="small-box bg-green">
-			<div class="inner">
-				<h3>?? ga:goal6Starts ??</h3>
-				<h4>Clinics-Near-you Submits</h4>
+				<h3>TBD </h3>
+				<h4>This Week's Bookings</h4>
 			</div>
 			<div class="icon">
 				<i class="fa fa-users"></i>
@@ -109,7 +95,21 @@
 		<div class="small-box bg-green">
 			<div class="inner">
 				<h3> TBD </h3>
-				<h4>  </h4>
+				<h4>Bookings This Month</h4>
+			</div>
+			<div class="icon">
+				<i class="fa fa-users"></i>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="col-lg-3 col-xs-6">
+
+		<div class="small-box bg-green">
+			<div class="inner">
+				<h3> TBD </h3>
+				<h4> Bookings Last Month </h4>
 			</div>
 			<div class="icon">
 				<i class="fa fa-users"></i>
@@ -118,5 +118,5 @@
 		</div>
 	</div>
 </div>
---}}
+
 <!-- =========================================================== -->

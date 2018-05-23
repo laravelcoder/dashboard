@@ -17,8 +17,15 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
 <script type="text/javascript" src="{!! asset('/DataTables/datatables.min.js') !!}"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script src="{!! asset('/public/javascript/embed-api/components/view-selector2.js') !!}"></script>
+<script src="{!! asset('/public/javascript/embed-api/components/date-range-selector.js') !!}"></script>
+<script src="{!! asset('/public/javascript/embed-api/components/active-users.js') !!}"></script>
+<link rel="stylesheet" href="{!! asset('/public/css/chartjs-visualizations.css') !!}">
+
 <script type="text/javascript">
     @if($view_id > 0)
     google.charts.load('current', {packages: ['corechart', 'line']});
@@ -35,7 +42,7 @@
 $json = json_encode($visitors_chart);
 $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
 ?>
-        data.addRows(<?= $json ?>);
+        data.addRows(<?=$json?>);
 
         var options = {
             hAxis: {
@@ -53,6 +60,7 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
 
         chart.draw(data, options);
     }
+
     function drawChartPageviews() {
 
         var data = new google.visualization.DataTable();
@@ -62,7 +70,7 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
 $json = json_encode($pageviews_chart);
 $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
 ?>
-        data.addRows(<?= $json ?>);
+        data.addRows(<?=$json?>);
 
         var options = {
             hAxis: {
@@ -80,8 +88,9 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
 
         chart.draw(data, options);
     }
+
     function drawChartPage() {
-        var data = google.visualization.arrayToDataTable(<?= json_encode($page_chart) ?>);
+        var data = google.visualization.arrayToDataTable(<?=json_encode($page_chart)?>);
 
         var options = {
             is3D: true,
@@ -91,7 +100,10 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d_page'));
         chart.draw(data, options);
     }
+
     @endif
+
+
 </script>
 
 @endsection
@@ -134,7 +146,7 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
 <hr style="clear:both" />
 
 <div class="row">
-    {{-- dd($anadata) --}}
+  {{-- @include('admin.analytical_dashboards.partials.additional') --}}
 </div>
 
 @if($view_id > 0)
@@ -174,6 +186,8 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
         </div>
     </div>
 </div>
+
+
 @else
 <div class="row">
     <div class="col-md-12">
@@ -232,6 +246,6 @@ $json = preg_replace("/(('|\")%%|%%(\"|'))/", '', $json);
             $('#filter_form').submit();
         });
     });
-</script>    
+</script>
 @endsection
 

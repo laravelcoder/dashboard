@@ -5,16 +5,16 @@
     <section class="sidebar">
         <ul class="sidebar-menu">
 
-             
 
-            <li class="{{ $request->segment(1) == 'home' ? 'active' : '' }}">
+
+            <li class="{{ $request->segment(1) == '/' ? 'active' : '' }}">
                 <a href="{{ url('/') }}">
                     <i class="fa fa-wrench"></i>
                     <span class="title">@lang('global.app_dashboard')</span>
                 </a>
             </li>
 
-            
+
             @can('dashboard_access')
             <li class="treeview">
                 <a href="#">
@@ -25,7 +25,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                
+
                 @can('lca_dashboard_access')
                 <li class="{{ $request->segment(2) == 'lca_dashboards' ? 'active active-sub' : '' }}">
                         <a href="{{ route('admin.lca_dashboards.index') }}">
@@ -89,7 +89,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                
+
                 @can('contact_company_access')
                 <li class="{{ $request->segment(2) == 'contact_companies' ? 'active active-sub' : '' }}">
                         <a href="{{ route('admin.contact_companies.index') }}">
@@ -181,7 +181,7 @@
                 </a>
             </li>
             @endcan
-            
+
             @can('user_management_access')
             <li class="treeview">
                 <a href="#">
@@ -192,7 +192,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                
+
                 @can('role_access')
                 <li class="{{ $request->segment(2) == 'roles' ? 'active active-sub' : '' }}">
                         <a href="{{ route('admin.roles.index') }}">
@@ -236,7 +236,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                
+
                 @can('task_access')
                 <li class="{{ $request->segment(2) == 'tasks' ? 'active active-sub' : '' }}">
                         <a href="{{ route('admin.tasks.index') }}">
@@ -288,11 +288,11 @@
                 </a>
             </li>
             @endcan
-            
 
-            
 
-            
+
+
+
             @php ($unread = App\MessengerTopic::countUnread())
             <li class="{{ $request->segment(2) == 'messenger' ? 'active' : '' }} {{ ($unread > 0 ? 'unread' : '') }}">
                 <a href="{{ route('admin.messenger.index') }}">

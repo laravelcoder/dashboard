@@ -1,7 +1,6 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="{{ url('/admin/home') }}" class="logo"
-       style="font-size: 16px;">
+    <a href="{{ url('/admin') }}" class="logo" style="font-size: 16px;">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">
            @lang('global.global_title')</span>
@@ -18,10 +17,6 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a>
-
-        
-
-        
 
     </nav>
 </header>
