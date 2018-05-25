@@ -59,13 +59,18 @@ class AnalyticalDashboardsController extends Controller {
             // https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries
             $anadata = Analytics::performQuery(
                             Period::create($start, $end), 'ga:sessions', [
-                        'metrics' => 'ga:sessions, ga:pageviews, ga:bounces,ga:sessionDuration',
+                        'metrics' => 'ga:sessions, ga:pageviews, ga:bounces,ga:sessionDuration,ga:goalCompletionsAll,ga:goal5Starts,ga:goal6Starts',
                         'dimensions' => 'ga:yearMonth',
                             ]
             );
             
             $bounce_rate = round($anadata->rows[0][3] * 100 / $anadata->rows[0][2],2);
-
+            
+            $widget_data = array();
+            $widget_data['goal_completion'] = $anadata->rows[0][5];
+            $widget_data['goal_5stars'] = $anadata->rows[0][6];
+            $widget_data['goal_6stars'] = $anadata->rows[0][7];
+            
             $analyticsData_mvp = Analytics::fetchMostVisitedPages(Period::create($start, $end));
             $this->data['url'] = $analyticsData_mvp->pluck('url');
             $this->data['pageTitle '] = $analyticsData_mvp->pluck('pageTitle');
@@ -110,7 +115,7 @@ class AnalyticalDashboardsController extends Controller {
  
         }
  
-        return view('admin.analytical_dashboards.index', compact('bounce_rate', 'view_id', 'websites', 'views', 'search_params', 'analyticsData_mvp', 'chartData', 'stats', 'product_chart', 'page_chart', 'order_chart', 'revenue_chart', 'visitors_chart', 'pageviews_chart', 'topkeywords', 'topreferrers', 'start', 'end', 'toppages', 'total_visitors', 'total_pageviews', 'column_type', 'column_name', 'column_format', 'online', 'anadata'))->with('active', 'home');
+        return view('admin.analytical_dashboards.index', compact('widget_data','bounce_rate', 'view_id', 'websites', 'views', 'search_params', 'analyticsData_mvp', 'chartData', 'stats', 'product_chart', 'page_chart', 'order_chart', 'revenue_chart', 'visitors_chart', 'pageviews_chart', 'topkeywords', 'topreferrers', 'start', 'end', 'toppages', 'total_visitors', 'total_pageviews', 'column_type', 'column_name', 'column_format', 'online', 'anadata'))->with('active', 'home');
  
     }
 
