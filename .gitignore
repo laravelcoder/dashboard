@@ -29,3 +29,4 @@ config/google-ads.php
 /.overwrite/
 /config/google-ads.php
 resources/views/admin/analytical_dashboards/partials/topwidgets-notstyled.blade.php
+resources/views.rar
