@@ -66,7 +66,7 @@
 
 		<div class="small-box bg-green">
 			<div class="inner">
-				<h3>?? ga:goalCompletionsAll ?? </h3>
+				<h3>{{$widget_data['goal_completion']}}</h3>
 				<h4>Total Goal Completions</h4>
 			</div>
 			<div class="icon">
@@ -80,7 +80,7 @@
 
 		<div class="small-box bg-green">
 			<div class="inner">
-				<h3>?? ga:goal5Starts ??</h3>
+				<h3>{{$widget_data['goal_5stars']}}</h3>
 				<h4>Store Locator Submits</h4>
 			</div>
 			<div class="icon">
@@ -94,7 +94,7 @@
 
 		<div class="small-box bg-green">
 			<div class="inner">
-				<h3>?? ga:goal6Starts ??</h3>
+				<h3>{{$widget_data['goal_6stars']}}</h3>
 				<h4>Clinics-Near-you Submits</h4>
 			</div>
 			<div class="icon">
@@ -109,7 +109,7 @@
 		<div class="small-box bg-green">
 			<div class="inner">
 				<h3> TBD </h3>
-				<h4>  </h4>
+				<h4> &nbsp; </h4>
 			</div>
 			<div class="icon">
 				<i class="fa fa-users"></i>
