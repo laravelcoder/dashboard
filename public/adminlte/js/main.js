@@ -194,7 +194,7 @@ $(document).ready(function () {
     });
 
     $('.select2').select2();
-
+    $('.dangerangepicker').daterangepicker();
 });
 
 function processAjaxTables() {

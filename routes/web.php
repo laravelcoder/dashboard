@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 
-Route::get('/', function () { return redirect('/admin/home'); });
+Route::get('/', function () { return redirect('admin'); });
 
 // Authentication Routes...
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -118,6 +118,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
 
 });
-
+ 
 
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
+Route::get('newcharts', ['as' => 'newcharts', 'uses' => 'Admin\ApiTestsController@newcharts']);
