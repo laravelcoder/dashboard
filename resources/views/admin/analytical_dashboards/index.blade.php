@@ -21,10 +21,10 @@
 <script type="text/javascript" src="{!! asset('/DataTables/datatables.min.js') !!}"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-<script src="{!! asset('/javascript/embed-api/components/view-selector2.js') !!}"></script>
-<script src="{!! asset('/javascript/embed-api/components/date-range-selector.js') !!}"></script>
-<script src="{!! asset('/javascript/embed-api/components/active-users.js') !!}"></script>
-<link rel="stylesheet" href="{!! asset('/css/chartjs-visualizations.css') !!}">
+<script src="{!! asset('/public/javascript/embed-api/components/view-selector2.js') !!}"></script>
+<script src="{!! asset('/public/javascript/embed-api/components/date-range-selector.js') !!}"></script>
+<script src="{!! asset('/public/javascript/embed-api/components/active-users.js') !!}"></script>
+<link rel="stylesheet" href="{!! asset('/public/css/chartjs-visualizations.css') !!}">
 
 <script type="text/javascript">
     @if($view_id > 0)
