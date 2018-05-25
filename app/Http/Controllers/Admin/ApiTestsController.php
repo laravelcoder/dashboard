@@ -24,12 +24,12 @@ class ApiTestsController extends Controller
         }
 
 
-        
+
         if (request()->ajax()) {
             $query = ApiTest::query();
             $template = 'actionsTemplate';
             if(request('show_deleted') == 1) {
-                
+
         if (! Gate::allows('api_test_delete')) {
             return abort(401);
         }
@@ -117,6 +117,12 @@ class ApiTestsController extends Controller
         }
         return view('admin.api_tests.create');
     }
+
+    public function newcharts()
+    {
+    	return view('newcharts');
+    }
+
 
     /**
      * Store a newly created ApiTest in storage.
