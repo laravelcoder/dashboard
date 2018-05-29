@@ -8,7 +8,10 @@ use App\Booking;
 use App\Http\Requests\Admin\StoreBookingsRequest;
 use App\Http\Requests\Admin\UpdateBookingsRequest;
 use Yajra\DataTables\DataTables;
-
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Input;
+use Spatie\Analytics\Period;
+use Illuminate\Support\Facades\Config;
 
 class BookingsDashboardsController extends Controller
 {
@@ -28,8 +31,38 @@ class BookingsDashboardsController extends Controller
      */
     public function index()
     {
+
+    	$clinics = \App\Booking::orderBy('requested_clinic','asc')->pluck('requested_clinic', 'clinic_id');
+	    // $clinics = \App\Booking::where('requested_clinic', Input::get('requested_clinic'))->orderBy('requested_clinic','asc')->pluck('requested_clinic', 'clinic_id');
+
+    	if (Input::get('clinic')) {
+            $clinics = \App\Booking::where('requested_clinic',
+            	Input::get('clinic')
+            )->orderBy('requested_clinic','asc')->pluck('requested_clinic', 'clinic_id');
+        }
+
         if (! Gate::allows('booking_access')) {
             return abort(401);
+        }
+
+        $start = Carbon::now()->subDay(6);
+        $end = Carbon::now();
+
+        // if (Input::get('date-range')) {
+        //     $date_range_arr = explode(' - ', Input::get('date-range'));
+        //     $start = Carbon::parse($date_range_arr[0]);
+        //     $end = Carbon::parse($date_range_arr[1]);
+        // }
+
+        // $search_params = array();
+        // if ($start && $end) {
+        //     $search_params['date-range'] = date('m/d/Y', strtotime($start)) . ' - ' . date('m/d/Y', strtotime($end));
+        // }
+
+
+        if (Input::get('requested_clinic')) {
+            $search_params['requested_clinic'] = Input::get('requested_clinic');
+            $clinic_id = \App\Booking::find(Input::get('requested_clinic'))->clinic_id;
         }
 
 
@@ -39,12 +72,13 @@ class BookingsDashboardsController extends Controller
             $template = 'actionsTemplate';
             if(request('show_deleted') == 1) {
 
-        if (! Gate::allows('booking_delete')) {
-            return abort(401);
-        }
+		        if (! Gate::allows('booking_delete')) {
+		            return abort(401);
+		        }
                 $query->onlyTrashed();
                 $template = 'restoreTemplate';
             }
+
             $query->select([
                 'bookings.id',
                 'bookings.submitted',
@@ -148,6 +182,6 @@ class BookingsDashboardsController extends Controller
             return $table->make(true);
         }
 
-        return view('admin.bookings_dashboards.index');
+        return view('admin.bookings_dashboards.index', compact('clinics'));
     }
 }

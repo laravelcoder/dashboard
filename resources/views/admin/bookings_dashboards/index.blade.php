@@ -35,8 +35,8 @@
 <div class="row">
 	    <div class="form-group col-md-4">
         <label for="inputWebsite">Clinic</label>
-        <input type="text" class="form-control">
-        {!! Form::select('clinic', @$clinics, @$search_params['clinic'], array('placeholder' => 'Select Clinic', 'class'=>'form-control', 'id' => 'clinic', 'value'=>@$search_params['clinic'])) !!}
+        {{-- <input type="text" class="form-control"> --}}
+        {!! Form::select('clinic', @$clinics, @$search_params['requested_clinic'], array('placeholder' => 'Select Clinic', 'class'=>'form-control', 'id' => 'clinic', 'value'=> @$search_params['requested_clinic'])) !!}
     </div>
 
     <div class="form-group col-md-4">
