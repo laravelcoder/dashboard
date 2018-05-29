@@ -32,7 +32,27 @@ class BookingsDashboardsController extends Controller
     public function index()
     {
 
-    	$clinics = \App\Booking::orderBy('requested_clinic','asc')->pluck('requested_clinic', 'clinic_id');
+    	$clinic_id = 0;
+    	//$clinics = \App\Booking::whereNotNull('requested_clinic')->orderBy('requested_clinic','asc')->pluck('requested_clinic', 'clinic_id');
+		//$clinics = \App\Booking::orderBy('requested_clinic','asc')->whereNotNull('requested_clinic')->pluck('requested_clinic', 'clinic_id');
+		$clinics = \App\Booking::orderBy('requested_clinic','asc')->pluck('requested_clinic', 'clinic_id');
+		// $clinics = array();
+
+        if (Input::get('clinic')) {
+        	// $clinics = \App\Booking::where('clinic_id', Input::get('clinic'))->orderBy('requested_clinic','asc')->pluck('requested_clinic', 'clinic_id');
+        }
+
+        // $start = Carbon::now()->subDay(6);
+        // $end = Carbon::now();
+
+        // if (Input::get('date-range')) {
+        //     $date_range_arr = explode(' - ', Input::get('date-range'));
+        //     $start = Carbon::parse($date_range_arr[0]);
+        //     $end = Carbon::parse($date_range_arr[1]);
+        // }
+
+        // $search_params = array();
+    	//$clinics = \App\Booking::orderBy('requested_clinic','asc')->pluck('requested_clinic', 'clinic_id');
 
 	    // $clinics = \App\Booking::where('requested_clinic', Input::get('requested_clinic'))->orderBy('requested_clinic','asc')->pluck('requested_clinic', 'clinic_id');
 
@@ -45,9 +65,6 @@ class BookingsDashboardsController extends Controller
         if (! Gate::allows('booking_access')) {
             return abort(401);
         }
-
-        $start = Carbon::now()->subDay(6);
-        $end = Carbon::now();
 
         // if (Input::get('date-range')) {
         //     $date_range_arr = explode(' - ', Input::get('date-range'));
