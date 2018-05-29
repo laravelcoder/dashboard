@@ -33,13 +33,14 @@ class BookingsDashboardsController extends Controller
     {
 
     	$clinics = \App\Booking::orderBy('requested_clinic','asc')->pluck('requested_clinic', 'clinic_id');
+
 	    // $clinics = \App\Booking::where('requested_clinic', Input::get('requested_clinic'))->orderBy('requested_clinic','asc')->pluck('requested_clinic', 'clinic_id');
 
-    	if (Input::get('clinic')) {
-            $clinics = \App\Booking::where('requested_clinic',
-            	Input::get('clinic')
-            )->orderBy('requested_clinic','asc')->pluck('requested_clinic', 'clinic_id');
-        }
+    	// if (Input::get('clinic')) {
+     //        $clinics = \App\Booking::where('requested_clinic',
+     //        	Input::get('clinic')
+     //        )->orderBy('requested_clinic','asc')->pluck('requested_clinic', 'clinic_id');
+     //    }
 
         if (! Gate::allows('booking_access')) {
             return abort(401);
@@ -60,10 +61,10 @@ class BookingsDashboardsController extends Controller
         // }
 
 
-        if (Input::get('requested_clinic')) {
-            $search_params['requested_clinic'] = Input::get('requested_clinic');
-            $clinic_id = \App\Booking::find(Input::get('requested_clinic'))->clinic_id;
-        }
+        // if (Input::get('requested_clinic')) {
+        //     $search_params['requested_clinic'] = Input::get('requested_clinic');
+        //     $clinic_id = \App\Booking::find(Input::get('requested_clinic'))->clinic_id;
+        // }
 
 
 
@@ -103,6 +104,7 @@ class BookingsDashboardsController extends Controller
                 'bookings.longitude',
                 'bookings.country',
             ]);
+
             $table = Datatables::of($query);
 
             $table->setRowAttr([
