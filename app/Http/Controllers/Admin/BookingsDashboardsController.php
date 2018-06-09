@@ -55,6 +55,8 @@ class BookingsDashboardsController extends Controller {
             $total_bookings = DB::table('bookings')
                         ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
                         ->where('locations.clinic_id',$clinic_id)
+                        ->whereDate('bookings.submitted','>=',$start)
+                        ->whereDate('bookings.submitted','<=',$end)
                         ->count();
         }
 
@@ -80,8 +82,8 @@ class BookingsDashboardsController extends Controller {
             $query = Booking::query();
             $query->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id');
             $query->where('locations.clinic_id', $clinic_id);
-            $query->whereDate('submitted','>=',$start);
-            $query->whereDate('submitted','<=',$end);
+            $query->whereDate('bookings.submitted','>=',$start);
+            $query->whereDate('bookings.submitted','<=',$end);
 
             $template = 'actionsTemplate';
             if (request('show_deleted') == 1) {
