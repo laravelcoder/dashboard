@@ -30,6 +30,11 @@ class BookingsDashboardsController extends Controller {
      */
     public function index() {
         $clinics = \App\Clinic::orderBy('nickname', 'asc')->pluck('nickname', 'id');
+        
+        $locations = array();
+        if (Input::get('clinic')) {
+            $locations = \App\Location::where('clinic_id',Input::get('clinic_id'))->orderBy('nickname','asc')->pluck('nickname', 'id');
+        }
 
         $start = Carbon::now()->subDay(6);
         $end = Carbon::now();
@@ -50,14 +55,23 @@ class BookingsDashboardsController extends Controller {
             $search_params['clinic'] = Input::get('clinic');
             $clinic_id = Input::get('clinic');
         }
+        
+        $location_id = 0;
+        if (Input::get('location_id')) {
+            $search_params['location_id'] = Input::get('location_id');
+            $location_id = Input::get('location_id');
+        }
 
         if ($clinic_id > 0) {
             $total_bookings = DB::table('bookings')
                         ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
                         ->where('locations.clinic_id',$clinic_id)
                         ->whereDate('bookings.submitted','>=',$start)
-                        ->whereDate('bookings.submitted','<=',$end)
-                        ->count();
+                        ->whereDate('bookings.submitted','<=',$end);
+            if($location_id > 0){
+                $total_bookings = $total_bookings->where('locations.id',$location_id);
+            }
+            $total_bookings = $total_bookings->count();
         }
 
         if (!Gate::allows('booking_access')) {
@@ -70,6 +84,10 @@ class BookingsDashboardsController extends Controller {
             $query->where('locations.clinic_id', $clinic_id);
             $query->whereDate('bookings.submitted','>=',$start);
             $query->whereDate('bookings.submitted','<=',$end);
+            
+            if($location_id > 0){
+                $query = $query->where('locations.id',$location_id);
+            }
 
             $template = 'actionsTemplate';
             if (request('show_deleted') == 1) {
@@ -183,7 +201,7 @@ class BookingsDashboardsController extends Controller {
             return $table->make(true);
         }
 
-        return view('admin.bookings_dashboards.index', compact('total_bookings', 'search_params', 'clinics', 'clinic_id'));
+        return view('admin.bookings_dashboards.index', compact('total_bookings', 'search_params', 'clinics', 'clinic_id', 'locations', 'location_id'));
     }
 
 }

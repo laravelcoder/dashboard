@@ -33,7 +33,7 @@
 
 {!! Form::open(['method' => 'get','id' => 'filter_form']) !!}
 <div class="row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
         <label>Date Range</label>
         <div class="input-group">
             <div class="input-group-addon">
@@ -42,9 +42,13 @@
             <input type="text" name="date-range" class="form-control pull-right" value="{!!@$search_params['date-range']!!}">
         </div>
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
         <label for="inputWebsite">Clinic</label>
         {!! Form::select('clinic', @$clinics,@$search_params['clinic'], array('placeholder' => 'Select Clinic', 'class'=>'form-control', 'id' => 'clinic', 'value'=>@$search_params['clinic'])) !!}
+    </div>
+    <div class="form-group col-md-4">
+        <label for="inputWebsite">Location</label>
+        {!! Form::select('location_id', @$locations,@$search_params['location_id'], array('placeholder' => 'All', 'class'=>'form-control', 'id' => 'location_id', 'value'=>@$search_params['location_id'])) !!}
     </div>
 </div>
 {!! Form::close() !!}
@@ -140,7 +144,7 @@
 
 		cb(start, end);
 
-		$('select[name="clinic"]').on("change", function () {
+		$('select[name="clinic"],select[name="location_id"]').on("change", function () {
                     $('#filter_form').submit();
 		});
 	});
