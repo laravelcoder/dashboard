@@ -33,7 +33,7 @@ class BookingsDashboardsController extends Controller {
         
         $locations = array();
         if (Input::get('clinic')) {
-            $locations = \App\Location::where('clinic_id',Input::get('clinic_id'))->orderBy('nickname','asc')->pluck('nickname', 'id');
+            $locations = \App\Location::where('clinic_id',Input::get('clinic'))->orderBy('nickname','asc')->pluck('nickname', 'id');
         }
 
         $start = Carbon::now()->subDay(6);
