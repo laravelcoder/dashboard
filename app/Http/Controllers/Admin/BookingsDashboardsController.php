@@ -53,7 +53,7 @@ class BookingsDashboardsController extends Controller {
 
         if ($clinic_id > 0) {
             $total_bookings = DB::table('bookings')
-                        ->join('locations', 'bookings.clinic_id', '=', 'locations.id')
+                        ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
                         ->where('locations.clinic_id',$clinic_id)
                         ->count();
         }
@@ -78,7 +78,7 @@ class BookingsDashboardsController extends Controller {
 
         if ($clinic_id > 0 && request()->ajax()) {
             $query = Booking::query();
-            $query->join('locations', 'bookings.clinic_id', '=', 'locations.id');
+            $query->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id');
             $query->where('locations.clinic_id', $clinic_id);
             $query->whereDate('submitted','>=',$start);
             $query->whereDate('submitted','<=',$end);
