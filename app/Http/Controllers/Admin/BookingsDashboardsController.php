@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
@@ -9,18 +10,17 @@ use App\Http\Requests\Admin\StoreBookingsRequest;
 use App\Http\Requests\Admin\UpdateBookingsRequest;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Blade;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Input;
+use DB;
 
+class BookingsDashboardsController extends Controller {
 
+    protected $bookings;
 
-class BookingsDashboardsController extends Controller
-{
-	protected $bookings;
-
-	function __construct(Booking $bookings)
-	{
-		$this->booking = $bookings;
-	}
-
+    function __construct(Booking $bookings) {
+        $this->booking = $bookings;
+    }
 
     /**
      * Display a listing of Booking.
@@ -28,39 +28,68 @@ class BookingsDashboardsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
- 		$bookings = Booking::orderBy('submitted', 'desc')->get();
+    public function index() {
+        $clinics = \App\Clinic::orderBy('nickname', 'asc')->pluck('nickname', 'id');
 
- 		$total_bookings = Booking::all()->count();
+        $start = Carbon::now()->subDay(6);
+        $end = Carbon::now();
 
-    	//$totalbookings = \App\Booking::whereHas('requested_clinic')->count();
-		// $count_preferred = Booking::whereHas('requested_clinic', function($q) use ($request) {
-		//     $q->where('question_id', $request->question_id);
-		//     $q->where('pref', 1);
-		//     $q->orderBy('created_at', 'desc'); // Sort the results by latest added
-		// })->get()->count();
+        if (Input::get('date-range')) {
+            $date_range_arr = explode(' - ', Input::get('date-range'));
+            $start = Carbon::parse($date_range_arr[0]);
+            $end = Carbon::parse($date_range_arr[1]);
+        }
 
-		// foreach($count_preferred as $count)
-		// {
-		//     $count->answers->first(); // Shit should return the last first added item
-		// }
+        $search_params = array();
+        if ($start && $end) {
+            $search_params['date-range'] = date('m/d/Y', strtotime($start)) . ' - ' . date('m/d/Y', strtotime($end));
+        }
+
+        $clinic_id = 0;
+        if (Input::get('clinic')) {
+            $search_params['clinic'] = Input::get('clinic');
+            $clinic_id = Input::get('clinic');
+        }
+
+        if ($clinic_id > 0) {
+            $total_bookings = DB::table('bookings')
+                        ->join('locations', 'bookings.clinic_id', '=', 'locations.id')
+                        ->where('locations.clinic_id',$clinic_id)
+                        ->count();
+        }
+
+        //$totalbookings = \App\Booking::whereHas('requested_clinic')->count();
+        // $count_preferred = Booking::whereHas('requested_clinic', function($q) use ($request) {
+        //     $q->where('question_id', $request->question_id);
+        //     $q->where('pref', 1);
+        //     $q->orderBy('created_at', 'desc'); // Sort the results by latest added
+        // })->get()->count();
+        // foreach($count_preferred as $count)
+        // {
+        //     $count->answers->first(); // Shit should return the last first added item
+        // }
 
 
-        if (! Gate::allows('booking_access')) {
+        if (!Gate::allows('booking_access')) {
             return abort(401);
         }
 
 
 
-        if (request()->ajax()) {
+        if ($clinic_id > 0 && request()->ajax()) {
             $query = Booking::query();
-            $template = 'actionsTemplate';
-            if(request('show_deleted') == 1) {
+            $query->join('locations', 'bookings.clinic_id', '=', 'locations.id');
+            $query->groupBy('bookings.id');
+            $query->where('locations.clinic_id', $clinic_id);
+            $query->whereDate('submitted','>=',$start);
+            $query->whereDate('submitted','<=',$end);
 
-        if (! Gate::allows('booking_delete')) {
-            return abort(401);
-        }
+            $template = 'actionsTemplate';
+            if (request('show_deleted') == 1) {
+
+                if (!Gate::allows('booking_delete')) {
+                    return abort(401);
+                }
                 $query->onlyTrashed();
                 $template = 'restoreTemplate';
             }
@@ -96,7 +125,7 @@ class BookingsDashboardsController extends Controller
             $table->addColumn('massDelete', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
             $table->editColumn('actions', function ($row) use ($template) {
-                $gateKey  = 'booking_';
+                $gateKey = 'booking_';
                 $routeKey = 'admin.bookings';
 
                 return view($template, compact('row', 'gateKey', 'routeKey'));
@@ -162,11 +191,12 @@ class BookingsDashboardsController extends Controller
                 return $row->country ? $row->country : '';
             });
 
-            $table->rawColumns(['actions','massDelete']);
+            $table->rawColumns(['actions', 'massDelete']);
 
             return $table->make(true);
         }
 
-        return view('admin.bookings_dashboards.index', compact('bookings', 'booking', 'total_bookings'));
+        return view('admin.bookings_dashboards.index', compact('total_bookings', 'search_params', 'clinics', 'clinic_id'));
     }
+
 }
