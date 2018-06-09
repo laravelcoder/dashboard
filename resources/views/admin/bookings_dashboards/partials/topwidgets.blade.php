@@ -5,7 +5,7 @@
 
 		<div class="small-box bg-yellow">
 			<div class="inner">
-				<h3>TBD </h3>
+				<h3>{{ $totalbookings }}</h3>
 				<h4>Today's Appointments</h4>
 			</div>
 			<div class="icon">
