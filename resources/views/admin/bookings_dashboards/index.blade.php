@@ -33,110 +33,68 @@
 
 {!! Form::open(['method' => 'get','id' => 'filter_form']) !!}
 <div class="row">
-		<div class="form-group col-md-4">
-		<label for="inputWebsite">Clinic</label>
-		<input type="text" class="form-control">
-		{{-- {!! Form::select('clinic', @$clinics, @$search_params['clinic'], array('placeholder' => 'Select Clinic', 'class'=>'form-control', 'id' => 'clinic', 'value'=>@$search_params['clinic'])) !!} --}}
-	</div>
-
-	<div class="form-group col-md-4">
-		<label>Date Range</label>
-		<div class="input-group">
-			<div class="input-group-addon">
-				<i class="fa fa-calendar"></i>
-			</div>
-			<input type="text" name="date-range" class="form-control pull-right" value="{!!@$search_params['date-range']!!}">
-		</div>
-	</div>
-
-
+    <div class="form-group col-md-6">
+        <label>Date Range</label>
+        <div class="input-group">
+            <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+            </div>
+            <input type="text" name="date-range" class="form-control pull-right" value="{!!@$search_params['date-range']!!}">
+        </div>
+    </div>
+    <div class="form-group col-md-6">
+        <label for="inputWebsite">Clinic</label>
+        {!! Form::select('clinic', @$clinics,@$search_params['clinic'], array('placeholder' => 'Select Clinic', 'class'=>'form-control', 'id' => 'clinic', 'value'=>@$search_params['clinic'])) !!}
+    </div>
 </div>
 {!! Form::close() !!}
 <hr style="clear:both" />
 
-{{-- @if($clinic_id > 0) --}}
+@if($clinic_id > 0)
 @include('admin.bookings_dashboards.partials.topwidgets')
-{{-- @endif --}}
-
 <hr style="clear:both" />
-
-<div class="row">
-	{{-- dd($anadata) --}}
-</div>
-
-<div class="row">
-	<div class="col-sm-12>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<i class="clip-stats"></i>
-				Bookings Table
-			</div>
-			<div class="panel-body">
-				<h1> BOOKING DATATABLE FOR SELECTED CLINIC ONLY GOES HERE</h1>
-
-	<div class="col-md-12">
-
-{{ @$bookings }}
-
-	</div>
-
-	<div class="panel panel-default">
+<div class="row">    
+    <div class="panel panel-default">
 		<div class="panel-heading">
 			@lang('global.app_list')
 		</div>
 
 		<div class="panel-body table-responsive">
-			 <table class="table table-bordered table-striped ajaxTable">
-			{{-- <table class="table table-bordered table-striped ajaxTable @can('booking_delete') @if ( request('show_deleted') != 1 ) dt-select @endif @endcan"> --}}
+			<table class="table table-bordered table-striped ajaxTable @can('booking_delete') @if ( request('show_deleted') != 1 ) dt-select @endif @endcan">
 				<thead>
 					<tr>
-						{{-- @can('booking_delete') --}}
-							{{-- @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif --}}
-						{{-- @endcan --}}
-
+						@can('booking_delete')
+							@if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
+						@endcan
 
 						<th>@lang('global.bookings.fields.id')</th>
 						<th>@lang('global.bookings.fields.submitted')</th>
 						<th>@lang('global.bookings.fields.customername')</th>
-						<th>@lang('global.bookings.fields.phone')</th>
 						<th>@lang('global.bookings.fields.email')</th>
+						<th>@lang('global.bookings.fields.phone')</th>
 						<th>@lang('global.bookings.fields.family-number')</th>
+						<th>@lang('global.bookings.fields.requested-date')</th>
 						<th>@lang('global.bookings.fields.requested-clinic')</th>
-						{{-- <th>@lang('global.bookings.fields.clinic-id')</th> --}}
-
-						{{-- @if( request('show_deleted') == 1 ) --}}
+						<th>@lang('global.bookings.fields.clinic-id')</th>
+						<th>@lang('global.bookings.fields.clinic-phone')</th>
+						@if( request('show_deleted') == 1 )
 						<th>Action</th>
-						{{-- @else --}}
+						@else
 						<th>Action</th>
-						{{-- @endif --}}
+						@endif
 					</tr>
 				</thead>
 			</table>
 		</div>
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-			</div>
-		</div>
-	</div>
-
 </div>
-
-
-
-{{-- @include('admin.bookings_dashboards.partials.analytics_section') --}}
-
-
-
+@else
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-success">Select above filters to view bookings dashboard</div>
+    </div>
+</div>
+@endif
 @stop
 
 @section('bottomscripts')
@@ -181,12 +139,33 @@
 		cb(start, end);
 
 		$('select[name="clinic"]').on("change", function () {
-			if($(this).attr('id') == 'clinic'){
-				$('#clinic').val('');
-			}
-			$('#filter_form').submit();
+                    $('#filter_form').submit();
 		});
 	});
+        $(document).ready(function () {
+			window.dtDefaultOptions.ajax = '{!! route('admin.bookings_dashboards.index') !!}?date-range={{ request('date-range') }}&clinic={{ request('clinic') }}';
+			window.dtDefaultOptions.order = [[2, "desc"]];
+			window.dtDefaultOptions.columns = [
+			@can('booking_delete')
+				@if ( request('show_deleted') != 1 )
+					{data: 'massDelete', name: 'id', searchable: false, sortable: false},
+				@endif
+				@endcan
+				{data: 'id', name: 'id', visible: false, searchable: false},
+				{data: 'submitted', name: 'submitted'},
+				{data: 'customername', name: 'customername'},
+				{data: 'email', name: 'email'},
+				{data: 'phone', name: 'phone'},
+				{data: 'family_number', name: 'family_number'},
+				{data: 'requested_date', name: 'requested_date'},
+				{data: 'requested_clinic', name: 'requested_clinic'},
+				{data: 'clinic_id', name: 'clinic_id'},
+				{data: 'clinic_phone', name: 'clinic_phone'},
+
+				{data: 'actions', name: 'actions', searchable: false, sortable: false}
+			];
+			processAjaxTables();
+		});
 </script>
 @endsection
 
