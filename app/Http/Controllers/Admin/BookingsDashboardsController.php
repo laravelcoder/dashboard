@@ -12,6 +12,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Blade;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
+use DB;
 
 class BookingsDashboardsController extends Controller {
 
@@ -51,7 +52,10 @@ class BookingsDashboardsController extends Controller {
         }
 
         if ($clinic_id > 0) {
-            $total_bookings = Booking::where('clinic_id', $search_params['clinic'])->count();
+            $total_bookings = DB::table('bookings')
+                        ->join('locations', 'bookings.clinic_id', '=', 'locations.id')
+                        ->where('locations.clinic_id',$clinic_id)
+                        ->count();
         }
 
         //$totalbookings = \App\Booking::whereHas('requested_clinic')->count();
@@ -74,7 +78,9 @@ class BookingsDashboardsController extends Controller {
 
         if ($clinic_id > 0 && request()->ajax()) {
             $query = Booking::query();
-            $query->where('clinic_id', $clinic_id);
+            $query->join('locations', 'bookings.clinic_id', '=', 'locations.id');
+            $query->groupBy('bookings.id');
+            $query->where('locations.clinic_id', $clinic_id);
             $query->whereDate('submitted','>=',$start);
             $query->whereDate('submitted','<=',$end);
 
