@@ -79,7 +79,6 @@ class BookingsDashboardsController extends Controller {
         if ($clinic_id > 0 && request()->ajax()) {
             $query = Booking::query();
             $query->join('locations', 'bookings.clinic_id', '=', 'locations.id');
-            $query->groupBy('bookings.id');
             $query->where('locations.clinic_id', $clinic_id);
             $query->whereDate('submitted','>=',$start);
             $query->whereDate('submitted','<=',$end);
