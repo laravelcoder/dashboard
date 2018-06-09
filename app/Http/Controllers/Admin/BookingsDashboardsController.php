@@ -60,23 +60,9 @@ class BookingsDashboardsController extends Controller {
                         ->count();
         }
 
-        //$totalbookings = \App\Booking::whereHas('requested_clinic')->count();
-        // $count_preferred = Booking::whereHas('requested_clinic', function($q) use ($request) {
-        //     $q->where('question_id', $request->question_id);
-        //     $q->where('pref', 1);
-        //     $q->orderBy('created_at', 'desc'); // Sort the results by latest added
-        // })->get()->count();
-        // foreach($count_preferred as $count)
-        // {
-        //     $count->answers->first(); // Shit should return the last first added item
-        // }
-
-
         if (!Gate::allows('booking_access')) {
             return abort(401);
         }
-
-
 
         if ($clinic_id > 0 && request()->ajax()) {
             $query = Booking::query();
