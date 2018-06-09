@@ -8,6 +8,8 @@ use Laravel\Dusk\DuskServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Blade;
+
 
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
+
     }
 
     /**
@@ -31,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
-        
+
         if ($this->app->environment('local', 'testing')) {
             $this->app->register(DuskServiceProvider::class);
         }
