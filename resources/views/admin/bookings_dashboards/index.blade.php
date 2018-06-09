@@ -53,6 +53,7 @@
 @if($clinic_id > 0)
 @include('admin.bookings_dashboards.partials.topwidgets')
 <hr style="clear:both" />
+ 
 <div class="row">    
     <div class="panel panel-default">
 		<div class="panel-heading">
@@ -86,6 +87,7 @@
 				</thead>
 			</table>
 		</div>
+ 
 	</div>
 </div>
 @else
