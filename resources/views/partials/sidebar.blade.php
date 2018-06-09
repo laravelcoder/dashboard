@@ -29,42 +29,25 @@
 				@can('lca_dashboard_access')
 				<li class="{{ $request->segment(2) == 'lca_dashboards' ? 'active active-sub' : '' }}">
 						<a href="{{ route('admin.lca_dashboards.index') }}">
-							<i class="fa fa-dashboard"></i>
+							<i class="fa fa-circle-o text-aqua"></i>
 							<span class="title">
 								@lang('global.lca-dashboard.title')
 							</span>
 						</a>
-					</li>
-<li>
-	<!-- / CLINIC / Form Input -->
-	<div class="form-group">
-		{!! Form::label('clinic', 'Clinic:') !!}
-		<div class="input-group">
-		{!! Form::text('clinic', null, ['class' => 'form-control', 'data-autogrow' => '', 'rows' => '3', 'placeholder' => 'clinic']) !!}
-			 <div class="input-group-addon"> <i class="fa fa-question-circle" type="button" data-toggle="collapse" data-target="#openinfo-clinic" aria-expanded="false" aria-controls="openinfo-clinic"></i>
-			 </div>
-		</div> {{-- / input-group end--}}
-
-		@if ($errors->first('clinic'))
-		<small class="text-danger">{{ $errors->first('clinic') }}</small>
-		@endif
-	</div>
-
-
-
-</li>
-
-
-
-
-
-
-
+						{{-- <ul class="treeview-menu">
+							<li class="{{ $request->segment(2) == 'lca_dashboards' ? 'active active-sub' : '' }}">
+							{!! Form::text('clinic', null, ['class' => 'form-control', 'data-autogrow' => '',  'placeholder' => 'Clinic Select']) !!}
+								<ul class="treeview-menu">
+									<li> test </li>
+								</ul>
+							</li>
+						</ul> --}}
+				</li>
 				@endcan
 				@can('analytical_dashboard_access')
 				<li class="{{ $request->segment(2) == 'analytical_dashboards' ? 'active active-sub' : '' }}">
 						<a href="{{ route('admin.analytical_dashboards.index') }}">
-							<i class="fa fa-bar-chart-o"></i>
+							<i class="fa fa-circle-o text-yellow"></i>
 							<span class="title">
 								@lang('global.analytical-dashboard.title')
 							</span>
@@ -74,7 +57,7 @@
 				@can('adwords_dashboard_access')
 				<li class="{{ $request->segment(2) == 'adwords_dashboards' ? 'active active-sub' : '' }}">
 						<a href="{{ route('admin.adwords_dashboards.index') }}">
-							<i class="fa fa-google"></i>
+							<i class="fa fa-google text-red"></i>
 							<span class="title">
 								@lang('global.adwords-dashboard.title')
 							</span>
@@ -84,7 +67,7 @@
 				@can('call_metric_access')
 				<li class="{{ $request->segment(2) == 'call_metrics' ? 'active active-sub' : '' }}">
 						<a href="{{ route('admin.call_metrics.index') }}">
-							<i class="fa fa-phone-square"></i>
+							<i class="fa fa-phone-square text-purple"></i>
 							<span class="title">
 								@lang('global.call-metrics.title')
 							</span>
@@ -94,7 +77,7 @@
 				@can('bookings_dashboard_access')
 				<li class="{{ $request->segment(2) == 'bookings_dashboards' ? 'active active-sub' : '' }}">
 						<a href="{{ route('admin.bookings_dashboards.index') }}">
-							<i class="fa fa-calendar-check-o"></i>
+							<i class="fa fa-calendar-check-o text-green"></i>
 							<span class="title">
 								@lang('global.bookings-dashboard.title')
 							</span>
