@@ -8,15 +8,17 @@ use App\Booking;
 use App\Http\Requests\Admin\StoreBookingsRequest;
 use App\Http\Requests\Admin\UpdateBookingsRequest;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Blade;
+
 
 
 class BookingsDashboardsController extends Controller
 {
-	protected $booking;
+	protected $bookings;
 
-	function __construct(Booking $booking)
+	function __construct(Booking $bookings)
 	{
-		$this->booking = $booking;
+		$this->booking = $bookings;
 	}
 
 
@@ -28,8 +30,11 @@ class BookingsDashboardsController extends Controller
      */
     public function index()
     {
+ 		$bookings = Booking::orderBy('submitted', 'desc')->get();
 
-    	$totalbookings = App\Booking::whereHas('requested_clinic')->count();
+ 		$total_bookings = Booking::all()->count();
+
+    	//$totalbookings = \App\Booking::whereHas('requested_clinic')->count();
 		// $count_preferred = Booking::whereHas('requested_clinic', function($q) use ($request) {
 		//     $q->where('question_id', $request->question_id);
 		//     $q->where('pref', 1);
@@ -162,6 +167,6 @@ class BookingsDashboardsController extends Controller
             return $table->make(true);
         }
 
-        return view('admin.bookings_dashboards.index', compact('totalbookings'));
+        return view('admin.bookings_dashboards.index', compact('bookings', 'booking', 'total_bookings'));
     }
 }
