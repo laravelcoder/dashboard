@@ -66,7 +66,7 @@
 				@if ( request('show_deleted') != 1 )
 					{data: 'massDelete', name: 'id', searchable: false, sortable: false},
 				@endif
-				@endcan
+			@endcan
 				{data: 'id', name: 'id', visible: false, searchable: false},
 				{data: 'submitted', name: 'submitted'},
 				{data: 'customername', name: 'customername'},

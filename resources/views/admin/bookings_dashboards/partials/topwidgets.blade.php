@@ -5,7 +5,7 @@
 
 		<div class="small-box bg-yellow">
 			<div class="inner">
-				<h3>TBD</h3>
+				<h3>{!! @$todays_bookings !!}</h3>
 				<h4>Today's Appointments</h4>
 			</div>
 			<div class="icon">
@@ -17,7 +17,7 @@
 	<div class="col-lg-3 col-xs-6">
 		<div class="small-box bg-aqua">
 			<div class="inner">
-				<h3>TBD</h3>
+				<h3>{{ @$this_weeks_bookings }}</h3>
 				<h4>This Week's Appointments</h4>
 			</div>
 			<div class="icon">

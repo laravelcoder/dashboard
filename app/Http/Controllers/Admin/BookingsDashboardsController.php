@@ -30,14 +30,20 @@ class BookingsDashboardsController extends Controller {
      */
     public function index() {
         $clinics = \App\Clinic::orderBy('nickname', 'asc')->pluck('nickname', 'id');
-        
+
         $locations = array();
         if (Input::get('clinic')) {
-            $locations = \App\Location::where('clinic_id',Input::get('clinic'))->orderBy('nickname','asc')->pluck('nickname', 'id');
+            $locations = \App\Location::where('clinic_id', Input::get('clinic'))->orderBy('nickname','asc')->pluck('nickname', 'id');
         }
 
         $start = Carbon::now()->subDay(6);
         $end = Carbon::now();
+
+        // $yesterday = Carbon::now()->subDays(1);
+        $yesterday = Carbon::yesterday();
+		$one_week_ago = Carbon::now()->subWeeks(1);
+
+
 
         if (Input::get('date-range')) {
             $date_range_arr = explode(' - ', Input::get('date-range'));
@@ -55,7 +61,7 @@ class BookingsDashboardsController extends Controller {
             $search_params['clinic'] = Input::get('clinic');
             $clinic_id = Input::get('clinic');
         }
-        
+
         $location_id = 0;
         if (Input::get('location_id')) {
             $search_params['location_id'] = Input::get('location_id');
@@ -65,13 +71,65 @@ class BookingsDashboardsController extends Controller {
         if ($clinic_id > 0) {
             $total_bookings = DB::table('bookings')
                         ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
-                        ->where('locations.clinic_id',$clinic_id)
-                        ->whereDate('bookings.submitted','>=',$start)
-                        ->whereDate('bookings.submitted','<=',$end);
+                        ->where('locations.clinic_id', $clinic_id);
+                        // ->whereDate('bookings.submitted','>=',$start)
+                        // ->whereDate('bookings.submitted','<=',$end);
             if($location_id > 0){
-                $total_bookings = $total_bookings->where('locations.id',$location_id);
+                $total_bookings = $total_bookings->where('locations.id', $location_id);
             }
+
             $total_bookings = $total_bookings->count();
+
+            // dd($total_bookings);
+
+
+
+            $todays_bookings = DB::table('bookings')
+                        ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
+                        ->where('locations.clinic_id', $clinic_id)
+                        // ->whereDate('bookings.submitted','>=',$end)
+                        ->whereDate('bookings.submitted', $end);
+
+            if($location_id > 0){
+                $todays_bookings = $todays_bookings->where('locations.id', $location_id);
+            }
+
+            $todays_bookings = $todays_bookings->count();
+            // dd($todays_bookings);
+
+
+            $this_weeks_bookings = DB::table('bookings')
+                ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
+                ->where('locations.clinic_id', $clinic_id)
+                ->whereDate('bookings.submitted','>=', $one_week_ago)
+                ->whereDate('bookings.submitted', '<=', $yesterday);
+
+            if($location_id > 0){
+                $this_weeks_bookings = $this_weeks_bookings->where('locations.id', $location_id);
+            }
+
+            $this_weeks_bookings = $this_weeks_bookings->count();
+
+
+   //          $this_months_bookings = DB::table('bookings')
+   //              ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
+   //              ->where('locations.clinic_id', $clinic_id)
+   //              ->whereDate('bookings.submitted','>=', $one_week_ago)
+   //              ->whereDate('bookings.submitted', '<=', $yesterday);
+
+   //          if($location_id > 0){
+   //              $this_months_bookings = $this_months_bookings->where('locations.id', $location_id);
+   //          }
+
+			// $this_month_bookings = $this_month_bookings->count();
+
+
+			$today = Carbon::today();
+			// dd($today);
+
+			$tomorrow = Carbon::tomorrow('America/Denver');
+			// dd($tomorrow);
+
         }
 
         if (!Gate::allows('booking_access')) {
@@ -84,7 +142,7 @@ class BookingsDashboardsController extends Controller {
             $query->where('locations.clinic_id', $clinic_id);
             $query->whereDate('bookings.submitted','>=',$start);
             $query->whereDate('bookings.submitted','<=',$end);
-            
+
             if($location_id > 0){
                 $query = $query->where('locations.id',$location_id);
             }
@@ -201,7 +259,7 @@ class BookingsDashboardsController extends Controller {
             return $table->make(true);
         }
 
-        return view('admin.bookings_dashboards.index', compact('total_bookings', 'search_params', 'clinics', 'clinic_id', 'locations', 'location_id'));
+        return view('admin.bookings_dashboards.index', compact('todays_bookings', 'total_bookings', 'search_params', 'clinics', 'clinic_id', 'locations', 'location_id', 'this_weeks_bookings'));
     }
 
 }
