@@ -5,7 +5,7 @@
 
 		<div class="small-box bg-yellow">
 			<div class="inner">
-				<h3>{!! @$todays_bookings !!}</h3>
+				<h3></h3>
 				<h4>Today's Appointments</h4>
 			</div>
 			<div class="icon">
@@ -17,7 +17,7 @@
 	<div class="col-lg-3 col-xs-6">
 		<div class="small-box bg-aqua">
 			<div class="inner">
-				<h3>{{ @$this_weeks_bookings }}</h3>
+				<h3></h3>
 				<h4>This Week's Appointments</h4>
 			</div>
 			<div class="icon">
@@ -67,7 +67,7 @@
 
 		<div class="small-box bg-green">
 			<div class="inner">
-				<h3> TBD</h3>
+				<h3>{!! @$todays_bookings !!}</h3>
 				<h4>Today's Bookings</h4>
 			</div>
 			<div class="icon">
@@ -81,7 +81,7 @@
 
 		<div class="small-box bg-green">
 			<div class="inner">
-				<h3>TBD </h3>
+				<h3>{{ @$this_weeks_bookings }}</h3>
 				<h4>This Week's Bookings</h4>
 			</div>
 			<div class="icon">
@@ -95,7 +95,7 @@
 
 		<div class="small-box bg-green">
 			<div class="inner">
-				<h3> TBD </h3>
+				<h3> {{ @$this_months_bookings }}</h3>
 				<h4>Bookings This Month</h4>
 			</div>
 			<div class="icon">
@@ -109,7 +109,7 @@
 
 		<div class="small-box bg-green">
 			<div class="inner">
-				<h3> TBD </h3>
+				<h3>{!! @$last_months_bookings !!}</h3>
 				<h4> Bookings Last Month </h4>
 			</div>
 			<div class="icon">

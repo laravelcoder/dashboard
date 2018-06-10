@@ -39,9 +39,9 @@ class BookingsDashboardsController extends Controller {
         $start = Carbon::now()->subDay(6);
         $end = Carbon::now();
 
-        // $yesterday = Carbon::now()->subDays(1);
         $yesterday = Carbon::yesterday();
 		$one_week_ago = Carbon::now()->subWeeks(1);
+		$today =  Carbon::now();
 
 
 
@@ -72,17 +72,11 @@ class BookingsDashboardsController extends Controller {
             $total_bookings = DB::table('bookings')
                         ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
                         ->where('locations.clinic_id', $clinic_id);
-                        // ->whereDate('bookings.submitted','>=',$start)
-                        // ->whereDate('bookings.submitted','<=',$end);
             if($location_id > 0){
                 $total_bookings = $total_bookings->where('locations.id', $location_id);
             }
 
             $total_bookings = $total_bookings->count();
-
-            // dd($total_bookings);
-
-
 
             $todays_bookings = DB::table('bookings')
                         ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
@@ -95,8 +89,6 @@ class BookingsDashboardsController extends Controller {
             }
 
             $todays_bookings = $todays_bookings->count();
-            // dd($todays_bookings);
-
 
             $this_weeks_bookings = DB::table('bookings')
                 ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
@@ -110,25 +102,35 @@ class BookingsDashboardsController extends Controller {
 
             $this_weeks_bookings = $this_weeks_bookings->count();
 
+ 			$firstDayofMonth = Carbon::now()->startOfMonth()->toDateString();
 
-   //          $this_months_bookings = DB::table('bookings')
-   //              ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
-   //              ->where('locations.clinic_id', $clinic_id)
-   //              ->whereDate('bookings.submitted','>=', $one_week_ago)
-   //              ->whereDate('bookings.submitted', '<=', $yesterday);
+            $this_months_bookings = DB::table('bookings')
+                ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
+                ->where('locations.clinic_id', $clinic_id)
+                ->whereDate('bookings.submitted','>=', $firstDayofMonth)
+                ->whereDate('bookings.submitted', '<=', $today);
 
-   //          if($location_id > 0){
-   //              $this_months_bookings = $this_months_bookings->where('locations.id', $location_id);
-   //          }
+            if($location_id > 0){
+                $this_months_bookings = $this_months_bookings->where('locations.id', $location_id);
+            }
 
-			// $this_month_bookings = $this_month_bookings->count();
+			$this_months_bookings = $this_months_bookings->count();
 
 
-			$today = Carbon::today();
-			// dd($today);
+			$firstDayofPreviousMonth = Carbon::now()->startOfMonth()->subMonth()->toDateString();
+			$lastDayofPreviousMonth = Carbon::now()->endOfMonth()->subMonth()->toDateString();
 
-			$tomorrow = Carbon::tomorrow('America/Denver');
-			// dd($tomorrow);
+            $last_months_bookings = DB::table('bookings')
+                ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
+                ->where('locations.clinic_id', $clinic_id)
+                ->whereDate('bookings.submitted','>=', $firstDayofPreviousMonth)
+                ->whereDate('bookings.submitted', '<=', $lastDayofPreviousMonth);
+
+            if($location_id > 0){
+                $last_months_bookings = $last_months_bookings->where('locations.id', $location_id);
+            }
+
+			$last_months_bookings = $last_months_bookings->count();
 
         }
 
@@ -259,7 +261,7 @@ class BookingsDashboardsController extends Controller {
             return $table->make(true);
         }
 
-        return view('admin.bookings_dashboards.index', compact('todays_bookings', 'total_bookings', 'search_params', 'clinics', 'clinic_id', 'locations', 'location_id', 'this_weeks_bookings'));
+        return view('admin.bookings_dashboards.index', compact('todays_bookings', 'total_bookings', 'search_params', 'clinics', 'clinic_id', 'locations', 'location_id', 'this_weeks_bookings', 'this_months_bookings', 'last_months_bookings'));
     }
 
 }
