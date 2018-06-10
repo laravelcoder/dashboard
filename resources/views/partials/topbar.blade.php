@@ -2,8 +2,7 @@
     <!-- Logo -->
     <a href="{{ url('/admin') }}" class="logo" style="font-size: 16px;">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini">
-           @lang('global.global_title')</span>
+        <span class="logo-mini"> <span style="color:#5cb85c">LCA</span> <span style="color:black;">Dashboard</span></span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">
            @lang('global.global_title')</span>

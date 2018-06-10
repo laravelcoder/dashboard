@@ -5,18 +5,18 @@
 	<section class="sidebar">
 		<ul class="sidebar-menu">
 
+<li class="header">MAIN NAVIGATION</li>
 
-
-			<li class="{{ $request->segment(1) == '/' ? 'active' : '' }}">
+{{-- 			<li class="{{ $request->segment(1) == '/' ? 'active' : '' }}">
 				<a href="{{ url('/') }}">
 					<i class="fa fa-wrench"></i>
 					<span class="title">@lang('global.app_dashboard')</span>
 				</a>
 			</li>
-
+ --}}
 
 			@can('dashboard_access')
-			<li class="treeview">
+			<li class="bg-primary treeview">
 				<a href="#">
 					<i class="fa fa-dashboard"></i>
 					<span class="title">@lang('global.dashboards.title')</span>
@@ -26,7 +26,7 @@
 				</a>
 				<ul class="treeview-menu">
 
-				@can('lca_dashboard_access')
+	{{-- 			@can('lca_dashboard_access')
 				<li class="{{ $request->segment(2) == 'lca_dashboards' ? 'active active-sub' : '' }}">
 						<a href="{{ route('admin.lca_dashboards.index') }}">
 							<i class="fa fa-circle-o text-aqua"></i>
@@ -34,16 +34,16 @@
 								@lang('global.lca-dashboard.title')
 							</span>
 						</a>
-						{{-- <ul class="treeview-menu">
+						<ul class="treeview-menu">
 							<li class="{{ $request->segment(2) == 'lca_dashboards' ? 'active active-sub' : '' }}">
 							{!! Form::text('clinic', null, ['class' => 'form-control', 'data-autogrow' => '',  'placeholder' => 'Clinic Select']) !!}
 								<ul class="treeview-menu">
 									<li> test </li>
 								</ul>
 							</li>
-						</ul> --}}
+						</ul>
 				</li>
-				@endcan
+				@endcan --}}
 				@can('analytical_dashboard_access')
 				<li class="{{ $request->segment(2) == 'analytical_dashboards' ? 'active active-sub' : '' }}">
 						<a href="{{ route('admin.analytical_dashboards.index') }}">
@@ -54,7 +54,7 @@
 						</a>
 					</li>
 				@endcan
-				@can('adwords_dashboard_access')
+	{{-- 			@can('adwords_dashboard_access')
 				<li class="{{ $request->segment(2) == 'adwords_dashboards' ? 'active active-sub' : '' }}">
 						<a href="{{ route('admin.adwords_dashboards.index') }}">
 							<i class="fa fa-google text-red"></i>
@@ -63,8 +63,8 @@
 							</span>
 						</a>
 					</li>
-				@endcan
-				@can('call_metric_access')
+				@endcan --}}
+{{-- 				@can('call_metric_access')
 				<li class="{{ $request->segment(2) == 'call_metrics' ? 'active active-sub' : '' }}">
 						<a href="{{ route('admin.call_metrics.index') }}">
 							<i class="fa fa-phone-square text-purple"></i>
@@ -73,7 +73,7 @@
 							</span>
 						</a>
 					</li>
-				@endcan
+				@endcan --}}
 				@can('bookings_dashboard_access')
 				<li class="{{ $request->segment(2) == 'bookings_dashboards' ? 'active active-sub' : '' }}">
 						<a href="{{ route('admin.bookings_dashboards.index') }}">
@@ -234,6 +234,7 @@
 				</ul>
 			</li>
 			@endcan
+
 			@can('task_management_access')
 			<li class="treeview">
 				<a href="#">
@@ -288,14 +289,7 @@
 				</ul>
 			</li>
 			@endcan
-			@can('api_test_access')
-			<li class="{{ $request->segment(2) == 'api_tests' ? 'active' : '' }}">
-				<a href="{{ route('admin.api_tests.index') }}">
-					<i class="fa fa-gears"></i>
-					<span class="title">@lang('global.api-test.title')</span>
-				</a>
-			</li>
-			@endcan
+
 
 
 

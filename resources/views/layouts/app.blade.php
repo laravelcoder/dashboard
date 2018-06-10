@@ -32,7 +32,7 @@
         <section class="content">
             @if(isset($siteTitle))
                 <h3 class="page-title">
-                    {{ $siteTitle }}
+                    LCA Dashboard
                 </h3>
             @endif
 
@@ -67,6 +67,7 @@
 {!! Form::close() !!}
 
 @include('partials.javascripts')
+
 @yield('bottomscripts')
 
 @yield('afterJQ')
