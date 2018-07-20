@@ -187,11 +187,11 @@ class ContactCompaniesController extends Controller
         if (! Gate::allows('contact_company_view')) {
             return abort(401);
         }
-        $contacts = \App\Contact::where('company_id', $id)->get();$websites = \App\Website::where('company_id', $id)->get();$adwords = \App\Adword::where('company_id', $id)->get();$clinics = \App\Clinic::where('company_id', $id)->get();
+        $contacts = \App\Contact::where('company_id', $id)->get();$websites = \App\Website::where('company_id', $id)->get();$adwords = \App\Adword::where('company_id', $id)->get();$clinics = \App\Clinic::where('company_id', $id)->get();$tracking_numbers = \App\TrackingNumber::where('company_id', $id)->get();
 
         $contact_company = ContactCompany::findOrFail($id);
 
-        return view('admin.contact_companies.show', compact('contact_company', 'contacts', 'websites', 'adwords', 'clinics'));
+        return view('admin.contact_companies.show', compact('contact_company', 'contacts', 'websites', 'adwords', 'clinics', 'tracking_numbers'));
     }
 
 

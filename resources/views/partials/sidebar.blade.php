@@ -186,6 +186,14 @@
 						</a>
 					</li>
 				@endcan
+                @can('tracking_number_access')
+                <li>
+                    <a href="{{ route('admin.tracking_numbers.index') }}">
+                        <i class="fa fa-gears"></i>
+                        <span>@lang('global.tracking-numbers.title')</span>
+                    </a>
+                </li>
+                @endcan
 				</ul>
 			</li>
 			@endcan
@@ -338,4 +346,3 @@
 		</ul>
 	</section>
 </aside>
-

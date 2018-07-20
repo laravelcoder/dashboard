@@ -33,10 +33,6 @@
                             <td field-key='last_name'>{{ isset($location->contact_person) ? $location->contact_person->last_name : '' }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('global.contacts.fields.email')</th>
-                            <td field-key='email'>{{ isset($location->contact_person) ? $location->contact_person->email : '' }}</td>
-                        </tr>
-                        <tr>
                             <th>@lang('global.locations.fields.address')</th>
                             <td field-key='address'>{{ $location->address }}</td>
                         </tr>
@@ -82,6 +78,7 @@
 <ul class="nav nav-tabs" role="tablist">
     
 <li role="presentation" class="active"><a href="#zipcodes" aria-controls="zipcodes" role="tab" data-toggle="tab">Zipcodes</a></li>
+<li role="presentation" class=""><a href="#tracking_numbers" aria-controls="tracking_numbers" role="tab" data-toggle="tab">Tracking numbers</a></li>
 </ul>
 
 <!-- Tab panes -->
@@ -111,31 +108,31 @@
                                         'style' => 'display: inline-block;',
                                         'method' => 'POST',
                                         'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['zipcodes.restore', $zipcode->id])) !!}
+                                        'route' => ['admin.zipcodes.restore', $zipcode->id])) !!}
                                     {!! Form::submit(trans('global.app_restore'), array('class' => 'btn btn-xs btn-success')) !!}
                                     {!! Form::close() !!}
                                                                     {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
                                         'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['zipcodes.perma_del', $zipcode->id])) !!}
+                                        'route' => ['admin.zipcodes.perma_del', $zipcode->id])) !!}
                                     {!! Form::submit(trans('global.app_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                                                 </td>
                                 @else
                                 <td>
-                                    @can('view')
-                                    <a href="{{ route('zipcodes.show',[$zipcode->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
+                                    @can('zipcode_view')
+                                    <a href="{{ route('admin.zipcodes.show',[$zipcode->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
                                     @endcan
-                                    @can('edit')
-                                    <a href="{{ route('zipcodes.edit',[$zipcode->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    @can('zipcode_edit')
+                                    <a href="{{ route('admin.zipcodes.edit',[$zipcode->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @endcan
-                                    @can('delete')
+                                    @can('zipcode_delete')
 {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
                                         'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['zipcodes.destroy', $zipcode->id])) !!}
+                                        'route' => ['admin.zipcodes.destroy', $zipcode->id])) !!}
                                     {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                     @endcan
@@ -146,6 +143,76 @@
         @else
             <tr>
                 <td colspan="8">@lang('global.app_no_entries_in_table')</td>
+            </tr>
+        @endif
+    </tbody>
+</table>
+</div>
+<div role="tabpanel" class="tab-pane " id="tracking_numbers">
+<table class="table table-bordered table-striped {{ count($tracking_numbers) > 0 ? 'datatable' : '' }}">
+    <thead>
+        <tr>
+            <th>@lang('global.tracking-numbers.fields.metrics-id')</th>
+                        <th>@lang('global.tracking-numbers.fields.number')</th>
+                        <th>@lang('global.tracking-numbers.fields.location')</th>
+                        <th>@lang('global.tracking-numbers.fields.company')</th>
+                        @if( request('show_deleted') == 1 )
+                        <th>&nbsp;</th>
+                        @else
+                        <th>&nbsp;</th>
+                        @endif
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (count($tracking_numbers) > 0)
+            @foreach ($tracking_numbers as $tracking_number)
+                <tr data-entry-id="{{ $tracking_number->id }}">
+                    <td field-key='metrics_id'>{{ $tracking_number->metrics_id }}</td>
+                                <td field-key='number'>{{ $tracking_number->number }}</td>
+                                <td field-key='location'>{{ $tracking_number->location->nickname or '' }}</td>
+                                <td field-key='company'>{{ $tracking_number->company->name or '' }}</td>
+                                @if( request('show_deleted') == 1 )
+                                <td>
+                                    {!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'POST',
+                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                        'route' => ['admin.tracking_numbers.restore', $tracking_number->id])) !!}
+                                    {!! Form::submit(trans('global.app_restore'), array('class' => 'btn btn-xs btn-success')) !!}
+                                    {!! Form::close() !!}
+                                                                    {!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'DELETE',
+                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                        'route' => ['admin.tracking_numbers.perma_del', $tracking_number->id])) !!}
+                                    {!! Form::submit(trans('global.app_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
+                                                                </td>
+                                @else
+                                <td>
+                                    @can('tracking_number_view')
+                                    <a href="{{ route('admin.tracking_numbers.show',[$tracking_number->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
+                                    @endcan
+                                    @can('tracking_number_edit')
+                                    <a href="{{ route('admin.tracking_numbers.edit',[$tracking_number->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    @endcan
+                                    @can('tracking_number_delete')
+{!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'DELETE',
+                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                        'route' => ['admin.tracking_numbers.destroy', $tracking_number->id])) !!}
+                                    {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
+                                    @endcan
+                                </td>
+                                @endif
+                </tr>
+            @endforeach
+        @else
+            <tr>
+                <td colspan="9">@lang('global.app_no_entries_in_table')</td>
             </tr>
         @endif
     </tbody>
