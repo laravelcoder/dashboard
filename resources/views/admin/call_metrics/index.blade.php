@@ -17,7 +17,7 @@
 
     {!! Form::open(['method' => 'get','id' => 'filter_form']) !!}
     <div class="row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
             <label>Date Range</label>
             <div class="input-group">
                 <div class="input-group-addon">
@@ -26,23 +26,29 @@
                 <input type="text" name="date-range" class="form-control pull-right" value="{!!@$search_params['date-range']!!}">
             </div>
         </div>
-        <div class="form-group col-md-4">
-            <label for="inputWebsite">Account</label>
-            <select class="form-control" id="account" name="account">
-            @foreach($accounts as $account)
-                @if(isset($search_params['account']) && $search_params['account'] == $account->id)
-                    <option value="{!! $account->id !!}" selected>{{ $account->name }}</option>
-                @else
-                    <option value="{!! $account->id !!}">{{ $account->name }}</option>
-                @endif
-            @endforeach
+        <div class="form-group col-md-3">
+            <label>Company</label>
+            <select class="form-control" name="company_id" required>
+                <option value="" @if(empty($search_params['company_id'])) selected @endif>SELECT COMPANY</option>
+                @foreach($companies as $item)
+                    <option value="{!! $item->id !!}" @if($search_params['company_id'] == $item->id) selected @endif>{{ $item->name }}</option>
+                @endforeach
             </select>
         </div>
-        <div class="form-group col-md-4">
-            <label for="view">Numbers</label>
-            <select name="numbers[]" class="form-control" style="width: 100%" multiple>
-                @foreach($search_params['numbers'] as $number)
-                    <option selected value="{!! json_encode($number) !!}" selected>{{ $number->number }}</option>
+        <div class="form-group col-md-3">
+            <label>Location</label>
+            <select class="form-control" name="location_id">
+                <option value="" @if(empty($search_params['location_id'])) selected @endif>All Locations</option>
+                @foreach($locations as $item)
+                    <option value="{!! $item->id !!}" @if($search_params['location_id'] == $item->id) selected @endif>{{ $item->nickname }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label>Numbers</label>
+            <select class="form-control" name="tracking_number_ids[]" multiple>
+                @foreach($tracking_numbers as $item)
+                    <option value="{!! $item->id !!}" @if(in_array($item->id, $search_params['tracking_number_ids'])) selected @endif>{{ $item->number }}</option>
                 @endforeach
             </select>
         </div>
@@ -74,38 +80,47 @@
                 $('#filter_form').submit();
             });
 
-            $('select[name=account]').on('change',function () {
+            $('select[name=company_id]').on('change',function () {
+                $('select[name="tracking_number_ids[]"]').val('').trigger('change');
                 $('#filter_form').submit();
             });
-
-            $(function () {
-
-                $('select[name="numbers[]"]').select2({
-                    placeholder: 'Select Numbers',
-                    multiple: true,
-                    ajax: {
-                        url: '/admin/call_metrics/numbers-select2',
-                        dataType: 'json',
-                        delay: 250,
-                        data: function (params) {
-                            return {
-                                account_id: $('select[name=account]').val(),
-                                page: params.page || 1
-                            };
-                        },processResults(data,params) {
-                            data.results.map((item)=>{
-                                item.text = item.number;
-                                item.id = JSON.stringify({
-                                    id: item.id,
-                                    number: item.number
-                                })
-                            });
-
-                            return data;
-                        }
-                    }
-                });
+            $('select[name=location_id]').on('change',function () {
+                $('select[name="tracking_number_ids[]"]').val('').trigger('change');
+                $('#filter_form').submit();
             });
+            $('select[name="tracking_number_ids[]"]').select2({
+                placeholder: 'Select Numbers',
+                multiple: true
+            });
+
+            // $(function () {
+            //
+            //     $('select[name="numbers[]"]').select2({
+            //         placeholder: 'Select Numbers',
+            //         multiple: true,
+            //         ajax: {
+            //             url: '/admin/call_metrics/numbers-select2',
+            //             dataType: 'json',
+            //             delay: 250,
+            //             data: function (params) {
+            //                 return {
+            //                     account_id: $('select[name=account]').val(),
+            //                     page: params.page || 1
+            //                 };
+            //             },processResults(data,params) {
+            //                 data.results.map((item)=>{
+            //                     item.text = item.number;
+            //                     item.id = JSON.stringify({
+            //                         id: item.id,
+            //                         number: item.number
+            //                     })
+            //                 });
+            //
+            //                 return data;
+            //             }
+            //         }
+            //     });
+            // });
         });
     </script>
 @endsection

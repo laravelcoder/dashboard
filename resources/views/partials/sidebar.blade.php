@@ -58,7 +58,7 @@
 					<a href="{{ route('admin.call_metrics.index') }}">
 						<i class="fa fa-circle-o text-yellow"></i>
 						<span class="title">
-							@lang('global.call-metrics-dashboard.title')
+							@lang('global.call-metrics.title')
 						</span>
 					</a>
 				</li>

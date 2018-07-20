@@ -1,8 +1,11 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\ContactCompany;
 use App\Http\Controllers\Controller;
+use App\Location;
 use App\Services\CallMetricApi;
+use App\TrackingNumber;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -11,7 +14,7 @@ class CallMetricsController extends Controller
 {
     public function index(Request $request)
     {
-        
+        $search_params = ['date-range'=>'','location_id'=>'','company_id'=>'','tracking_number_ids'=>[]];
         $start = Carbon::now()->subDay(6);
         $end = Carbon::now();
         if ($request->get('date-range')) {
@@ -20,46 +23,59 @@ class CallMetricsController extends Controller
             $end = Carbon::parse($date_range_arr[1]);
         }
 
-        $search_params = ['account'=>'','numbers'=>[]];
         if ($start && $end) {
             $search_params['date-range'] = date('m/d/Y', strtotime($start)) . ' - ' . date('m/d/Y', strtotime($end));
         }
 
-        if ($request->get('account')) {
-            $search_params['account'] = $request->get('account');
+        $company_id = $request->get('company_id');
+        $location_id = $request->get('location_id');
+        $companies = ContactCompany::select('name','id')->get();
+        $selectedCompany = null;
+        $locations = new Collection();
+        if($company_id) {
+            $selectedCompany = $companies->where('id',$company_id)->first();
+            $locations = Location::byTrackingNumberCompany($company_id)
+                ->select('id','nickname')
+                ->get();
         }
-        if ($request->get('numbers')) {
-            $numbers = $request->get('numbers');
-            foreach ($numbers as $numberJson) {
-                $search_params['numbers'][] = json_decode($numberJson);
-            }
+
+        $tracking_numbers = new Collection();
+        $trackingQuery = TrackingNumber::query();
+        if(!empty($location_id)) {
+            $trackingQuery = $trackingQuery->where('location_id',$location_id);
+            $search_params['location_id'] = $location_id;
         }
+        if($selectedCompany) {
+            $trackingQuery = $trackingQuery->where('company_id',$selectedCompany->id);
+            $search_params['company_id'] = $selectedCompany->id;
+            $tracking_numbers = $trackingQuery->get();
+        }
+        if(!empty($request->get('tracking_number_ids'))){
+            $search_params['tracking_number_ids'] = $request->get('tracking_number_ids');
+        }
+        if(count($search_params['tracking_number_ids'])===0 && count($tracking_numbers)>0)
+            $search_params['tracking_number_ids'] = $tracking_numbers->pluck('id')->toArray();
 
         $service = new CallMetricApi();
-        $accounts = $service->getAllAccounts();
-
-        if(empty($search_params['account']) && count($accounts)>0) {
-            $search_params['account'] = $accounts->first()->id;
-        }
-        return view('admin.call_metrics.index', compact('accounts','search_params'));
+        return view('admin.call_metrics.index', compact('locations','companies', 'tracking_numbers','search_params'));
     }
 
-    public function numbersSelect2(Request $request) {
-        $service = new CallMetricApi();
-        $account_id = $request->get('account_id');
-        $page = $request->get('page');
-        $paginator = $service->getNumbersForAccount($account_id,$page);
-        $mappedItems = $paginator->map(function($item){
-            return [
-                'id'=>$item->id,
-                'number'=>$item->number
-            ];
-        });
-        return response()->json([
-            'results'=>$mappedItems,
-            'pagination'=>[
-                'more'=>$paginator->hasMorePages()
-            ]
-        ]);
-    }
+//    public function numbersSelect2(Request $request) {
+//        $service = new CallMetricApi();
+//        $account_id = $request->get('account_id');
+//        $page = $request->get('page');
+//        $paginator = $service->getNumbersForAccount($account_id,$page);
+//        $mappedItems = $paginator->map(function($item){
+//            return [
+//                'id'=>$item->id,
+//                'number'=>$item->number
+//            ];
+//        });
+//        return response()->json([
+//            'results'=>$mappedItems,
+//            'pagination'=>[
+//                'more'=>$paginator->hasMorePages()
+//            ]
+//        ]);
+//    }
 }

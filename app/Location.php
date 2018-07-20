@@ -103,4 +103,12 @@ class Location extends Model
     public function zipcodes() {
         return $this->hasMany(Zipcode::class, 'location_id');
     }
+
+    public function scopeByTrackingNumberCompany($query, $company_id) {
+        $query->whereIn('id',function ($q) use ($company_id) {
+            $q->from('tracking_numbers')
+                ->where('company_id',$company_id)
+                ->select('location_id');
+        });
+    }
 }
