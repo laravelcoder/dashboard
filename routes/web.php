@@ -99,6 +99,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('lca_dashboards', 'Admin\LcaDashboardsController');
     Route::resource('analytical_dashboards', 'Admin\AnalyticalDashboardsController');
     Route::resource('adwords_dashboards', 'Admin\AdwordsDashboardsController');
+    Route::get('call_metrics/numbers-select2', 'Admin\CallMetricsController@numbersSelect2')->name('callmetrics.numbers-select2');
     Route::resource('call_metrics', 'Admin\CallMetricsController');
     Route::resource('bookings_dashboards', 'Admin\BookingsDashboardsController');
     Route::resource('zipcodes', 'Admin\ZipcodesController');

@@ -146,6 +146,12 @@ return [
 		'fields' => [
 		],
 	],
+
+    'call-metrics-dashboard' => [
+        'title' => 'Call Metrics Dashboard',
+        'fields' => [
+        ],
+    ],
 	
 	'analytical-dashboard' => [
 		'title' => 'Analytical Dashboard',

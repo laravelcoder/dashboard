@@ -34,7 +34,8 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-
-    
-
+    'callmetric' => [
+        'api_key' => env('CALLMETRIC_API_KEY'),
+        'api_secret' => env('CALLMETRIC_API_SECRET'),
+    ]
 ];

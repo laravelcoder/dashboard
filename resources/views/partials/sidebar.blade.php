@@ -54,6 +54,14 @@
 						</a>
 					</li>
 				@endcan
+				<li class="{{ $request->segment(2) == 'call_metrics' ? 'active active-sub' : '' }}">
+					<a href="{{ route('admin.call_metrics.index') }}">
+						<i class="fa fa-circle-o text-yellow"></i>
+						<span class="title">
+							@lang('global.call-metrics-dashboard.title')
+						</span>
+					</a>
+				</li>
 	{{-- 			@can('adwords_dashboard_access')
 				<li class="{{ $request->segment(2) == 'adwords_dashboards' ? 'active active-sub' : '' }}">
 						<a href="{{ route('admin.adwords_dashboards.index') }}">
