@@ -120,6 +120,11 @@ class PermissionSeed extends Seeder
             ['id' => 111, 'title' => 'api_test_edit',],
             ['id' => 112, 'title' => 'api_test_view',],
             ['id' => 113, 'title' => 'api_test_delete',],
+            ['id' => 114, 'title' => 'tracking_number_access',],
+            ['id' => 115, 'title' => 'tracking_number_create',],
+            ['id' => 116, 'title' => 'tracking_number_edit',],
+            ['id' => 117, 'title' => 'tracking_number_view',],
+            ['id' => 118, 'title' => 'tracking_number_delete',],
 
         ];
 
