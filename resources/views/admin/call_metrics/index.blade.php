@@ -58,6 +58,38 @@
     </div>
     {!! Form::close() !!}
     <hr style="clear:both" />
+    @if($reportDto!==null)
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @lang('global.call_metrics')
+        </div>
+
+        <div class="panel-body table-responsive">
+            <table class="table table-bordered table-striped js-dt">
+                <thead>
+                    <tr>
+                        <th>@lang('global.call-metrics.source')</th>
+                        @foreach($reportDto->metrics as $header)
+                            <th>{!! $reportDto->metricMapping[$header] !!}</th>
+                        @endforeach
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($reportDto->groups as $group)
+                        <tr>
+                            <td>{{ $group->id }}</td>
+                            @foreach($group->metrics as $metricName => $metric)
+                                <td>
+                                    {!! $reportDto->getDisplayableValue($metricName,$metric) !!}
+                                </td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @endif
 @endsection
 
 @section('bottomscripts')
@@ -88,6 +120,7 @@
                 $('select[name="tracking_number_ids[]"]').val('').trigger('change');
                 $('#filter_form').submit();
             });
+            $('.js-dt').DataTable({});
             $('select[name="tracking_number_ids[]"]').select2({
                 placeholder: 'Select Numbers',
                 multiple: true

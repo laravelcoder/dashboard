@@ -3,6 +3,7 @@
 namespace App\Services;
 
 
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -60,6 +61,39 @@ class CallMetricApi {
             report($e);
         }
         return $paginator;
+    }
+
+    /**
+     * @param $page
+     * @param Carbon $start_date
+     * @param Carbon $end_date
+     * @return mixed|null
+     */
+    public function getReportSeries($accountId, $page, $start_date, $end_date) {
+        if(empty($page) || $page<1)
+            $page = 1;
+
+        $decoded = null;
+        try {
+            $resp = $this->executeRequest("accounts/$accountId/reports/series.json",'GET',[
+                'query'=>[
+                    'with_time'=>1,
+                    'page'=>$page,
+                    'by'=>'source',
+                    'start_date'=>$start_date->format('Y-m-d'),
+                    'end_date'=>$end_date->format('Y-m-d')
+                ]
+            ]);
+            $jsonResponse = $resp->getBody()->getContents();
+
+            if(!empty($jsonResponse)) {
+                $decoded = json_decode($jsonResponse);
+            }
+        } catch (GuzzleException $e) {
+
+            report($e);
+        }
+        return $decoded;
     }
 
     public function getAllAccounts(){

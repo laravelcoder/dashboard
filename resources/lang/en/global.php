@@ -18,7 +18,25 @@ return [
 		'lca-dashboard' => [		'title' => 'LCA Dashboard',		'fields' => [		],	],
 		'analytical-dashboard' => [		'title' => 'Analytical Dashboard',		'fields' => [		],	],
 		'adwords-dashboard' => [		'title' => 'Adwords Dashboard',		'fields' => [		],	],
-		'call-metrics' => [		'title' => 'Call Metrics Dashboard',		'fields' => [		],	],
+		'call_metrics'=>'Call Metrics',
+	'call-metrics' => [
+		'title' => 'Call Metrics Dashboard',
+        'source' => 'Source',
+        'metrics' => [
+            'total'=>"Total",
+            'period_unique'=>"Period Unique",
+            'global_unique'=>"Global Unique",
+            'ring_time'=>"Ring Time",
+            'talk_time'=>"Talk Time",
+            'duration'=>"Duration",
+            'score'=>"Score",
+            'conversion'=>"Conversion",
+            'revenue'=>"Revenue",
+            'conversion_rate'=>"Conversion Rate",
+        ],
+		'fields' => [
+		],
+	],
 		'bookings-dashboard' => [		'title' => 'Bookings Dashboard',		'fields' => [		],	],
 		'bookings' => [		'title' => 'Bookings',		'fields' => [			'customername' => 'Customername',			'phone' => 'Phone',			'family-number' => 'Family number',			'email' => 'Email',			'how-long' => 'How long',			'requested-date' => 'Requested date',			'requested-time' => 'Requested time',			'requested-clinic' => 'Requested clinic',			'clinic-id' => 'Clinic id',			'clinic-email' => 'Clinic email',			'clinic-address' => 'Clinic address',			'clinic-phone' => 'Clinic phone',			'clinic-text-numbers' => 'Clinic text numbers',			'client-firstname' => 'Client firstname',			'submitted-user-city' => 'Submitted user city',			'submitted-user-state' => 'Submitted user state',			'searched-for' => 'Searched for',			'latitude' => 'Latitude',			'longitude' => 'Longitude',			'country' => 'Country',			'submitted' => 'Submitted',		],	],
 		'zipcodes' => [		'title' => 'Zipcodes',		'fields' => [			'zipcode' => 'Zipcode',			'clinic' => 'Clinic',			'location' => 'Location',		],	],

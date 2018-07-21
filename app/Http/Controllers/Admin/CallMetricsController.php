@@ -2,9 +2,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\ContactCompany;
+use App\DTO\CalllMetricReportDTO;
 use App\Http\Controllers\Controller;
 use App\Location;
 use App\Services\CallMetricApi;
+use App\Services\CallMetricReports;
 use App\TrackingNumber;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -56,8 +58,15 @@ class CallMetricsController extends Controller
         if(count($search_params['tracking_number_ids'])===0 && count($tracking_numbers)>0)
             $search_params['tracking_number_ids'] = $tracking_numbers->pluck('id')->toArray();
 
-        $service = new CallMetricApi();
-        return view('admin.call_metrics.index', compact('locations','companies', 'tracking_numbers','search_params'));
+        $filterable_tracking_numbers = $tracking_numbers->filter(function ($tracking_number) use ($search_params) {
+            return in_array($tracking_number->id, $search_params['tracking_number_ids']);
+        })->pluck('metrics_id')->toArray();
+
+        $reportDto = null;
+        if(!empty($search_params['tracking_number_ids']))
+            $reportDto = (new CallMetricReports())->getReport($start, $end, $filterable_tracking_numbers);
+
+        return view('admin.call_metrics.index', compact('locations','companies', 'tracking_numbers','search_params','reportDto'));
     }
 
 //    public function numbersSelect2(Request $request) {
