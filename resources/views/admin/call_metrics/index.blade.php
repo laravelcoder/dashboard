@@ -58,7 +58,7 @@
     </div>
     {!! Form::close() !!}
     <hr style="clear:both" />
-    @if($reportDto!==null)
+    @if($reportDto!==null && count($reportDto->groups)>0)
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('global.call_metrics')

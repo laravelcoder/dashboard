@@ -7,21 +7,26 @@
  */
 
 namespace App\DTO;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
-
-use function foo\func;
-
-class CalllMetricReportDTO
+class CallMetricReportDTO implements \JsonSerializable
 {
     public $metricMapping;
     public $metrics;
     public $series;
+    /**
+     * Undocumented variable
+     *
+     * @var LengthAwarePaginator
+     */
     public $groups;
     public $aggregation;
 
     public function __construct()
     {
         $this->metricMapping = __('global.call-metrics.metrics');
+        $this->groups = new Paginator([],0,10,1);
     }
 
     public function getDisplayableValue($metric, $metricData) {
@@ -50,5 +55,12 @@ class CalllMetricReportDTO
         ];
 
         return $metricFormatters[$metric]($metricData);
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'groups'=>$this->groups
+        ];
     }
 }

@@ -2,50 +2,73 @@
 
 namespace App\Services;
 
-
-use App\DTO\CalllMetricReportDTO;
+use App\DTO\CallMetricReportDTO;
 use Illuminate\Support\Collection;
 use function GuzzleHttp\json_encode;
+use App\DTO\CallMetricReportOptions;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CallMetricReports {
     /**
-     * @return null|CalllMetricReportDTO
+     * Undocumented variable
+     *
+     * @var CallMetricApi
      */
-    public function getReport($start_date, $end_date, $metrics){
-        $dto = null;
-        $service = new CallMetricApi();
-        $account = $service->getAllAccounts();
-        if(count($account)>0) {
-            $dto = new CalllMetricReportDTO();
-            $groups = [];
-            $accountId = $account[0]->id;
-            $page = 0;
-            $last_page = 1;
-            do {
-                $page++;
-                $resp = $service->getReportSeries($accountId, $page, $start_date, $end_date);
+    protected $service;
+    /**
+     * Undocumented variable
+     *
+     * @var array
+     */
+    protected $accounts;
 
+    public function __construct()
+    {
+        $this->service = new CallMetricApi();
+        $this->initAccounts();
+    }
+
+    protected function initAccounts() {
+        $this->accounts = $this->service->getAllAccounts();
+    }
+
+    protected function getTrackingNumberFilters($numbers) {
+        $filterIds = [];
+        foreach ($numbers as $number) {
+            
+            foreach ($this->accounts as $callMetricAccount) {
+                $result = $this->service->getNumbersForAccount($callMetricAccount->id, 1,$number);
+
+                foreach ($result as $callMetricTrackingNumber) {
+                    $filterIds[] = $callMetricTrackingNumber->filter_id;
+                }
+            }
+        }
+        
+        return $filterIds;
+    }
+
+    /**
+     * @return null|CallMetricReportDTO
+     */
+    public function getReport(CallMetricReportOptions $options, $tracking_numbers){
+        $dto = null;
+        
+        if(count($this->accounts)>0) {
+            $options->tracking_numbers_filter_ids = $this->getTrackingNumberFilters($tracking_numbers);
+            $dto = new CallMetricReportDTO();
+            $groups = [];
+            $accountId = $this->accounts[0]->id;
+            if (count($options->tracking_numbers_filter_ids) > 0) {
+                $resp = $this->service->getReportSeries($accountId, $options);
                 if($resp!==null) {
                     $dto->metrics = $resp->metrics;
                     $dto->series = $resp->series;
-                    $groups = array_merge($groups,$resp->groups->items);
+                    $dto->groups = new LengthAwarePaginator($resp->groups->items,$resp->groups->total_entries,$resp->groups->per_page,$resp->groups->page);
                     $last_page = $resp->groups->total_pages;
                 }
-            } while($page<$last_page);
-
-            $dto->groups = new Collection($groups);
-            
-            $dto->groups = $dto->groups->filter(function ($group) use ($metrics) {
-                $incCollection = $group->name->includes;
-                foreach ($incCollection as $include) {
-                    if(isset($include->tracking_number) && in_array($include->tracking_number, $metrics))
-                        return true;
-                }
-
-                return false;
-            });
+            }
         }
-
         return $dto;
     }
 }

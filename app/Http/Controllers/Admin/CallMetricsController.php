@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\ContactCompany;
-use App\DTO\CalllMetricReportDTO;
+use App\DTO\CallMetricReportDTO;
 use App\Http\Controllers\Controller;
 use App\Location;
 use App\Services\CallMetricApi;
@@ -11,6 +11,7 @@ use App\TrackingNumber;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use App\DTO\CallMetricReportOptions;
 
 class CallMetricsController extends Controller
 {
@@ -19,6 +20,7 @@ class CallMetricsController extends Controller
         $search_params = ['date-range'=>'','location_id'=>'','company_id'=>'','tracking_number_ids'=>[]];
         $start = Carbon::now()->subDay(6);
         $end = Carbon::now();
+        
         if ($request->get('date-range')) {
             $date_range_arr = explode(' - ', $request->get('date-range'));
             $start = Carbon::parse($date_range_arr[0]);
@@ -65,8 +67,18 @@ class CallMetricsController extends Controller
         })->toArray();
 
         $reportDto = null;
-        if(!empty($search_params['tracking_number_ids']))
-            $reportDto = (new CallMetricReports())->getReport($start, $end, $filterable_tracking_numbers);
+        if(!empty($search_params['tracking_number_ids'])) {
+            $callMetricOptions = new CallMetricReportOptions();
+            $callMetricOptions->start_date = $start;
+            $callMetricOptions->end_date = $end;
+            $callMetricOptions->sort = 'total';
+            $callMetricOptions->sortDir = 'asc';
+            if ($request->get('page')) {
+                $callMetricOptions->page = $request->get('page');
+            }
+            $reportDto = (new CallMetricReports())->getReport($callMetricOptions, $filterable_tracking_numbers);
+        }
+            
 
         return view('admin.call_metrics.index', compact('locations','companies', 'tracking_numbers','search_params','reportDto'));
     }
