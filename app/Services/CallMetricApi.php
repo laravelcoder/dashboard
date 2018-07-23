@@ -79,7 +79,7 @@ class CallMetricApi {
                 'query'=>[
                     'with_time'=>1,
                     'page'=>$page,
-                    'by'=>'source',
+                    'by'=>'tracking_number',
                     'start_date'=>$start_date->format('Y-m-d'),
                     'end_date'=>$end_date->format('Y-m-d')
                 ]

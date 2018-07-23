@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\DTO\CalllMetricReportDTO;
 use Illuminate\Support\Collection;
+use function GuzzleHttp\json_encode;
 
 class CallMetricReports {
     /**
@@ -33,8 +34,15 @@ class CallMetricReports {
             } while($page<$last_page);
 
             $dto->groups = new Collection($groups);
+            
             $dto->groups = $dto->groups->filter(function ($group) use ($metrics) {
-                return in_array($group->id, $metrics);
+                $incCollection = $group->name->includes;
+                foreach ($incCollection as $include) {
+                    if(isset($include->tracking_number) && in_array($include->tracking_number, $metrics))
+                        return true;
+                }
+
+                return false;
             });
         }
 

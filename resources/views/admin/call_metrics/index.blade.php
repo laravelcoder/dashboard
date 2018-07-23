@@ -68,7 +68,7 @@
             <table class="table table-bordered table-striped js-dt">
                 <thead>
                     <tr>
-                        <th>@lang('global.call-metrics.source')</th>
+                        <th>@lang('global.call-metrics.by-dimension')</th>
                         @foreach($reportDto->metrics as $header)
                             <th>{!! $reportDto->metricMapping[$header] !!}</th>
                         @endforeach
@@ -77,7 +77,12 @@
                 <tbody>
                     @foreach($reportDto->groups as $group)
                         <tr>
-                            <td>{{ $group->id }}</td>
+                            <td>
+                                <div>
+                                    {{ $group->name->name }} 
+                                </div>
+                                <small>{{ $group->name->desc }}</small>
+                            </td>
                             @foreach($group->metrics as $metricName => $metric)
                                 <td>
                                     {!! $reportDto->getDisplayableValue($metricName,$metric) !!}
