@@ -107,10 +107,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('zipcodes_mass_destroy', ['uses' => 'Admin\ZipcodesController@massDestroy', 'as' => 'zipcodes.mass_destroy']);
     Route::post('zipcodes_restore/{id}', ['uses' => 'Admin\ZipcodesController@restore', 'as' => 'zipcodes.restore']);
     Route::delete('zipcodes_perma_del/{id}', ['uses' => 'Admin\ZipcodesController@perma_del', 'as' => 'zipcodes.perma_del']);
-    Route::resource('api_tests', 'Admin\ApiTestsController');
-    Route::post('api_tests_mass_destroy', ['uses' => 'Admin\ApiTestsController@massDestroy', 'as' => 'api_tests.mass_destroy']);
-    Route::post('api_tests_restore/{id}', ['uses' => 'Admin\ApiTestsController@restore', 'as' => 'api_tests.restore']);
-    Route::delete('api_tests_perma_del/{id}', ['uses' => 'Admin\ApiTestsController@perma_del', 'as' => 'api_tests.perma_del']);
+
+	Route::resource('tracking_numbers', 'Admin\TrackingNumbersController');
+    Route::post('tracking_numbers_mass_destroy', ['uses' => 'Admin\TrackingNumbersController@massDestroy', 'as' => 'tracking_numbers.mass_destroy']);
+    Route::post('tracking_numbers_restore/{id}', ['uses' => 'Admin\TrackingNumbersController@restore', 'as' => 'tracking_numbers.restore']);
+    Route::delete('tracking_numbers_perma_del/{id}', ['uses' => 'Admin\TrackingNumbersController@perma_del', 'as' => 'tracking_numbers.perma_del']);
+
 
     Route::model('messenger', 'App\MessengerTopic');
     Route::get('messenger/inbox', 'Admin\MessengerController@inbox')->name('messenger.inbox');
