@@ -19,5 +19,7 @@ Route::group(['prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], funct
         Route::resource('zipcodes', 'ZipcodesController', ['except' => ['create', 'edit']]);
 
         Route::resource('api_tests', 'ApiTestsController', ['except' => ['create', 'edit']]);
+	
+	    Route::resource('tracking_numbers', 'TrackingNumbersController', ['except' => ['create', 'edit']]);
 
 });
