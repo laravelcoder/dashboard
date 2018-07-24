@@ -2,9 +2,9 @@
 
 @section('topscripts')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="{!! asset('/javascript/embed-api/components/date-range-selector.js') !!}"></script>
-    <script src="{!! asset('/javascript/embed-api/components/active-users.js') !!}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 @endsection
 
 @section('content')
@@ -64,6 +64,7 @@
             @lang('global.call_metrics')
         </div>
 
+        <div id="series_chart"></div>
         <div class="panel-body table-responsive">
             <table class="table table-bordered table-striped js-dt" style="width: 100%">
                 <thead>
@@ -74,24 +75,6 @@
                         @endforeach
                     </tr>
                 </thead>
-                {{-- 
-                <tbody>
-                    @foreach($reportDto->groups as $group)
-                        <tr>
-                            <td>
-                                <div>
-                                    {{ $group->name->name }} 
-                                </div>
-                                <small>{{ $group->name->desc }}</small>
-                            </td>
-                            @foreach($group->metrics as $metricName => $metric)
-                                <td>
-                                    {!! $reportDto->getDisplayableValue($metricName,$metric) !!}
-                                </td>
-                            @endforeach
-                        </tr>
-                    @endforeach
-                </tbody> --}}
             </table>
         </div>
     </div>
@@ -136,38 +119,9 @@
                 multiple: true
             });
 
-            // $(function () {
-            //
-            //     $('select[name="numbers[]"]').select2({
-            //         placeholder: 'Select Numbers',
-            //         multiple: true,
-            //         ajax: {
-            //             url: '/admin/call_metrics/numbers-select2',
-            //             dataType: 'json',
-            //             delay: 250,
-            //             data: function (params) {
-            //                 return {
-            //                     account_id: $('select[name=account]').val(),
-            //                     page: params.page || 1
-            //                 };
-            //             },processResults(data,params) {
-            //                 data.results.map((item)=>{
-            //                     item.text = item.number;
-            //                     item.id = JSON.stringify({
-            //                         id: item.id,
-            //                         number: item.number
-            //                     })
-            //                 });
-            //
-            //                 return data;
-            //             }
-            //         }
-            //     });
-            // });
-
-
             var mappingElem = $('#metric-mapping');
             if(mappingElem.length>0) {
+                initChart();
                 window.dtDefaultOptions.ajax = '{!! route('admin.call_metrics.index') !!}';
                 var columns = [
                     {
@@ -207,12 +161,56 @@
                                 } else
                                     data[item.name] = item.value;
                             });
+                        },
+                        complete: function(d) {
+                            d = JSON.parse(d.responseText)
+                            console.log(d);
+                            refreshChart(d.series);
+                            return d;
                         }
                     },
                     processing: true,
                     serverSide: true
                 });
             }
+
+            function refreshChart(series) {
+                var rowsData = [];
+                var columns = series.items.map(function(item, index) {
+                    item.data.forEach(function(dataPoint, index) {
+                        if(rowsData.length<=index) {
+                            var label = moment.utc(dataPoint[0],'x').format('YYYY-MMM-DD');
+                            rowsData.push([label]);
+                        }
+                    
+                        var rowData = rowsData[index];
+                        rowData.push(dataPoint[1]);
+                    })
+
+                    return item.name.name + " - " + item.name.desc;
+                });
+                
+                columns.unshift("Period");
+                rowsData.unshift(columns);
+                
+                var data = google.visualization.arrayToDataTable(rowsData);
+                 var options = {
+                    
+                    height: 400,
+                    legend: { position: 'bottom', maxLines: 3 },
+                    bar: { groupWidth: '75%' },
+                    isStacked: true,
+                };
+
+                var view = new google.visualization.DataView(data);
+                var chart = new google.visualization.ColumnChart(document.getElementById("series_chart"));
+                chart.draw(view, options);
+            }
+
+            function initChart(){
+                google.charts.load('current', {packages: ['corechart', 'line']});
+            }
         });
+
     </script>
 @endsection
