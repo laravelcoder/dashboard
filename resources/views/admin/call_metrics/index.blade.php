@@ -58,22 +58,23 @@
     </div>
     {!! Form::close() !!}
     <hr style="clear:both" />
-    @if($reportDto!==null && count($reportDto->groups)>0)
+    @if($reportDto!==null)
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('global.call_metrics')
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped js-dt">
+            <table class="table table-bordered table-striped js-dt" style="width: 100%">
                 <thead>
                     <tr>
                         <th>@lang('global.call-metrics.by-dimension')</th>
-                        @foreach($reportDto->metrics as $header)
-                            <th>{!! $reportDto->metricMapping[$header] !!}</th>
+                        @foreach($reportDto->metricMapping as $key => $val)
+                            <th>{!! $val !!}</th>
                         @endforeach
                     </tr>
                 </thead>
+                {{-- 
                 <tbody>
                     @foreach($reportDto->groups as $group)
                         <tr>
@@ -90,10 +91,15 @@
                             @endforeach
                         </tr>
                     @endforeach
-                </tbody>
+                </tbody> --}}
             </table>
         </div>
     </div>
+    @endif
+    @if(isset($reportDto))
+        <script type="application/json" id="metric-mapping">
+            {!! json_encode($reportDto->metricMapping) !!}
+        </script>
     @endif
 @endsection
 
@@ -125,7 +131,6 @@
                 $('select[name="tracking_number_ids[]"]').val('').trigger('change');
                 $('#filter_form').submit();
             });
-            $('.js-dt').DataTable({});
             $('select[name="tracking_number_ids[]"]').select2({
                 placeholder: 'Select Numbers',
                 multiple: true
@@ -159,6 +164,55 @@
             //         }
             //     });
             // });
+
+
+            var mappingElem = $('#metric-mapping');
+            if(mappingElem.length>0) {
+                window.dtDefaultOptions.ajax = '{!! route('admin.call_metrics.index') !!}';
+                var columns = [
+                    {
+                        data: 'first',
+                        name: 'first',
+                        searchable: false,
+                        orderable: false
+                    }
+                ];
+                var mappings = JSON.parse(mappingElem.text());
+                for(var prop in mappings) {
+                    if(mappings.hasOwnProperty(prop)){
+                        columns.push({
+                            data: prop,
+                            name: prop,
+                            searchable: false,
+                        });
+                    }
+                }
+                
+                $('.js-dt').DataTable({
+                    columns: columns,
+                    searching: false,
+                    lengthChange: false,
+                    ajax:  {
+                        "url": window.dtDefaultOptions.ajax,
+                        "type": "GET",
+                        "data": function(data) {
+                            var d = $("#filter_form").serializeArray();
+                            d.forEach(function(item) {
+                                var name = item.name;
+                                if(item.name.indexOf("[]")>-1) {
+                                    name = item.name.replace("[]","");
+                                    if(!data[name])
+                                        data[name] = [];
+                                    data[name].push(item.value);
+                                } else
+                                    data[item.name] = item.value;
+                            });
+                        }
+                    },
+                    processing: true,
+                    serverSide: true
+                });
+            }
         });
     </script>
 @endsection

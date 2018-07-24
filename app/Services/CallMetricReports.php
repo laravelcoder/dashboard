@@ -63,12 +63,14 @@ class CallMetricReports {
                 $resp = $this->service->getReportSeries($accountId, $options);
                 if($resp!==null) {
                     $dto->metrics = $resp->metrics;
+                    $dto->aggregation = $resp->aggregations;
                     $dto->series = $resp->series;
                     $dto->groups = new LengthAwarePaginator($resp->groups->items,$resp->groups->total_entries,$resp->groups->per_page,$resp->groups->page);
                     $last_page = $resp->groups->total_pages;
                 }
             }
         }
+        
         return $dto;
     }
 }

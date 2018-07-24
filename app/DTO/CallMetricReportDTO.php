@@ -31,7 +31,7 @@ class CallMetricReportDTO implements \JsonSerializable
 
     public function getDisplayableValue($metric, $metricData) {
         $valuePercentFormatter = function ($metric) {
-            return $metric->value.' ('.$metric->percent.')';
+            return $metric->value. (isset($metric->percent) ? ' (' . $metric->percent . ')' : '');
         };
         $valueFormatter = function ($metric) {
             return $metric->value;
