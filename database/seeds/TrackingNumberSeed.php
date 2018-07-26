@@ -20,7 +20,11 @@ class TrackingNumberSeed extends Seeder
             ['id' => 5, 'metrics_id' => '198010L', 'number' => '+18087400051', 'location_id' => 3, 'company_id' => 2,],
             ['id' => 6, 'metrics_id' => '198010L', 'number' => '+18087400054', 'location_id' => 3, 'company_id' => 2,],
             ['id' => 7, 'metrics_id' => '198010L', 'number' => '+18087400052', 'location_id' => 3, 'company_id' => 2,],
-            ['id' => 8, 'metrics_id' => '198010L', 'number' => '+18086701008', 'location_id' => null, 'company_id' => 2,],
+            ['id' => 8, 'metrics_id' => '198020L', 'number' => '+18086701008', 'location_id' => 4, 'company_id' => 2,],
+            ['id' => 9, 'metrics_id' => '198020L', 'number' => '+18086701192', 'location_id' => 4, 'company_id' => 2,],
+            ['id' => 10, 'metrics_id' => '198020L', 'number' => '+18086701123', 'location_id' => 4, 'company_id' => 2,],
+            ['id' => 11, 'metrics_id' => '198020L', 'number' => '+18086703585', 'location_id' => 4, 'company_id' => 2,],
+            ['id' => 12, 'metrics_id' => '198020L', 'number' => '+18086701181', 'location_id' => 4, 'company_id' => 2,],
 
         ];
 
