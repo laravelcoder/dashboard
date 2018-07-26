@@ -62,9 +62,7 @@ class CallMetricsController extends Controller
 
         $filterable_tracking_numbers = $tracking_numbers->filter(function ($tracking_number) use ($search_params) {
             return in_array($tracking_number->id, $search_params['tracking_number_ids']);
-        })->map(function ($tracking_number) {
-            return trim($tracking_number->number);
-        })->toArray();
+        });
 
         $reportDto = null;
         if (!empty($search_params['tracking_number_ids'])) {

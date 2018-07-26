@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\DTO\CallMetricReportDTO;
+use App\TrackingNumber;
+use function GuzzleHttp\Promise\unwrap;
 use Illuminate\Support\Collection;
 use function GuzzleHttp\json_encode;
 use App\DTO\CallMetricReportOptions;
@@ -32,26 +34,50 @@ class CallMetricReports {
         $this->accounts = $this->service->getAllAccounts();
     }
 
-    protected function getTrackingNumberFilters($numbers) {
-        $filterIds = [];
-        foreach ($numbers as $number) {
-            
-            foreach ($this->accounts as $callMetricAccount) {
-                $result = $this->service->getNumbersForAccount($callMetricAccount->id, 1,$number);
+    protected function getTrackingNumberFilters(Collection $trackingNumbers) {
+        $numbers  = $trackingNumbers->filter(function (TrackingNumber $tracking_number) {
+            return empty($tracking_number->callmetric_filter_id);
+        });
 
-                foreach ($result as $callMetricTrackingNumber) {
-                    $filterIds[] = $callMetricTrackingNumber->filter_id;
-                }
+        $promises = [];
+        foreach ($numbers as $tracking_number) {
+            /**
+             * @var TrackingNumber $tracking_number
+             */
+            foreach ($this->accounts as $callMetricAccount) {
+                $promise = $this->service->getNumbersForAccountAsync($callMetricAccount->id, 1,trim($tracking_number->number));
+                $promises[] = $promise;
+                $promise->then(function(LengthAwarePaginator $result) use ($tracking_number) {
+                    foreach ($result as $callMetricTrackingNumber) {
+                        $tracking_number->callmetric_filter_id = $callMetricTrackingNumber->filter_id;
+                        $tracking_number->save();
+                        break;
+                    }
+                });
+                break;
+            }
+
+            if(count($promises)==8){
+                unwrap($promises);
+                $promises = [];
             }
         }
-        
+
+        if(count($promises)>0) {
+            unwrap($promises);
+        }
+        $filterIds  = $trackingNumbers->filter(function (TrackingNumber $tracking_number) {
+            return !empty($tracking_number->callmetric_filter_id);
+        })->map(function (TrackingNumber $tracking_number) {
+            return $tracking_number->callmetric_filter_id;
+        })->toArray();
         return $filterIds;
     }
 
     /**
      * @return null|CallMetricReportDTO
      */
-    public function getReport(CallMetricReportOptions $options, $tracking_numbers){
+    public function getReport(CallMetricReportOptions $options, Collection $tracking_numbers){
         $dto = null;
         
         if(count($this->accounts)>0) {

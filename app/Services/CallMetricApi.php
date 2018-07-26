@@ -5,11 +5,14 @@ namespace App\Services;
 
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use GuzzleHttp\Promise\Promise;
+use GuzzleHttp\Promise\RejectionException;
 use Illuminate\Support\Collection;
 use App\DTO\CallMetricReportOptions;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use function GuzzleHttp\json_encode;
+use Psr\Http\Message\ResponseInterface;
 
 class CallMetricApi
 {
@@ -33,6 +36,10 @@ class CallMetricApi
      */
     protected function executeRequest($url, $method = 'GET', $options = [])
     {
+        return $this->client->request($method, $url, $this->buildOptions($options));
+    }
+
+    protected function buildOptions($options) {
         $token = base64_encode($this->serviceConfig['api_key'] . ":" . $this->serviceConfig['api_secret']);
         if (!isset($options['headers'])) {
             $options['headers'] = [];
@@ -41,7 +48,7 @@ class CallMetricApi
             $options['headers']['Authorization'] = "Basic $token";
         }
 
-        return $this->client->request($method, $url, $options);
+        return $options;
     }
 
 
@@ -51,9 +58,9 @@ class CallMetricApi
      * @param [type] $accountId
      * @param integer $page
      * @param [type] $number
-     * @return LengthAwarePaginator
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getNumbersForAccount($accountId, $page = 1, $number = null)
+    public function getNumbersForAccountAsync($accountId, $page = 1, $number = null)
     {
         $paginator = new LengthAwarePaginator([], 0, 10, 1);
         if (empty($page) || $page < 1)
@@ -62,22 +69,24 @@ class CallMetricApi
         $params = [
             'page' => $page
         ];
+
         if($number!==null)
             $params['number'] = $number;
-        try {
-            $resp = $this->executeRequest("accounts/$accountId/numbers.json", 'GET', [
-                'query'=>$params
-            ]);
-            $jsonResponse = $resp->getBody()->getContents();
+
+        return $this->client->requestAsync('GET',"accounts/$accountId/numbers.json", $this->buildOptions([
+            'query'=>$params
+        ]))->then(function (ResponseInterface $response) use($paginator) {
+            $jsonResponse = $response->getBody()->getContents();
 
             if (!empty($jsonResponse)) {
                 $decoded = json_decode($jsonResponse);
                 $paginator = new LengthAwarePaginator($decoded->numbers, $decoded->total_entries, $decoded->per_page, $decoded->page);
             }
-        } catch (GuzzleException $e) {
+
+            return $paginator;
+        },function(RejectionException $e) {
             report($e);
-        }
-        return $paginator;
+        });
     }
 
     /**
