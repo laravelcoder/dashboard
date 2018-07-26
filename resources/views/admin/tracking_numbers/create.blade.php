@@ -58,6 +58,18 @@
                     @endif
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('callmetric_filter_id', trans('global.tracking-numbers.fields.callmetric-filter-id').'', ['class' => 'control-label']) !!}
+                    {!! Form::text('callmetric_filter_id', old('callmetric_filter_id'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('callmetric_filter_id'))
+                        <p class="help-block">
+                            {{ $errors->first('callmetric_filter_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
             
         </div>
     </div>

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Add5b523b98bf13dRelationshipsToTrackingNumberTable extends Migration
+class Add5b59215071a22RelationshipsToTrackingNumberTable extends Migration
 {
     /**
      * Run the migrations.
@@ -33,6 +33,16 @@ class Add5b523b98bf13dRelationshipsToTrackingNumberTable extends Migration
     public function down()
     {
         Schema::table('tracking_numbers', function(Blueprint $table) {
+            if(Schema::hasColumn('tracking_numbers', 'location_id')) {
+                $table->dropForeign('186806_5b523b981dd76');
+                $table->dropIndex('186806_5b523b981dd76');
+                $table->dropColumn('location_id');
+            }
+            if(Schema::hasColumn('tracking_numbers', 'company_id')) {
+                $table->dropForeign('186806_5b523b983f4ea');
+                $table->dropIndex('186806_5b523b983f4ea');
+                $table->dropColumn('company_id');
+            }
             
         });
     }

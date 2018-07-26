@@ -12,12 +12,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $number
  * @property string $location
  * @property string $company
+ * @property string $callmetric_filter_id
 */
 class TrackingNumber extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['metrics_id', 'number', 'location_id', 'company_id'];
+    protected $fillable = ['metrics_id', 'number', 'callmetric_filter_id', 'location_id', 'company_id'];
     protected $hidden = [];
     
     

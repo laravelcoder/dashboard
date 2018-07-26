@@ -28,6 +28,10 @@
                             <th>@lang('global.tracking-numbers.fields.company')</th>
                             <td field-key='company'>{{ $tracking_number->company->name or '' }}</td>
                         </tr>
+                        <tr>
+                            <th>@lang('global.tracking-numbers.fields.callmetric-filter-id')</th>
+                            <td field-key='callmetric_filter_id'>{{ $tracking_number->callmetric_filter_id }}</td>
+                        </tr>
                     </table>
                 </div>
             </div>

@@ -44,6 +44,7 @@ class TrackingNumbersController extends Controller
                 'tracking_numbers.number',
                 'tracking_numbers.location_id',
                 'tracking_numbers.company_id',
+                'tracking_numbers.callmetric_filter_id',
             ]);
             $table = Datatables::of($query);
 
@@ -70,7 +71,10 @@ class TrackingNumbersController extends Controller
             $table->editColumn('company.name', function ($row) {
                 return $row->company ? $row->company->name : '';
             });
-
+            $table->editColumn('callmetric_filter_id', function ($row) {
+                return $row->callmetric_filter_id ? $row->callmetric_filter_id : '';
+            });
+            
             $table->rawColumns(['actions','massDelete']);
 
             return $table->make(true);

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Create1532115863TrackingNumbersTable extends Migration
+class CreateCombined1532115863TrackingNumbersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,6 +17,7 @@ class Create1532115863TrackingNumbersTable extends Migration
                 $table->increments('id');
                 $table->string('metrics_id')->nullable();
                 $table->string('number')->nullable();
+                $table->string('callmetric_filter_id')->nullable();
                 
                 $table->timestamps();
                 $table->softDeletes();

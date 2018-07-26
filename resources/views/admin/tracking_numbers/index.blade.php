@@ -35,6 +35,7 @@
                         <th>@lang('global.tracking-numbers.fields.number')</th>
                         <th>@lang('global.tracking-numbers.fields.location')</th>
                         <th>@lang('global.tracking-numbers.fields.company')</th>
+                        <th>@lang('global.tracking-numbers.fields.callmetric-filter-id')</th>
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else
@@ -62,6 +63,7 @@
                 {data: 'number', name: 'number'},
                 {data: 'location.nickname', name: 'location.nickname'},
                 {data: 'company.name', name: 'company.name'},
+                {data: 'callmetric_filter_id', name: 'callmetric_filter_id'},
                 
                 {data: 'actions', name: 'actions', searchable: false, sortable: false}
             ];
