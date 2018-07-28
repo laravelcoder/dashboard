@@ -11,12 +11,13 @@ use App\TrackingNumber;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use App\Services\CallMetricApi;
 
 class CallMetricsController extends Controller
 {
     public function index(Request $request)
     {
-        $search_params = ['date-range' => '', 'location_id' => '', 'company_id' => '', 'tracking_number_ids' => []];
+        $search_params = ['date-range' => '', 'location_id' => '', 'company_id' => '', 'tracking_number_ids' => [], 'callmetric_account_id'=>null];
         $start = Carbon::now()->subDay(6);
         $end = Carbon::now();
 
@@ -32,6 +33,7 @@ class CallMetricsController extends Controller
 
         $company_id = $request->get('company_id');
         $location_id = $request->get('location_id');
+        $callmetric_account_id = $request->get('callmetric_account_id');
         $companies = ContactCompany::select('name', 'id')->get();
         $selectedCompany = null;
         $locations = new Collection();
@@ -42,11 +44,16 @@ class CallMetricsController extends Controller
                 ->get();
         }
 
+        $callMetricApiClient = new CallMetricApi();
+        $callMetricAccounts = $callMetricApiClient->getAllAccounts();
         $tracking_numbers = new Collection();
         $trackingQuery = TrackingNumber::query();
         if (!empty($location_id)) {
             $trackingQuery = $trackingQuery->where('location_id', $location_id);
             $search_params['location_id'] = $location_id;
+        }
+        if (!empty($callmetric_account_id)) {
+            $search_params['callmetric_account_id'] = $callmetric_account_id;
         }
         if ($selectedCompany) {
             $trackingQuery = $trackingQuery->where('company_id', $selectedCompany->id);
@@ -67,12 +74,13 @@ class CallMetricsController extends Controller
         $reportDto = null;
         if (!empty($search_params['tracking_number_ids'])) {
             if ($request->ajax()) {
-                $callMetricOptions = new CallMetricReportOptions();
+                $reportDto = new CallMetricReportDTO();
+                $callMetricOptions = new CallMetricReportOptions($callmetric_account_id);
                 $callMetricOptions->start_date = $start;
                 $callMetricOptions->end_date = $end;
                 $order = $request->get('order');
                 $callMetricOptions->sort = 'total';
-                $reportDto = new CallMetricReportDTO();
+
                 $i = 0;
                 foreach ($reportDto->metricMapping as $key => $value) {
                     if($i == $order[0]['column']) {
@@ -85,6 +93,7 @@ class CallMetricsController extends Controller
                 if ($request->get('start')) {
                     $callMetricOptions->page = ceil(($request->get('start')+1)/10);
                 }
+
                 $reportDto = (new CallMetricReports())->getReport($callMetricOptions, $filterable_tracking_numbers);
                 return response()->json($this->toDataTable($request,$reportDto));
             } else {
@@ -92,7 +101,7 @@ class CallMetricsController extends Controller
             }
         }
 
-        return view('admin.call_metrics.index', compact('locations', 'companies', 'tracking_numbers', 'search_params', 'reportDto'));
+        return view('admin.call_metrics.index', compact('locations', 'callMetricAccounts', 'companies', 'tracking_numbers', 'search_params', 'reportDto'));
     }
 
     protected function toDataTable(Request $request, CallMetricReportDTO $dto)

@@ -27,11 +27,12 @@ class CallMetricReportOptions
 
     public $page;
     public $sort;
-
+    public $account_id;
     public $sortDir;
 
-    public function __construct()
+    public function __construct($account_id)
     {
+        $this->account_id = $account_id;
         $this->page = 1;
     }
 }

@@ -17,7 +17,7 @@
 
     {!! Form::open(['method' => 'get','id' => 'filter_form']) !!}
     <div class="row">
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-2">
             <label>Date Range</label>
             <div class="input-group">
                 <div class="input-group-addon">
@@ -26,7 +26,7 @@
                 <input type="text" name="date-range" class="form-control pull-right" value="{!!@$search_params['date-range']!!}">
             </div>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-2">
             <label>Company</label>
             <select class="form-control" name="company_id" required>
                 <option value="" @if(empty($search_params['company_id'])) selected @endif>SELECT COMPANY</option>
@@ -35,9 +35,17 @@
                 @endforeach
             </select>
         </div>
+        <div class="form-group col-md-2">
+            <label>Account</label>
+            <select class="form-control" name="callmetric_account_id">
+                @foreach($callMetricAccounts as $item)
+                    <option value="{!! $item->id !!}" @if($search_params['callmetric_account_id'] == $item->id) selected @endif>{{ $item->name }}</option>
+                @endforeach
+            </select>
+        </div>
         <div class="form-group col-md-3">
             <label>Location</label>
-            <select class="form-control" name="location_id">
+            <select class="form-control" name="location_id" style="width:100%">
                 <option value="" @if(empty($search_params['location_id'])) selected @endif>All Locations</option>
                 @foreach($locations as $item)
                     <option value="{!! $item->id !!}" @if($search_params['location_id'] == $item->id) selected @endif>{{ $item->nickname }}</option>
@@ -46,7 +54,7 @@
         </div>
         <div class="form-group col-md-3">
             <label>Numbers</label>
-            <select class="form-control" name="tracking_number_ids[]" multiple>
+            <select class="form-control" name="tracking_number_ids[]" multiple style="width: 100%">
                 @foreach($tracking_numbers as $item)
                     <option value="{!! $item->id !!}" @if(in_array($item->id, $search_params['tracking_number_ids'])) selected @endif>{{ $item->number }}</option>
                 @endforeach
@@ -106,6 +114,11 @@
                 $('#filter_form').submit();
             });
 
+            $('select[name=callmetric_account_id]').on('change', function() {
+                $('#filter_form').submit();
+            });
+
+            $('select[name=callmetric_account_id]').select2();
             $('select[name=company_id]').on('change',function () {
                 $('select[name="tracking_number_ids[]"]').val('').trigger('change');
                 $('#filter_form').submit();
@@ -175,6 +188,12 @@
             }
 
             function refreshChart(series) {
+                if(!series) {
+                    $('#series_chart').css('display','none');
+                    return;
+                }
+                $('#series_chart').css('display','block');
+                    
                 var rowsData = [];
                 var columns = series.items.map(function(item, index) {
                     item.data.forEach(function(dataPoint, index) {
@@ -194,7 +213,7 @@
                 rowsData.unshift(columns);
                 
                 var data = google.visualization.arrayToDataTable(rowsData);
-                 var options = {
+                var options = {
                     
                     height: 400,
                     legend: { position: 'bottom', maxLines: 3 },

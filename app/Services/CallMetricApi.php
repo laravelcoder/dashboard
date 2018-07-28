@@ -134,7 +134,12 @@ class CallMetricApi
     {
         $collection = new Collection();
         try {
-            $resp = $this->executeRequest('accounts.json');
+            $resp = $this->executeRequest('accounts.json','GET',[
+                'query'=>[
+                    'names'=>1,
+                    'all'=>1
+                ]
+            ]);
             $jsonResponse = $resp->getBody()->getContents();
 
             if (!empty($jsonResponse)) {

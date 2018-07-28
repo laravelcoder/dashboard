@@ -17,26 +17,15 @@ class CallMetricReports {
      * @var CallMetricApi
      */
     protected $service;
-    /**
-     * Undocumented variable
-     *
-     * @var array
-     */
-    protected $accounts;
 
     public function __construct()
     {
         $this->service = new CallMetricApi();
-        $this->initAccounts();
     }
 
-    protected function initAccounts() {
-        $this->accounts = $this->service->getAllAccounts();
-    }
-
-    protected function getTrackingNumberFilters(Collection $trackingNumbers) {
+    protected function getTrackingNumberFilters(Collection $trackingNumbers, $accountId) {
         $numbers  = $trackingNumbers->filter(function (TrackingNumber $tracking_number) {
-            return empty($tracking_number->callmetric_filter_id);
+            return true;//empty($tracking_number->callmetric_filter_id);
         });
 
         $promises = [];
@@ -44,18 +33,15 @@ class CallMetricReports {
             /**
              * @var TrackingNumber $tracking_number
              */
-            foreach ($this->accounts as $callMetricAccount) {
-                $promise = $this->service->getNumbersForAccountAsync($callMetricAccount->id, 1,trim($tracking_number->number));
-                $promises[] = $promise;
-                $promise->then(function(LengthAwarePaginator $result) use ($tracking_number) {
-                    foreach ($result as $callMetricTrackingNumber) {
-                        $tracking_number->callmetric_filter_id = $callMetricTrackingNumber->filter_id;
-                        $tracking_number->save();
-                        break;
-                    }
-                });
-                break;
-            }
+            $promise = $this->service->getNumbersForAccountAsync($accountId, 1,trim($tracking_number->number));
+            $promises[] = $promise;
+            $promise->then(function(LengthAwarePaginator $result) use ($tracking_number) {
+                foreach ($result as $callMetricTrackingNumber) {
+                    $tracking_number->callmetric_filter_id = $callMetricTrackingNumber->filter_id;
+                    $tracking_number->save();
+                    break;
+                }
+            });
 
             if(count($promises)==8){
                 unwrap($promises);
@@ -79,21 +65,18 @@ class CallMetricReports {
      */
     public function getReport(CallMetricReportOptions $options, Collection $tracking_numbers){
         $dto = null;
-        
-        if(count($this->accounts)>0) {
-            $options->tracking_numbers_filter_ids = $this->getTrackingNumberFilters($tracking_numbers);
-            $dto = new CallMetricReportDTO();
-            $groups = [];
-            $accountId = $this->accounts[0]->id;
-            if (count($options->tracking_numbers_filter_ids) > 0) {
-                $resp = $this->service->getReportSeries($accountId, $options);
-                if($resp!==null) {
-                    $dto->metrics = $resp->metrics;
-                    $dto->aggregation = $resp->aggregations;
-                    $dto->series = $resp->series;
-                    $dto->groups = new LengthAwarePaginator($resp->groups->items,$resp->groups->total_entries,$resp->groups->per_page,$resp->groups->page);
-                    $last_page = $resp->groups->total_pages;
-                }
+        $options->tracking_numbers_filter_ids = $this->getTrackingNumberFilters($tracking_numbers,$options->account_id);
+        $dto = new CallMetricReportDTO();
+        $groups = [];
+        $accountId = $options->account_id;
+        if (count($options->tracking_numbers_filter_ids) > 0) {
+            $resp = $this->service->getReportSeries($accountId, $options);
+            if($resp!==null) {
+                $dto->metrics = $resp->metrics;
+                $dto->aggregation = $resp->aggregations;
+                $dto->series = $resp->series;
+                $dto->groups = new LengthAwarePaginator($resp->groups->items,$resp->groups->total_entries,$resp->groups->per_page,$resp->groups->page);
+                $last_page = $resp->groups->total_pages;
             }
         }
         
