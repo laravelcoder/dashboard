@@ -159,8 +159,7 @@
         </h3>
     </div>
     <div class="box-body">
-    
-        {{-- <div id="series_chart" class="col-md-12"></div> --}}
+        <div id="series_chart2" class="col-md-12"></div>
     </div>
     <!-- /.box-body-->
 {{--     <div class="box-footer no-border">
@@ -183,6 +182,8 @@
             </div>
             <!-- /.row -->
         </div> --}}
+
+    
 </div>
 
     @endif
@@ -192,434 +193,6 @@
         </script>
     @endif
 @endsection
-
-
- 
-{{-- 
-    THIS IS A GOOD ONE FOR THE TOP GRAPH
-
-
-https://www.amcharts.com/demos/date-based-data/
-
-<!-- Chart code -->
-<script>
-var chart = AmCharts.makeChart("chartdiv", {
-    "type": "serial",
-    "theme": "light",
-    "marginRight": 40,
-    "marginLeft": 40,
-    "autoMarginOffset": 20,
-    "mouseWheelZoomEnabled":true,
-    "dataDateFormat": "YYYY-MM-DD",
-    "valueAxes": [{
-        "id": "v1",
-        "axisAlpha": 0,
-        "position": "left",
-        "ignoreAxisWidth":true
-    }],
-    "balloon": {
-        "borderThickness": 1,
-        "shadowAlpha": 0
-    },
-    "graphs": [{
-        "id": "g1",
-        "balloon":{
-          "drop":true,
-          "adjustBorderColor":false,
-          "color":"#ffffff"
-        },
-        "bullet": "round",
-        "bulletBorderAlpha": 1,
-        "bulletColor": "#FFFFFF",
-        "bulletSize": 5,
-        "hideBulletsCount": 50,
-        "lineThickness": 2,
-        "title": "red line",
-        "useLineColorForBulletBorder": true,
-        "valueField": "value",
-        "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
-    }],
-    "chartScrollbar": {
-        "graph": "g1",
-        "oppositeAxis":false,
-        "offset":30,
-        "scrollbarHeight": 80,
-        "backgroundAlpha": 0,
-        "selectedBackgroundAlpha": 0.1,
-        "selectedBackgroundColor": "#888888",
-        "graphFillAlpha": 0,
-        "graphLineAlpha": 0.5,
-        "selectedGraphFillAlpha": 0,
-        "selectedGraphLineAlpha": 1,
-        "autoGridCount":true,
-        "color":"#AAAAAA"
-    },
-    "chartCursor": {
-        "pan": true,
-        "valueLineEnabled": true,
-        "valueLineBalloonEnabled": true,
-        "cursorAlpha":1,
-        "cursorColor":"#258cbb",
-        "limitToGraph":"g1",
-        "valueLineAlpha":0.2,
-        "valueZoomable":true
-    },
-    "valueScrollbar":{
-      "oppositeAxis":false,
-      "offset":50,
-      "scrollbarHeight":10
-    },
-    "categoryField": "date",
-    "categoryAxis": {
-        "parseDates": true,
-        "dashLength": 1,
-        "minorGridEnabled": true
-    },
-    "export": {
-        "enabled": true
-    },
-    "dataProvider": [{
-        "date": "2012-07-27",
-        "value": 13
-    }, {
-        "date": "2012-07-28",
-        "value": 11
-    }, {
-        "date": "2012-07-29",
-        "value": 15
-    }, {
-        "date": "2012-07-30",
-        "value": 16
-    }, {
-        "date": "2012-07-31",
-        "value": 18
-    }, {
-        "date": "2012-08-01",
-        "value": 13
-    }, {
-        "date": "2012-08-02",
-        "value": 22
-    }, {
-        "date": "2012-08-03",
-        "value": 23
-    }, {
-        "date": "2012-08-04",
-        "value": 20
-    }, {
-        "date": "2012-08-05",
-        "value": 17
-    }, {
-        "date": "2012-08-06",
-        "value": 16
-    }, {
-        "date": "2012-08-07",
-        "value": 18
-    }, {
-        "date": "2012-08-08",
-        "value": 21
-    }, {
-        "date": "2012-08-09",
-        "value": 26
-    }, {
-        "date": "2012-08-10",
-        "value": 24
-    }, {
-        "date": "2012-08-11",
-        "value": 29
-    }, {
-        "date": "2012-08-12",
-        "value": 32
-    }, {
-        "date": "2012-08-13",
-        "value": 18
-    }, {
-        "date": "2012-08-14",
-        "value": 24
-    }, {
-        "date": "2012-08-15",
-        "value": 22
-    }, {
-        "date": "2012-08-16",
-        "value": 18
-    }, {
-        "date": "2012-08-17",
-        "value": 19
-    }, {
-        "date": "2012-08-18",
-        "value": 14
-    }, {
-        "date": "2012-08-19",
-        "value": 15
-    }, {
-        "date": "2012-08-20",
-        "value": 12
-    }, {
-        "date": "2012-08-21",
-        "value": 8
-    }, {
-        "date": "2012-08-22",
-        "value": 9
-    }, {
-        "date": "2012-08-23",
-        "value": 8
-    }, {
-        "date": "2012-08-24",
-        "value": 7
-    }, {
-        "date": "2012-08-25",
-        "value": 5
-    }, {
-        "date": "2012-08-26",
-        "value": 11
-    }, {
-        "date": "2012-08-27",
-        "value": 13
-    }, {
-        "date": "2012-08-28",
-        "value": 18
-    }, {
-        "date": "2012-08-29",
-        "value": 20
-    }, {
-        "date": "2012-08-30",
-        "value": 29
-    }, {
-        "date": "2012-08-31",
-        "value": 33
-    }, {
-        "date": "2012-09-01",
-        "value": 42
-    }, {
-        "date": "2012-09-02",
-        "value": 35
-    }, {
-        "date": "2012-09-03",
-        "value": 31
-    }, {
-        "date": "2012-09-04",
-        "value": 47
-    }, {
-        "date": "2012-09-05",
-        "value": 52
-    }, {
-        "date": "2012-09-06",
-        "value": 46
-    }, {
-        "date": "2012-09-07",
-        "value": 41
-    }, {
-        "date": "2012-09-08",
-        "value": 43
-    }, {
-        "date": "2012-09-09",
-        "value": 40
-    }, {
-        "date": "2012-09-10",
-        "value": 39
-    }, {
-        "date": "2012-09-11",
-        "value": 34
-    }, {
-        "date": "2012-09-12",
-        "value": 29
-    }, {
-        "date": "2012-09-13",
-        "value": 34
-    }, {
-        "date": "2012-09-14",
-        "value": 37
-    }, {
-        "date": "2012-09-15",
-        "value": 42
-    }, {
-        "date": "2012-09-16",
-        "value": 49
-    }, {
-        "date": "2012-09-17",
-        "value": 46
-    }, {
-        "date": "2012-09-18",
-        "value": 47
-    }, {
-        "date": "2012-09-19",
-        "value": 55
-    }, {
-        "date": "2012-09-20",
-        "value": 59
-    }, {
-        "date": "2012-09-21",
-        "value": 58
-    }, {
-        "date": "2012-09-22",
-        "value": 57
-    }, {
-        "date": "2012-09-23",
-        "value": 61
-    }, {
-        "date": "2012-09-24",
-        "value": 59
-    }, {
-        "date": "2012-09-25",
-        "value": 67
-    }, {
-        "date": "2012-09-26",
-        "value": 65
-    }, {
-        "date": "2012-09-27",
-        "value": 61
-    }, {
-        "date": "2012-09-28",
-        "value": 66
-    }, {
-        "date": "2012-09-29",
-        "value": 69
-    }, {
-        "date": "2012-09-30",
-        "value": 71
-    }, {
-        "date": "2012-10-01",
-        "value": 67
-    }, {
-        "date": "2012-10-02",
-        "value": 63
-    }, {
-        "date": "2012-10-03",
-        "value": 46
-    }, {
-        "date": "2012-10-04",
-        "value": 32
-    },    {
-        "date": "2013-01-30",
-        "value": 81
-    }]
-});
-
-chart.addListener("rendered", zoomChart);
-
-zoomChart();
-
-function zoomChart() {
-    chart.zoomToIndexes(chart.dataProvider.length - 40, chart.dataProvider.length - 1);
-}
-</script>
-
- --}}
-
-{{-- 
-THIS IS A GOOD ONE FOR THE BOTTOM GRAPH
-https://www.amcharts.com/demos/stacked-column-chart/
-
-<!-- Chart code -->
-<script>
-var chart = AmCharts.makeChart("chartdiv", {
-    "type": "serial",
-    "theme": "light",
-    "legend": {
-        "horizontalGap": 10,
-        "maxColumns": 1,
-        "position": "right",
-        "useGraphSettings": true,
-        "markerSize": 10
-    },
-    "dataProvider": [{
-        "DATE": 2003,
-        "tracking 1": 2.5,
-        "tracking 2": 2.5,
-        "tracking 3": 2.1,
-        "tracking 4": 0.3,
-        "tracking 5": 0.2,
-        "tracking 6": 0.1
-    }, {
-        "DATE": 2004,
-        "tracking 1": 2.6,
-        "tracking 2": 2.7,
-        "tracking 3": 2.2,
-        "tracking 4": 0.3,
-        "tracking 5": 0.3,
-        "africa": 0.1
-    }, {
-        "DATE": 2005,
-        "tracking 1": 2.8,
-        "tracking 2": 2.9,
-        "tracking 3": 2.4,
-        "tracking 4": 0.3,
-        "tracking 5": 0.3,
-        "africa": 0.1
-    }],
-    "valueAxes": [{
-        "stackType": "regular",
-        "axisAlpha": 0.3,
-        "gridAlpha": 0
-    }],
-    "graphs": [{
-        "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
-        "fillAlphas": 0.8,
-        "labelText": "[[value]]",
-        "lineAlpha": 0.3,
-        "title": "tracking 1",
-        "type": "column",
-        "color": "#000000",
-        "valueField": "tracking 1"
-    }, {
-        "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
-        "fillAlphas": 0.8,
-        "labelText": "[[value]]",
-        "lineAlpha": 0.3,
-        "title": "tracking 2",
-        "type": "column",
-        "color": "#000000",
-        "valueField": "tracking 2"
-    }, {
-        "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
-        "fillAlphas": 0.8,
-        "labelText": "[[value]]",
-        "lineAlpha": 0.3,
-        "title": "tracking 3",
-        "type": "column",
-        "color": "#000000",
-        "valueField": "tracking 3"
-    }, {
-        "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
-        "fillAlphas": 0.8,
-        "labelText": "[[value]]",
-        "lineAlpha": 0.3,
-        "title": "tracking 4",
-        "type": "column",
-        "color": "#000000",
-        "valueField": "tracking 4"
-    }, {
-        "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
-        "fillAlphas": 0.8,
-        "labelText": "[[value]]",
-        "lineAlpha": 0.3,
-        "title": "tracking 5",
-        "type": "column",
-        "color": "#000000",
-        "valueField": "tracking 5"
-    }, {
-        "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
-        "fillAlphas": 0.8,
-        "labelText": "[[value]]",
-        "lineAlpha": 0.3,
-        "title": "tracking 6",
-        "type": "column",
-        "color": "#000000",
-        "valueField": "tracking 6"
-    }],
-    "categoryField": "year",
-    "categoryAxis": {
-        "gridPosition": "start",
-        "axisAlpha": 0,
-        "gridAlpha": 0,
-        "position": "left"
-    },
-    "export": {
-        "enabled": true
-     }
-
-});
-</script>
- --}}
 
 @section('bottomscripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
@@ -686,7 +259,22 @@ var chart = AmCharts.makeChart("chartdiv", {
                     columns: columns,
                     searching: false,
                     lengthChange: false,
-                    ajax:  {
+                    ajax:  getCallMetricDataAjaxConfig('series_chart','tracking_number', function(previousRequestData) {
+                        
+                        var config = getCallMetricDataAjaxConfig('series_chart2','sources')();
+                        config.data = previousRequestData;
+                        config.data.dimension = 'source';
+                        $.ajax(config);
+                    })(),
+                    processing: true,
+                    serverSide: true
+                });
+            }
+
+            function getCallMetricDataAjaxConfig(chart_id, dimension, onCompleted){
+                return function () {
+                    var dd = null;
+                    return {
                         "url": window.dtDefaultOptions.ajax,
                         "type": "GET",
                         "data": function(data) {
@@ -701,57 +289,86 @@ var chart = AmCharts.makeChart("chartdiv", {
                                 } else
                                     data[item.name] = item.value;
                             });
+                            data['dimension'] = dimension;
+                            dd = data;
                         },
                         complete: function(d) {
                             d = JSON.parse(d.responseText)
-                            console.log(d);
-                            refreshChart(d.series);
+                            
+                            refreshChart(d.series, chart_id);
+                            if(onCompleted) {
+                                onCompleted(dd);
+                            }
                             return d;
                         }
-                    },
-                    processing: true,
-                    serverSide: true
-                });
+                    };
+                }
             }
 
-            function refreshChart(series) {
+            function refreshChart(series, id) {
                 if(!series) {
-                    $('#series_chart').css('display','none');
+                    $('#'+id).css('display','none');
                     return;
                 }
-                $('#series_chart').css('display','block');
-                    
-                var rowsData = [];
-                var columns = series.items.map(function(item, index) {
-                    item.data.forEach(function(dataPoint, index) {
-                        if(rowsData.length<=index) {
-                            var label = moment.utc(dataPoint[0],'x').format('YYYY-MMM-DD');
-                            rowsData.push([label]);
-                        }
-                    
-                        var rowData = rowsData[index];
-                        rowData.push(dataPoint[1]);
-                    })
-
-                    return item.name.name + "\n" + item.name.desc;
-                });
+                $('#'+id).css('display','block');
                 
-                columns.unshift("Period");
-                
-                rowsData.unshift(columns);
-                
-                var data = google.visualization.arrayToDataTable(rowsData);
-                var options = {
-                    
-                    height: 400,
-                    legend: { position: 'bottom', maxLines: 3 },
-                    bar: { groupWidth: '75%' },
-                    isStacked: true,
+                var graphs = [];
+                var dataProvider = [];
+                var amChartConfig = {
+                    "type": "serial",
+                    "theme": "light",
+                    "legend": {
+                        "horizontalGap": 10,
+                        "maxColumns": 1,
+                        "position": "right",
+                        "useGraphSettings": true,
+                        "markerSize": 10
+                    },
+                    "dataProvider": dataProvider,
+                    "valueAxes": [{
+                        "stackType": "regular",
+                        "axisAlpha": 0.3,
+                        "gridAlpha": 0
+                    }],
+                    "graphs": graphs,
+                    "categoryField": "date",
+                    "categoryAxis": {
+                        "gridPosition": "start",
+                        "axisAlpha": 0,
+                        "gridAlpha": 0,
+                        "position": "left"
+                    },
+                    "export": {
+                        "enabled": true
+                    }
                 };
 
-                var view = new google.visualization.DataView(data);
-                var chart = new google.visualization.ColumnChart(document.getElementById("series_chart"));
-                chart.draw(view, options);
+                series.items.forEach(function(item, index) {
+                    item.data.forEach(function(dataPoint, index) {
+                        if(dataProvider.length<=index) {
+                            var label = moment.utc(dataPoint[0],'x').format('YYYY-MMM-DD');
+                            dataProvider.push({
+                                date: label
+                            });
+                        }
+                    
+                        var rowData = dataProvider[index];
+                        rowData[item.id] = dataPoint[1];
+                    })
+
+                    graphs.push({
+                        "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                        "fillAlphas": 0.8,
+                        "labelText": "[[value]]",
+                        "lineAlpha": 0.3,
+                        "title": item.name.name + "\n" + (item.name.desc ? item.name.desc : ''),
+                        "type": "column",
+                        "color": "#000000",
+                        "valueField": item.id
+                    })
+                });
+            
+                AmCharts.makeChart(id, amChartConfig);
             }
 
             function initChart(){

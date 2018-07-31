@@ -78,6 +78,9 @@ class CallMetricsController extends Controller
                 $callMetricOptions = new CallMetricReportOptions($callmetric_account_id);
                 $callMetricOptions->start_date = $start;
                 $callMetricOptions->end_date = $end;
+                if(!empty($request->get('dimension'))){
+                    $callMetricOptions->dimension = $request->get('dimension');
+                }
                 $order = $request->get('order');
                 $callMetricOptions->sort = 'total';
 
@@ -121,8 +124,9 @@ class CallMetricsController extends Controller
             }
 
             $datableResponse['data'] = $dto->groups->map(function ($group) use ($dto) {
+                
                 $rowData = [
-                    'first' => "<div>" . $group->name->name . "</div><div>" . $group->name->desc . "</div>",
+                    'first' => "<div>" . $group->name->name . "</div><div>" . (property_exists($group->name,'desc') ? $group->name->desc : '') . "</div>",
                 ];
 
                 foreach ($group->metrics as $metricName => $metric) {

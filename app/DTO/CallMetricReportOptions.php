@@ -9,6 +9,12 @@ class CallMetricReportOptions
     /**
      * Undocumented variable
      *
+     * @var string
+     */
+    public $dimension;
+    /**
+     * Undocumented variable
+     *
      * @var Carbon
      */
     public $start_date;
@@ -32,6 +38,7 @@ class CallMetricReportOptions
 
     public function __construct($account_id)
     {
+        $this->dimension = 'tracking_number';
         $this->account_id = $account_id;
         $this->page = 1;
     }

@@ -107,7 +107,7 @@ class CallMetricApi
                 'outbound'
             ],
             'multi_tracking_numbers_operator'=>'includes',
-            'by' => 'tracking_number',
+            'by' => $options->dimension,
             'multi_tracking_numbers' => implode(",",$options->tracking_numbers_filter_ids),
             'sort' => $options->sort,
             'dir' => $options->sortDir,
