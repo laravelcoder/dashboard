@@ -2,6 +2,10 @@
 
 @section('topscripts')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />
+    <style type="text/css">
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {background-color: #3c8dbc!important; border-color: #367fa9!important; color:#fff!important; }
+        span.select2-selection__choice__remove {float: right; color:#000!important; margin-left:5px; font-size: 120%; }
+    </style>
     <script src="{!! asset('/javascript/embed-api/components/date-range-selector.js') !!}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -37,7 +41,7 @@
         </div>
         <div class="form-group col-md-2">
             <label>Account</label>
-            <select class="form-control" name="callmetric_account_id">
+            <select class="form-control pull-right" name="callmetric_account_id">
                 @foreach($callMetricAccounts as $item)
                     <option value="{!! $item->id !!}" @if($search_params['callmetric_account_id'] == $item->id) selected @endif>{{ $item->name }}</option>
                 @endforeach
@@ -67,12 +71,57 @@
     {!! Form::close() !!}
     <hr style="clear:both" />
     @if($reportDto!==null)
+
+
+<!-- Map box -->
+<div class="box box-solid ">
+    <div class="box-header bg-light-blue-gradient">
+        <!-- tools box -->
+        <div class="pull-right box-tools">
+            <button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse"
+                data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
+            <i class="fa fa-minus"></i></button>
+        </div>
+        <!-- /. tools -->
+        <i class="fa fa-phone"></i>
+        <h3 class="box-title">
+            Call Metrics
+        </h3>
+    </div>
+    <div class="box-body">
+    
+        <div id="series_chart" class="col-md-12"></div>
+    </div>
+    <!-- /.box-body-->
+{{--     <div class="box-footer no-border">
+        <div class="row">
+            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                <div id="sparkline-1"></div>
+                <div class="knob-label">Visitors</div>
+            </div>
+            <!-- ./col -->
+            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                <div id="sparkline-2"></div>
+                <div class="knob-label">Online</div>
+            </div>
+            <!-- ./col -->
+            <div class="col-xs-4 text-center">
+                <div id="sparkline-3"></div>
+                <div class="knob-label">Exists</div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <!-- /.row -->
+    </div> --}}
+</div>
+
+
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('global.call_metrics')
         </div>
 
-        <div id="series_chart"></div>
+        
         <div class="panel-body table-responsive">
             <table class="table table-bordered table-striped js-dt" style="width: 100%">
                 <thead>
@@ -86,6 +135,50 @@
             </table>
         </div>
     </div>
+
+ 
+<!-- Map box -->
+<div class="box box-solid ">
+    <div class="box-header bg-green-gradient">
+        <!-- tools box -->
+        <div class="pull-right box-tools">
+            <button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse"
+                data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
+            <i class="fa fa-minus"></i></button>
+        </div>
+        <!-- /. tools -->
+        <i class="fa fa-phone"></i>
+        <h3 class="box-title">
+            Call Sources
+        </h3>
+    </div>
+    <div class="box-body">
+    
+        {{-- <div id="series_chart" class="col-md-12"></div> --}}
+    </div>
+    <!-- /.box-body-->
+{{--     <div class="box-footer no-border">
+            <div class="row">
+                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                    <div id="sparkline-1"></div>
+                    <div class="knob-label">Visitors</div>
+                </div>
+                <!-- ./col -->
+                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                    <div id="sparkline-2"></div>
+                    <div class="knob-label">Online</div>
+                </div>
+                <!-- ./col -->
+                <div class="col-xs-4 text-center">
+                    <div id="sparkline-3"></div>
+                    <div class="knob-label">Exists</div>
+                </div>
+                <!-- ./col -->
+            </div>
+            <!-- /.row -->
+        </div> --}}
+</div>
+
     @endif
     @if(isset($reportDto))
         <script type="application/json" id="metric-mapping">
@@ -206,10 +299,11 @@
                         rowData.push(dataPoint[1]);
                     })
 
-                    return item.name.name + " - " + item.name.desc;
+                    return item.name.name + "\n" + item.name.desc;
                 });
                 
                 columns.unshift("Period");
+                
                 rowsData.unshift(columns);
                 
                 var data = google.visualization.arrayToDataTable(rowsData);
