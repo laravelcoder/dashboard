@@ -5,7 +5,10 @@
     <style type="text/css">
         .select2-container--default .select2-selection--multiple .select2-selection__choice {background-color: #3c8dbc!important; border-color: #367fa9!important; color:#fff!important; }
         span.select2-selection__choice__remove {float: right; color:#000!important; margin-left:5px; font-size: 120%; }
-    </style>
+        div.amcharts-chart-div a {display: none; }
+        #series_chart {width: 100%; height: 300px; } 
+        #series_chart2 {width: 100%; height: 300px; } 
+    </style> 
     <script src="{!! asset('/javascript/embed-api/components/date-range-selector.js') !!}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -14,6 +17,9 @@
     <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/dark.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/black.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/chalk.js"></script>
 
 @endsection
 
@@ -98,27 +104,7 @@
     
         <div id="series_chart" class="col-md-12"></div>
     </div>
-    <!-- /.box-body-->
-{{--     <div class="box-footer no-border">
-        <div class="row">
-            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                <div id="sparkline-1"></div>
-                <div class="knob-label">Visitors</div>
-            </div>
-            <!-- ./col -->
-            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                <div id="sparkline-2"></div>
-                <div class="knob-label">Online</div>
-            </div>
-            <!-- ./col -->
-            <div class="col-xs-4 text-center">
-                <div id="sparkline-3"></div>
-                <div class="knob-label">Exists</div>
-            </div>
-            <!-- ./col -->
-        </div>
-        <!-- /.row -->
-    </div> --}}
+ 
 </div>
 
 
@@ -142,7 +128,7 @@
         </div>
     </div>
 
- 
+
 <!-- Map box -->
 <div class="box box-solid ">
     <div class="box-header bg-green-gradient">
@@ -161,27 +147,6 @@
     <div class="box-body">
         <div id="series_chart2" class="col-md-12"></div>
     </div>
-    <!-- /.box-body-->
-{{--     <div class="box-footer no-border">
-            <div class="row">
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                    <div id="sparkline-1"></div>
-                    <div class="knob-label">Visitors</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                    <div id="sparkline-2"></div>
-                    <div class="knob-label">Online</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center">
-                    <div id="sparkline-3"></div>
-                    <div class="knob-label">Exists</div>
-                </div>
-                <!-- ./col -->
-            </div>
-            <!-- /.row -->
-        </div> --}}
 
     
 </div>
@@ -317,6 +282,8 @@
                 var amChartConfig = {
                     "type": "serial",
                     "theme": "light",
+                        // "marginTop":0,
+                        // "marginRight": 80,
                     "legend": {
                         "horizontalGap": 10,
                         "maxColumns": 1,
@@ -327,7 +294,7 @@
                     "dataProvider": dataProvider,
                     "valueAxes": [{
                         "stackType": "regular",
-                        "axisAlpha": 0.3,
+                        "axisAlpha": 15,
                         "gridAlpha": 0
                     }],
                     "graphs": graphs,
@@ -346,7 +313,7 @@
                 series.items.forEach(function(item, index) {
                     item.data.forEach(function(dataPoint, index) {
                         if(dataProvider.length<=index) {
-                            var label = moment.utc(dataPoint[0],'x').format('YYYY-MMM-DD');
+                            var label = moment.utc(dataPoint[0],'x').format('DD-MMM-YYYY');
                             dataProvider.push({
                                 date: label
                             });
@@ -375,6 +342,14 @@
                 google.charts.load('current', {packages: ['corechart', 'line']});
             }
         });
-
+            function resize() {
+              var w = Math.random() * 600 + 100;
+              var h = Math.random() * 600 + 100;
+              document.getElementById('series_chart').style.width = w + 'px';
+              document.getElementById('series_chart').style.height = h + 'px';
+              document.getElementById('series_chart2').style.width = w + 'px';
+              document.getElementById('series_chart2').style.height = h + 'px';
+              chart.invalidateSize();
+            }
     </script>
 @endsection
