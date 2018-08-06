@@ -166,7 +166,8 @@ return [
 	'call_metrics'=>'Call Metrics',
 	'call-metrics' => [
 		'title' => 'Call Metrics Dashboard',
-		'by-dimension' => 'Tracking Number',
+		'dimension-tracking' => 'Tracking Number',
+		'dimension-source' => 'Source',
         'metrics' => [
             'total'=>"Total",
             'period_unique'=>"Period Unique",
