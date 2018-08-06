@@ -240,7 +240,9 @@
                     columns: columns,
                     searching: false,
                     lengthChange: false,
-                    ajax:  getCallMetricDataAjaxConfig('series_chart','tracking_number')(),
+                    ajax:  getCallMetricDataAjaxConfig('tracking_number', function(data){
+                        refreshChartLine(data.series, 'series_chart');
+                    })(),
                     processing: true,
                     serverSide: true
                 });
@@ -249,15 +251,16 @@
                     columns: columns,
                     searching: false,
                     lengthChange: false,
-                    ajax:  getCallMetricDataAjaxConfig('series_chart2','source')(),
+                    ajax:  getCallMetricDataAjaxConfig('source',function(data){
+                        refreshChartColumn(data.series, 'series_chart2');
+                    })(),
                     processing: true,
                     serverSide: true
                 });
             }
 
-            function getCallMetricDataAjaxConfig(chart_id, dimension, onCompleted){
+            function getCallMetricDataAjaxConfig(dimension, onCompleted){
                 return function () {
-                    var dd = null;
                     return {
                         "url": window.dtDefaultOptions.ajax,
                         "type": "GET",
@@ -274,14 +277,12 @@
                                     data[item.name] = item.value;
                             });
                             data['dimension'] = dimension;
-                            dd = data;
                         },
                         complete: function(d) {
                             d = JSON.parse(d.responseText)
                             
-                            refreshChart(d.series, chart_id);
                             if(onCompleted) {
-                                onCompleted(dd);
+                                onCompleted(d);
                             }
                             return d;
                         }
@@ -289,7 +290,7 @@
                 }
             }
 
-            function refreshChart(series, id) {
+            function refreshChartColumn(series, id) {
                 if(!series) {
                     $('#'+id).css('display','none');
                     return;
@@ -356,6 +357,75 @@
             
                 AmCharts.makeChart(id, amChartConfig);
             }
+
+            function refreshChartLine(series, id) {
+                if(!series) {
+                    $('#'+id).css('display','none');
+                    return;
+                }
+                $('#'+id).css('display','block');
+                
+                var graphs = [];
+                var dataProvider = [];
+                var amChartConfig = {
+                    "type": "serial",
+                    "theme": "light",
+                        // "marginTop":0,
+                        // "marginRight": 80,
+                    "legend": {
+                        "horizontalGap": 10,
+                        "maxColumns": 1,
+                        "position": "right",
+                        "useGraphSettings": true,
+                        "markerSize": 10
+                    },
+                    "dataProvider": dataProvider,
+                    "valueAxes": [{
+                        "stackType": "regular",
+                        "axisAlpha": 15,
+                        "gridAlpha": 0
+                    }],
+                    "graphs": graphs,
+                    "categoryField": "date",
+                    "categoryAxis": {
+                        "gridPosition": "start",
+                        "axisAlpha": 0,
+                        "gridAlpha": 0,
+                        "position": "left"
+                    },
+                    "export": {
+                        "enabled": true
+                    }
+                };
+
+                series.items.forEach(function(item, index) {
+                    item.data.forEach(function(dataPoint, index) {
+                        if(dataProvider.length<=index) {
+                            var label = moment.utc(dataPoint[0],'x').format('DD-MMM-YYYY');
+                            dataProvider.push({
+                                date: label
+                            });
+                        }
+                    
+                        var rowData = dataProvider[index];
+                        rowData[item.id] = dataPoint[1];
+                    })
+
+                    graphs.push({
+                        "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                        "fillAlphas": 0.0,
+                        "labelText": "[[value]]",
+                        "lineAlpha": 0.3,
+                        "title": item.name.name + "\n" + (item.name.desc ? item.name.desc : ''),
+                        "type": "line",
+                        "color": "#000000",
+                        "valueField": item.id
+                    })
+                });
+            
+                AmCharts.makeChart(id, amChartConfig);
+            }
+
 
             function initChart(){
                 google.charts.load('current', {packages: ['corechart', 'line']});
