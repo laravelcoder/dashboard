@@ -14,6 +14,7 @@
     </style> 
     <script src="{!! asset('/javascript/embed-api/components/date-range-selector.js') !!}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
     <script src="https://www.amcharts.com/lib/3/serial.js"></script>
@@ -232,6 +233,17 @@
                             data: prop,
                             name: prop,
                             searchable: false,
+                            render: (function(){
+                                var property = prop;
+                                var durationProps = ['ring_time','talk_time','duration']
+                                return function(data, type, row) {
+                                    moment.relativeTimeThreshold()
+                                    if(durationProps.indexOf(property) > -1 ) {
+                                        return moment.duration(data,'seconds').format('h [hours], m [minutes and] s [seconds]');
+                                    }
+                                    return data;
+                                }
+                            })()
                         });
                     }
                 }
@@ -307,8 +319,9 @@
                     "legend": {
                         "horizontalGap": 10,
                         "maxColumns": 1,
+                        "markerType": "square",
                         "position": "right",
-                        "useGraphSettings": true,
+                        "useGraphSettings": false,
                         "markerSize": 10
                     },
                     "dataProvider": dataProvider,
@@ -376,8 +389,9 @@
                         "horizontalGap": 10,
                         "maxColumns": 1,
                         "position": "right",
-                        "useGraphSettings": true,
-                        "markerSize": 10
+                        "useGraphSettings": false,
+                        "markerSize": 10,
+                        "markerType": "square"
                     },
                     "dataProvider": dataProvider,
                     "valueAxes": [{
@@ -416,6 +430,7 @@
                         "fillAlphas": 0.0,
                         "labelText": "[[value]]",
                         "lineAlpha": 0.3,
+                        "lineThickness": 5,
                         "title": item.name.name + "\n" + (item.name.desc ? item.name.desc : ''),
                         "type": "line",
                         "color": "#000000",
@@ -441,4 +456,5 @@
               chart.invalidateSize();
             }
     </script>
+    <script src="{{ URL::asset('js/moment-duration-format.js') }}"></script>
 @endsection
