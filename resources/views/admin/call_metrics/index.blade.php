@@ -11,6 +11,91 @@
         .select2-selection {
             min-height: 34px;
         }
+
+
+        .amcharts-graph-g2 .amcharts-graph-stroke {
+          stroke-dasharray: 3px 3px;
+          stroke-linejoin: round;
+          stroke-linecap: round;
+          -webkit-animation: am-moving-dashes 1s linear infinite;
+          animation: am-moving-dashes 1s linear infinite;
+        }
+
+        @-webkit-keyframes am-moving-dashes {
+          100% {
+            stroke-dashoffset: -31px;
+          }
+        }
+        @keyframes am-moving-dashes {
+          100% {
+            stroke-dashoffset: -31px;
+          }
+        }
+        .lastBullet {
+          -webkit-animation: am-pulsating 1s ease-out infinite;
+          animation: am-pulsating 1s ease-out infinite;
+        }
+        @-webkit-keyframes am-pulsating {
+          0% {
+            stroke-opacity: 1;
+            stroke-width: 0px;
+          }
+          100% {
+            stroke-opacity: 0;
+            stroke-width: 50px;
+          }
+        }
+        @keyframes am-pulsating {
+          0% {
+            stroke-opacity: 1;
+            stroke-width: 0px;
+          }
+          100% {
+            stroke-opacity: 0;
+            stroke-width: 50px;
+          }
+        }
+
+        .amcharts-graph-column-front {
+          -webkit-transition: all .3s .3s ease-out;
+          transition: all .3s .3s ease-out;
+        }
+        .amcharts-graph-column-front:hover {
+          fill: #496375;
+          stroke: #496375;
+          -webkit-transition: all .3s ease-out;
+          transition: all .3s ease-out;
+        }
+
+        .amcharts-graph-g3 {
+          stroke-linejoin: round;
+          stroke-linecap: round;
+          stroke-dasharray: 500%;
+          stroke-dasharray: 0 /;    /* fixes IE prob */
+          stroke-dashoffset: 0 /;   /* fixes IE prob */
+          -webkit-animation: am-draw 40s;
+          animation: am-draw 40s;
+        }
+        @-webkit-keyframes am-draw {
+            0% {
+                stroke-dashoffset: 500%;
+            }
+            100% {
+                stroke-dashoffset: 0%;
+            }
+        }
+        @keyframes am-draw {
+            0% {
+                stroke-dashoffset: 500%;
+            }
+            100% {
+                stroke-dashoffset: 0%;
+            }
+        }
+        /* OVERWRITE OUR MAIN STYLE */
+        .demo-flipper-front.demo-panel-white, body {
+          background-color: #161616;
+        }
     </style> 
     <script src="{!! asset('/javascript/embed-api/components/date-range-selector.js') !!}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
@@ -314,8 +399,7 @@
                 var amChartConfig = {
                     "type": "serial",
                     "theme": "light",
-                        // "marginTop":0,
-                        // "marginRight": 80,
+    
                     "legend": {
                         "horizontalGap": 10,
                         "maxColumns": 1,
@@ -331,12 +415,39 @@
                         "gridAlpha": 0
                     }],
                     "graphs": graphs,
+                    "chartCursor": {
+                        // "categoryBalloonDateFormat": "DD",
+                        "cursorAlpha": 0.1,
+                        // "cursorColor":"#000000",
+                         "fullWidth":true,
+                        "valueBalloonsEnabled": false,
+                        "zoomable": false
+                    },
                     "categoryField": "date",
                     "categoryAxis": {
                         "gridPosition": "start",
                         "axisAlpha": 0,
                         "gridAlpha": 0,
-                        "position": "left"
+                        "position": "left",
+                        "dateFormats": [{
+                            "period": "DD",
+                            "format": "DD"
+                        }, {
+                            "period": "WW",
+                            "format": "MMM DD"
+                        }, {
+                            "period": "MM",
+                            "format": "MMM"
+                        }, {
+                            "period": "YYYY",
+                            "format": "YYYY"
+                        }],
+                        "parseDates": true,
+                          "autoGridCount": false,
+                        "axisColor": "#555555",
+                        "gridAlpha": 0.1,
+                        "gridColor": "#FFFFFF",
+                        "gridCount": 50
                     },
                     "export": {
                         "enabled": true
@@ -346,7 +457,7 @@
                 series.items.forEach(function(item, index) {
                     item.data.forEach(function(dataPoint, index) {
                         if(dataProvider.length<=index) {
-                            var label = moment.utc(dataPoint[0],'x').format('DD-MMM-YYYY');
+                            var label = moment.utc(dataPoint[0],'x').format('MMM-DD-YYYY');
                             dataProvider.push({
                                 date: label
                             });
@@ -357,7 +468,10 @@
                     })
 
                     graphs.push({
-                        "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                         // "id": "g2",
+                        "balloonText": "<b>[[title]]</b><span style='font-size:14px'> <b>[[value]]</b></span> <br> calls generated",
+
+
                         "fillAlphas": 0.8,
                         "labelText": "[[value]]",
                         "lineAlpha": 0.3,
@@ -383,8 +497,6 @@
                 var amChartConfig = {
                     "type": "serial",
                     "theme": "light",
-                        // "marginTop":0,
-                        // "marginRight": 80,
                     "legend": {
                         "horizontalGap": 10,
                         "maxColumns": 1,
@@ -397,15 +509,43 @@
                     "valueAxes": [{
                         "stackType": "regular",
                         "axisAlpha": 15,
-                        "gridAlpha": 0
+                        "gridAlpha": 0,
+                        
                     }],
+                    "chartCursor": {
+                        // "categoryBalloonDateFormat": "DD",
+                        "cursorAlpha": 0.1,
+                        "cursorColor":"#000000",
+                         "fullWidth":true,
+                        "valueBalloonsEnabled": false,
+                        // "zoomable": false
+                    },
                     "graphs": graphs,
                     "categoryField": "date",
                     "categoryAxis": {
                         "gridPosition": "start",
-                        "axisAlpha": 0,
-                        "gridAlpha": 0,
-                        "position": "left"
+                        // "axisAlpha": 0,
+                        // "gridAlpha": 0,
+                        // "position": "left",
+                        "dateFormats": [{
+                            "period": "DD",
+                            "format": "DD"
+                        }, {
+                            "period": "WW",
+                            "format": "MMM DD"
+                        }, {
+                            "period": "MM",
+                            "format": "MMM"
+                        }, {
+                            "period": "YYYY",
+                            "format": "YYYY"
+                        }],
+                        "parseDates": true,
+                        "autoGridCount": false,
+                        "axisColor": "#555555",
+                        "gridAlpha": 0.1,
+                        "gridColor": "#FFFFFF",
+                        "gridCount": 50
                     },
                     "export": {
                         "enabled": true
@@ -415,7 +555,7 @@
                 series.items.forEach(function(item, index) {
                     item.data.forEach(function(dataPoint, index) {
                         if(dataProvider.length<=index) {
-                            var label = moment.utc(dataPoint[0],'x').format('DD-MMM-YYYY');
+                            var label = moment.utc(dataPoint[0],'x').format('MMM-DD-YYYY');
                             dataProvider.push({
                                 date: label
                             });
@@ -426,15 +566,20 @@
                     })
 
                     graphs.push({
-                        "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                         
+                        "balloonText": "<span style='font-size:16px'> <b>[[value]]</b> Calls on:</span><br><b>[[title]]</b><br>",
+                        "fillAlphas": 0.6,
+                        "bullet": "diamond",
+                        "bulletBorderAlpha": 1,
+                        "useLineColorForBulletBorder": true,
                         "fillAlphas": 0.0,
-                        "labelText": "[[value]]",
+                        "labelText": " [[value]]",
                         "lineAlpha": 0.3,
-                        "lineThickness": 5,
+                        "lineThickness": 3,
                         "title": item.name.name + "\n" + (item.name.desc ? item.name.desc : ''),
                         "type": "line",
                         "color": "#000000",
-                        "valueField": item.id
+                        "valueField": item.id 
                     })
                 });
             
@@ -458,3 +603,7 @@
     </script>
     <script src="{{ URL::asset('js/moment-duration-format.js') }}"></script>
 @endsection
+
+
+
+
