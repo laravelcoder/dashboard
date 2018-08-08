@@ -6,96 +6,13 @@
         .select2-container--default .select2-selection--multiple .select2-selection__choice {background-color: #3c8dbc!important; border-color: #367fa9!important; color:#fff!important; }
         span.select2-selection__choice__remove {float: right; color:#000!important; margin-left:5px; font-size: 120%; }
         div.amcharts-chart-div a {display: none; }
-        #series_chart {width: 100%; height: 300px; } 
-        #series_chart2 {width: 100%; height: 300px; } 
-        .select2-selection {
-            min-height: 34px;
-        }
 
-
-        .amcharts-graph-g2 .amcharts-graph-stroke {
-          stroke-dasharray: 3px 3px;
-          stroke-linejoin: round;
-          stroke-linecap: round;
-          -webkit-animation: am-moving-dashes 1s linear infinite;
-          animation: am-moving-dashes 1s linear infinite;
-        }
-
-        @-webkit-keyframes am-moving-dashes {
-          100% {
-            stroke-dashoffset: -31px;
-          }
-        }
-        @keyframes am-moving-dashes {
-          100% {
-            stroke-dashoffset: -31px;
-          }
-        }
-        .lastBullet {
-          -webkit-animation: am-pulsating 1s ease-out infinite;
-          animation: am-pulsating 1s ease-out infinite;
-        }
-        @-webkit-keyframes am-pulsating {
-          0% {
-            stroke-opacity: 1;
-            stroke-width: 0px;
-          }
-          100% {
-            stroke-opacity: 0;
-            stroke-width: 50px;
-          }
-        }
-        @keyframes am-pulsating {
-          0% {
-            stroke-opacity: 1;
-            stroke-width: 0px;
-          }
-          100% {
-            stroke-opacity: 0;
-            stroke-width: 50px;
-          }
-        }
-
-        .amcharts-graph-column-front {
-          -webkit-transition: all .3s .3s ease-out;
-          transition: all .3s .3s ease-out;
-        }
-        .amcharts-graph-column-front:hover {
-          fill: #496375;
-          stroke: #496375;
-          -webkit-transition: all .3s ease-out;
-          transition: all .3s ease-out;
-        }
-
-        .amcharts-graph-g3 {
-          stroke-linejoin: round;
-          stroke-linecap: round;
-          stroke-dasharray: 500%;
-          stroke-dasharray: 0 /;    /* fixes IE prob */
-          stroke-dashoffset: 0 /;   /* fixes IE prob */
-          -webkit-animation: am-draw 40s;
-          animation: am-draw 40s;
-        }
-        @-webkit-keyframes am-draw {
-            0% {
-                stroke-dashoffset: 500%;
-            }
-            100% {
-                stroke-dashoffset: 0%;
-            }
-        }
-        @keyframes am-draw {
-            0% {
-                stroke-dashoffset: 500%;
-            }
-            100% {
-                stroke-dashoffset: 0%;
-            }
-        }
-        /* OVERWRITE OUR MAIN STYLE */
-        .demo-flipper-front.demo-panel-white, body {
-          background-color: #161616;
-        }
+        #series_chart {width: 100%;  min-height: 400px;  } 
+        #series_chart2 {width: 100%;  min-height: 400px; } 
+        #series_chart_black {width: 100%; min-height: 300px; background: #fff!important;} 
+        #series_chart2_black {width: 100%; min-height: 300px; background: #fff!important;} 
+        .select2-selection { min-height: 34px;}
+ 
     </style> 
     <script src="{!! asset('/javascript/embed-api/components/date-range-selector.js') !!}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
@@ -188,8 +105,9 @@
             </h3>
         </div>
         <div class="box-body">
-        
-            <div id="series_chart" class="col-md-12"></div>
+            <div class="chartwrapper">
+                <div id="series_chart" class="col-md-12 chartdiv"></div>
+            </div>
         </div>
     </div>
     <div class="panel panel-default">
@@ -228,7 +146,9 @@
             </h3>
         </div>
         <div class="box-body">
-            <div id="series_chart2" class="col-md-12"></div>
+            <div class="chartwrapper">
+            <div id="series_chart2" class="col-md-12 chartdiv"></div>
+            </div>
         </div>
     </div>
     <div class="panel panel-default">
@@ -401,28 +321,40 @@
                     "theme": "light",
     
                     "legend": {
+                        "equalWidths": false,
                         "horizontalGap": 10,
                         "maxColumns": 1,
                         "markerType": "square",
-                        "position": "right",
+                        "position": "left",
                         "useGraphSettings": false,
-                        "markerSize": 10
+                        "markerSize": 10,
+                        "valueWidth": 120
                     },
                     "dataProvider": dataProvider,
                     "valueAxes": [{
                         "stackType": "regular",
+                        // "stackType": "3d",
                         "axisAlpha": 15,
+                        "position": "left",
                         "gridAlpha": 0
                     }],
                     "graphs": graphs,
                     "chartCursor": {
-                        // "categoryBalloonDateFormat": "DD",
+                        "categoryBalloonDateFormat": "DD",
                         "cursorAlpha": 0.1,
-                        // "cursorColor":"#000000",
-                         "fullWidth":true,
+                        "cursorColor":"#000000",
+                        "fullWidth":true,
+                        "zoomable": false,
+                        "pan": true,
+                        // "valueLineEnabled": true,
+                        "valueLineBalloonEnabled": true,
                         "valueBalloonsEnabled": false,
-                        "zoomable": false
+                        // "cursorAlpha": 0,
+                        "valueLineAlpha": 0.4
                     },
+                    "plotAreaFillAlphas": 0.1,
+                    // "depth3D": 90,
+                    // "angle": 30,
                     "categoryField": "date",
                     "categoryAxis": {
                         "gridPosition": "start",
@@ -470,8 +402,9 @@
                     graphs.push({
                          // "id": "g2",
                         "balloonText": "<b>[[title]]</b><span style='font-size:14px'> <b>[[value]]</b></span> <br> calls generated",
-
-
+                        "legendValueText": "[[value]] Calls",
+                        // "columnWidth": 0.5,
+                        "useLineColorForBulletBorder": true,
                         "fillAlphas": 0.8,
                         "labelText": "[[value]]",
                         "lineAlpha": 0.3,
@@ -497,17 +430,19 @@
                 var amChartConfig = {
                     "type": "serial",
                     "theme": "light",
+                    // "startDuration": 1,
                     "legend": {
                         "horizontalGap": 10,
                         "maxColumns": 1,
-                        "position": "right",
+                        "position": "left",
                         "useGraphSettings": false,
                         "markerSize": 10,
                         "markerType": "square"
                     },
                     "dataProvider": dataProvider,
                     "valueAxes": [{
-                        "stackType": "regular",
+                        // "stackType": "regular",
+
                         "axisAlpha": 15,
                         "gridAlpha": 0,
                         
@@ -516,9 +451,13 @@
                         // "categoryBalloonDateFormat": "DD",
                         "cursorAlpha": 0.1,
                         "cursorColor":"#000000",
-                         "fullWidth":true,
+                        "fullWidth":true,
                         "valueBalloonsEnabled": false,
                         // "zoomable": false
+                        "pan": true,
+                        // "valueLineEnabled": true,
+                        "valueLineBalloonEnabled": true,
+                        "valueBalloonsEnabled": false,
                     },
                     "graphs": graphs,
                     "categoryField": "date",
@@ -545,6 +484,7 @@
                         "axisColor": "#555555",
                         "gridAlpha": 0.1,
                         "gridColor": "#FFFFFF",
+                        "gridPosition": "start",
                         "gridCount": 50
                     },
                     "export": {
@@ -567,13 +507,16 @@
 
                     graphs.push({
                          
-                        "balloonText": "<span style='font-size:16px'> <b>[[value]]</b> Calls on:</span><br><b>[[title]]</b><br>",
-                        "fillAlphas": 0.6,
+                        //"balloonText": "<span style='font-size:16px'> <b>[[value]]</b> Calls on:</span><br><b>[[title]]</b><br>",
+                        "balloonText": "<span style='font-size:16px'> <b>[[value]]</b> Calls on:</span> <b>[[title]]</b> ",
+                        "fillAlphas": 0.0,
+                        "legendValueText": "[[value]] Calls",
+                       // "legendValueSize" "16",
+                        "useLineColorForBulletBorder": true,
                         "bullet": "diamond",
                         "bulletBorderAlpha": 1,
                         "useLineColorForBulletBorder": true,
-                        "fillAlphas": 0.0,
-                        "labelText": " [[value]]",
+                        // "labelText": "[[value]]",
                         "lineAlpha": 0.3,
                         "lineThickness": 3,
                         "title": item.name.name + "\n" + (item.name.desc ? item.name.desc : ''),
