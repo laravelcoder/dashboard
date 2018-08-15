@@ -253,7 +253,7 @@
                     }
                 }
                 
-                $('#tracking-dt').DataTable({
+                var optTracking = {
                     columns: columns,
                     searching: false,
                     lengthChange: false,
@@ -262,9 +262,11 @@
                     })(),
                     processing: true,
                     serverSide: true
-                });
+                };
+                addDefaultsToDT(optTracking);
+                $('#tracking-dt').DataTable(optTracking);
 
-                $('#sources-dt').DataTable({
+                var optSources = {
                     columns: columns,
                     searching: false,
                     lengthChange: false,
@@ -273,7 +275,17 @@
                     })(),
                     processing: true,
                     serverSide: true
-                });
+                };
+                addDefaultsToDT(optSources);
+                $('#sources-dt').DataTable(optSources);
+
+                function addDefaultsToDT(options) {
+                    for(var prop in window.dtDefaultOptions) {
+                        if(window.dtDefaultOptions.hasOwnProperty(prop) && options[prop] === undefined)  {
+                            options[prop] = window.dtDefaultOptions[prop];
+                        }
+                    }
+                }
             }
 
             function getCallMetricDataAjaxConfig(dimension, onCompleted){
