@@ -28,10 +28,15 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         $user = \Auth::user();
+        $permissionArray = [];
 
-        
+
+
         if (! app()->runningInConsole()) {
+
             $roles = Role::with('permission')->get();
+
+
 
             foreach ($roles as $role) {
                 foreach ($role->permission as $permission) {

@@ -1,0 +1,104 @@
+[15-Apr-2018 17:28:58 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[27-Apr-2018 21:47:35 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[29-Apr-2018 20:58:58 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[02-May-2018 14:06:57 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[11-May-2018 00:48:19 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[11-May-2018 20:21:46 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[13-May-2018 00:33:03 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[15-May-2018 15:41:50 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[25-May-2018 14:08:14 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[26-May-2018 14:07:34 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[16-Jun-2018 14:02:22 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[20-Jun-2018 14:07:48 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[21-Jun-2018 14:01:17 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[22-Jun-2018 14:08:52 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[27-Jun-2018 14:04:15 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[28-Jun-2018 14:01:57 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[29-Jun-2018 14:10:03 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[30-Jun-2018 14:07:18 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[13-Jul-2018 16:27:51 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[16-Jul-2018 14:20:02 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[18-Jul-2018 12:02:02 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[18-Jul-2018 19:58:22 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[25-Jul-2018 22:48:17 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[30-Jul-2018 20:07:14 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[01-Aug-2018 04:43:14 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14
+[01-Aug-2018 10:10:31 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/bootstrap/app.php on line 14

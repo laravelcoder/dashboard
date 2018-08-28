@@ -1,0 +1,6 @@
+[10-May-2018 04:37:58 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Console\Kernel' not found in /home/lcadbcom/public_html/lcadashboard/app/Console/Kernel.php on line 8
+[11-May-2018 05:18:59 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Console\Kernel' not found in /home/lcadbcom/public_html/lcadashboard/app/Console/Kernel.php on line 8
+[27-May-2018 14:03:24 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Console\Kernel' not found in /home/lcadbcom/public_html/lcadashboard/app/Console/Kernel.php on line 8
+[26-Jul-2018 20:32:25 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Console\Kernel' not found in /home/lcadbcom/public_html/lcadashboard/app/Console/Kernel.php on line 8
+[29-Jul-2018 03:45:13 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Console\Kernel' not found in /home/lcadbcom/public_html/lcadashboard/app/Console/Kernel.php on line 8
+[30-Jul-2018 03:01:11 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Console\Kernel' not found in /home/lcadbcom/public_html/lcadashboard/app/Console/Kernel.php on line 8

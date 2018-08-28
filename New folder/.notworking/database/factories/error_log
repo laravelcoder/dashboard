@@ -1,0 +1,624 @@
+[03-May-2018 14:04:17 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskTagFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskTagFactory.php on line 3
+[03-May-2018 14:04:17 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactFactory.php on line 3
+[03-May-2018 14:04:17 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php on line 3
+[03-May-2018 14:04:18 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php on line 3
+[04-May-2018 10:18:29 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php on line 3
+[04-May-2018 14:03:53 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php on line 3
+[04-May-2018 14:03:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php on line 3
+[04-May-2018 14:03:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordFactory.php on line 3
+[04-May-2018 14:03:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactCompanyFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactCompanyFactory.php on line 3
+[04-May-2018 14:03:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php on line 3
+[04-May-2018 14:03:55 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php on line 3
+[04-May-2018 14:03:55 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ZipcodeFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ZipcodeFactory.php on line 3
+[04-May-2018 14:03:55 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskFactory.php on line 3
+[04-May-2018 14:03:55 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/DashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/DashboardFactory.php on line 3
+[04-May-2018 14:03:55 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/RoleFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/RoleFactory.php on line 3
+[04-May-2018 14:03:55 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php on line 3
+[04-May-2018 14:03:56 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php on line 3
+[04-May-2018 14:03:56 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ClinicFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ClinicFactory.php on line 3
+[05-May-2018 14:01:18 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php on line 3
+[05-May-2018 14:01:18 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ZipcodeFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ZipcodeFactory.php on line 3
+[05-May-2018 14:01:18 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php on line 3
+[05-May-2018 14:01:18 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php on line 3
+[05-May-2018 14:01:19 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php on line 3
+[06-May-2018 05:19:33 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php on line 3
+[06-May-2018 06:26:13 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactCompanyFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactCompanyFactory.php on line 3
+[06-May-2018 21:06:40 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php on line 3
+[07-May-2018 14:09:17 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ClinicFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ClinicFactory.php on line 3
+[10-May-2018 03:16:50 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/UserFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/UserFactory.php on line 3
+[10-May-2018 09:47:30 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordFactory.php on line 3
+[10-May-2018 09:47:34 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php on line 3
+[10-May-2018 09:47:37 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php on line 3
+[10-May-2018 09:47:40 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticalDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticalDashboardFactory.php on line 3
+[10-May-2018 09:47:42 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php on line 3
+[10-May-2018 09:47:46 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php on line 3
+[10-May-2018 09:47:49 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingsDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingsDashboardFactory.php on line 3
+[10-May-2018 09:47:52 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/CallMetricFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/CallMetricFactory.php on line 3
+[10-May-2018 09:47:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ClinicFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ClinicFactory.php on line 3
+[10-May-2018 09:47:57 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactCompanyFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactCompanyFactory.php on line 3
+[10-May-2018 09:48:01 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactFactory.php on line 3
+[10-May-2018 09:48:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/DashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/DashboardFactory.php on line 3
+[10-May-2018 09:48:08 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/LcaDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/LcaDashboardFactory.php on line 3
+[10-May-2018 09:48:13 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php on line 3
+[10-May-2018 09:49:20 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php on line 3
+[10-May-2018 09:49:23 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/RoleFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/RoleFactory.php on line 3
+[10-May-2018 09:49:25 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php on line 3
+[10-May-2018 09:49:29 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskFactory.php on line 3
+[10-May-2018 09:49:31 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskStatusFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskStatusFactory.php on line 3
+[10-May-2018 09:49:34 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskTagFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskTagFactory.php on line 3
+[10-May-2018 09:49:36 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/WebsiteFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/WebsiteFactory.php on line 3
+[10-May-2018 09:49:38 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ZipcodeFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ZipcodeFactory.php on line 3
+[11-May-2018 05:43:40 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/UserFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/UserFactory.php on line 3
+[11-May-2018 13:24:26 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordFactory.php on line 3
+[11-May-2018 13:24:28 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php on line 3
+[11-May-2018 13:24:31 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php on line 3
+[11-May-2018 13:24:36 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticalDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticalDashboardFactory.php on line 3
+[11-May-2018 13:24:38 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php on line 3
+[11-May-2018 13:24:41 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php on line 3
+[11-May-2018 13:24:44 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingsDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingsDashboardFactory.php on line 3
+[11-May-2018 13:24:48 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/CallMetricFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/CallMetricFactory.php on line 3
+[11-May-2018 13:24:51 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ClinicFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ClinicFactory.php on line 3
+[11-May-2018 13:24:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactCompanyFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactCompanyFactory.php on line 3
+[11-May-2018 13:24:57 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactFactory.php on line 3
+[11-May-2018 13:25:09 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/LcaDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/LcaDashboardFactory.php on line 3
+[11-May-2018 13:25:12 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php on line 3
+[11-May-2018 13:25:20 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php on line 3
+[11-May-2018 13:25:23 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/RoleFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/RoleFactory.php on line 3
+[11-May-2018 13:25:26 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php on line 3
+[11-May-2018 13:25:32 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskFactory.php on line 3
+[11-May-2018 13:25:35 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskStatusFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskStatusFactory.php on line 3
+[11-May-2018 13:25:40 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskTagFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskTagFactory.php on line 3
+[11-May-2018 13:25:47 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/WebsiteFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/WebsiteFactory.php on line 3
+[11-May-2018 13:25:51 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ZipcodeFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ZipcodeFactory.php on line 3
+[23-May-2018 14:03:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/DashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/DashboardFactory.php on line 3
+[23-May-2018 14:03:56 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/UserFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/UserFactory.php on line 3
+[23-May-2018 14:03:58 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/RoleFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/RoleFactory.php on line 3
+[23-May-2018 14:03:59 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php on line 3
+[23-May-2018 14:03:59 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/LcaDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/LcaDashboardFactory.php on line 3
+[23-May-2018 14:04:00 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactFactory.php on line 3
+[23-May-2018 14:04:02 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingsDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingsDashboardFactory.php on line 3
+[23-May-2018 14:04:03 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php on line 3
+[30-May-2018 14:03:14 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php on line 3
+[30-May-2018 14:03:14 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php on line 3
+[30-May-2018 14:03:14 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/CallMetricFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/CallMetricFactory.php on line 3
+[30-May-2018 14:03:14 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php on line 3
+[30-May-2018 14:03:15 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php on line 3
+[30-May-2018 14:03:15 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php on line 3
+[31-May-2018 14:07:08 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/DashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/DashboardFactory.php on line 3
+[31-May-2018 14:07:08 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/WebsiteFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/WebsiteFactory.php on line 3
+[01-Jun-2018 14:01:02 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/WebsiteFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/WebsiteFactory.php on line 3
+[28-Jul-2018 23:52:37 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/UserFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/UserFactory.php on line 3
+[29-Jul-2018 01:08:24 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/RoleFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/RoleFactory.php on line 3
+[29-Jul-2018 03:15:21 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordFactory.php on line 3
+[29-Jul-2018 03:15:24 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php on line 3
+[29-Jul-2018 03:15:26 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php on line 3
+[29-Jul-2018 03:15:28 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticalDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticalDashboardFactory.php on line 3
+[29-Jul-2018 03:15:31 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php on line 3
+[29-Jul-2018 03:15:33 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php on line 3
+[29-Jul-2018 03:15:37 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingsDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingsDashboardFactory.php on line 3
+[29-Jul-2018 03:15:40 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/CallMetricFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/CallMetricFactory.php on line 3
+[29-Jul-2018 03:15:42 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ClinicFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ClinicFactory.php on line 3
+[29-Jul-2018 03:15:45 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactCompanyFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactCompanyFactory.php on line 3
+[29-Jul-2018 03:15:47 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactFactory.php on line 3
+[29-Jul-2018 03:15:50 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/DashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/DashboardFactory.php on line 3
+[29-Jul-2018 03:15:53 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/LcaDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/LcaDashboardFactory.php on line 3
+[29-Jul-2018 03:15:55 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php on line 3
+[29-Jul-2018 03:15:56 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php on line 3
+[29-Jul-2018 03:15:58 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/RoleFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/RoleFactory.php on line 3
+[29-Jul-2018 03:16:00 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php on line 3
+[29-Jul-2018 03:16:03 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskFactory.php on line 3
+[29-Jul-2018 03:16:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskStatusFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskStatusFactory.php on line 3
+[29-Jul-2018 03:16:07 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskTagFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskTagFactory.php on line 3
+[29-Jul-2018 03:16:10 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/UserFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/UserFactory.php on line 3
+[29-Jul-2018 03:16:12 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/WebsiteFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/WebsiteFactory.php on line 3
+[29-Jul-2018 03:16:16 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ZipcodeFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ZipcodeFactory.php on line 3
+[29-Jul-2018 08:43:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskFactory.php on line 3
+[29-Jul-2018 15:02:00 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ClinicFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ClinicFactory.php on line 3
+[29-Jul-2018 16:17:47 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordFactory.php on line 3
+[29-Jul-2018 18:49:21 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/WebsiteFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/WebsiteFactory.php on line 3
+[29-Jul-2018 22:33:31 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php on line 3
+[29-Jul-2018 23:49:18 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskTagFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskTagFactory.php on line 3
+[30-Jul-2018 01:05:06 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactFactory.php on line 3
+[30-Jul-2018 03:06:50 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordFactory.php on line 3
+[30-Jul-2018 03:06:54 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php on line 3
+[30-Jul-2018 03:07:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php on line 3
+[30-Jul-2018 03:07:15 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticalDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticalDashboardFactory.php on line 3
+[30-Jul-2018 03:07:19 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ApiTestFactory.php on line 3
+[30-Jul-2018 03:07:23 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php on line 3
+[30-Jul-2018 03:07:29 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingsDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingsDashboardFactory.php on line 3
+[30-Jul-2018 03:07:42 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/CallMetricFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/CallMetricFactory.php on line 3
+[30-Jul-2018 03:07:49 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ClinicFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ClinicFactory.php on line 3
+[30-Jul-2018 03:07:58 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactCompanyFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactCompanyFactory.php on line 3
+[30-Jul-2018 03:08:03 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactFactory.php on line 3
+[30-Jul-2018 03:08:06 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/LcaDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/LcaDashboardFactory.php on line 3
+[30-Jul-2018 03:08:15 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php on line 3
+[30-Jul-2018 03:08:19 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php on line 3
+[30-Jul-2018 03:08:26 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/RoleFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/RoleFactory.php on line 3
+[30-Jul-2018 03:08:31 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php on line 3
+[30-Jul-2018 03:08:34 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskFactory.php on line 3
+[30-Jul-2018 03:08:38 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskStatusFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskStatusFactory.php on line 3
+[30-Jul-2018 03:08:50 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskTagFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskTagFactory.php on line 3
+[30-Jul-2018 03:09:02 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/WebsiteFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/WebsiteFactory.php on line 3
+[30-Jul-2018 03:09:04 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ZipcodeFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ZipcodeFactory.php on line 3
+[30-Jul-2018 07:24:02 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticFactory.php on line 3
+[30-Jul-2018 08:39:49 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ZipcodeFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ZipcodeFactory.php on line 3
+[30-Jul-2018 09:55:37 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingFactory.php on line 3
+[30-Jul-2018 11:11:24 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/DashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/DashboardFactory.php on line 3
+[30-Jul-2018 12:27:12 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskStatusFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskStatusFactory.php on line 3
+[30-Jul-2018 13:42:59 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/PermissionFactory.php on line 3
+[30-Jul-2018 14:58:46 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AdwordsDashboardFactory.php on line 3
+[30-Jul-2018 17:03:42 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/LocationFactory.php on line 3
+[30-Jul-2018 21:59:34 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/CallMetricFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/CallMetricFactory.php on line 3
+[31-Jul-2018 01:46:56 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/LcaDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/LcaDashboardFactory.php on line 3
+[31-Jul-2018 03:02:45 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/TaskCalendarFactory.php on line 3
+[31-Jul-2018 08:05:52 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingsDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/BookingsDashboardFactory.php on line 3
+[31-Jul-2018 09:21:40 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticalDashboardFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/AnalyticalDashboardFactory.php on line 3
+[31-Jul-2018 13:09:02 UTC] PHP Fatal error:  Uncaught Error: Call to a member function define() on null in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactCompanyFactory.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/lcadbcom/public_html/lcadashboard/database/factories/ContactCompanyFactory.php on line 3

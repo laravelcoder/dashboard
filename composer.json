@@ -30,7 +30,7 @@
         "nunomaduro/collision": "~2.0",
         "phpunit/phpunit": "~7.0",
         "symfony/thanks": "^1.0",
-    "laravel/dusk": "^3.0.1"
+    	"laravel/dusk": "^3.0.1"
     },
     "autoload": {
         "classmap": [
@@ -63,7 +63,8 @@
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover"
+            "@php artisan package:discover",
+             "@php artisan iseed bookings"
         ]
     },
     "config": {

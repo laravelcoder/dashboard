@@ -1,0 +1,16 @@
+[11-May-2018 20:21:14 UTC] PHP Fatal error:  Class 'Illuminate\Cookie\Middleware\EncryptCookies' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/EncryptCookies.php on line 7
+[11-May-2018 20:21:17 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Http\Middleware\TrimStrings' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/TrimStrings.php on line 7
+[11-May-2018 20:21:19 UTC] PHP Fatal error:  Class 'Fideloper\Proxy\TrustProxies' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/TrustProxies.php on line 8
+[11-May-2018 20:21:21 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Http\Middleware\VerifyCsrfToken' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/VerifyCsrfToken.php on line 7
+[13-May-2018 00:32:26 UTC] PHP Fatal error:  Class 'Illuminate\Cookie\Middleware\EncryptCookies' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/EncryptCookies.php on line 7
+[13-May-2018 00:32:30 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Http\Middleware\TrimStrings' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/TrimStrings.php on line 7
+[13-May-2018 00:32:32 UTC] PHP Fatal error:  Class 'Fideloper\Proxy\TrustProxies' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/TrustProxies.php on line 8
+[13-May-2018 00:32:33 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Http\Middleware\VerifyCsrfToken' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/VerifyCsrfToken.php on line 7
+[30-Jul-2018 20:06:41 UTC] PHP Fatal error:  Class 'Illuminate\Cookie\Middleware\EncryptCookies' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/EncryptCookies.php on line 7
+[30-Jul-2018 20:06:44 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Http\Middleware\TrimStrings' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/TrimStrings.php on line 7
+[30-Jul-2018 20:06:46 UTC] PHP Fatal error:  Class 'Fideloper\Proxy\TrustProxies' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/TrustProxies.php on line 8
+[30-Jul-2018 20:06:47 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Http\Middleware\VerifyCsrfToken' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/VerifyCsrfToken.php on line 7
+[01-Aug-2018 04:38:49 UTC] PHP Fatal error:  Class 'Illuminate\Cookie\Middleware\EncryptCookies' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/EncryptCookies.php on line 7
+[01-Aug-2018 04:39:24 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Http\Middleware\TrimStrings' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/TrimStrings.php on line 7
+[01-Aug-2018 04:39:36 UTC] PHP Fatal error:  Class 'Fideloper\Proxy\TrustProxies' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/TrustProxies.php on line 8
+[01-Aug-2018 04:39:53 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Http\Middleware\VerifyCsrfToken' not found in /home/lcadbcom/public_html/lcadashboard/app/Http/Middleware/VerifyCsrfToken.php on line 7

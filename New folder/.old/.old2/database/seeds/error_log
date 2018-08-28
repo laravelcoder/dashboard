@@ -1,0 +1,3 @@
+[24-Mar-2018 14:08:36 UTC] PHP Fatal error:  Class 'Illuminate\Database\Seeder' not found in /home/lcadbcom/public_html/lcadashboard/database/seeds/ContactSeed.php on line 5
+[24-Mar-2018 14:08:37 UTC] PHP Fatal error:  Class 'Illuminate\Database\Seeder' not found in /home/lcadbcom/public_html/lcadashboard/database/seeds/TaskStatusSeed.php on line 5
+[24-Mar-2018 14:08:37 UTC] PHP Fatal error:  Class 'Illuminate\Database\Seeder' not found in /home/lcadbcom/public_html/lcadashboard/database/seeds/UserSeed.php on line 5

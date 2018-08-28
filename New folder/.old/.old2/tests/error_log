@@ -1,0 +1,1 @@
+[24-Mar-2018 14:08:27 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Testing\TestCase' not found in /home/lcadbcom/public_html/lcadashboard/tests/TestCase.php on line 7
