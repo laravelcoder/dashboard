@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Adword;
+use Edujugon\GoogleAds\GoogleAds;
+use Google\AdsApi\AdWords\v201802\cm\AdGroupService;
+use Google\AdsApi\AdWords\v201802\cm\CampaignService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
@@ -18,8 +21,6 @@ class AdwordsController extends Controller
      */
     public function index()
     {
-
-
         if (request('show_deleted') == 1) {
             if (! Gate::allows('adword_delete')) {
                 return abort(401);
@@ -170,5 +171,18 @@ class AdwordsController extends Controller
         $adword->forceDelete();
 
         return redirect()->route('admin.adwords.index');
+    }
+
+
+    public function googleAds(){
+        $ads = new GoogleAds();
+        $ads->env('test');
+//        dd($ads->getService());
+//        dd($ads->campaignService());
+//        dd($ads->service(AdGroupService::class));
+        $collection = $ads->service(CampaignService::class)
+            ->select(['Id', 'Name', 'Status', 'ServingStatus', 'StartDate', 'EndDate'])
+            ->get();
+        dd($collection);
     }
 }

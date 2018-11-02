@@ -120,10 +120,11 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('messenger', 'Admin\MessengerController');
 
 
-
+    Route::get('googlecompaign', 'Admin\AdwordsController@googleAds');
 });
  
 
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 Route::get('newcharts', ['as' => 'newcharts', 'uses' => 'Admin\ApiTestsController@newcharts']);
+

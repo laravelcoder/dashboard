@@ -196,6 +196,13 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+
+        /**
+         * Edujugon/Laravel-google-ads
+         * Provider
+         */
+
+        Edujugon\GoogleAds\Providers\GoogleAdsServiceProvider::class
     ],
 
     /*
@@ -251,7 +258,12 @@ return [
         'Image'        => Intervention\Image\Facades\Image::class,
         'Form'         => Collective\Html\FormFacade::class,
         'Html'         => Collective\Html\HtmlFacade::class,
-        
+
+
+        /**
+         * Edujugon/Laravel-google-ads
+         */
+        'GoogleAds' => Edujugon\GoogleAds\Facades\GoogleAds::class,
     ],
 
     
