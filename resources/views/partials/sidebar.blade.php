@@ -207,7 +207,14 @@
                 </a>
             </li>
             @endcan
-
+            @can('booking_access')
+            <li class="{{ $request->segment(2) == 'bookings' ? 'active' : '' }}">
+                <a href="{{ route('admin.bookings.newindex') }}">
+                    <i class="fa fa-calendar-plus-o"></i>
+                    <span class="title">new Booking</span>
+                </a>
+            </li>
+            @endcan
             @can('user_management_access')
             <li class="treeview">
                 <a href="#">

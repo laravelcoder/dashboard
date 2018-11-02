@@ -1,3 +1,4 @@
+@inject('request', 'Illuminate\Http\Request')
 @extends('layouts.app')
 
 @section('content')
@@ -6,4 +7,6 @@
     <p>
         {{ trans('global.app_custom_controller_index') }} 
     </p>
+
+    {{-- {{ dd($request->all()) }} --}}
 @stop

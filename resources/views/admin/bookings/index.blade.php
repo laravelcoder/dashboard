@@ -16,7 +16,8 @@
 			<li><a href="{{ route('admin.bookings.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">@lang('global.app_trash')</a></li>
 		</ul>
 	</p>
-
+ 
+ @include('admin.bookings.partials.topwidgets')
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
