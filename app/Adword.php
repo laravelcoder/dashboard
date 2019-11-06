@@ -1,13 +1,13 @@
 <?php
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Adword
+ * Class Adword.
  *
- * @package App
  * @property string $company
  * @property string $website
  * @property string $client_customer_id
@@ -20,18 +20,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $token_credential_uri
  * @property string $scope
  * @property string $clinic
-*/
+ */
 class Adword extends Model
 {
     use SoftDeletes;
 
     protected $fillable = ['client_customer_id', 'user_agent', 'client_id', 'client_secret', 'refresh_token', 'authorization_uri', 'redirect_uri', 'token_credential_uri', 'scope', 'company_id', 'website_id', 'clinic_id'];
     protected $hidden = [];
-    
-    
 
     /**
-     * Set to null if empty
+     * Set to null if empty.
+     *
      * @param $input
      */
     public function setCompanyIdAttribute($input)
@@ -40,7 +39,8 @@ class Adword extends Model
     }
 
     /**
-     * Set to null if empty
+     * Set to null if empty.
+     *
      * @param $input
      */
     public function setWebsiteIdAttribute($input)
@@ -49,27 +49,27 @@ class Adword extends Model
     }
 
     /**
-     * Set to null if empty
+     * Set to null if empty.
+     *
      * @param $input
      */
     public function setClinicIdAttribute($input)
     {
         $this->attributes['clinic_id'] = $input ? $input : null;
     }
-    
+
     public function company()
     {
         return $this->belongsTo(ContactCompany::class, 'company_id');
     }
-    
+
     public function website()
     {
         return $this->belongsTo(Website::class, 'website_id')->withTrashed();
     }
-    
+
     public function clinic()
     {
         return $this->belongsTo(Clinic::class, 'clinic_id')->withTrashed();
     }
-    
 }

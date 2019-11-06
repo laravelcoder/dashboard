@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\ApiTest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreApiTestsRequest;
 use App\Http\Requests\Admin\UpdateApiTestsRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 
 class ApiTestsController extends Controller
 {
-
     public function newcharts()
     {
         return view('newcharts');
@@ -25,20 +24,17 @@ class ApiTestsController extends Controller
      */
     public function index()
     {
-        if (! Gate::allows('api_test_access')) {
+        if (!Gate::allows('api_test_access')) {
             return abort(401);
         }
 
-
-        
         if (request()->ajax()) {
             $query = ApiTest::query();
             $template = 'actionsTemplate';
-            if(request('show_deleted') == 1) {
-                
-        if (! Gate::allows('api_test_delete')) {
-            return abort(401);
-        }
+            if (request('show_deleted') == 1) {
+                if (!Gate::allows('api_test_delete')) {
+                    return abort(401);
+                }
                 $query->onlyTrashed();
                 $template = 'restoreTemplate';
             }
@@ -64,7 +60,7 @@ class ApiTestsController extends Controller
             $table->addColumn('massDelete', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
             $table->editColumn('actions', function ($row) use ($template) {
-                $gateKey  = 'api_test_';
+                $gateKey = 'api_test_';
                 $routeKey = 'admin.api_tests';
 
                 return view($template, compact('row', 'gateKey', 'routeKey'));
@@ -103,7 +99,7 @@ class ApiTestsController extends Controller
                 return $row->longitude ? $row->longitude : '';
             });
 
-            $table->rawColumns(['actions','massDelete']);
+            $table->rawColumns(['actions', 'massDelete']);
 
             return $table->make(true);
         }
@@ -118,40 +114,40 @@ class ApiTestsController extends Controller
      */
     public function create()
     {
-        if (! Gate::allows('api_test_create')) {
+        if (!Gate::allows('api_test_create')) {
             return abort(401);
         }
+
         return view('admin.api_tests.create');
     }
 
     /**
      * Store a newly created ApiTest in storage.
      *
-     * @param  \App\Http\Requests\StoreApiTestsRequest  $request
+     * @param \App\Http\Requests\StoreApiTestsRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreApiTestsRequest $request)
     {
-        if (! Gate::allows('api_test_create')) {
+        if (!Gate::allows('api_test_create')) {
             return abort(401);
         }
         $api_test = ApiTest::create($request->all());
 
-
-
         return redirect()->route('admin.api_tests.index');
     }
-
 
     /**
      * Show the form for editing ApiTest.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        if (! Gate::allows('api_test_edit')) {
+        if (!Gate::allows('api_test_edit')) {
             return abort(401);
         }
         $api_test = ApiTest::findOrFail($id);
@@ -162,33 +158,32 @@ class ApiTestsController extends Controller
     /**
      * Update ApiTest in storage.
      *
-     * @param  \App\Http\Requests\UpdateApiTestsRequest  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\UpdateApiTestsRequest $request
+     * @param int                                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateApiTestsRequest $request, $id)
     {
-        if (! Gate::allows('api_test_edit')) {
+        if (!Gate::allows('api_test_edit')) {
             return abort(401);
         }
         $api_test = ApiTest::findOrFail($id);
         $api_test->update($request->all());
 
-
-
         return redirect()->route('admin.api_tests.index');
     }
-
 
     /**
      * Display ApiTest.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        if (! Gate::allows('api_test_view')) {
+        if (!Gate::allows('api_test_view')) {
             return abort(401);
         }
         $api_test = ApiTest::findOrFail($id);
@@ -196,16 +191,16 @@ class ApiTestsController extends Controller
         return view('admin.api_tests.show', compact('api_test'));
     }
 
-
     /**
      * Remove ApiTest from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        if (! Gate::allows('api_test_delete')) {
+        if (!Gate::allows('api_test_delete')) {
             return abort(401);
         }
         $api_test = ApiTest::findOrFail($id);
@@ -221,7 +216,7 @@ class ApiTestsController extends Controller
      */
     public function massDestroy(Request $request)
     {
-        if (! Gate::allows('api_test_delete')) {
+        if (!Gate::allows('api_test_delete')) {
             return abort(401);
         }
         if ($request->input('ids')) {
@@ -233,16 +228,16 @@ class ApiTestsController extends Controller
         }
     }
 
-
     /**
      * Restore ApiTest from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
     {
-        if (! Gate::allows('api_test_delete')) {
+        if (!Gate::allows('api_test_delete')) {
             return abort(401);
         }
         $api_test = ApiTest::onlyTrashed()->findOrFail($id);
@@ -254,12 +249,13 @@ class ApiTestsController extends Controller
     /**
      * Permanently delete ApiTest from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function perma_del($id)
     {
-        if (! Gate::allows('api_test_delete')) {
+        if (!Gate::allows('api_test_delete')) {
             return abort(401);
         }
         $api_test = ApiTest::onlyTrashed()->findOrFail($id);

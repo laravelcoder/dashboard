@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Adword;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreAdwordsRequest;
 use App\Http\Requests\Admin\UpdateAdwordsRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AdwordsController extends Controller
 {
@@ -18,10 +18,8 @@ class AdwordsController extends Controller
      */
     public function index()
     {
-
-
         if (request('show_deleted') == 1) {
-            if (! Gate::allows('adword_delete')) {
+            if (!Gate::allows('adword_delete')) {
                 return abort(401);
             }
             $adwords = Adword::onlyTrashed()->get();
@@ -39,7 +37,6 @@ class AdwordsController extends Controller
      */
     public function create()
     {
-        
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $websites = \App\Website::get()->pluck('website', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
@@ -50,28 +47,26 @@ class AdwordsController extends Controller
     /**
      * Store a newly created Adword in storage.
      *
-     * @param  \App\Http\Requests\StoreAdwordsRequest  $request
+     * @param \App\Http\Requests\StoreAdwordsRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreAdwordsRequest $request)
     {
         $adword = Adword::create($request->all());
 
-
-
         return redirect()->route('admin.adwords.index');
     }
-
 
     /**
      * Show the form for editing Adword.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $websites = \App\Website::get()->pluck('website', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
@@ -84,8 +79,9 @@ class AdwordsController extends Controller
     /**
      * Update Adword in storage.
      *
-     * @param  \App\Http\Requests\UpdateAdwordsRequest  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\UpdateAdwordsRequest $request
+     * @param int                                     $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateAdwordsRequest $request, $id)
@@ -93,16 +89,14 @@ class AdwordsController extends Controller
         $adword = Adword::findOrFail($id);
         $adword->update($request->all());
 
-
-
         return redirect()->route('admin.adwords.index');
     }
-
 
     /**
      * Display Adword.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -112,11 +106,11 @@ class AdwordsController extends Controller
         return view('admin.adwords.show', compact('adword'));
     }
 
-
     /**
      * Remove Adword from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -143,11 +137,11 @@ class AdwordsController extends Controller
         }
     }
 
-
     /**
      * Restore Adword from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
@@ -161,7 +155,8 @@ class AdwordsController extends Controller
     /**
      * Permanently delete Adword from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function perma_del($id)

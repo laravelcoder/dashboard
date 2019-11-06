@@ -3,8 +3,8 @@
 namespace Tests\Browser;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 
 class ClinicTest extends DuskTestCase
 {
@@ -16,20 +16,20 @@ class ClinicTest extends DuskTestCase
         $clinic = factory('App\Clinic')->make();
 
         $relations = [
-            factory('App\User')->create(), 
-            factory('App\User')->create(), 
+            factory('App\User')->create(),
+            factory('App\User')->create(),
         ];
 
         $this->browse(function (Browser $browser) use ($admin, $clinic, $relations) {
             $browser->loginAs($admin)
                 ->visit(route('admin.clinics.index'))
                 ->clickLink('Add new')
-                ->type("nickname", $clinic->nickname)
-                ->attach("logo", base_path("tests/_resources/test.jpg"))
-                ->select("company_id", $clinic->company_id)
+                ->type('nickname', $clinic->nickname)
+                ->attach('logo', base_path('tests/_resources/test.jpg'))
+                ->select('company_id', $clinic->company_id)
                 ->select('select[name="users[]"]', $relations[0]->id)
                 ->select('select[name="users[]"]', $relations[1]->id)
-                ->type("notes", $clinic->notes)
+                ->type('notes', $clinic->notes)
                 ->press('Save')
                 ->assertRouteIs('admin.clinics.index')
                 ->assertSeeIn("tr:last-child td[field-key='nickname']", $clinic->nickname)
@@ -46,20 +46,20 @@ class ClinicTest extends DuskTestCase
         $clinic2 = factory('App\Clinic')->make();
 
         $relations = [
-            factory('App\User')->create(), 
-            factory('App\User')->create(), 
+            factory('App\User')->create(),
+            factory('App\User')->create(),
         ];
 
         $this->browse(function (Browser $browser) use ($admin, $clinic, $clinic2, $relations) {
             $browser->loginAs($admin)
                 ->visit(route('admin.clinics.index'))
-                ->click('tr[data-entry-id="' . $clinic->id . '"] .btn-info')
-                ->type("nickname", $clinic2->nickname)
-                ->attach("logo", base_path("tests/_resources/test.jpg"))
-                ->select("company_id", $clinic2->company_id)
+                ->click('tr[data-entry-id="'.$clinic->id.'"] .btn-info')
+                ->type('nickname', $clinic2->nickname)
+                ->attach('logo', base_path('tests/_resources/test.jpg'))
+                ->select('company_id', $clinic2->company_id)
                 ->select('select[name="users[]"]', $relations[0]->id)
                 ->select('select[name="users[]"]', $relations[1]->id)
-                ->type("notes", $clinic2->notes)
+                ->type('notes', $clinic2->notes)
                 ->press('Update')
                 ->assertRouteIs('admin.clinics.index')
                 ->assertSeeIn("tr:last-child td[field-key='nickname']", $clinic2->nickname)
@@ -75,8 +75,8 @@ class ClinicTest extends DuskTestCase
         $clinic = factory('App\Clinic')->create();
 
         $relations = [
-            factory('App\User')->create(), 
-            factory('App\User')->create(), 
+            factory('App\User')->create(),
+            factory('App\User')->create(),
         ];
 
         $clinic->users()->attach([$relations[0]->id, $relations[1]->id]);
@@ -84,7 +84,7 @@ class ClinicTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($admin, $clinic, $relations) {
             $browser->loginAs($admin)
                 ->visit(route('admin.clinics.index'))
-                ->click('tr[data-entry-id="' . $clinic->id . '"] .btn-primary')
+                ->click('tr[data-entry-id="'.$clinic->id.'"] .btn-primary')
                 ->assertSeeIn("td[field-key='nickname']", $clinic->nickname)
                 ->assertSeeIn("td[field-key='company']", $clinic->company->name)
                 ->assertSeeIn("tr:last-child td[field-key='users'] span:first-child", $relations[0]->name)
@@ -92,5 +92,4 @@ class ClinicTest extends DuskTestCase
                 ->assertSeeIn("td[field-key='notes']", $clinic->notes);
         });
     }
-
 }

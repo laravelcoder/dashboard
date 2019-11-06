@@ -12,8 +12,8 @@ class TaskSeed extends Seeder
     public function run()
     {
         $items = [
-            
-            ['id' => 1, 'name' => 'Troubleshoot booking api', 'description' => 'working on this now', 'status_id' => 2, 'attachment' => null, 'due_date' => '', 'user_id' => 2,],
+
+            ['id' => 1, 'name' => 'Troubleshoot booking api', 'description' => 'working on this now', 'status_id' => 2, 'attachment' => null, 'due_date' => '', 'user_id' => 2],
 
         ];
 

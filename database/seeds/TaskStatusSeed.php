@@ -12,10 +12,10 @@ class TaskStatusSeed extends Seeder
     public function run()
     {
         $items = [
-            
-            ['id' => 1, 'name' => 'Open',],
-            ['id' => 2, 'name' => 'In progress',],
-            ['id' => 3, 'name' => 'Close',],
+
+            ['id' => 1, 'name' => 'Open'],
+            ['id' => 2, 'name' => 'In progress'],
+            ['id' => 3, 'name' => 'Close'],
 
         ];
 

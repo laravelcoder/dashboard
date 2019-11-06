@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,8 +25,8 @@ class StoreClinicsRequest extends FormRequest
     {
         return [
             'nickname' => 'required',
-            'logo' => 'nullable|mimes:png,jpg,jpeg,gif',
-            'users.*' => 'exists:users,id',
+            'logo'     => 'nullable|mimes:png,jpg,jpeg,gif',
+            'users.*'  => 'exists:users,id',
         ];
     }
 }

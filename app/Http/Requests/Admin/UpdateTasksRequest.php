@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,11 +24,11 @@ class UpdateTasksRequest extends FormRequest
     public function rules()
     {
         return [
-            
-            'name' => 'required',
+
+            'name'      => 'required',
             'status_id' => 'required',
-            'tag.*' => 'exists:task_tags,id',
-            'due_date' => 'nullable|date_format:'.config('app.date_format'),
+            'tag.*'     => 'exists:task_tags,id',
+            'due_date'  => 'nullable|date_format:'.config('app.date_format'),
         ];
     }
 }

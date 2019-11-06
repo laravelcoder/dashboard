@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Analytic;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreAnalyticsRequest;
 use App\Http\Requests\Admin\UpdateAnalyticsRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AnalyticsController extends Controller
 {
@@ -18,10 +18,8 @@ class AnalyticsController extends Controller
      */
     public function index()
     {
-
-
         if (request('show_deleted') == 1) {
-            if (! Gate::allows('analytic_delete')) {
+            if (!Gate::allows('analytic_delete')) {
                 return abort(401);
             }
             $analytics = Analytic::onlyTrashed()->get();
@@ -39,7 +37,6 @@ class AnalyticsController extends Controller
      */
     public function create()
     {
-        
         $websites = \App\Website::get()->pluck('website', 'id')->prepend(trans('global.app_please_select'), '');
 
         return view('admin.analytics.create', compact('websites'));
@@ -48,28 +45,26 @@ class AnalyticsController extends Controller
     /**
      * Store a newly created Analytic in storage.
      *
-     * @param  \App\Http\Requests\StoreAnalyticsRequest  $request
+     * @param \App\Http\Requests\StoreAnalyticsRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreAnalyticsRequest $request)
     {
         $analytic = Analytic::create($request->all());
 
-
-
         return redirect()->route('admin.analytics.index');
     }
-
 
     /**
      * Show the form for editing Analytic.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        
         $websites = \App\Website::get()->pluck('website', 'id')->prepend(trans('global.app_please_select'), '');
 
         $analytic = Analytic::findOrFail($id);
@@ -80,8 +75,9 @@ class AnalyticsController extends Controller
     /**
      * Update Analytic in storage.
      *
-     * @param  \App\Http\Requests\UpdateAnalyticsRequest  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\UpdateAnalyticsRequest $request
+     * @param int                                       $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateAnalyticsRequest $request, $id)
@@ -89,16 +85,14 @@ class AnalyticsController extends Controller
         $analytic = Analytic::findOrFail($id);
         $analytic->update($request->all());
 
-
-
         return redirect()->route('admin.analytics.index');
     }
-
 
     /**
      * Display Analytic.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -108,11 +102,11 @@ class AnalyticsController extends Controller
         return view('admin.analytics.show', compact('analytic'));
     }
 
-
     /**
      * Remove Analytic from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -139,11 +133,11 @@ class AnalyticsController extends Controller
         }
     }
 
-
     /**
      * Restore Analytic from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
@@ -157,7 +151,8 @@ class AnalyticsController extends Controller
     /**
      * Permanently delete Analytic from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function perma_del($id)

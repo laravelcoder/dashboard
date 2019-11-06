@@ -12,10 +12,10 @@ class WebsiteSeed extends Seeder
     public function run()
     {
         $items = [
-            
-            ['id' => 1, 'company_id' => 1, 'clinic_id' => 1, 'website' => 'liceclinicsofamerica.com',],
-            ['id' => 4, 'company_id' => 2, 'clinic_id' => 2, 'website' => 'liceclinicshawaii.com',],
-            ['id' => 5, 'company_id' => 3, 'clinic_id' => 4, 'website' => 'liceclinicspasadena.com',],
+
+            ['id' => 1, 'company_id' => 1, 'clinic_id' => 1, 'website' => 'liceclinicsofamerica.com'],
+            ['id' => 4, 'company_id' => 2, 'clinic_id' => 2, 'website' => 'liceclinicshawaii.com'],
+            ['id' => 5, 'company_id' => 3, 'clinic_id' => 4, 'website' => 'liceclinicspasadena.com'],
 
         ];
 

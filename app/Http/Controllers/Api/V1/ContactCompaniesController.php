@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\ContactCompany;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\FileUploadTrait;
 use App\Http\Requests\Admin\StoreContactCompaniesRequest;
 use App\Http\Requests\Admin\UpdateContactCompaniesRequest;
-use App\Http\Controllers\Traits\FileUploadTrait;
-use Yajra\DataTables\DataTables;
 
 class ContactCompaniesController extends Controller
 {
@@ -29,14 +27,14 @@ class ContactCompaniesController extends Controller
         $request = $this->saveFiles($request);
         $contact_company = ContactCompany::findOrFail($id);
         $contact_company->update($request->all());
-        
-        $websites           = $contact_company->websites;
+
+        $websites = $contact_company->websites;
         $currentWebsiteData = [];
         foreach ($request->input('websites', []) as $index => $data) {
-            if (is_integer($index)) {
+            if (is_int($index)) {
                 $contact_company->websites()->create($data);
             } else {
-                $id                          = explode('-', $index)[1];
+                $id = explode('-', $index)[1];
                 $currentWebsiteData[$id] = $data;
             }
         }
@@ -47,13 +45,13 @@ class ContactCompaniesController extends Controller
                 $item->delete();
             }
         }
-        $clinics           = $contact_company->clinics;
+        $clinics = $contact_company->clinics;
         $currentClinicData = [];
         foreach ($request->input('clinics', []) as $index => $data) {
-            if (is_integer($index)) {
+            if (is_int($index)) {
                 $contact_company->clinics()->create($data);
             } else {
-                $id                          = explode('-', $index)[1];
+                $id = explode('-', $index)[1];
                 $currentClinicData[$id] = $data;
             }
         }
@@ -72,7 +70,7 @@ class ContactCompaniesController extends Controller
     {
         $request = $this->saveFiles($request);
         $contact_company = ContactCompany::create($request->all());
-        
+
         foreach ($request->input('websites', []) as $data) {
             $contact_company->websites()->create($data);
         }
@@ -87,6 +85,7 @@ class ContactCompaniesController extends Controller
     {
         $contact_company = ContactCompany::findOrFail($id);
         $contact_company->delete();
+
         return '';
     }
 }

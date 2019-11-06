@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,10 +24,10 @@ class UpdateClinicsRequest extends FormRequest
     public function rules()
     {
         return [
-            
+
             'nickname' => 'required',
-            'logo' => 'nullable|mimes:png,jpg,jpeg,gif',
-            'users.*' => 'exists:users,id',
+            'logo'     => 'nullable|mimes:png,jpg,jpeg,gif',
+            'users.*'  => 'exists:users,id',
         ];
     }
 }

@@ -12,8 +12,8 @@ class AnalyticSeed extends Seeder
     public function run()
     {
         $items = [
-            
-            ['id' => 1, 'view_name' => 'Master View', 'view_id' => '117039068', 'website_id' => 1,],
+
+            ['id' => 1, 'view_name' => 'Master View', 'view_id' => '117039068', 'website_id' => 1],
 
         ];
 

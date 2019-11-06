@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateCombined1523057169ApiTestsTable extends Migration
 {
@@ -12,7 +12,7 @@ class CreateCombined1523057169ApiTestsTable extends Migration
      */
     public function up()
     {
-        if(! Schema::hasTable('api_tests')) {
+        if (!Schema::hasTable('api_tests')) {
             Schema::create('api_tests', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('submitted')->nullable();
@@ -26,7 +26,7 @@ class CreateCombined1523057169ApiTestsTable extends Migration
                 $table->string('country')->nullable();
                 $table->string('latitude')->nullable();
                 $table->string('longitude')->nullable();
-                
+
                 $table->timestamps();
                 $table->softDeletes();
 

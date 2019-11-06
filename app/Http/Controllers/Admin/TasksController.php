@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Task;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\FileUploadTrait;
 use App\Http\Requests\Admin\StoreTasksRequest;
 use App\Http\Requests\Admin\UpdateTasksRequest;
-use App\Http\Controllers\Traits\FileUploadTrait;
+use App\Task;
+use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
@@ -21,9 +20,7 @@ class TasksController extends Controller
      */
     public function index()
     {
-
-
-                $tasks = Task::all();
+        $tasks = Task::all();
 
         return view('admin.tasks.index', compact('tasks'));
     }
@@ -35,7 +32,6 @@ class TasksController extends Controller
      */
     public function create()
     {
-        
         $statuses = \App\TaskStatus::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $tags = \App\TaskTag::get()->pluck('name', 'id');
 
@@ -47,30 +43,28 @@ class TasksController extends Controller
     /**
      * Store a newly created Task in storage.
      *
-     * @param  \App\Http\Requests\StoreTasksRequest  $request
+     * @param \App\Http\Requests\StoreTasksRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreTasksRequest $request)
     {
         $request = $this->saveFiles($request);
         $task = Task::create($request->all());
-        $task->tag()->sync(array_filter((array)$request->input('tag')));
-
-
+        $task->tag()->sync(array_filter((array) $request->input('tag')));
 
         return redirect()->route('admin.tasks.index');
     }
 
-
     /**
      * Show the form for editing Task.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        
         $statuses = \App\TaskStatus::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $tags = \App\TaskTag::get()->pluck('name', 'id');
 
@@ -84,8 +78,9 @@ class TasksController extends Controller
     /**
      * Update Task in storage.
      *
-     * @param  \App\Http\Requests\UpdateTasksRequest  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\UpdateTasksRequest $request
+     * @param int                                   $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateTasksRequest $request, $id)
@@ -93,18 +88,16 @@ class TasksController extends Controller
         $request = $this->saveFiles($request);
         $task = Task::findOrFail($id);
         $task->update($request->all());
-        $task->tag()->sync(array_filter((array)$request->input('tag')));
-
-
+        $task->tag()->sync(array_filter((array) $request->input('tag')));
 
         return redirect()->route('admin.tasks.index');
     }
 
-
     /**
      * Display Task.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -114,11 +107,11 @@ class TasksController extends Controller
         return view('admin.tasks.show', compact('task'));
     }
 
-
     /**
      * Remove Task from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -144,5 +137,4 @@ class TasksController extends Controller
             }
         }
     }
-
 }

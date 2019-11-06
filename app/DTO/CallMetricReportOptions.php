@@ -7,25 +7,25 @@ use Carbon\Carbon;
 class CallMetricReportOptions
 {
     /**
-     * Undocumented variable
+     * Undocumented variable.
      *
      * @var string
      */
     public $dimension;
     /**
-     * Undocumented variable
+     * Undocumented variable.
      *
      * @var Carbon
      */
     public $start_date;
     /**
-     * Undocumented variable
+     * Undocumented variable.
      *
      * @var Carbon
      */
     public $end_date;
     /**
-     * Undocumented variable
+     * Undocumented variable.
      *
      * @var string[]
      */

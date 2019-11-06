@@ -1,12 +1,12 @@
 <?php
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Contact
+ * Class Contact.
  *
- * @package App
  * @property string $company
  * @property string $clinic
  * @property string $user
@@ -17,16 +17,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $email
  * @property string $skype
  * @property text $notes
-*/
+ */
 class Contact extends Model
 {
     protected $fillable = ['first_name', 'last_name', 'phone1', 'phone2', 'email', 'skype', 'notes', 'company_id', 'clinic_id', 'user_id'];
     protected $hidden = [];
-    
-    
 
     /**
-     * Set to null if empty
+     * Set to null if empty.
+     *
      * @param $input
      */
     public function setCompanyIdAttribute($input)
@@ -35,7 +34,8 @@ class Contact extends Model
     }
 
     /**
-     * Set to null if empty
+     * Set to null if empty.
+     *
      * @param $input
      */
     public function setClinicIdAttribute($input)
@@ -44,27 +44,27 @@ class Contact extends Model
     }
 
     /**
-     * Set to null if empty
+     * Set to null if empty.
+     *
      * @param $input
      */
     public function setUserIdAttribute($input)
     {
         $this->attributes['user_id'] = $input ? $input : null;
     }
-    
+
     public function company()
     {
         return $this->belongsTo(ContactCompany::class, 'company_id');
     }
-    
+
     public function clinic()
     {
         return $this->belongsTo(Clinic::class, 'clinic_id')->withTrashed();
     }
-    
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    
 }

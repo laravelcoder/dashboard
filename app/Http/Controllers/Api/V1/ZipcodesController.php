@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Zipcode;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreZipcodesRequest;
 use App\Http\Requests\Admin\UpdateZipcodesRequest;
+use App\Zipcode;
 
 class ZipcodesController extends Controller
 {
@@ -24,7 +23,6 @@ class ZipcodesController extends Controller
     {
         $zipcode = Zipcode::findOrFail($id);
         $zipcode->update($request->all());
-        
 
         return $zipcode;
     }
@@ -32,7 +30,6 @@ class ZipcodesController extends Controller
     public function store(StoreZipcodesRequest $request)
     {
         $zipcode = Zipcode::create($request->all());
-        
 
         return $zipcode;
     }
@@ -41,6 +38,7 @@ class ZipcodesController extends Controller
     {
         $zipcode = Zipcode::findOrFail($id);
         $zipcode->delete();
+
         return '';
     }
 }

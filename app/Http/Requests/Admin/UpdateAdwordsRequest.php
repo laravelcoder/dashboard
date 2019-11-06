@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,16 +24,16 @@ class UpdateAdwordsRequest extends FormRequest
     public function rules()
     {
         return [
-            
-            'client_customer_id' => 'required',
-            'user_agent' => 'required',
-            'client_id' => 'required',
-            'client_secret' => 'required',
-            'refresh_token' => 'required',
-            'authorization_uri' => 'required',
-            'redirect_uri' => 'required',
+
+            'client_customer_id'   => 'required',
+            'user_agent'           => 'required',
+            'client_id'            => 'required',
+            'client_secret'        => 'required',
+            'refresh_token'        => 'required',
+            'authorization_uri'    => 'required',
+            'redirect_uri'         => 'required',
             'token_credential_uri' => 'required',
-            'scope' => 'required',
+            'scope'                => 'required',
         ];
     }
 }

@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Clinic;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\FileUploadTrait;
 use App\Http\Requests\Admin\StoreClinicsRequest;
 use App\Http\Requests\Admin\UpdateClinicsRequest;
-use App\Http\Controllers\Traits\FileUploadTrait;
-use Yajra\DataTables\DataTables;
 
 class ClinicsController extends Controller
 {
@@ -29,14 +27,14 @@ class ClinicsController extends Controller
         $request = $this->saveFiles($request);
         $clinic = Clinic::findOrFail($id);
         $clinic->update($request->all());
-        
-        $contacts           = $clinic->contacts;
+
+        $contacts = $clinic->contacts;
         $currentContactData = [];
         foreach ($request->input('contacts', []) as $index => $data) {
-            if (is_integer($index)) {
+            if (is_int($index)) {
                 $clinic->contacts()->create($data);
             } else {
-                $id                          = explode('-', $index)[1];
+                $id = explode('-', $index)[1];
                 $currentContactData[$id] = $data;
             }
         }
@@ -47,13 +45,13 @@ class ClinicsController extends Controller
                 $item->delete();
             }
         }
-        $websites           = $clinic->websites;
+        $websites = $clinic->websites;
         $currentWebsiteData = [];
         foreach ($request->input('websites', []) as $index => $data) {
-            if (is_integer($index)) {
+            if (is_int($index)) {
                 $clinic->websites()->create($data);
             } else {
-                $id                          = explode('-', $index)[1];
+                $id = explode('-', $index)[1];
                 $currentWebsiteData[$id] = $data;
             }
         }
@@ -64,13 +62,13 @@ class ClinicsController extends Controller
                 $item->delete();
             }
         }
-        $zipcodes           = $clinic->zipcodes;
+        $zipcodes = $clinic->zipcodes;
         $currentZipcodeData = [];
         foreach ($request->input('zipcodes', []) as $index => $data) {
-            if (is_integer($index)) {
+            if (is_int($index)) {
                 $clinic->zipcodes()->create($data);
             } else {
-                $id                          = explode('-', $index)[1];
+                $id = explode('-', $index)[1];
                 $currentZipcodeData[$id] = $data;
             }
         }
@@ -81,13 +79,13 @@ class ClinicsController extends Controller
                 $item->delete();
             }
         }
-        $locations           = $clinic->locations;
+        $locations = $clinic->locations;
         $currentLocationData = [];
         foreach ($request->input('locations', []) as $index => $data) {
-            if (is_integer($index)) {
+            if (is_int($index)) {
                 $clinic->locations()->create($data);
             } else {
-                $id                          = explode('-', $index)[1];
+                $id = explode('-', $index)[1];
                 $currentLocationData[$id] = $data;
             }
         }
@@ -106,7 +104,7 @@ class ClinicsController extends Controller
     {
         $request = $this->saveFiles($request);
         $clinic = Clinic::create($request->all());
-        
+
         foreach ($request->input('contacts', []) as $data) {
             $clinic->contacts()->create($data);
         }
@@ -127,6 +125,7 @@ class ClinicsController extends Controller
     {
         $clinic = Clinic::findOrFail($id);
         $clinic->delete();
+
         return '';
     }
 }

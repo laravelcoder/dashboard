@@ -1,41 +1,41 @@
 <?php
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/r', function () {
+        function philsroutes()
+        {
+            $routeCollection = Route::getRoutes();
+            echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">';
+            echo "<div class='container'><div class='col-md-12'><table class='table table-striped' style='width:100%'>";
+            echo '<tr>';
+            //  echo '<td><h4>Domain</h4></td>';
+            echo "<td width='10%'><h4>HTTP Method</h4></td>";
+            echo "<td width='30%'><h4>URL</h4></td>";
+            echo "<td width='30%'><h4>Route</h4></td>";
+            echo "<td width='30%'><h4>Corresponding Action</h4></td>";
+            echo '</tr>';
 
-	Route::get('/r', function () {
-		function philsroutes() {
-			$routeCollection = Route::getRoutes();
-			echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">';
-			echo "<div class='container'><div class='col-md-12'><table class='table table-striped' style='width:100%'>";
-			echo '<tr>';
-			//  echo '<td><h4>Domain</h4></td>';
-			echo "<td width='10%'><h4>HTTP Method</h4></td>";
-			echo "<td width='30%'><h4>URL</h4></td>";
-			echo "<td width='30%'><h4>Route</h4></td>";
-			echo "<td width='30%'><h4>Corresponding Action</h4></td>";
-			echo '</tr>';
+            foreach ($routeCollection as $value) {
+                echo '<tr>';
+                //    echo '<td>lcadashboard.com</td>';
+                echo '<td>'.$value->methods()[0].'</td>';
+                echo "<td><a href='".$value->uri()."' target='_blank'>".$value->uri().'</a> </td>';
+                echo '<td>'.$value->getName().'</td>';
+                echo '<td>'.$value->getActionName().'</td>';
+                echo '</tr>';
+            }
 
-			foreach ($routeCollection as $value) {
-				echo '<tr>';
-				//    echo '<td>lcadashboard.com</td>';
-				echo '<td>' . $value->methods()[0] . '</td>';
-				echo "<td><a href='" . $value->uri() . "' target='_blank'>" . $value->uri() . '</a> </td>';
-				echo '<td>' . $value->getName() . '</td>';
-				echo '<td>' . $value->getActionName() . '</td>';
-				echo '</tr>';
-			}
+            echo '</table></div></div>';
+            echo '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>';
+        }
 
-			echo '</table></div></div>';
-			echo '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>';
-
-		}
-
-		return philsroutes();
-	})->name('assigned-routes');
-
+        return philsroutes();
+    })->name('assigned-routes');
 });
 
-Route::get('/', function () { return redirect('admin'); });
+Route::get('/', function () {
+    return redirect('admin');
+});
 
 // Authentication Routes...
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -84,7 +84,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('task_tags', 'Admin\TaskTagsController');
     Route::post('task_tags_mass_destroy', ['uses' => 'Admin\TaskTagsController@massDestroy', 'as' => 'task_tags.mass_destroy']);
     Route::resource('websites', 'Admin\WebsitesController');
-    Route::resource('tracking_numbers','Admin\TrackingNumbersController');
+    Route::resource('tracking_numbers', 'Admin\TrackingNumbersController');
     Route::post('websites_mass_destroy', ['uses' => 'Admin\WebsitesController@massDestroy', 'as' => 'websites.mass_destroy']);
     Route::post('websites_restore/{id}', ['uses' => 'Admin\WebsitesController@restore', 'as' => 'websites.restore']);
     Route::delete('websites_perma_del/{id}', ['uses' => 'Admin\WebsitesController@perma_del', 'as' => 'websites.perma_del']);
@@ -108,21 +108,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('zipcodes_restore/{id}', ['uses' => 'Admin\ZipcodesController@restore', 'as' => 'zipcodes.restore']);
     Route::delete('zipcodes_perma_del/{id}', ['uses' => 'Admin\ZipcodesController@perma_del', 'as' => 'zipcodes.perma_del']);
 
-	Route::resource('tracking_numbers', 'Admin\TrackingNumbersController');
+    Route::resource('tracking_numbers', 'Admin\TrackingNumbersController');
     Route::post('tracking_numbers_mass_destroy', ['uses' => 'Admin\TrackingNumbersController@massDestroy', 'as' => 'tracking_numbers.mass_destroy']);
     Route::post('tracking_numbers_restore/{id}', ['uses' => 'Admin\TrackingNumbersController@restore', 'as' => 'tracking_numbers.restore']);
     Route::delete('tracking_numbers_perma_del/{id}', ['uses' => 'Admin\TrackingNumbersController@perma_del', 'as' => 'tracking_numbers.perma_del']);
-
 
     Route::model('messenger', 'App\MessengerTopic');
     Route::get('messenger/inbox', 'Admin\MessengerController@inbox')->name('messenger.inbox');
     Route::get('messenger/outbox', 'Admin\MessengerController@outbox')->name('messenger.outbox');
     Route::resource('messenger', 'Admin\MessengerController');
-
-
-
 });
- 
 
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 

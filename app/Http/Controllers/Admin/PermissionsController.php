@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Permission;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePermissionsRequest;
 use App\Http\Requests\Admin\UpdatePermissionsRequest;
+use App\Permission;
+use Illuminate\Http\Request;
 
 class PermissionsController extends Controller
 {
@@ -18,9 +17,7 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-
-
-                $permissions = Permission::all();
+        $permissions = Permission::all();
 
         return view('admin.permissions.index', compact('permissions'));
     }
@@ -38,23 +35,22 @@ class PermissionsController extends Controller
     /**
      * Store a newly created Permission in storage.
      *
-     * @param  \App\Http\Requests\StorePermissionsRequest  $request
+     * @param \App\Http\Requests\StorePermissionsRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StorePermissionsRequest $request)
     {
         $permission = Permission::create($request->all());
 
-
-
         return redirect()->route('admin.permissions.index');
     }
-
 
     /**
      * Show the form for editing Permission.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -67,8 +63,9 @@ class PermissionsController extends Controller
     /**
      * Update Permission in storage.
      *
-     * @param  \App\Http\Requests\UpdatePermissionsRequest  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\UpdatePermissionsRequest $request
+     * @param int                                         $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdatePermissionsRequest $request, $id)
@@ -76,16 +73,14 @@ class PermissionsController extends Controller
         $permission = Permission::findOrFail($id);
         $permission->update($request->all());
 
-
-
         return redirect()->route('admin.permissions.index');
     }
-
 
     /**
      * Display Permission.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -100,11 +95,11 @@ class PermissionsController extends Controller
         return view('admin.permissions.show', compact('permission', 'roles'));
     }
 
-
     /**
      * Remove Permission from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -130,5 +125,4 @@ class PermissionsController extends Controller
             }
         }
     }
-
 }

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\TaskTag;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreTaskTagsRequest;
 use App\Http\Requests\Admin\UpdateTaskTagsRequest;
+use App\TaskTag;
+use Illuminate\Http\Request;
 
 class TaskTagsController extends Controller
 {
@@ -18,9 +17,7 @@ class TaskTagsController extends Controller
      */
     public function index()
     {
-
-
-                $task_tags = TaskTag::all();
+        $task_tags = TaskTag::all();
 
         return view('admin.task_tags.index', compact('task_tags'));
     }
@@ -38,23 +35,22 @@ class TaskTagsController extends Controller
     /**
      * Store a newly created TaskTag in storage.
      *
-     * @param  \App\Http\Requests\StoreTaskTagsRequest  $request
+     * @param \App\Http\Requests\StoreTaskTagsRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreTaskTagsRequest $request)
     {
         $task_tag = TaskTag::create($request->all());
 
-
-
         return redirect()->route('admin.task_tags.index');
     }
-
 
     /**
      * Show the form for editing TaskTag.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -67,8 +63,9 @@ class TaskTagsController extends Controller
     /**
      * Update TaskTag in storage.
      *
-     * @param  \App\Http\Requests\UpdateTaskTagsRequest  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\UpdateTaskTagsRequest $request
+     * @param int                                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateTaskTagsRequest $request, $id)
@@ -76,16 +73,14 @@ class TaskTagsController extends Controller
         $task_tag = TaskTag::findOrFail($id);
         $task_tag->update($request->all());
 
-
-
         return redirect()->route('admin.task_tags.index');
     }
-
 
     /**
      * Display TaskTag.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -100,11 +95,11 @@ class TaskTagsController extends Controller
         return view('admin.task_tags.show', compact('task_tag', 'tasks'));
     }
 
-
     /**
      * Remove TaskTag from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -130,5 +125,4 @@ class TaskTagsController extends Controller
             }
         }
     }
-
 }

@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\TrackingNumber;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreTrackingNumbersRequest;
 use App\Http\Requests\Admin\UpdateTrackingNumbersRequest;
-use Yajra\DataTables\DataTables;
+use App\TrackingNumber;
 
 class TrackingNumbersController extends Controller
 {
@@ -25,7 +23,6 @@ class TrackingNumbersController extends Controller
     {
         $tracking_number = TrackingNumber::findOrFail($id);
         $tracking_number->update($request->all());
-        
 
         return $tracking_number;
     }
@@ -33,7 +30,6 @@ class TrackingNumbersController extends Controller
     public function store(StoreTrackingNumbersRequest $request)
     {
         $tracking_number = TrackingNumber::create($request->all());
-        
 
         return $tracking_number;
     }
@@ -42,6 +38,7 @@ class TrackingNumbersController extends Controller
     {
         $tracking_number = TrackingNumber::findOrFail($id);
         $tracking_number->delete();
+
         return '';
     }
 }

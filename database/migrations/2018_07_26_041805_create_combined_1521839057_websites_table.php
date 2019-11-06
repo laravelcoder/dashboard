@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateCombined1521839057WebsitesTable extends Migration
 {
@@ -12,11 +12,11 @@ class CreateCombined1521839057WebsitesTable extends Migration
      */
     public function up()
     {
-        if(! Schema::hasTable('websites')) {
+        if (!Schema::hasTable('websites')) {
             Schema::create('websites', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('website');
-                
+
                 $table->timestamps();
                 $table->softDeletes();
 

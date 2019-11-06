@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Contact;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreContactsRequest;
 use App\Http\Requests\Admin\UpdateContactsRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 
 class ContactsController extends Controller
@@ -19,19 +19,17 @@ class ContactsController extends Controller
      */
     public function index()
     {
-        if (! Gate::allows('contact_access')) {
+        if (!Gate::allows('contact_access')) {
             return abort(401);
         }
 
-
-        
         if (request()->ajax()) {
             $query = Contact::query();
-            $query->with("company");
-            $query->with("clinic");
-            $query->with("user");
+            $query->with('company');
+            $query->with('clinic');
+            $query->with('user');
             $template = 'actionsTemplate';
-            
+
             $query->select([
                 'contacts.id',
                 'contacts.company_id',
@@ -53,7 +51,7 @@ class ContactsController extends Controller
             $table->addColumn('massDelete', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
             $table->editColumn('actions', function ($row) use ($template) {
-                $gateKey  = 'contact_';
+                $gateKey = 'contact_';
                 $routeKey = 'admin.contacts';
 
                 return view($template, compact('row', 'gateKey', 'routeKey'));
@@ -89,7 +87,7 @@ class ContactsController extends Controller
                 return $row->notes ? $row->notes : '';
             });
 
-            $table->rawColumns(['actions','massDelete']);
+            $table->rawColumns(['actions', 'massDelete']);
 
             return $table->make(true);
         }
@@ -104,10 +102,10 @@ class ContactsController extends Controller
      */
     public function create()
     {
-        if (! Gate::allows('contact_create')) {
+        if (!Gate::allows('contact_create')) {
             return abort(401);
         }
-        
+
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
         $users = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
@@ -118,34 +116,33 @@ class ContactsController extends Controller
     /**
      * Store a newly created Contact in storage.
      *
-     * @param  \App\Http\Requests\StoreContactsRequest  $request
+     * @param \App\Http\Requests\StoreContactsRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreContactsRequest $request)
     {
-        if (! Gate::allows('contact_create')) {
+        if (!Gate::allows('contact_create')) {
             return abort(401);
         }
         $contact = Contact::create($request->all());
 
-
-
         return redirect()->route('admin.contacts.index');
     }
-
 
     /**
      * Show the form for editing Contact.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        if (! Gate::allows('contact_edit')) {
+        if (!Gate::allows('contact_edit')) {
             return abort(401);
         }
-        
+
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
         $users = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
@@ -158,55 +155,55 @@ class ContactsController extends Controller
     /**
      * Update Contact in storage.
      *
-     * @param  \App\Http\Requests\UpdateContactsRequest  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\UpdateContactsRequest $request
+     * @param int                                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateContactsRequest $request, $id)
     {
-        if (! Gate::allows('contact_edit')) {
+        if (!Gate::allows('contact_edit')) {
             return abort(401);
         }
         $contact = Contact::findOrFail($id);
         $contact->update($request->all());
 
-
-
         return redirect()->route('admin.contacts.index');
     }
-
 
     /**
      * Display Contact.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        if (! Gate::allows('contact_view')) {
+        if (!Gate::allows('contact_view')) {
             return abort(401);
         }
-        
+
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
-        $users = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');$locations = \App\Location::where('contact_person_id', $id)->get();
+        $users = \App\User::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
+        $locations = \App\Location::where('contact_person_id', $id)->get();
 
         $contact = Contact::findOrFail($id);
 
         return view('admin.contacts.show', compact('contact', 'locations'));
     }
 
-
     /**
      * Remove Contact from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        if (! Gate::allows('contact_delete')) {
+        if (!Gate::allows('contact_delete')) {
             return abort(401);
         }
         $contact = Contact::findOrFail($id);
@@ -222,7 +219,7 @@ class ContactsController extends Controller
      */
     public function massDestroy(Request $request)
     {
-        if (! Gate::allows('contact_delete')) {
+        if (!Gate::allows('contact_delete')) {
             return abort(401);
         }
         if ($request->input('ids')) {
@@ -233,5 +230,4 @@ class ContactsController extends Controller
             }
         }
     }
-
 }

@@ -1,28 +1,27 @@
 <?php
+
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Task
+ * Class Task.
  *
- * @package App
  * @property string $name
  * @property text $description
  * @property string $status
  * @property string $attachment
  * @property string $due_date
  * @property string $user
-*/
+ */
 class Task extends Model
 {
     protected $fillable = ['name', 'description', 'attachment', 'due_date', 'status_id', 'user_id'];
-    
-    
 
     /**
-     * Set to null if empty
+     * Set to null if empty.
+     *
      * @param $input
      */
     public function setStatusIdAttribute($input)
@@ -31,7 +30,8 @@ class Task extends Model
     }
 
     /**
-     * Set attribute to date format
+     * Set attribute to date format.
+     *
      * @param $input
      */
     public function setDueDateAttribute($input)
@@ -44,7 +44,8 @@ class Task extends Model
     }
 
     /**
-     * Get attribute from date format
+     * Get attribute from date format.
+     *
      * @param $input
      *
      * @return string
@@ -61,27 +62,27 @@ class Task extends Model
     }
 
     /**
-     * Set to null if empty
+     * Set to null if empty.
+     *
      * @param $input
      */
     public function setUserIdAttribute($input)
     {
         $this->attributes['user_id'] = $input ? $input : null;
     }
-    
+
     public function status()
     {
         return $this->belongsTo(TaskStatus::class, 'status_id');
     }
-    
+
     public function tag()
     {
         return $this->belongsToMany(TaskTag::class, 'task_task_tag');
     }
-    
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    
 }

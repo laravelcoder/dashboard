@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\TrackingNumber;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreTrackingNumbersRequest;
 use App\Http\Requests\Admin\UpdateTrackingNumbersRequest;
+use App\TrackingNumber;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 
 class TrackingNumbersController extends Controller
@@ -19,22 +19,19 @@ class TrackingNumbersController extends Controller
      */
     public function index()
     {
-        if (! Gate::allows('tracking_number_access')) {
+        if (!Gate::allows('tracking_number_access')) {
             return abort(401);
         }
 
-
-        
         if (request()->ajax()) {
             $query = TrackingNumber::query();
-            $query->with("location");
-            $query->with("company");
+            $query->with('location');
+            $query->with('company');
             $template = 'actionsTemplate';
-            if(request('show_deleted') == 1) {
-                
-        if (! Gate::allows('tracking_number_delete')) {
-            return abort(401);
-        }
+            if (request('show_deleted') == 1) {
+                if (!Gate::allows('tracking_number_delete')) {
+                    return abort(401);
+                }
                 $query->onlyTrashed();
                 $template = 'restoreTemplate';
             }
@@ -54,7 +51,7 @@ class TrackingNumbersController extends Controller
             $table->addColumn('massDelete', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
             $table->editColumn('actions', function ($row) use ($template) {
-                $gateKey  = 'tracking_number_';
+                $gateKey = 'tracking_number_';
                 $routeKey = 'admin.tracking_numbers';
 
                 return view($template, compact('row', 'gateKey', 'routeKey'));
@@ -74,8 +71,8 @@ class TrackingNumbersController extends Controller
             $table->editColumn('callmetric_filter_id', function ($row) {
                 return $row->callmetric_filter_id ? $row->callmetric_filter_id : '';
             });
-            
-            $table->rawColumns(['actions','massDelete']);
+
+            $table->rawColumns(['actions', 'massDelete']);
 
             return $table->make(true);
         }
@@ -90,10 +87,10 @@ class TrackingNumbersController extends Controller
      */
     public function create()
     {
-        if (! Gate::allows('tracking_number_create')) {
+        if (!Gate::allows('tracking_number_create')) {
             return abort(401);
         }
-        
+
         $locations = \App\Location::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
 
@@ -103,34 +100,33 @@ class TrackingNumbersController extends Controller
     /**
      * Store a newly created TrackingNumber in storage.
      *
-     * @param  \App\Http\Requests\StoreTrackingNumbersRequest  $request
+     * @param \App\Http\Requests\StoreTrackingNumbersRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreTrackingNumbersRequest $request)
     {
-        if (! Gate::allows('tracking_number_create')) {
+        if (!Gate::allows('tracking_number_create')) {
             return abort(401);
         }
         $tracking_number = TrackingNumber::create($request->all());
 
-
-
         return redirect()->route('admin.tracking_numbers.index');
     }
-
 
     /**
      * Show the form for editing TrackingNumber.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        if (! Gate::allows('tracking_number_edit')) {
+        if (!Gate::allows('tracking_number_edit')) {
             return abort(401);
         }
-        
+
         $locations = \App\Location::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
 
@@ -142,33 +138,32 @@ class TrackingNumbersController extends Controller
     /**
      * Update TrackingNumber in storage.
      *
-     * @param  \App\Http\Requests\UpdateTrackingNumbersRequest  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\UpdateTrackingNumbersRequest $request
+     * @param int                                             $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateTrackingNumbersRequest $request, $id)
     {
-        if (! Gate::allows('tracking_number_edit')) {
+        if (!Gate::allows('tracking_number_edit')) {
             return abort(401);
         }
         $tracking_number = TrackingNumber::findOrFail($id);
         $tracking_number->update($request->all());
 
-
-
         return redirect()->route('admin.tracking_numbers.index');
     }
-
 
     /**
      * Display TrackingNumber.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        if (! Gate::allows('tracking_number_view')) {
+        if (!Gate::allows('tracking_number_view')) {
             return abort(401);
         }
         $tracking_number = TrackingNumber::findOrFail($id);
@@ -176,16 +171,16 @@ class TrackingNumbersController extends Controller
         return view('admin.tracking_numbers.show', compact('tracking_number'));
     }
 
-
     /**
      * Remove TrackingNumber from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        if (! Gate::allows('tracking_number_delete')) {
+        if (!Gate::allows('tracking_number_delete')) {
             return abort(401);
         }
         $tracking_number = TrackingNumber::findOrFail($id);
@@ -201,7 +196,7 @@ class TrackingNumbersController extends Controller
      */
     public function massDestroy(Request $request)
     {
-        if (! Gate::allows('tracking_number_delete')) {
+        if (!Gate::allows('tracking_number_delete')) {
             return abort(401);
         }
         if ($request->input('ids')) {
@@ -213,16 +208,16 @@ class TrackingNumbersController extends Controller
         }
     }
 
-
     /**
      * Restore TrackingNumber from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
     {
-        if (! Gate::allows('tracking_number_delete')) {
+        if (!Gate::allows('tracking_number_delete')) {
             return abort(401);
         }
         $tracking_number = TrackingNumber::onlyTrashed()->findOrFail($id);
@@ -234,12 +229,13 @@ class TrackingNumbersController extends Controller
     /**
      * Permanently delete TrackingNumber from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function perma_del($id)
     {
-        if (! Gate::allows('tracking_number_delete')) {
+        if (!Gate::allows('tracking_number_delete')) {
             return abort(401);
         }
         $tracking_number = TrackingNumber::onlyTrashed()->findOrFail($id);

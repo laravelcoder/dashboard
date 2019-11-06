@@ -3,10 +3,11 @@
  * Created by PhpStorm.
  * User: talha
  * Date: 7/21/2018
- * Time: 4:37 PM
+ * Time: 4:37 PM.
  */
 
 namespace App\DTO;
+
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
@@ -16,7 +17,7 @@ class CallMetricReportDTO implements \JsonSerializable
     public $metrics;
     public $series;
     /**
-     * Undocumented variable
+     * Undocumented variable.
      *
      * @var LengthAwarePaginator
      */
@@ -26,12 +27,13 @@ class CallMetricReportDTO implements \JsonSerializable
     public function __construct()
     {
         $this->metricMapping = __('global.call-metrics.metrics');
-        $this->groups = new Paginator([],0,10,1);
+        $this->groups = new Paginator([], 0, 10, 1);
     }
 
-    public function getDisplayableValue($metric, $metricData) {
+    public function getDisplayableValue($metric, $metricData)
+    {
         $valuePercentFormatter = function ($metric) {
-            return $metric->value. (isset($metric->percent) ? ' (' . $metric->percent . ')' : '');
+            return $metric->value.(isset($metric->percent) ? ' ('.$metric->percent.')' : '');
         };
         $valueFormatter = function ($metric) {
             return $metric->value;
@@ -40,18 +42,18 @@ class CallMetricReportDTO implements \JsonSerializable
             return $metric->sum;
         };
         $metricFormatters = [
-            'total'=>$valuePercentFormatter,
-            'period_unique'=>$valuePercentFormatter,
-            'global_unique'=>$valuePercentFormatter,
-            'ring_time'=>$sumFormatter,
-            'talk_time'=>$sumFormatter,
-            'duration'=>$sumFormatter,
-            'score'=>function($metric) {
+            'total'        => $valuePercentFormatter,
+            'period_unique'=> $valuePercentFormatter,
+            'global_unique'=> $valuePercentFormatter,
+            'ring_time'    => $sumFormatter,
+            'talk_time'    => $sumFormatter,
+            'duration'     => $sumFormatter,
+            'score'        => function ($metric) {
                 return $metric->count;
             },
-            'conversion'=>$valueFormatter,
-            'revenue'=>$valueFormatter,
-            'conversion_rate'=>$valueFormatter
+            'conversion'     => $valueFormatter,
+            'revenue'        => $valueFormatter,
+            'conversion_rate'=> $valueFormatter,
         ];
 
         return $metricFormatters[$metric]($metricData);
@@ -60,7 +62,7 @@ class CallMetricReportDTO implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'groups'=>$this->groups
+            'groups'=> $this->groups,
         ];
     }
 }

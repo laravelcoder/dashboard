@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Booking;
+use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use App\Http\Controllers\Controller;
-use App\Booking;
-use App\Http\Requests\Admin\StoreBookingsRequest;
-use App\Http\Requests\Admin\UpdateBookingsRequest;
-use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\Blade;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
-use DB;
+use Yajra\DataTables\DataTables;
 
-class BookingsDashboardsController extends Controller {
-
+class BookingsDashboardsController extends Controller
+{
     protected $bookings;
 
-    function __construct(Booking $bookings) {
+    public function __construct(Booking $bookings)
+    {
         $this->booking = $bookings;
     }
 
@@ -27,22 +25,21 @@ class BookingsDashboardsController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $clinics = \App\Clinic::orderBy('nickname', 'asc')->pluck('nickname', 'id');
 
-        $locations = array();
+        $locations = [];
         if (Input::get('clinic')) {
-            $locations = \App\Location::where('clinic_id', Input::get('clinic'))->orderBy('nickname','asc')->pluck('nickname', 'id');
+            $locations = \App\Location::where('clinic_id', Input::get('clinic'))->orderBy('nickname', 'asc')->pluck('nickname', 'id');
         }
 
         $start = Carbon::now()->subDay(6);
         $end = Carbon::now();
 
         $yesterday = Carbon::yesterday();
-		$one_week_ago = Carbon::now()->subWeeks(1);
-		$today =  Carbon::now();
-
-
+        $one_week_ago = Carbon::now()->subWeeks(1);
+        $today = Carbon::now();
 
         if (Input::get('date-range')) {
             $date_range_arr = explode(' - ', Input::get('date-range'));
@@ -50,9 +47,9 @@ class BookingsDashboardsController extends Controller {
             $end = Carbon::parse($date_range_arr[1]);
         }
 
-        $search_params = array();
+        $search_params = [];
         if ($start && $end) {
-            $search_params['date-range'] = date('m/d/Y', strtotime($start)) . ' - ' . date('m/d/Y', strtotime($end));
+            $search_params['date-range'] = date('m/d/Y', strtotime($start)).' - '.date('m/d/Y', strtotime($end));
         }
 
         $clinic_id = 0;
@@ -71,7 +68,7 @@ class BookingsDashboardsController extends Controller {
             $total_bookings = DB::table('bookings')
                         ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
                         ->where('locations.clinic_id', $clinic_id);
-            if($location_id > 0){
+            if ($location_id > 0) {
                 $total_bookings = $total_bookings->where('locations.id', $location_id);
             }
 
@@ -83,102 +80,100 @@ class BookingsDashboardsController extends Controller {
                         // ->whereDate('bookings.submitted','>=',$end)
                         ->whereDate('bookings.submitted', $end);
 
-            if($location_id > 0){
+            if ($location_id > 0) {
                 $todays_bookings = $todays_bookings->where('locations.id', $location_id);
             }
 
             $todays_bookings = $todays_bookings->count();
 
+            $todays_appointments = DB::table('bookings')
+                            ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
+                            ->where('locations.clinic_id', $clinic_id)
+                            // ->whereDate('bookings.submitted','>=',$end)
+                            ->whereDate('bookings.submitted', $end);
 
-	            $todays_appointments = DB::table('bookings')
-	                        ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
-	                        ->where('locations.clinic_id', $clinic_id)
-	                        // ->whereDate('bookings.submitted','>=',$end)
-	                        ->whereDate('bookings.submitted', $end);
+            if ($location_id > 0) {
+                $todays_appointments = $todays_appointments->where('locations.id', $location_id);
+            }
 
-	            if($location_id > 0){
-	                $todays_appointments = $todays_appointments->where('locations.id', $location_id);
-	            }
-
-	            $todays_appointments = $todays_appointments->count();
+            $todays_appointments = $todays_appointments->count();
 
             $this_weeks_bookings = DB::table('bookings')
                 ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
                 ->where('locations.clinic_id', $clinic_id)
-                ->whereDate('bookings.submitted','>=', $one_week_ago)
+                ->whereDate('bookings.submitted', '>=', $one_week_ago)
                 ->whereDate('bookings.submitted', '<=', $yesterday);
 
-            if($location_id > 0){
+            if ($location_id > 0) {
                 $this_weeks_bookings = $this_weeks_bookings->where('locations.id', $location_id);
             }
 
             $this_weeks_bookings = $this_weeks_bookings->count();
 
-	            $this_weeks_appointments = DB::table('bookings')
-	                ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
-	                ->where('locations.clinic_id', $clinic_id)
-	                ->whereDate('bookings.requested_date','>=', $one_week_ago)
-	                ->whereDate('bookings.requested_date', '<=', $yesterday);
+            $this_weeks_appointments = DB::table('bookings')
+                    ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
+                    ->where('locations.clinic_id', $clinic_id)
+                    ->whereDate('bookings.requested_date', '>=', $one_week_ago)
+                    ->whereDate('bookings.requested_date', '<=', $yesterday);
 
-	            if($location_id > 0){
-	                $this_weeks_appointments = $this_weeks_appointments->where('locations.id', $location_id);
-	            }
+            if ($location_id > 0) {
+                $this_weeks_appointments = $this_weeks_appointments->where('locations.id', $location_id);
+            }
 
-	            $this_weeks_appointments = $this_weeks_appointments->count();
+            $this_weeks_appointments = $this_weeks_appointments->count();
 
- 			$firstDayofMonth = Carbon::now()->startOfMonth()->toDateString();
+            $firstDayofMonth = Carbon::now()->startOfMonth()->toDateString();
 
             $this_months_bookings = DB::table('bookings')
                 ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
                 ->where('locations.clinic_id', $clinic_id)
-                ->whereDate('bookings.submitted','>=', $firstDayofMonth)
+                ->whereDate('bookings.submitted', '>=', $firstDayofMonth)
                 ->whereDate('bookings.submitted', '<=', $today);
 
-            if($location_id > 0){
+            if ($location_id > 0) {
                 $this_months_bookings = $this_months_bookings->where('locations.id', $location_id);
             }
 
-			$this_months_bookings = $this_months_bookings->count();
+            $this_months_bookings = $this_months_bookings->count();
 
-	            $this_months_appointments = DB::table('bookings')
-	                ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
-	                ->where('locations.clinic_id', $clinic_id)
-	                ->whereDate('bookings.requested_date','>=', $firstDayofMonth)
-	                ->whereDate('bookings.requested_date', '<=', $today);
+            $this_months_appointments = DB::table('bookings')
+                    ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
+                    ->where('locations.clinic_id', $clinic_id)
+                    ->whereDate('bookings.requested_date', '>=', $firstDayofMonth)
+                    ->whereDate('bookings.requested_date', '<=', $today);
 
-	            if($location_id > 0){
-	                $this_months_appointments = $this_months_appointments->where('locations.id', $location_id);
-	            }
+            if ($location_id > 0) {
+                $this_months_appointments = $this_months_appointments->where('locations.id', $location_id);
+            }
 
-				$this_months_appointments = $this_months_appointments->count();
+            $this_months_appointments = $this_months_appointments->count();
 
-			$firstDayofPreviousMonth = Carbon::now()->startOfMonth()->subMonth()->toDateString();
-			$lastDayofPreviousMonth = Carbon::now()->endOfMonth()->subMonth()->toDateString();
+            $firstDayofPreviousMonth = Carbon::now()->startOfMonth()->subMonth()->toDateString();
+            $lastDayofPreviousMonth = Carbon::now()->endOfMonth()->subMonth()->toDateString();
 
             $last_months_bookings = DB::table('bookings')
                 ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
                 ->where('locations.clinic_id', $clinic_id)
-                ->whereDate('bookings.submitted','>=', $firstDayofPreviousMonth)
+                ->whereDate('bookings.submitted', '>=', $firstDayofPreviousMonth)
                 ->whereDate('bookings.submitted', '<=', $lastDayofPreviousMonth);
 
-            if($location_id > 0){
+            if ($location_id > 0) {
                 $last_months_bookings = $last_months_bookings->where('locations.id', $location_id);
             }
 
-			$last_months_bookings = $last_months_bookings->count();
+            $last_months_bookings = $last_months_bookings->count();
 
-				$last_months_appointments = DB::table('bookings')
-	                ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
-	                ->where('locations.clinic_id', $clinic_id)
-	                ->whereDate('bookings.requested_date','>=', $firstDayofPreviousMonth)
-	                ->whereDate('bookings.requested_date', '<=', $lastDayofPreviousMonth);
+            $last_months_appointments = DB::table('bookings')
+                    ->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id')
+                    ->where('locations.clinic_id', $clinic_id)
+                    ->whereDate('bookings.requested_date', '>=', $firstDayofPreviousMonth)
+                    ->whereDate('bookings.requested_date', '<=', $lastDayofPreviousMonth);
 
-	            if($location_id > 0){
-	                $last_months_appointments = $last_months_appointments->where('locations.id', $location_id);
-	            }
+            if ($location_id > 0) {
+                $last_months_appointments = $last_months_appointments->where('locations.id', $location_id);
+            }
 
-				$last_months_appointments = $last_months_appointments->count();
-
+            $last_months_appointments = $last_months_appointments->count();
         }
 
         if (!Gate::allows('booking_access')) {
@@ -189,16 +184,15 @@ class BookingsDashboardsController extends Controller {
             $query = Booking::query();
             $query->join('locations', 'bookings.clinic_id', '=', 'locations.clinic_location_id');
             $query->where('locations.clinic_id', $clinic_id);
-            $query->whereDate('bookings.submitted','>=',$start);
-            $query->whereDate('bookings.submitted','<=',$end);
+            $query->whereDate('bookings.submitted', '>=', $start);
+            $query->whereDate('bookings.submitted', '<=', $end);
 
-            if($location_id > 0){
-                $query = $query->where('locations.id',$location_id);
+            if ($location_id > 0) {
+                $query = $query->where('locations.id', $location_id);
             }
 
             $template = 'actionsTemplate';
             if (request('show_deleted') == 1) {
-
                 if (!Gate::allows('booking_delete')) {
                     return abort(401);
                 }
@@ -310,5 +304,4 @@ class BookingsDashboardsController extends Controller {
 
         return view('admin.bookings_dashboards.index', compact('todays_bookings', 'total_bookings', 'search_params', 'clinics', 'clinic_id', 'locations', 'location_id', 'this_weeks_bookings', 'this_months_bookings', 'last_months_bookings', 'this_months_appointments', 'last_months_appointments', 'this_weeks_appointments', 'todays_appointments'));
     }
-
 }

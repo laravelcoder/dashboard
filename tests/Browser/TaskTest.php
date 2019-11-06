@@ -3,8 +3,8 @@
 namespace Tests\Browser;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 
 class TaskTest extends DuskTestCase
 {
@@ -16,22 +16,22 @@ class TaskTest extends DuskTestCase
         $task = factory('App\Task')->make();
 
         $relations = [
-            factory('App\Tasktag')->create(), 
-            factory('App\Tasktag')->create(), 
+            factory('App\Tasktag')->create(),
+            factory('App\Tasktag')->create(),
         ];
 
         $this->browse(function (Browser $browser) use ($admin, $task, $relations) {
             $browser->loginAs($admin)
                 ->visit(route('admin.tasks.index'))
                 ->clickLink('Add new')
-                ->type("name", $task->name)
-                ->type("description", $task->description)
-                ->select("status_id", $task->status_id)
+                ->type('name', $task->name)
+                ->type('description', $task->description)
+                ->select('status_id', $task->status_id)
                 ->select('select[name="tag[]"]', $relations[0]->id)
                 ->select('select[name="tag[]"]', $relations[1]->id)
-                ->attach("attachment", base_path("tests/_resources/test.jpg"))
-                ->type("due_date", $task->due_date)
-                ->select("user_id", $task->user_id)
+                ->attach('attachment', base_path('tests/_resources/test.jpg'))
+                ->type('due_date', $task->due_date)
+                ->select('user_id', $task->user_id)
                 ->press('Save')
                 ->assertRouteIs('admin.tasks.index')
                 ->assertSeeIn("tr:last-child td[field-key='name']", $task->name)
@@ -39,7 +39,7 @@ class TaskTest extends DuskTestCase
                 ->assertSeeIn("tr:last-child td[field-key='status']", $task->status->name)
                 ->assertSeeIn("tr:last-child td[field-key='tag'] span:first-child", $relations[0]->name)
                 ->assertSeeIn("tr:last-child td[field-key='tag'] span:last-child", $relations[1]->name)
-                ->assertVisible("a[href='" . env("APP_URL") . "/" . env("UPLOAD_PATH") . "/" . \App\Task::first()->attachment . "']")
+                ->assertVisible("a[href='".env('APP_URL').'/'.env('UPLOAD_PATH').'/'.\App\Task::first()->attachment."']")
                 ->assertSeeIn("tr:last-child td[field-key='due_date']", $task->due_date)
                 ->assertSeeIn("tr:last-child td[field-key='user']", $task->user->name);
         });
@@ -52,22 +52,22 @@ class TaskTest extends DuskTestCase
         $task2 = factory('App\Task')->make();
 
         $relations = [
-            factory('App\Tasktag')->create(), 
-            factory('App\Tasktag')->create(), 
+            factory('App\Tasktag')->create(),
+            factory('App\Tasktag')->create(),
         ];
 
         $this->browse(function (Browser $browser) use ($admin, $task, $task2, $relations) {
             $browser->loginAs($admin)
                 ->visit(route('admin.tasks.index'))
-                ->click('tr[data-entry-id="' . $task->id . '"] .btn-info')
-                ->type("name", $task2->name)
-                ->type("description", $task2->description)
-                ->select("status_id", $task2->status_id)
+                ->click('tr[data-entry-id="'.$task->id.'"] .btn-info')
+                ->type('name', $task2->name)
+                ->type('description', $task2->description)
+                ->select('status_id', $task2->status_id)
                 ->select('select[name="tag[]"]', $relations[0]->id)
                 ->select('select[name="tag[]"]', $relations[1]->id)
-                ->attach("attachment", base_path("tests/_resources/test.jpg"))
-                ->type("due_date", $task2->due_date)
-                ->select("user_id", $task2->user_id)
+                ->attach('attachment', base_path('tests/_resources/test.jpg'))
+                ->type('due_date', $task2->due_date)
+                ->select('user_id', $task2->user_id)
                 ->press('Update')
                 ->assertRouteIs('admin.tasks.index')
                 ->assertSeeIn("tr:last-child td[field-key='name']", $task2->name)
@@ -75,7 +75,7 @@ class TaskTest extends DuskTestCase
                 ->assertSeeIn("tr:last-child td[field-key='status']", $task2->status->name)
                 ->assertSeeIn("tr:last-child td[field-key='tag'] span:first-child", $relations[0]->name)
                 ->assertSeeIn("tr:last-child td[field-key='tag'] span:last-child", $relations[1]->name)
-                ->assertVisible("a[href='" . env("APP_URL") . "/" . env("UPLOAD_PATH") . "/" . \App\Task::first()->attachment . "']")
+                ->assertVisible("a[href='".env('APP_URL').'/'.env('UPLOAD_PATH').'/'.\App\Task::first()->attachment."']")
                 ->assertSeeIn("tr:last-child td[field-key='due_date']", $task2->due_date)
                 ->assertSeeIn("tr:last-child td[field-key='user']", $task2->user->name);
         });
@@ -87,8 +87,8 @@ class TaskTest extends DuskTestCase
         $task = factory('App\Task')->create();
 
         $relations = [
-            factory('App\Tasktag')->create(), 
-            factory('App\Tasktag')->create(), 
+            factory('App\Tasktag')->create(),
+            factory('App\Tasktag')->create(),
         ];
 
         $task->tag()->attach([$relations[0]->id, $relations[1]->id]);
@@ -96,7 +96,7 @@ class TaskTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($admin, $task, $relations) {
             $browser->loginAs($admin)
                 ->visit(route('admin.tasks.index'))
-                ->click('tr[data-entry-id="' . $task->id . '"] .btn-primary')
+                ->click('tr[data-entry-id="'.$task->id.'"] .btn-primary')
                 ->assertSeeIn("td[field-key='name']", $task->name)
                 ->assertSeeIn("td[field-key='description']", $task->description)
                 ->assertSeeIn("td[field-key='status']", $task->status->name)
@@ -106,5 +106,4 @@ class TaskTest extends DuskTestCase
                 ->assertSeeIn("td[field-key='user']", $task->user->name);
         });
     }
-
 }

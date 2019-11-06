@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\TaskStatus;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreTaskStatusesRequest;
 use App\Http\Requests\Admin\UpdateTaskStatusesRequest;
+use App\TaskStatus;
+use Illuminate\Http\Request;
 
 class TaskStatusesController extends Controller
 {
@@ -18,9 +17,7 @@ class TaskStatusesController extends Controller
      */
     public function index()
     {
-
-
-                $task_statuses = TaskStatus::all();
+        $task_statuses = TaskStatus::all();
 
         return view('admin.task_statuses.index', compact('task_statuses'));
     }
@@ -38,23 +35,22 @@ class TaskStatusesController extends Controller
     /**
      * Store a newly created TaskStatus in storage.
      *
-     * @param  \App\Http\Requests\StoreTaskStatusesRequest  $request
+     * @param \App\Http\Requests\StoreTaskStatusesRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreTaskStatusesRequest $request)
     {
         $task_status = TaskStatus::create($request->all());
 
-
-
         return redirect()->route('admin.task_statuses.index');
     }
-
 
     /**
      * Show the form for editing TaskStatus.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -67,8 +63,9 @@ class TaskStatusesController extends Controller
     /**
      * Update TaskStatus in storage.
      *
-     * @param  \App\Http\Requests\UpdateTaskStatusesRequest  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\UpdateTaskStatusesRequest $request
+     * @param int                                          $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateTaskStatusesRequest $request, $id)
@@ -76,16 +73,14 @@ class TaskStatusesController extends Controller
         $task_status = TaskStatus::findOrFail($id);
         $task_status->update($request->all());
 
-
-
         return redirect()->route('admin.task_statuses.index');
     }
-
 
     /**
      * Display TaskStatus.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -97,11 +92,11 @@ class TaskStatusesController extends Controller
         return view('admin.task_statuses.show', compact('task_status', 'tasks'));
     }
 
-
     /**
      * Remove TaskStatus from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -127,5 +122,4 @@ class TaskStatusesController extends Controller
             }
         }
     }
-
 }

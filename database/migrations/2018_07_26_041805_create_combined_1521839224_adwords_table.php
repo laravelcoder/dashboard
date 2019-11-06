@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateCombined1521839224AdwordsTable extends Migration
 {
@@ -12,7 +12,7 @@ class CreateCombined1521839224AdwordsTable extends Migration
      */
     public function up()
     {
-        if(! Schema::hasTable('adwords')) {
+        if (!Schema::hasTable('adwords')) {
             Schema::create('adwords', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('client_customer_id')->nullable();
@@ -24,7 +24,7 @@ class CreateCombined1521839224AdwordsTable extends Migration
                 $table->string('redirect_uri')->nullable();
                 $table->string('token_credential_uri')->nullable();
                 $table->string('scope')->nullable();
-                
+
                 $table->timestamps();
                 $table->softDeletes();
 

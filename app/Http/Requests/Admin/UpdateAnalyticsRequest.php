@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,7 +24,7 @@ class UpdateAnalyticsRequest extends FormRequest
     public function rules()
     {
         return [
-            
+
             'view_id' => 'required|unique:analytics,view_id,'.$this->route('analytic'),
         ];
     }

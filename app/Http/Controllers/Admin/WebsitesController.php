@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Website;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreWebsitesRequest;
 use App\Http\Requests\Admin\UpdateWebsitesRequest;
+use App\Website;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 
 class WebsitesController extends Controller
@@ -19,22 +19,19 @@ class WebsitesController extends Controller
      */
     public function index()
     {
-        if (! Gate::allows('website_access')) {
+        if (!Gate::allows('website_access')) {
             return abort(401);
         }
 
-
-        
         if (request()->ajax()) {
             $query = Website::query();
-            $query->with("company");
-            $query->with("clinic");
+            $query->with('company');
+            $query->with('clinic');
             $template = 'actionsTemplate';
-            if(request('show_deleted') == 1) {
-                
-        if (! Gate::allows('website_delete')) {
-            return abort(401);
-        }
+            if (request('show_deleted') == 1) {
+                if (!Gate::allows('website_delete')) {
+                    return abort(401);
+                }
                 $query->onlyTrashed();
                 $template = 'restoreTemplate';
             }
@@ -52,7 +49,7 @@ class WebsitesController extends Controller
             $table->addColumn('massDelete', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
             $table->editColumn('actions', function ($row) use ($template) {
-                $gateKey  = 'website_';
+                $gateKey = 'website_';
                 $routeKey = 'admin.websites';
 
                 return view($template, compact('row', 'gateKey', 'routeKey'));
@@ -64,7 +61,7 @@ class WebsitesController extends Controller
                 return $row->clinic ? $row->clinic->nickname : '';
             });
 
-            $table->rawColumns(['actions','massDelete']);
+            $table->rawColumns(['actions', 'massDelete']);
 
             return $table->make(true);
         }
@@ -79,10 +76,10 @@ class WebsitesController extends Controller
      */
     public function create()
     {
-        if (! Gate::allows('website_create')) {
+        if (!Gate::allows('website_create')) {
             return abort(401);
         }
-        
+
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
 
@@ -92,12 +89,13 @@ class WebsitesController extends Controller
     /**
      * Store a newly created Website in storage.
      *
-     * @param  \App\Http\Requests\StoreWebsitesRequest  $request
+     * @param \App\Http\Requests\StoreWebsitesRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreWebsitesRequest $request)
     {
-        if (! Gate::allows('website_create')) {
+        if (!Gate::allows('website_create')) {
             return abort(401);
         }
         $website = Website::create($request->all());
@@ -112,23 +110,22 @@ class WebsitesController extends Controller
             $website->analytics()->create($data);
         }
 
-
         return redirect()->route('admin.websites.index');
     }
-
 
     /**
      * Show the form for editing Website.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        if (! Gate::allows('website_edit')) {
+        if (!Gate::allows('website_edit')) {
             return abort(401);
         }
-        
+
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
 
@@ -140,25 +137,26 @@ class WebsitesController extends Controller
     /**
      * Update Website in storage.
      *
-     * @param  \App\Http\Requests\UpdateWebsitesRequest  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\UpdateWebsitesRequest $request
+     * @param int                                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateWebsitesRequest $request, $id)
     {
-        if (! Gate::allows('website_edit')) {
+        if (!Gate::allows('website_edit')) {
             return abort(401);
         }
         $website = Website::findOrFail($id);
         $website->update($request->all());
 
-        $locations           = $website->locations;
+        $locations = $website->locations;
         $currentLocationData = [];
         foreach ($request->input('locations', []) as $index => $data) {
-            if (is_integer($index)) {
+            if (is_int($index)) {
                 $website->locations()->create($data);
             } else {
-                $id                          = explode('-', $index)[1];
+                $id = explode('-', $index)[1];
                 $currentLocationData[$id] = $data;
             }
         }
@@ -169,13 +167,13 @@ class WebsitesController extends Controller
                 $item->delete();
             }
         }
-        $adwords           = $website->adwords;
+        $adwords = $website->adwords;
         $currentAdwordData = [];
         foreach ($request->input('adwords', []) as $index => $data) {
-            if (is_integer($index)) {
+            if (is_int($index)) {
                 $website->adwords()->create($data);
             } else {
-                $id                          = explode('-', $index)[1];
+                $id = explode('-', $index)[1];
                 $currentAdwordData[$id] = $data;
             }
         }
@@ -186,13 +184,13 @@ class WebsitesController extends Controller
                 $item->delete();
             }
         }
-        $analytics           = $website->analytics;
+        $analytics = $website->analytics;
         $currentAnalyticData = [];
         foreach ($request->input('analytics', []) as $index => $data) {
-            if (is_integer($index)) {
+            if (is_int($index)) {
                 $website->analytics()->create($data);
             } else {
-                $id                          = explode('-', $index)[1];
+                $id = explode('-', $index)[1];
                 $currentAnalyticData[$id] = $data;
             }
         }
@@ -204,41 +202,43 @@ class WebsitesController extends Controller
             }
         }
 
-
         return redirect()->route('admin.websites.index');
     }
-
 
     /**
      * Display Website.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        if (! Gate::allows('website_view')) {
+        if (!Gate::allows('website_view')) {
             return abort(401);
         }
-        
+
         $companies = \App\ContactCompany::get()->pluck('name', 'id')->prepend(trans('global.app_please_select'), '');
-        $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');$locations = \App\Location::where('parent_website_id', $id)->get();$adwords = \App\Adword::where('website_id', $id)->get();$analytics = \App\Analytic::where('website_id', $id)->get();
+        $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
+        $locations = \App\Location::where('parent_website_id', $id)->get();
+        $adwords = \App\Adword::where('website_id', $id)->get();
+        $analytics = \App\Analytic::where('website_id', $id)->get();
 
         $website = Website::findOrFail($id);
 
         return view('admin.websites.show', compact('website', 'locations', 'adwords', 'analytics'));
     }
 
-
     /**
      * Remove Website from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        if (! Gate::allows('website_delete')) {
+        if (!Gate::allows('website_delete')) {
             return abort(401);
         }
         $website = Website::findOrFail($id);
@@ -254,7 +254,7 @@ class WebsitesController extends Controller
      */
     public function massDestroy(Request $request)
     {
-        if (! Gate::allows('website_delete')) {
+        if (!Gate::allows('website_delete')) {
             return abort(401);
         }
         if ($request->input('ids')) {
@@ -266,16 +266,16 @@ class WebsitesController extends Controller
         }
     }
 
-
     /**
      * Restore Website from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
     {
-        if (! Gate::allows('website_delete')) {
+        if (!Gate::allows('website_delete')) {
             return abort(401);
         }
         $website = Website::onlyTrashed()->findOrFail($id);
@@ -287,12 +287,13 @@ class WebsitesController extends Controller
     /**
      * Permanently delete Website from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function perma_del($id)
     {
-        if (! Gate::allows('website_delete')) {
+        if (!Gate::allows('website_delete')) {
             return abort(401);
         }
         $website = Website::onlyTrashed()->findOrFail($id);

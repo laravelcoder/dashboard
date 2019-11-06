@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Website;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreWebsitesRequest;
 use App\Http\Requests\Admin\UpdateWebsitesRequest;
-use Yajra\DataTables\DataTables;
+use App\Website;
 
 class WebsitesController extends Controller
 {
@@ -25,14 +23,14 @@ class WebsitesController extends Controller
     {
         $website = Website::findOrFail($id);
         $website->update($request->all());
-        
-        $adwords           = $website->adwords;
+
+        $adwords = $website->adwords;
         $currentAdwordData = [];
         foreach ($request->input('adwords', []) as $index => $data) {
-            if (is_integer($index)) {
+            if (is_int($index)) {
                 $website->adwords()->create($data);
             } else {
-                $id                          = explode('-', $index)[1];
+                $id = explode('-', $index)[1];
                 $currentAdwordData[$id] = $data;
             }
         }
@@ -43,13 +41,13 @@ class WebsitesController extends Controller
                 $item->delete();
             }
         }
-        $analytics           = $website->analytics;
+        $analytics = $website->analytics;
         $currentAnalyticData = [];
         foreach ($request->input('analytics', []) as $index => $data) {
-            if (is_integer($index)) {
+            if (is_int($index)) {
                 $website->analytics()->create($data);
             } else {
-                $id                          = explode('-', $index)[1];
+                $id = explode('-', $index)[1];
                 $currentAnalyticData[$id] = $data;
             }
         }
@@ -67,7 +65,7 @@ class WebsitesController extends Controller
     public function store(StoreWebsitesRequest $request)
     {
         $website = Website::create($request->all());
-        
+
         foreach ($request->input('adwords', []) as $data) {
             $website->adwords()->create($data);
         }
@@ -82,6 +80,7 @@ class WebsitesController extends Controller
     {
         $website = Website::findOrFail($id);
         $website->delete();
+
         return '';
     }
 }

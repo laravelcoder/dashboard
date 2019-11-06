@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Booking;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreBookingsRequest;
 use App\Http\Requests\Admin\UpdateBookingsRequest;
-use Yajra\DataTables\DataTables;
 
 class BookingsController extends Controller
 {
@@ -25,7 +23,6 @@ class BookingsController extends Controller
     {
         $booking = Booking::findOrFail($id);
         $booking->update($request->all());
-        
 
         return $booking;
     }
@@ -33,7 +30,6 @@ class BookingsController extends Controller
     public function store(StoreBookingsRequest $request)
     {
         $booking = Booking::create($request->all());
-        
 
         return $booking;
     }
@@ -42,6 +38,7 @@ class BookingsController extends Controller
     {
         $booking = Booking::findOrFail($id);
         $booking->delete();
+
         return '';
     }
 }

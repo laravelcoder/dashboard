@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Location;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\FileUploadTrait;
 use App\Http\Requests\Admin\StoreLocationsRequest;
 use App\Http\Requests\Admin\UpdateLocationsRequest;
-use App\Http\Controllers\Traits\FileUploadTrait;
-use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Input;
+use App\Location;
 
 class LocationsController extends Controller
 {
@@ -31,14 +27,14 @@ class LocationsController extends Controller
         $request = $this->saveFiles($request);
         $location = Location::findOrFail($id);
         $location->update($request->all());
-        
-        $zipcodes           = $location->zipcodes;
+
+        $zipcodes = $location->zipcodes;
         $currentZipcodeData = [];
         foreach ($request->input('zipcodes', []) as $index => $data) {
-            if (is_integer($index)) {
+            if (is_int($index)) {
                 $location->zipcodes()->create($data);
             } else {
-                $id                          = explode('-', $index)[1];
+                $id = explode('-', $index)[1];
                 $currentZipcodeData[$id] = $data;
             }
         }
@@ -57,7 +53,7 @@ class LocationsController extends Controller
     {
         $request = $this->saveFiles($request);
         $location = Location::create($request->all());
-        
+
         foreach ($request->input('zipcodes', []) as $data) {
             $location->zipcodes()->create($data);
         }
@@ -69,6 +65,7 @@ class LocationsController extends Controller
     {
         $location = Location::findOrFail($id);
         $location->delete();
+
         return '';
     }
 }

@@ -10,22 +10,24 @@ trait FilterByUser
 {
     protected static function bootFilterByUser()
     {
-        if(! app()->runningInConsole()) {
+        if (!app()->runningInConsole()) {
             static::creating(function ($model) {
                 $model->created_by_id = Auth::check() ? Auth::getUser()->id : null;
             });
 
             $currentUser = Auth::user();
-            if (!$currentUser) return;
+            if (!$currentUser) {
+                return;
+            }
             $canSeeAllRecordsRoleId = config('app_service.can_see_all_records_role_id');
             $modelName = class_basename(self::class);
 
-            if (!is_null($canSeeAllRecordsRoleId) && in_array($canSeeAllRecordsRoleId, $currentUser->role->pluck('id')->toArray()) ) {
-                if (Session::get($modelName . '.filter', 'all') == 'my') {
-                    Session::put($modelName . '.filter', 'my');
+            if (!is_null($canSeeAllRecordsRoleId) && in_array($canSeeAllRecordsRoleId, $currentUser->role->pluck('id')->toArray())) {
+                if (Session::get($modelName.'.filter', 'all') == 'my') {
+                    Session::put($modelName.'.filter', 'my');
                     $addScope = true;
                 } else {
-                    Session::put($modelName . '.filter', 'all');
+                    Session::put($modelName.'.filter', 'all');
                     $addScope = false;
                 }
             } else {
@@ -33,7 +35,7 @@ trait FilterByUser
             }
 
             if ($addScope) {
-                if (((new self)->getTable()) == 'users') {
+                if (((new self())->getTable()) == 'users') {
                     static::addGlobalScope('created_by_id', function (Builder $builder) use ($currentUser) {
                         $builder->where('created_by_id', $currentUser->id)
                             ->orWhere('id', $currentUser->id);

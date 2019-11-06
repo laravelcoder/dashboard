@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateCombined1522105602TaskTagsTable extends Migration
 {
@@ -12,13 +12,12 @@ class CreateCombined1522105602TaskTagsTable extends Migration
      */
     public function up()
     {
-        if(! Schema::hasTable('task_tags')) {
+        if (!Schema::hasTable('task_tags')) {
             Schema::create('task_tags', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name')->nullable();
-                
+
                 $table->timestamps();
-                
             });
         }
     }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,12 +25,12 @@ class StoreLocationsRequest extends FormRequest
     {
         return [
             'clinic_location_id' => 'max:2147483647|nullable|numeric',
-            'nickname' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'location_email' => 'email',
-            'storefront' => 'nullable|mimes:png,jpg,jpeg,gif',
+            'nickname'           => 'required',
+            'address'            => 'required',
+            'city'               => 'required',
+            'state'              => 'required',
+            'location_email'     => 'email',
+            'storefront'         => 'nullable|mimes:png,jpg,jpeg,gif',
         ];
     }
 }

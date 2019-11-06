@@ -1,13 +1,13 @@
 <?php
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class ApiTest
+ * Class ApiTest.
  *
- * @package App
  * @property string $submitted
  * @property string $name
  * @property string $email
@@ -19,14 +19,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $country
  * @property string $latitude
  * @property string $longitude
-*/
+ */
 class ApiTest extends Model
 {
     use SoftDeletes;
 
     protected $fillable = ['submitted', 'name', 'email', 'subject', 'message', 'submitted_user_city', 'submitted_user_state', 'searched_for', 'country', 'latitude', 'longitude'];
     protected $hidden = [];
-    
-    
-    
 }

@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Contact;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreContactsRequest;
 use App\Http\Requests\Admin\UpdateContactsRequest;
-use Yajra\DataTables\DataTables;
 
 class ContactsController extends Controller
 {
@@ -25,7 +23,6 @@ class ContactsController extends Controller
     {
         $contact = Contact::findOrFail($id);
         $contact->update($request->all());
-        
 
         return $contact;
     }
@@ -33,7 +30,6 @@ class ContactsController extends Controller
     public function store(StoreContactsRequest $request)
     {
         $contact = Contact::create($request->all());
-        
 
         return $contact;
     }
@@ -42,6 +38,7 @@ class ContactsController extends Controller
     {
         $contact = Contact::findOrFail($id);
         $contact->delete();
+
         return '';
     }
 }

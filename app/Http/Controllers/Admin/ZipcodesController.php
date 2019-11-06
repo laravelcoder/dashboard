@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Zipcode;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreZipcodesRequest;
 use App\Http\Requests\Admin\UpdateZipcodesRequest;
+use App\Zipcode;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ZipcodesController extends Controller
 {
@@ -18,10 +18,8 @@ class ZipcodesController extends Controller
      */
     public function index()
     {
-
-
         if (request('show_deleted') == 1) {
-            if (! Gate::allows('zipcode_delete')) {
+            if (!Gate::allows('zipcode_delete')) {
                 return abort(401);
             }
             $zipcodes = Zipcode::onlyTrashed()->get();
@@ -39,7 +37,6 @@ class ZipcodesController extends Controller
      */
     public function create()
     {
-        
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
         $locations = \App\Location::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
 
@@ -49,28 +46,26 @@ class ZipcodesController extends Controller
     /**
      * Store a newly created Zipcode in storage.
      *
-     * @param  \App\Http\Requests\StoreZipcodesRequest  $request
+     * @param \App\Http\Requests\StoreZipcodesRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreZipcodesRequest $request)
     {
         $zipcode = Zipcode::create($request->all());
 
-
-
         return redirect()->route('admin.zipcodes.index');
     }
-
 
     /**
      * Show the form for editing Zipcode.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        
         $clinics = \App\Clinic::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
         $locations = \App\Location::get()->pluck('nickname', 'id')->prepend(trans('global.app_please_select'), '');
 
@@ -82,8 +77,9 @@ class ZipcodesController extends Controller
     /**
      * Update Zipcode in storage.
      *
-     * @param  \App\Http\Requests\UpdateZipcodesRequest  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\UpdateZipcodesRequest $request
+     * @param int                                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateZipcodesRequest $request, $id)
@@ -91,16 +87,14 @@ class ZipcodesController extends Controller
         $zipcode = Zipcode::findOrFail($id);
         $zipcode->update($request->all());
 
-
-
         return redirect()->route('admin.zipcodes.index');
     }
-
 
     /**
      * Display Zipcode.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -110,11 +104,11 @@ class ZipcodesController extends Controller
         return view('admin.zipcodes.show', compact('zipcode'));
     }
 
-
     /**
      * Remove Zipcode from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -141,11 +135,11 @@ class ZipcodesController extends Controller
         }
     }
 
-
     /**
      * Restore Zipcode from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
@@ -159,7 +153,8 @@ class ZipcodesController extends Controller
     /**
      * Permanently delete Zipcode from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function perma_del($id)

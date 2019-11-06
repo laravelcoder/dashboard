@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\ApiTest;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreApiTestsRequest;
 use App\Http\Requests\Admin\UpdateApiTestsRequest;
-use Yajra\DataTables\DataTables;
 
 class ApiTestsController extends Controller
 {
@@ -25,7 +23,6 @@ class ApiTestsController extends Controller
     {
         $api_test = ApiTest::findOrFail($id);
         $api_test->update($request->all());
-        
 
         return $api_test;
     }
@@ -33,7 +30,6 @@ class ApiTestsController extends Controller
     public function store(StoreApiTestsRequest $request)
     {
         $api_test = ApiTest::create($request->all());
-        
 
         return $api_test;
     }
@@ -42,6 +38,7 @@ class ApiTestsController extends Controller
     {
         $api_test = ApiTest::findOrFail($id);
         $api_test->delete();
+
         return '';
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Analytic;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreAnalyticsRequest;
 use App\Http\Requests\Admin\UpdateAnalyticsRequest;
@@ -24,7 +23,6 @@ class AnalyticsController extends Controller
     {
         $analytic = Analytic::findOrFail($id);
         $analytic->update($request->all());
-        
 
         return $analytic;
     }
@@ -32,7 +30,6 @@ class AnalyticsController extends Controller
     public function store(StoreAnalyticsRequest $request)
     {
         $analytic = Analytic::create($request->all());
-        
 
         return $analytic;
     }
@@ -41,6 +38,7 @@ class AnalyticsController extends Controller
     {
         $analytic = Analytic::findOrFail($id);
         $analytic->delete();
+
         return '';
     }
 }

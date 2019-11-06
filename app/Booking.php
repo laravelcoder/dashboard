@@ -1,13 +1,13 @@
 <?php
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Booking
+ * Class Booking.
  *
- * @package App
  * @property string $customername
  * @property string $phone
  * @property string $family_number
@@ -29,7 +29,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $longitude
  * @property string $country
  * @property string $submitted
-*/
+ */
 class Booking extends Model
 {
     use SoftDeletes;
@@ -37,7 +37,4 @@ class Booking extends Model
     protected $fillable = ['customername', 'phone', 'family_number', 'email', 'how_long', 'requested_date', 'requested_time', 'requested_clinic', 'clinic_id', 'clinic_email', 'clinic_address', 'clinic_phone', 'clinic_text_numbers', 'client_firstname', 'submitted_user_city', 'submitted_user_state', 'searched_for', 'latitude', 'longitude', 'country', 'submitted'];
 
     protected $hidden = [];
-
-
-
 }

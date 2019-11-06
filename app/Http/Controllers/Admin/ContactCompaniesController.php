@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\ContactCompany;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\FileUploadTrait;
 use App\Http\Requests\Admin\StoreContactCompaniesRequest;
 use App\Http\Requests\Admin\UpdateContactCompaniesRequest;
-use App\Http\Controllers\Traits\FileUploadTrait;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\DataTables;
 
 class ContactCompaniesController extends Controller
@@ -22,16 +22,14 @@ class ContactCompaniesController extends Controller
      */
     public function index()
     {
-        if (! Gate::allows('contact_company_access')) {
+        if (!Gate::allows('contact_company_access')) {
             return abort(401);
         }
 
-
-        
         if (request()->ajax()) {
             $query = ContactCompany::query();
             $template = 'actionsTemplate';
-            
+
             $query->select([
                 'contact_companies.id',
                 'contact_companies.name',
@@ -45,7 +43,7 @@ class ContactCompaniesController extends Controller
             $table->addColumn('massDelete', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
             $table->editColumn('actions', function ($row) use ($template) {
-                $gateKey  = 'contact_company_';
+                $gateKey = 'contact_company_';
                 $routeKey = 'admin.contact_companies';
 
                 return view($template, compact('row', 'gateKey', 'routeKey'));
@@ -54,10 +52,12 @@ class ContactCompaniesController extends Controller
                 return $row->name ? $row->name : '';
             });
             $table->editColumn('logo', function ($row) {
-                if($row->logo) { return '<a href="'. asset(env('UPLOAD_PATH').'/' . $row->logo) .'" target="_blank"><img src="'. asset(env('UPLOAD_PATH').'/thumb/' . $row->logo) .'"/>'; };
+                if ($row->logo) {
+                    return '<a href="'.asset(env('UPLOAD_PATH').'/'.$row->logo).'" target="_blank"><img src="'.asset(env('UPLOAD_PATH').'/thumb/'.$row->logo).'"/>';
+                }
             });
 
-            $table->rawColumns(['actions','massDelete','logo']);
+            $table->rawColumns(['actions', 'massDelete', 'logo']);
 
             return $table->make(true);
         }
@@ -72,21 +72,23 @@ class ContactCompaniesController extends Controller
      */
     public function create()
     {
-        if (! Gate::allows('contact_company_create')) {
+        if (!Gate::allows('contact_company_create')) {
             return abort(401);
         }
+
         return view('admin.contact_companies.create');
     }
 
     /**
      * Store a newly created ContactCompany in storage.
      *
-     * @param  \App\Http\Requests\StoreContactCompaniesRequest  $request
+     * @param \App\Http\Requests\StoreContactCompaniesRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreContactCompaniesRequest $request)
     {
-        if (! Gate::allows('contact_company_create')) {
+        if (!Gate::allows('contact_company_create')) {
             return abort(401);
         }
         $request = $this->saveFiles($request);
@@ -99,20 +101,19 @@ class ContactCompaniesController extends Controller
             $contact_company->clinics()->create($data);
         }
 
-
         return redirect()->route('admin.contact_companies.index');
     }
-
 
     /**
      * Show the form for editing ContactCompany.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        if (! Gate::allows('contact_company_edit')) {
+        if (!Gate::allows('contact_company_edit')) {
             return abort(401);
         }
         $contact_company = ContactCompany::findOrFail($id);
@@ -123,26 +124,27 @@ class ContactCompaniesController extends Controller
     /**
      * Update ContactCompany in storage.
      *
-     * @param  \App\Http\Requests\UpdateContactCompaniesRequest  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\UpdateContactCompaniesRequest $request
+     * @param int                                              $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateContactCompaniesRequest $request, $id)
     {
-        if (! Gate::allows('contact_company_edit')) {
+        if (!Gate::allows('contact_company_edit')) {
             return abort(401);
         }
         $request = $this->saveFiles($request);
         $contact_company = ContactCompany::findOrFail($id);
         $contact_company->update($request->all());
 
-        $websites           = $contact_company->websites;
+        $websites = $contact_company->websites;
         $currentWebsiteData = [];
         foreach ($request->input('websites', []) as $index => $data) {
-            if (is_integer($index)) {
+            if (is_int($index)) {
                 $contact_company->websites()->create($data);
             } else {
-                $id                          = explode('-', $index)[1];
+                $id = explode('-', $index)[1];
                 $currentWebsiteData[$id] = $data;
             }
         }
@@ -153,13 +155,13 @@ class ContactCompaniesController extends Controller
                 $item->delete();
             }
         }
-        $clinics           = $contact_company->clinics;
+        $clinics = $contact_company->clinics;
         $currentClinicData = [];
         foreach ($request->input('clinics', []) as $index => $data) {
-            if (is_integer($index)) {
+            if (is_int($index)) {
                 $contact_company->clinics()->create($data);
             } else {
-                $id                          = explode('-', $index)[1];
+                $id = explode('-', $index)[1];
                 $currentClinicData[$id] = $data;
             }
         }
@@ -171,39 +173,42 @@ class ContactCompaniesController extends Controller
             }
         }
 
-
         return redirect()->route('admin.contact_companies.index');
     }
-
 
     /**
      * Display ContactCompany.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        if (! Gate::allows('contact_company_view')) {
+        if (!Gate::allows('contact_company_view')) {
             return abort(401);
         }
-        $contacts = \App\Contact::where('company_id', $id)->get();$websites = \App\Website::where('company_id', $id)->get();$adwords = \App\Adword::where('company_id', $id)->get();$clinics = \App\Clinic::where('company_id', $id)->get();$tracking_numbers = \App\TrackingNumber::where('company_id', $id)->get();
+        $contacts = \App\Contact::where('company_id', $id)->get();
+        $websites = \App\Website::where('company_id', $id)->get();
+        $adwords = \App\Adword::where('company_id', $id)->get();
+        $clinics = \App\Clinic::where('company_id', $id)->get();
+        $tracking_numbers = \App\TrackingNumber::where('company_id', $id)->get();
 
         $contact_company = ContactCompany::findOrFail($id);
 
         return view('admin.contact_companies.show', compact('contact_company', 'contacts', 'websites', 'adwords', 'clinics', 'tracking_numbers'));
     }
 
-
     /**
      * Remove ContactCompany from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        if (! Gate::allows('contact_company_delete')) {
+        if (!Gate::allows('contact_company_delete')) {
             return abort(401);
         }
         $contact_company = ContactCompany::findOrFail($id);
@@ -219,7 +224,7 @@ class ContactCompaniesController extends Controller
      */
     public function massDestroy(Request $request)
     {
-        if (! Gate::allows('contact_company_delete')) {
+        if (!Gate::allows('contact_company_delete')) {
             return abort(401);
         }
         if ($request->input('ids')) {
@@ -230,5 +235,4 @@ class ContactCompaniesController extends Controller
             }
         }
     }
-
 }
